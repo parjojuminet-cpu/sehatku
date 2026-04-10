@@ -1000,3 +1000,42 @@ window.onclick = function(event) {
         padding: 0 10px;
     }
 }
+
+/* TAMPILAN MOBILE FRIENDLY (KHUSUS HP) */
+@media (max-width: 768px) {
+    /* Produk jadi 2 kolom */
+    .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 10px !important;
+    }
+
+    /* Penyesuaian gambar agar tidak kebesaran di HP */
+    .card img {
+        height: 120px !important;
+        object-fit: contain;
+    }
+
+    .card h3 {
+        font-size: 0.8rem !important;
+        height: 35px;
+        overflow: hidden;
+    }
+
+    /* Pastikan modal tidak terlalu lebar di HP */
+    .modal-content {
+        width: 95% !important;
+        margin: 10px !important;
+    }
+
+    .content {
+        padding: 10px !important;
+    }
+}
+
+/* Style tambahan untuk form di keranjang */
+#form-biodata input, #form-biodata textarea, #form-biodata select {
+    font-size: 14px;
+    outline: none;
+}
+#form-biodata input:focus { border-color: #e74c3c; }
