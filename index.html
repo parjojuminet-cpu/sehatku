@@ -27,60 +27,36 @@
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="brand">
-            <img src="sehat.png" alt="Logo Mitra Farma" class="logo-img">
-            <h2>Sehat Farma</h2>
-            <p>Ramah & Terpercaya</p>
-        </div>
-        
-        <a href="#promo"><i class="fas fa-fire"></i> Promo</a>
+<body>
 
-        <div class="dropdown">
-            <button class="dropbtn">
-                <i class="fas fa-pills"></i> Kategori <i class="fas fa-chevron-down" style="font-size:0.7rem; float:right; margin-top:5px;"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="#kecantikan">Kecantikan</a>
-                <a href="#anak">Anak & Bayi</a>
-                <a href="#dewasa">Dewasa</a>
-                <a href="#vitamin">Vitamin</a>
-                <a href="#obatresep">Obat resep</a>
-                <a href="#herbal">Herbal</a>
-            </div>
-        </div>
-
-        <a href="#galeri"><i class="fas fa-image"></i> Galeri</a>
-        <a href="#edukasi"><i class="fas fa-book-medical"></i> Edukasi</a>
-        
-        <div class="dropdown">
-            <button class="dropbtn">
-                <i class="fas fa-info-circle"></i> Bantuan <i class="fas fa-chevron-down" style="font-size:0.7rem; float:right; margin-top:5px;"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="javascript:void(0)" onclick="bukaModal('modal-cara-pesan')">Cara Pesan</a>
-                <a href="javascript:void(0)" onclick="bukaModal('modal-cara-bayar')">Cara Bayar</a>
-            </div>
-        </div>
-
-        <a href="#kontak"><i class="fas fa-phone"></i> Profil dan Kontak</a>
-        
-        <div class="sidebar-footer" style="margin-top: auto; padding-top: 20px;">
-            <button class="btn-checkout" onclick="checkout()">
-                <i class="fas fa-cash-register"></i> Checkout WA
-            </button>
-        </div>
-    </div>
+    <!-- NAVBAR ATAS DIHAPUS, PINDAH KE HERO -->
 
     <div class="content">
         <section class="hero">
-		
-    <h1 class="main-title">SEHAT FARMA</h1>
-    <div class="konsultasi-wrapper" onclick="waKonsultasi()">
-        <img src="apoteker.png" alt="Apoteker Mitra Farma" class="img-apoteker">
-        <p class="text-konsultasi">Konsultasikan Sekarang</p>
-    </div>
-</section>
+            <h1 class="main-title">SEHAT FARMA</h1>
+            <div class="konsultasi-wrapper" onclick="waKonsultasi()">
+                <img src="apoteker.png" alt="Apoteker Mitra Farma" class="img-apoteker">
+                <p class="text-konsultasi">Konsultasikan Sekarang</p>
+            </div>
+
+            <!-- INI KOTAK MENU YANG ANDA MAKSUD DI GAMBAR -->
+            <div class="menu-utama-box">
+                <div class="grid-menu">
+                    <a href="#promo" class="item-menu"><i class="fas fa-fire"></i><span>Promo</span></a>
+                    <a href="#kecantikan" class="item-menu"><i class="fas fa-pills"></i><span>Kecantikan</span></a>
+                    <a href="#anak" class="item-menu"><i class="fas fa-baby"></i><span>Anak</span></a>
+                    <a href="#dewasa" class="item-menu"><i class="fas fa-user"></i><span>Dewasa</span></a>
+                    <a href="#vitamin" class="item-menu"><i class="fas fa-capsules"></i><span>Vitamin</span></a>
+                    <a href="#herbal" class="item-menu"><i class="fas fa-leaf"></i><span>Herbal</span></a>
+                    <a href="#galeri" class="item-menu"><i class="fas fa-image"></i><span>Galeri</span></a>
+                    <a href="#edukasi" class="item-menu"><i class="fas fa-book-medical"></i><span>Edukasi</span></a>
+                    <a href="#kontak" class="item-menu"><i class="fas fa-phone"></i><span>Profil</span></a>
+                    <a href="javascript:void(0)" onclick="bukaModal('modal-cara-pesan')" class="item-menu"><i class="fas fa-info-circle"></i><span>Bantuan</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ISI PRODUK DAN LAINNYA TETAP DI BAWAH SINI (TIDAK BERUBAH) -->
 
         <section id="promo">
             <h2 class="section-title">✨ Promo Spesial ✨</h2>
@@ -425,45 +401,19 @@
         <i class="fab fa-whatsapp"></i>
     </div>
 
-    <!-- MODAL KERANJANG DENGAN FORM BIODATA -->
-<div id="modal-keranjang" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3><i class="fas fa-shopping-basket"></i> Keranjang Saya</h3>
-            <span class="close-modal" onclick="tutupModal('modal-keranjang')">&times;</span>
-        </div>
-        
-        <!-- Daftar Produk yang dibeli -->
-        <div id="daftar-item-keranjang" style="max-height: 200px; overflow-y: auto; padding: 10px; border-bottom: 2px solid #eee;"></div>
-
-        <!-- FORM BIODATA PEMBELI -->
-        <div id="form-biodata" style="padding: 15px; background: #fdf2f2;">
-            <h4 style="margin-bottom: 10px; color: #e74c3c; font-size: 0.9rem;">Data Pengiriman:</h4>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <input type="text" id="nama-pembeli" placeholder="Nama Lengkap" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-                <textarea id="alamat-pembeli" placeholder="Alamat Lengkap (Kecamatan, Kota, No Rumah)" rows="2" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: sans-serif;"></textarea>
-                
-                <select id="metode-bayar" onchange="cekMetode()" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-                    <option value="COD">Bayar di Tempat (COD)</option>
-                    <option value="Transfer">Transfer Bank</option>
-                </select>
-
-                <!-- Info Rekening (Muncul jika pilih transfer) -->
-                <div id="info-rek" style="display: none; background: white; padding: 10px; border: 1px dashed #e74c3c; border-radius: 8px; font-size: 0.8rem;">
-                    <p><strong>BCA: 1234567890</strong><br>A/N: SEHAT FARMA</p>
-                    <p style="color: #c0392b; margin-top: 5px;">*Simpan bukti transfer untuk dikirimkan di WhatsApp sebagai konfirmasi.</p>
-                </div>
+    <div id="modal-keranjang" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-shopping-basket"></i> Keranjang Saya</h3>
+                <span class="close-modal" onclick="tutupModal('modal-keranjang')">&times;</span>
+            </div>
+            <div id="daftar-item-keranjang"></div>
+            <div class="modal-footer">
+                <button class="btn-lanjut" onclick="tutupModal('modal-keranjang')">Tambah Produk Lagi</button>
+                <button class="btn-checkout-final" onclick="checkout()">Kirim ke WhatsApp</button>
             </div>
         </div>
-
-        <div class="modal-footer">
-            <button class="btn-lanjut" onclick="tutupModal('modal-keranjang')">Tambah Produk</button>
-            <button class="btn-checkout-final" onclick="konfirmasiPesanan()" style="background: #27ae60;">
-                Konfirmasi Pesanan <i class="fab fa-whatsapp"></i>
-            </button>
-        </div>
     </div>
-</div>
 
     <div id="modal-cara-pesan" class="modal-overlay">
         <div class="modal-content">
