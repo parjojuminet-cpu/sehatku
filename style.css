@@ -798,38 +798,45 @@ Hapus bagian `.sidebar` dan `.content` yang lama, lalu tambahkan kode CSS respon
 
 ```css
 /* NAVBAR MODERN STYLES */
-.navbar {
-    background: var(--sidebar-bg);
-    color: white;
-    position: fixed;
-    top: 0; width: 100%;
+/* Membuat Navbar Berjejer ke Samping */
+.navbar-atas {
+    background: #2c3e50; /* Warna gelap seperti sidebar kamu */
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .nav-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo kiri, Menu tengah, Keranjang kanan */
     align-items: center;
-    padding: 10px 20px;
     max-width: 1200px;
-    margin: auto;
+    margin: 0 auto;
 }
 
-.nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; }
-.nav-logo { width: 40px; height: 40px; border-radius: 50%; }
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px; /* Jarak antar menu */
+}
 
-.nav-menu { display: flex; list-style: none; gap: 5px; margin: 0; padding: 0; }
-.nav-menu a {
-    color: #bdc3c7;
+.nav-links li a {
+    color: white;
     text-decoration: none;
-    padding: 10px 15px;
-    display: block;
-    font-size: 0.9rem;
-    transition: 0.3s;
+    font-weight: bold;
 }
-.nav-menu a:hover { color: white; background: rgba(255,255,255,0.1); border-radius: 8px; }
 
+/* Sembunyikan Sidebar kalau menu sudah di atas */
+.sidebar {
+    display: none;
+}
+
+/* Lebarkan konten utama karena sidebar sudah hilang */
+.main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
 /* DROPDOWN NAVBAR */
 .nav-dropdown { position: relative; }
 .dropdown-items {
@@ -1039,3 +1046,95 @@ window.onclick = function(event) {
     outline: none;
 }
 #form-biodata input:focus { border-color: #e74c3c; }
+
+/* Menghapus navbar lama agar tidak bertumpuk */
+.navbar-atas, .sidebar {
+    display: none !important;
+}
+
+/* Penyesuaian Content */
+.content {
+    margin-left: 0 !important;
+    padding: 0 !important;
+}
+
+/* Style Logo di dalam Hero */
+.logo-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.logo-hero img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+.logo-hero span {
+    color: white;
+    font-weight: 800;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+/* KOTAK MENU UTAMA (SESUAI GAMBAR ANDA) */
+.kotak-menu-utama {
+    background: rgba(255, 255, 255, 0.95); /* Putih bersih */
+    border: 2px solid #2c3e50; /* Garis kotak tegas sesuai gambar */
+    border-radius: 15px;
+    padding: 15px;
+    max-width: 600px; /* Agar tidak terlalu lebar di laptop */
+    margin: 20px auto 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Grid Menu: 5 kolom di laptop, 3 kolom di HP */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #2c3e50;
+    padding: 8px 5px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.menu-item i {
+    font-size: 1.3rem;
+    color: #e74c3c;
+    margin-bottom: 5px;
+}
+
+.menu-item span {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.menu-item:hover {
+    background: #fdf2f2;
+    transform: translateY(-3px);
+}
+
+/* RESPONSIVE UNTUK HP */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 kolom agar icon tidak kekecilan */
+    }
+    
+    .hero {
+        padding: 30px 10px !important;
+    }
+
+    .main-title {
+        font-size: 1.8rem !important;
+    }
+}
