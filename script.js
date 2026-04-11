@@ -99,78 +99,39 @@ function tampilkanKonten(menu) {
     }
 }
 
-// Fungsi untuk memunculkan/menghilangkan info rekening
-function cekMetode() {
-    const metode = document.getElementById('metode-bayar').value;
-    const infoRek = document.getElementById('info-rek');
-    if (metode === 'Transfer') {
-        infoRek.style.display = 'block';
-    } else {
-        infoRek.style.display = 'none';
-    }
+// Fungsi Buka Tutup Menu Mobile
+function toggleMenu() {
+    const navMenu = document.getElementById('navMenu');
+    navMenu.classList.toggle('active');
 }
 
-// Fungsi Konfirmasi Pesanan dengan Rekapan Lengkap
+// Fungsi Pilihan Metode Bayar
+function cekMetode() {
+    const metode = document.getElementById('metode-bayar').value;
+    document.getElementById('info-rek').style.display = (metode === 'Transfer') ? 'block' : 'none';
+}
+
+// Fungsi Konfirmasi Pesanan Ke WhatsApp
 function konfirmasiPesanan() {
     const nama = document.getElementById('nama-pembeli').value;
     const alamat = document.getElementById('alamat-pembeli').value;
     const metode = document.getElementById('metode-bayar').value;
 
-    // Validasi
-    if (keranjang.length === 0) {
-        alert("Keranjang Anda masih kosong!");
-        return;
-    }
-    if (nama === "" || alamat === "") {
-        alert("Mohon lengkapi Nama dan Alamat pengiriman!");
-        return;
-    }
+    if (keranjang.length === 0) return alert("Keranjang kosong!");
+    if (!nama || !alamat) return alert("Isi nama dan alamat lengkap!");
 
-    // Buat Rekapan Produk
-    let daftarOrder = "";
-    keranjang.forEach((item, i) => {
-        daftarOrder += `${i + 1}. ${item}%0A`;
-    });
+    let list = "";
+    keranjang.forEach((item, i) => { list += `${i+1}. ${item}%0A`; });
 
-    // Format Pesan WhatsApp
-    const nomorWA = "6285731070315";
-    const pesan = `*KONFIRMASI PESANAN - SEHAT FARMA*%0A` +
-                  `----------------------------------------%0A` +
-                  `*Biodata Penerima:*%0A` +
-                  `Nama: ${nama}%0A` +
-                  `Alamat: ${alamat}%0A` +
-                  `Metode Bayar: ${metode}%0A` +
-                  `----------------------------------------%0A` +
-                  `*Daftar Order:*%0A${daftarOrder}` +
-                  `----------------------------------------%0A` +
-                  `Mohon segera diproses ya Admin, Terima kasih! 🙏`;
+    const pesanWA = `*KONFIRMASI PESANAN - SEHAT FARMA*%0A` +
+                    `----------------------------------%0A` +
+                    `*Nama:* ${nama}%0A` +
+                    `*Alamat:* ${alamat}%0A` +
+                    `*Metode:* ${metode}%0A` +
+                    `----------------------------------%0A` +
+                    `*Order:*%0A${list}%0A` +
+                    `----------------------------------%0A` +
+                    `Mohon diproses Admin. Terima kasih!`;
 
-    // Kirim ke WA
-    window.open(`https://wa.me/${nomorWA}?text=${pesan}`);
-}
-
-// Update fungsi hapus item (opsional jika ingin fitur hapus)
-function hapusItem(index) {
-    keranjang.splice(index, 1);
-    document.getElementById('cart-count').innerText = keranjang.length;
-    bukaModalKeranjang();
-}
-
-// Modifikasi sedikit fungsi bukaModalKeranjang agar ada tombol hapus
-function bukaModalKeranjang() {
-    const listContainer = document.getElementById('daftar-item-keranjang');
-    listContainer.innerHTML = "";
-    
-    if (keranjang.length === 0) {
-        listContainer.innerHTML = "<p style='text-align:center; padding:20px;'>Keranjang masih kosong...</p>";
-    } else {
-        keranjang.forEach((item, index) => {
-            listContainer.innerHTML += `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:8px; border-bottom:1px solid #eee;">
-                    <span style="font-size:0.9rem;">${index + 1}. ${item}</span>
-                    <button onclick="hapusItem(${index})" style="background:none; border:none; color:red; cursor:pointer;"><i class="fas fa-trash"></i></button>
-                </div>`;
-        });
-    }
-    bukaModal('modal-keranjang');
+    window.open(`https://wa.me/6285731070315?text=${pesanWA}`);
 }
