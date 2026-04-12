@@ -1,25 +1,52 @@
 let keranjang = [];
 
-function waPesan(nama){
-    window.open("https://wa.me/6285731070315?text=Halo admin, saya ingin pesan "+nama);
+// MENU MOBILE
+function toggleMenu() {
+    document.getElementById('navMenu').classList.toggle('active');
 }
 
-function waKonsultasi(){
-    window.open("https://wa.me/6285731070315?text=Halo admin, saya ingin konsultasi");
+// PINDAH HALAMAN
+function tampilkanHalaman(id) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(s => s.style.display = 'none');
+    
+    document.getElementById('hero').style.display = 'block';
+    const target = document.getElementById(id);
+    if(target) target.style.display = 'block';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('navMenu').classList.remove('active');
 }
 
-function waTanya(){
-    window.open("https://wa.me/6285731070315?text=Halo admin, saya ingin bertanya tentang produk");
+// PENCARIAN
+function cariProduk() {
+    let input = document.getElementById('navSearchInput').value.toLowerCase();
+    let cards = document.querySelectorAll('.card');
+    let sections = document.querySelectorAll('section');
+
+    if (input === "") {
+        tampilkanHalaman('promo');
+        return;
+    }
+
+    sections.forEach(s => { if(s.id !== 'hero') s.style.display = 'block'; });
+    cards.forEach(card => {
+        let nama = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = nama.includes(input) ? "block" : "none";
+    });
 }
 
-function tambahKeranjang(nama){
-    keranjang.push(nama);
+// KERANJANG (FUNGSI UTAMA)
+function tambahKeranjang(nama, harga) {
+    keranjang.push({ nama: nama, harga: harga });
     document.getElementById('cart-count').innerText = keranjang.length;
-    alert(nama + " masuk keranjang");
+    alert(nama + " berhasil ditambah ke keranjang!");
 }
 
-function bukaModal(id) {
-    document.getElementById(id).style.display = 'flex';
+function hapusItem(index) {
+    keranjang.splice(index, 1);
+    document.getElementById('cart-count').innerText = keranjang.length;
+    bukaModalKeranjang();
 }
 
 function tutupModal(id) {
@@ -27,111 +54,68 @@ function tutupModal(id) {
 }
 
 function bukaModalKeranjang() {
-    const listContainer = document.getElementById('daftar-item-keranjang');
-    listContainer.innerHTML = "";
+    const container = document.getElementById('daftar-item-keranjang');
+    const totalCon = document.getElementById('total-container');
+    const textTotal = document.getElementById('text-total');
     
+    container.innerHTML = "";
+    let total = 0;
+
     if (keranjang.length === 0) {
-        listContainer.innerHTML = "<p style='text-align:center; padding:20px;'>Keranjang masih kosong...</p>";
+        container.innerHTML = `
+            <div style="text-align:center; padding:40px 20px;">
+                <i class="fas fa-shopping-basket" style="font-size:3rem; color:#eee;"></i>
+                <p style="color:#999; margin-top:10px;">Keranjang kosong</p>
+            </div>`;
+        totalCon.style.display = 'none';
     } else {
-        keranjang.forEach((item, index) => {
-            listContainer.innerHTML += `
-                <div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;">
-                    <span>${index + 1}. ${item}</span>
+        keranjang.forEach((item, i) => {
+            total += item.harga;
+            container.innerHTML += `
+                <div class="cart-item" style="display:flex; justify-content:space-between; align-items:center; padding:12px 20px; border-bottom:1px solid #f8f9fa;">
+                    <div>
+                        <b style="display:block; font-size:0.9rem; color:#2c3e50;">${item.nama}</b>
+                        <span style="color:var(--primary); font-weight:800; font-size:0.85rem;">Rp ${item.harga.toLocaleString('id-ID')}</span>
+                    </div>
+                    <i class="fas fa-trash-alt" style="color:#ff7675; cursor:pointer; padding:10px;" onclick="hapusItem(${i})"></i>
                 </div>`;
         });
+        totalCon.style.display = 'flex';
+        textTotal.innerText = "Rp " + total.toLocaleString('id-ID');
     }
-    bukaModal('modal-keranjang');
+    document.getElementById('modal-keranjang').style.display = 'flex';
 }
 
-function checkout(){
-    if(keranjang.length==0){
-        alert("Keranjang kosong");
-        return;
-    }
-    let pesan="Halo admin, saya ingin pesan:%0A";
-    keranjang.forEach((item,i)=>{
-        pesan+=(i+1)+". "+item+"%0A";
-    });
-    window.open("https://wa.me/6285731070315?text="+pesan);
-}
-function tampilkanKonten(menu) {
-    // Sembunyikan semua bagian konten dulu
-    var semuaKonten = document.querySelectorAll('.hal-konten');
-    semuaKonten.forEach(function(el) {
-        el.style.display = 'none';
-    });
-
-    // Tampilkan hanya bagian yang diklik
-    if (menu === 'tentang') {
-        document.getElementById('konten-tentang').style.display = 'block';
-    }
-    // Tambahkan menu lain (promo, edukasi, dll) di sini nanti
-}
-// Fungsi untuk buka tutup menu di tampilan mobile
-function toggleMenu() {
-    const navMenu = document.getElementById('navMenu');
-    if (window.innerWidth <= 768) {
-        navMenu.classList.toggle('active');
-    }
-}
-
-// Menutup menu jika user mengklik di luar menu saat terbuka (Opsional)
-window.onclick = function(event) {
-    if (!event.target.matches('.menu-toggle') && !event.target.closest('.nav-menu')) {
-        const navMenu = document.getElementById('navMenu');
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-        }
-    }
-}
-function tampilkanKonten(menu) {
-    // Sembunyikan semua bagian konten dulu
-    var semuaKonten = document.querySelectorAll('.hal-konten');
-    semuaKonten.forEach(function(el) {
-        el.style.display = 'none';
-    });
-
-    // Tampilkan bagian yang diklik
-    if (menu === 'tentang') {
-        document.getElementById('konten-tentang').style.display = 'block';
-    } else if (menu === 'profil') {
-        document.getElementById('konten-profil').style.display = 'block';
-    }
-}
-
-// Fungsi Buka Tutup Menu Mobile
-function toggleMenu() {
-    const navMenu = document.getElementById('navMenu');
-    navMenu.classList.toggle('active');
-}
-
-// Fungsi Pilihan Metode Bayar
 function cekMetode() {
-    const metode = document.getElementById('metode-bayar').value;
-    document.getElementById('info-rek').style.display = (metode === 'Transfer') ? 'block' : 'none';
+    const m = document.getElementById('metode-bayar').value;
+    document.getElementById('info-rek').style.display = (m === 'Transfer') ? 'block' : 'none';
+    document.getElementById('info-qris').style.display = (m === 'QRIS') ? 'block' : 'none';
 }
 
-// Fungsi Konfirmasi Pesanan Ke WhatsApp
+// WHATSAPP
+function waPesan(nama) {
+    window.open(`https://wa.me/6285731070315?text=Saya ingin pesan: ${nama}`);
+}
+
+function waKonsultasi() {
+    window.open(`https://wa.me/6285731070315?text=Halo admin, saya ingin konsultasi`);
+}
+
 function konfirmasiPesanan() {
     const nama = document.getElementById('nama-pembeli').value;
     const alamat = document.getElementById('alamat-pembeli').value;
     const metode = document.getElementById('metode-bayar').value;
 
     if (keranjang.length === 0) return alert("Keranjang kosong!");
-    if (!nama || !alamat) return alert("Isi nama dan alamat lengkap!");
+    if (!nama || !alamat) return alert("Lengkapi data pengiriman!");
 
     let list = "";
-    keranjang.forEach((item, i) => { list += `${i+1}. ${item}%0A`; });
+    let total = 0;
+    keranjang.forEach((item, i) => {
+        list += `${i + 1}. ${item.nama} (Rp ${item.harga.toLocaleString('id-ID')})%0A`;
+        total += item.harga;
+    });
 
-    const pesanWA = `*KONFIRMASI PESANAN - SEHAT FARMA*%0A` +
-                    `----------------------------------%0A` +
-                    `*Nama:* ${nama}%0A` +
-                    `*Alamat:* ${alamat}%0A` +
-                    `*Metode:* ${metode}%0A` +
-                    `----------------------------------%0A` +
-                    `*Order:*%0A${list}%0A` +
-                    `----------------------------------%0A` +
-                    `Mohon diproses Admin. Terima kasih!`;
-
-    window.open(`https://wa.me/6285731070315?text=${pesanWA}`);
+    const teks = `*PESANAN BARU - SEHAT FARMA*%0A*Nama:* ${nama}%0A*Alamat:* ${alamat}%0A*Metode:* ${metode}%0A*Order:*%0A${list}*TOTAL: Rp ${total.toLocaleString('id-ID')}*`;
+    window.open(`https://wa.me/6285731070315?text=${teks}`);
 }
