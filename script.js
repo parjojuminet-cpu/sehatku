@@ -1,7 +1,7 @@
 // ============================================================
 // 1. LINK GOOGLE SCRIPT (SUDAH TERPASANG)
 // ============================================================
-const URL_GAS = "https://script.google.com/macros/s/AKfycbwq125jV2vnloAHfb9NZYKEW1-V6zWnEsoexKXsXPkfQttFOIBAxzMixlh_A1buSirC/exec"; 
+const URL_GAS = "https://script.google.com/macros/s/AKfycbxq81zOIRM2-eanP5QVDnLLdmK8ivHLjw6gAY0SLvJo6TdPSdWFWlsNvR_YSrU6tqKQ/exec"; 
 
 let keranjang = [];
 let ongkirSekarang = 0;
