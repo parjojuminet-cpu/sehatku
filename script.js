@@ -1,13 +1,13 @@
 // ============================================================
-// 1. LINK GOOGLE SCRIPT
+// 1. PASTE URL BARU HASIL DEPLOY TADI DI SINI
 // ============================================================
-const URL_GAS = "https://script.google.com/macros/s/AKfycbyD-OI98MDS4Zw8sTlBAUTa-LuvHOEYDNmJmutFBoaJhEsH5QzKAy_r5cNZoPp6pOSz/exec"; 
+const URL_GAS = "https://script.google.com/macros/s/AKfycbw4wG9QsY1bA8LCc8NacQvCqRehkWiaPfkqaKvATXXF95cKqzVBQC7cZxRIKB4IsWyy/exec"; 
 
 let keranjang = [];
 let ongkirSekarang = 0;
 
 // ============================================================
-// 2. FUNGSI CEK ONGKIR (ANTI-CORS & ANTI-CACHE)
+// 2. FUNGSI CEK ONGKIR (DIRECT FETCH)
 // ============================================================
 async function hitungOngkirOtomatis() {
     const idKota = document.getElementById('kota-tujuan').value;
@@ -16,22 +16,20 @@ async function hitungOngkirOtomatis() {
     
     if (!idKota) return;
     
-    textOngkir.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengecek...';
+    textOngkir.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menghubungkan...';
     
-    // Kita tambahkan random number agar Google tidak mengirim hasil lama (cache)
-    const urlAsli = `${URL_GAS}?dest=${idKota}&weight=1000&v=${Math.random()}`;
-    const urlProxy = `https://api.allorigins.win/get?url=${encodeURIComponent(urlAsli)}`;
+    // Panggil langsung ke Google Script
+    const finalUrl = `${URL_GAS}?dest=${idKota}&weight=1000`;
 
     try {
-        const response = await fetch(urlProxy);
-        if (!response.ok) throw new Error('Proxy error');
+        // Tanpa proxy, langsung fetch. Browser akan handle redirect Google.
+        const response = await fetch(finalUrl);
         
-        const proxyData = await response.json();
-        // AllOrigins mengirim data dalam bentuk teks di properti 'contents'
-        const data = JSON.parse(proxyData.contents); 
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        const data = await response.json(); 
         
         if (data.rajaongkir && data.rajaongkir.results[0].costs.length > 0) {
-            // Mengambil tarif JNE
             ongkirSekarang = data.rajaongkir.results[0].costs[0].cost[0].value;
             textOngkir.innerText = "Rp " + ongkirSekarang.toLocaleString('id-ID');
             
@@ -42,17 +40,18 @@ async function hitungOngkirOtomatis() {
             document.getElementById('area-pembayaran').style.display = 'block';
             document.getElementById('notif-ongkir').style.display = 'none';
         } else {
-            textOngkir.innerText = "Gagal memuat";
-            console.log("Respon API:", data);
+            textOngkir.innerText = "Gagal memuat tarif";
         }
     } catch (e) {
-        console.error("Detail Error:", e);
+        console.error("Error:", e);
         textOngkir.innerText = "Error koneksi";
+        // Jika masih error CORS, ini pesan bantuannya:
+        alert("Koneksi gagal. Pastikan saat Deploy di Google Script, 'Who has access' dipilih 'Anyone'.");
     }
 }
 
 // ============================================================
-// 3. FUNGSI LAINNYA
+// 3. FUNGSI NAVIGASI & MENU
 // ============================================================
 function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('active');
@@ -61,17 +60,10 @@ function toggleMenu() {
 function tampilkanHalaman(id) {
     const sections = document.querySelectorAll('section');
     sections.forEach(s => s.style.display = 'none');
-    
-    // Halaman Promo/Utama
-    if(id === 'promo' || id === 'home') {
-        document.getElementById('hero').style.display = 'block';
-        document.getElementById('promo').style.display = 'block';
-    } else {
-        document.getElementById('hero').style.display = 'none';
-        const target = document.getElementById(id);
-        if(target) target.style.display = 'block';
-    }
-    
+    if(id === 'promo') document.getElementById('hero').style.display = 'block';
+    else document.getElementById('hero').style.display = 'none';
+    const target = document.getElementById(id);
+    if(target) target.style.display = 'block';
     document.getElementById('navMenu').classList.remove('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -121,32 +113,18 @@ function tutupModal(id) {
     document.getElementById(id).style.display = 'none';
 }
 
-function cekMetode() {
-    const m = document.getElementById('metode-bayar').value;
-    document.getElementById('info-rek').style.display = (m === 'Transfer') ? 'block' : 'none';
-    document.getElementById('info-qris').style.display = (m === 'QRIS') ? 'block' : 'none';
-}
-
 function konfirmasiPesanan() {
     const nama = document.getElementById('nama-pembeli').value;
     const alamat = document.getElementById('alamat-pembeli').value;
-    const kotaElem = document.getElementById('kota-tujuan');
-    const kota = kotaElem.options[kotaElem.selectedIndex].text;
-    if(!nama || !alamat || !kotaElem.value) return alert("Lengkapi data!");
+    if(!nama || !alamat) return alert("Lengkapi Nama dan Alamat!");
     
-    let detail = "";
-    let sub = 0;
-    keranjang.forEach((item, index) => {
-        detail += `${index+1}. ${item.nama} (Rp ${item.harga.toLocaleString('id-ID')})%0A`;
-        sub += item.harga;
-    });
-    
-    const pesan = `Halo Sehat Farma,%0ASaya ingin memesan:%0A%0A${detail}%0A*Total:* Rp ${(sub + ongkirSekarang).toLocaleString('id-ID')}%0A*Penerima:* ${nama}%0A*Alamat:* ${alamat} (${kota})`;
-    window.open(`https://wa.me/6285731070315?text=${pesan}`);
+    let sub = 0; keranjang.forEach(i => sub += i.harga);
+    const pesan = `Halo Sehat Farma, saya pesan produk total Rp ${(sub + ongkirSekarang).toLocaleString('id-ID')}. Nama: ${nama}, Alamat: ${alamat}`;
+    window.open(`https://wa.me/6285731070315?text=${encodeURIComponent(pesan)}`);
 }
 
 function waPesan(nama) {
-    window.open(`https://wa.me/6285731070315?text=Saya ingin pesan promo: ${nama}`);
+    window.open(`https://wa.me/6285731070315?text=Saya ingin pesan: ${nama}`);
 }
 
 function waKonsultasi() {
