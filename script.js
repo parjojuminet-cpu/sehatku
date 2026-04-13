@@ -1,5 +1,5 @@
 // ============================================================
-// 1. PASTE LINK GOOGLE SCRIPT ANDA DI SINI (PASTIKAN BERAKHIRAN /exec)
+// 1. LINK GOOGLE SCRIPT (PASTIKAN BERAKHIRAN /exec)
 // ============================================================
 const URL_GAS = "https://script.google.com/macros/s/AKfycbyD-OI98MDS4Zw8sTlBAUTa-LuvHOEYDNmJmutFBoaJhEsH5QzKAy_r5cNZoPp6pOSz/exec"; 
 
@@ -7,7 +7,7 @@ let keranjang = [];
 let ongkirSekarang = 0;
 
 // ============================================================
-// 2. FUNGSI UTAMA (CEK ONGKIR) - SUDAH DIPERBAIKI DARI CORS
+// 2. FUNGSI CEK ONGKIR (DENGAN PROXY ANTI-CORS TERBARU)
 // ============================================================
 async function hitungOngkirOtomatis() {
     const idKota = document.getElementById('kota-tujuan').value;
@@ -18,16 +18,17 @@ async function hitungOngkirOtomatis() {
     
     textOngkir.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengecek...';
     
-    // KITA GUNAKAN PROXY KHUSUS AGAR TIDAK KENA ERROR CORS LAGI
+    // Menggunakan AllOrigins Proxy (lebih stabil untuk Google Script)
     const urlAsli = `${URL_GAS}?dest=${idKota}&weight=1000`;
-    const urlDenganProxy = "https://corsproxy.io/?" + encodeURIComponent(urlAsli);
+    const urlProxy = `https://api.allorigins.win/get?url=${encodeURIComponent(urlAsli)}`;
 
     try {
-        const response = await fetch(urlDenganProxy);
+        const response = await fetch(urlProxy);
+        if (!response.ok) throw new Error('Network error');
         
-        if (!response.ok) throw new Error('Server tidak merespon');
-        
-        const data = await response.json(); 
+        const proxyData = await response.json();
+        // AllOrigins membungkus data di dalam properti 'contents'
+        const data = JSON.parse(proxyData.contents); 
         
         if (data.rajaongkir && data.rajaongkir.results[0].costs.length > 0) {
             ongkirSekarang = data.rajaongkir.results[0].costs[0].cost[0].value;
@@ -40,18 +41,18 @@ async function hitungOngkirOtomatis() {
             document.getElementById('area-pembayaran').style.display = 'block';
             document.getElementById('notif-ongkir').style.display = 'none';
         } else {
-            textOngkir.innerText = "Gagal memuat";
-            alert("Layanan JNE tidak ditemukan untuk kota ini.");
+            textOngkir.innerText = "Rp 0 (Gagal)";
+            alert("Gagal mengambil tarif. Pastikan API RajaOngkir Anda aktif.");
         }
     } catch (e) {
-        console.error("Kesalahan Sistem:", e);
-        textOngkir.innerText = "Gagal memuat";
-        alert("Gagal menghubungi server ongkir. Pastikan link Google Script sudah benar.");
+        console.error("Detail Error:", e);
+        textOngkir.innerText = "Error koneksi";
+        alert("Gagal terhubung. Coba klik 'Oke' lalu pilih ulang lokasi.");
     }
 }
 
 // ============================================================
-// 3. FUNGSI KERANJANG & LAINNYA (TIDAK BERUBAH)
+// 3. FUNGSI NAVIGASI & MENU
 // ============================================================
 function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('active');
@@ -60,10 +61,16 @@ function toggleMenu() {
 function tampilkanHalaman(id) {
     const sections = document.querySelectorAll('section');
     sections.forEach(s => s.style.display = 'none');
-    if(id === 'promo') document.getElementById('hero').style.display = 'block';
-    else document.getElementById('hero').style.display = 'none';
-    const target = document.getElementById(id);
-    if(target) target.style.display = 'block';
+    
+    if(id === 'promo' || id === 'home') {
+        document.getElementById('hero').style.display = 'block';
+        document.getElementById('promo').style.display = 'block';
+    } else {
+        document.getElementById('hero').style.display = 'none';
+        const target = document.getElementById(id);
+        if(target) target.style.display = 'block';
+    }
+    
     document.getElementById('navMenu').classList.remove('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -77,6 +84,9 @@ function cariProduk() {
     });
 }
 
+// ============================================================
+// 4. LOGIKA KERANJANG
+// ============================================================
 function tambahKeranjang(nama, harga) {
     keranjang.push({ nama: nama, harga: harga });
     document.getElementById('cart-count').innerText = keranjang.length;
@@ -110,7 +120,7 @@ function bukaModalKeranjang() {
             subtotal += item.harga;
             container.innerHTML += `
                 <div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;">
-                    <span style="font-size:0.9rem;">${item.nama}</span>
+                    <span style="font-size:0.85rem;">${item.nama}</span>
                     <span style="font-weight:bold;">Rp ${item.harga.toLocaleString('id-ID')} 
                         <i class="fas fa-trash" onclick="hapusItem(${i})" style="color:red; cursor:pointer; margin-left:10px;"></i>
                     </span>
@@ -140,18 +150,4 @@ function konfirmasiPesanan() {
     let detail = "";
     let sub = 0;
     keranjang.forEach((item, index) => {
-        detail += `${index+1}. ${item.nama} (Rp ${item.harga.toLocaleString('id-ID')})%0A`;
-        sub += item.harga;
-    });
-    
-    const pesan = `Halo Sehat Farma,%0ASaya ingin memesan:%0A%0A${detail}%0A*Penerima:* ${nama}%0A*Alamat:* ${alamat} (${kota})%0A*Total Bayar:* Rp ${(sub + ongkirSekarang).toLocaleString('id-ID')}%0A*Metode:* ${metode}`;
-    window.open(`https://wa.me/6285731070315?text=${pesan}`);
-}
-
-function waPesan(nama) {
-    window.open(`https://wa.me/6285731070315?text=Halo admin, saya ingin pesan: *${nama}*`);
-}
-
-function waKonsultasi() {
-    window.open(`https://wa.me/6285731070315?text=Halo admin, saya ingin konsultasi kesehatan...`);
-}
+        detail += `${index+1}. ${item.
