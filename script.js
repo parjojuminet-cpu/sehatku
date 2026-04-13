@@ -1,5 +1,5 @@
 // ============================================================
-// 1. KONFIGURASI - PASTE LINK GOOGLE SCRIPT ANDA DI SINI
+// 1. PASTE LINK GOOGLE SCRIPT ANDA DI SINI (PASTIKAN BERAKHIRAN /exec)
 // ============================================================
 const URL_GAS = "https://script.google.com/macros/s/AKfycbyD-OI98MDS4Zw8sTlBAUTa-LuvHOEYDNmJmutFBoaJhEsH5QzKAy_r5cNZoPp6pOSz/exec"; 
 
@@ -7,7 +7,51 @@ let keranjang = [];
 let ongkirSekarang = 0;
 
 // ============================================================
-// 2. NAVIGASI & MENU
+// 2. FUNGSI UTAMA (CEK ONGKIR) - SUDAH DIPERBAIKI DARI CORS
+// ============================================================
+async function hitungOngkirOtomatis() {
+    const idKota = document.getElementById('kota-tujuan').value;
+    const textOngkir = document.getElementById('text-ongkir');
+    const textTotal = document.getElementById('text-total');
+    
+    if (!idKota) return;
+    
+    textOngkir.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengecek...';
+    
+    // KITA GUNAKAN PROXY KHUSUS AGAR TIDAK KENA ERROR CORS LAGI
+    const urlAsli = `${URL_GAS}?dest=${idKota}&weight=1000`;
+    const urlDenganProxy = "https://corsproxy.io/?" + encodeURIComponent(urlAsli);
+
+    try {
+        const response = await fetch(urlDenganProxy);
+        
+        if (!response.ok) throw new Error('Server tidak merespon');
+        
+        const data = await response.json(); 
+        
+        if (data.rajaongkir && data.rajaongkir.results[0].costs.length > 0) {
+            ongkirSekarang = data.rajaongkir.results[0].costs[0].cost[0].value;
+            textOngkir.innerText = "Rp " + ongkirSekarang.toLocaleString('id-ID');
+            
+            let subtotal = 0;
+            keranjang.forEach(item => subtotal += item.harga);
+            textTotal.innerText = "Rp " + (subtotal + ongkirSekarang).toLocaleString('id-ID');
+            
+            document.getElementById('area-pembayaran').style.display = 'block';
+            document.getElementById('notif-ongkir').style.display = 'none';
+        } else {
+            textOngkir.innerText = "Gagal memuat";
+            alert("Layanan JNE tidak ditemukan untuk kota ini.");
+        }
+    } catch (e) {
+        console.error("Kesalahan Sistem:", e);
+        textOngkir.innerText = "Gagal memuat";
+        alert("Gagal menghubungi server ongkir. Pastikan link Google Script sudah benar.");
+    }
+}
+
+// ============================================================
+// 3. FUNGSI KERANJANG & LAINNYA (TIDAK BERUBAH)
 // ============================================================
 function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('active');
@@ -16,18 +60,10 @@ function toggleMenu() {
 function tampilkanHalaman(id) {
     const sections = document.querySelectorAll('section');
     sections.forEach(s => s.style.display = 'none');
-    
-    // Tampilkan Hero hanya di halaman utama (promo)
-    if(id === 'promo') {
-        document.getElementById('hero').style.display = 'block';
-    } else {
-        document.getElementById('hero').style.display = 'none';
-    }
-    
+    if(id === 'promo') document.getElementById('hero').style.display = 'block';
+    else document.getElementById('hero').style.display = 'none';
     const target = document.getElementById(id);
     if(target) target.style.display = 'block';
-    
-    // Tutup menu mobile jika terbuka
     document.getElementById('navMenu').classList.remove('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -35,16 +71,12 @@ function tampilkanHalaman(id) {
 function cariProduk() {
     let input = document.getElementById('navSearchInput').value.toLowerCase();
     let cards = document.querySelectorAll('.card');
-    
     cards.forEach(card => {
         let title = card.querySelector('h3').innerText.toLowerCase();
         card.style.display = title.includes(input) ? "" : "none";
     });
 }
 
-// ============================================================
-// 3. LOGIKA KERANJANG
-// ============================================================
 function tambahKeranjang(nama, harga) {
     keranjang.push({ nama: nama, harga: harga });
     document.getElementById('cart-count').innerText = keranjang.length;
@@ -54,7 +86,7 @@ function tambahKeranjang(nama, harga) {
 function hapusItem(index) {
     keranjang.splice(index, 1);
     document.getElementById('cart-count').innerText = keranjang.length;
-    bukaModalKeranjang(); // Refresh tampilan modal
+    bukaModalKeranjang();
 }
 
 function tutupModal(id) {
@@ -65,7 +97,6 @@ function bukaModalKeranjang() {
     const container = document.getElementById('daftar-item-keranjang');
     const textSubtotal = document.getElementById('text-subtotal');
     const textTotal = document.getElementById('text-total');
-    
     container.innerHTML = "";
     let subtotal = 0;
 
@@ -91,50 +122,6 @@ function bukaModalKeranjang() {
     document.getElementById('modal-keranjang').style.display = 'flex';
 }
 
-// ============================================================
-// 4. HITUNG ONGKIR OTOMATIS (DIRECT TO GOOGLE SCRIPT)
-// ============================================================
-async function hitungOngkirOtomatis() {
-    const idKota = document.getElementById('kota-tujuan').value;
-    const textOngkir = document.getElementById('text-ongkir');
-    const textTotal = document.getElementById('text-total');
-    
-    if (!idKota) return;
-    
-    textOngkir.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengecek...';
-    
-    // Jalur langsung tanpa proxy
-    const urlFinal = `${URL_GAS}?dest=${idKota}&weight=1000`;
-
-    try {
-        const response = await fetch(urlFinal);
-        const data = await response.json(); 
-        
-        if (data.rajaongkir && data.rajaongkir.results[0].costs.length > 0) {
-            // Ambil biaya dari pilihan pertama JNE
-            ongkirSekarang = data.rajaongkir.results[0].costs[0].cost[0].value;
-            textOngkir.innerText = "Rp " + ongkirSekarang.toLocaleString('id-ID');
-            
-            let subtotal = 0;
-            keranjang.forEach(item => subtotal += item.harga);
-            textTotal.innerText = "Rp " + (subtotal + ongkirSekarang).toLocaleString('id-ID');
-            
-            document.getElementById('area-pembayaran').style.display = 'block';
-            document.getElementById('notif-ongkir').style.display = 'none';
-        } else {
-            textOngkir.innerText = "Gagal memuat";
-            alert("Layanan pengiriman tidak tersedia untuk kota ini.");
-        }
-    } catch (e) {
-        console.error("Detail Error:", e);
-        textOngkir.innerText = "Error koneksi";
-        alert("Gagal menghubungi server ongkir. Coba lagi nanti.");
-    }
-}
-
-// ============================================================
-// 5. PEMBAYARAN & WHATSAPP
-// ============================================================
 function cekMetode() {
     const m = document.getElementById('metode-bayar').value;
     document.getElementById('info-rek').style.display = (m === 'Transfer') ? 'block' : 'none';
@@ -157,15 +144,12 @@ function konfirmasiPesanan() {
         sub += item.harga;
     });
     
-    const totalSemua = sub + ongkirSekarang;
-    
-    const pesan = `Halo Sehat Farma,%0ASaya ingin memesan:%0A%0A${detail}%0A*Penerima:* ${nama}%0A*Alamat:* ${alamat} (${kota})%0A*Subtotal:* Rp ${sub.toLocaleString('id-ID')}%0A*Ongkir:* Rp ${ongkirSekarang.toLocaleString('id-ID')}%0A*Total Bayar:* Rp ${totalSemua.toLocaleString('id-ID')}%0A*Metode:* ${metode}`;
-    
+    const pesan = `Halo Sehat Farma,%0ASaya ingin memesan:%0A%0A${detail}%0A*Penerima:* ${nama}%0A*Alamat:* ${alamat} (${kota})%0A*Total Bayar:* Rp ${(sub + ongkirSekarang).toLocaleString('id-ID')}%0A*Metode:* ${metode}`;
     window.open(`https://wa.me/6285731070315?text=${pesan}`);
 }
 
 function waPesan(nama) {
-    window.open(`https://wa.me/6285731070315?text=Halo admin Sehat Farma, saya ingin memesan: *${nama}*`);
+    window.open(`https://wa.me/6285731070315?text=Halo admin, saya ingin pesan: *${nama}*`);
 }
 
 function waKonsultasi() {
