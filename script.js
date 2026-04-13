@@ -1,6 +1,7 @@
 let keranjang = [];
 let ongkirSekarang = 0;
-// MASUKKAN URL GOOGLE SCRIPT KAMU DI SINI
+
+// 1. GANTI DENGAN URL GOOGLE SCRIPT (GAS) KAMU
 const URL_MESIN_ONGKIR = "https://script.google.com/macros/s/AKfycbxn-cQKWoYCkfMbiAQEvZ8T0qHPhzvjGTZZxeU98kWXOnZwvmxNd9WTtGTKNzw3cdhT/exec"; 
 
 function toggleMenu() {
@@ -47,88 +48,93 @@ function tutupModal(id) {
 
 function bukaModalKeranjang() {
     const container = document.getElementById('daftar-item-keranjang');
-    const totalCon = document.getElementById('total-container');
     const textSubtotal = document.getElementById('text-subtotal');
     const textTotal = document.getElementById('text-total');
+    const textOngkir = document.getElementById('text-ongkir');
     
     container.innerHTML = "";
     let subtotal = 0;
 
     if (keranjang.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:40px 20px;"><i class="fas fa-shopping-basket" style="font-size:3rem; color:#eee;"></i><p style="color:#999; margin-top:10px;">Keranjang kosong</p></div>`;
-        totalCon.style.display = 'none';
+        container.innerHTML = `<div style="text-align:center; padding:40px 20px;"><p>Keranjang kosong</p></div>`;
+        document.getElementById('total-container').style.display = 'none';
         document.getElementById('area-pembayaran').style.display = 'none';
     } else {
         keranjang.forEach((item, i) => {
             subtotal += item.harga;
             container.innerHTML += `
-                <div class="cart-item" style="display:flex; justify-content:space-between; align-items:center; padding:12px 20px; border-bottom:1px solid #f8f9fa;">
-                    <div><b style="display:block; font-size:0.9rem; color:#2c3e50;">${item.nama}</b><span style="color:var(--primary); font-weight:800; font-size:0.85rem;">Rp ${item.harga.toLocaleString('id-ID')}</span></div>
-                    <i class="fas fa-trash-alt" style="color:#ff7675; cursor:pointer; padding:10px;" onclick="hapusItem(${i})"></i>
+                <div class="cart-item" style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;">
+                    <div><b>${item.nama}</b><br>Rp ${item.harga.toLocaleString('id-ID')}</div>
+                    <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="hapusItem(${i})"></i>
                 </div>`;
         });
-        totalCon.style.display = 'block';
+        document.getElementById('total-container').style.display = 'block';
         textSubtotal.innerText = "Rp " + subtotal.toLocaleString('id-ID');
-        updateTampilanTotal(subtotal);
+        
+        // Reset ongkir kalau keranjang berubah tapi belum pilih kota lagi
+        if (ongkirSekarang === 0) {
+            textTotal.innerText = "Rp " + subtotal.toLocaleString('id-ID');
+            textOngkir.innerText = "Rp 0";
+        } else {
+            textTotal.innerText = "Rp " + (subtotal + ongkirSekarang).toLocaleString('id-ID');
+        }
     }
     document.getElementById('modal-keranjang').style.display = 'flex';
 }
 
-// FUNGSI CEK ONGKIR OTOMATIS
+// FUNGSI CEK ONGKIR OTOMATIS + LOG UNTUK LACAK ERROR
 async function hitungOngkirOtomatis() {
     const idKota = document.getElementById('kota-tujuan').value;
     const textOngkir = document.getElementById('text-ongkir');
-    
+    const textTotal = document.getElementById('text-total');
+    const textSubtotal = document.getElementById('text-subtotal');
+
     if (!idKota) {
         ongkirSekarang = 0;
         document.getElementById('area-pembayaran').style.display = 'none';
-        document.getElementById('notif-ongkir').style.display = 'block';
-        bukaModalKeranjang();
         return;
     }
 
-    textOngkir.innerText = "Memuat...";
-    
+    textOngkir.innerText = "Cek tarif...";
+    console.log("Mencoba cek ongkir ke ID Kota:", idKota);
+
     try {
-        // Ambil berat total (asumsi per item 100gr)
-        let berat = keranjang.length * 100; 
-        const respon = await fetch(`${URL_MESIN_ONGKIR}?dest=${idKota}&weight=${berat}`);
-        const hasil = await respon.json();
-        
-        // Ambil harga JNE Reguler (dari RajaOngkir)
-        ongkirSekarang = hasil.rajaongkir.results[0].costs[0].cost[0].value;
-        
-        textOngkir.innerText = "Rp " + ongkirSekarang.toLocaleString('id-ID');
-        document.getElementById('area-pembayaran').style.display = 'block';
-        document.getElementById('notif-ongkir').style.display = 'none';
-        
         let subtotal = 0;
         keranjang.forEach(item => subtotal += item.harga);
-        updateTampilanTotal(subtotal);
+
+        // Fetch data dari Google Script
+        const respon = await fetch(`${URL_MESIN_ONGKIR}?dest=${idKota}&weight=1000`);
+        const hasil = await respon.json();
+        
+        console.log("Respon API:", hasil); // Ini console log untuk cek di Inspect Element laptop
+
+        if (hasil.rajaongkir && hasil.rajaongkir.results[0].costs.length > 0) {
+            // Ambil biaya JNE Reguler
+            ongkirSekarang = hasil.rajaongkir.results[0].costs[0].cost[0].value;
+            
+            textOngkir.innerText = "Rp " + ongkirSekarang.toLocaleString('id-ID');
+            const totalAkhir = subtotal + ongkirSekarang;
+            textTotal.innerText = "Rp " + totalAkhir.toLocaleString('id-ID');
+
+            // Munculkan pembayaran & Sembunyikan notifikasi
+            document.getElementById('area-pembayaran').style.display = 'block';
+            document.getElementById('notif-ongkir').style.display = 'none';
+        } else {
+            textOngkir.innerText = "Tidak tersedia";
+            alert("Layanan pengiriman tidak tersedia untuk wilayah ini.");
+        }
 
     } catch (error) {
-        alert("Gagal ambil ongkir. Coba lagi nanti.");
-        textOngkir.innerText = "Rp 0";
+        console.error("Detail Error:", error);
+        textOngkir.innerText = "Gagal koneksi";
+        alert("Gagal ambil ongkir. Pastikan URL Google Script sudah benar.");
     }
-}
-
-function updateTampilanTotal(sub) {
-    const totalSemua = sub + ongkirSekarang;
-    document.getElementById('text-total').innerText = "Rp " + totalSemua.toLocaleString('id-ID');
 }
 
 function cekMetode() {
     const m = document.getElementById('metode-bayar').value;
     document.getElementById('info-rek').style.display = (m === 'Transfer') ? 'block' : 'none';
     document.getElementById('info-qris').style.display = (m === 'QRIS') ? 'block' : 'none';
-}
-
-function waPesan(nama) {
-    window.open(`https://wa.me/6285731070315?text=Saya ingin pesan: ${nama}`);
-}
-
-function waKonsultasi() {
-    window.open(`https://wa.me/6285731070315?text=Halo admin, saya ingin konsultasi`);
 }
 
 function konfirmasiPesanan() {
@@ -138,7 +144,6 @@ function konfirmasiPesanan() {
     const kotaSelect = document.getElementById('kota-tujuan');
     const namaKota = kotaSelect.options[kotaSelect.selectedIndex].text;
 
-    if (keranjang.length === 0) return alert("Keranjang kosong!");
     if (!nama || !alamat || !kotaSelect.value) return alert("Lengkapi data pengiriman!");
 
     let list = "";
@@ -149,8 +154,7 @@ function konfirmasiPesanan() {
     });
 
     const totalFix = subtotal + ongkirSekarang;
-
-    const teks = `*PESANAN BARU - SEHAT FARMA*%0A*Nama:* ${nama}%0A*Alamat:* ${alamat} (${namaKota})%0A*Metode:* ${metode}%0A%0A*Order:*%0A${list}%0A*Subtotal:* Rp ${subtotal.toLocaleString('id-ID')}%0A*Ongkir (JNE):* Rp ${ongkirSekarang.toLocaleString('id-ID')}%0A*TOTAL TRANSFER: Rp ${totalFix.toLocaleString('id-ID')}*`;
+    const teks = `*PESANAN BARU*%0A*Nama:* ${nama}%0A*Alamat:* ${alamat} (${namaKota})%0A*Metode:* ${metode}%0A%0A*Order:*%0A${list}%0A*Subtotal:* Rp ${subtotal.toLocaleString('id-ID')}%0A*Ongkir:* Rp ${ongkirSekarang.toLocaleString('id-ID')}%0A*TOTAL: Rp ${totalFix.toLocaleString('id-ID')}*`;
     
     window.open(`https://wa.me/6285731070315?text=${teks}`);
 }
