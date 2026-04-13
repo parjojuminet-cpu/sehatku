@@ -1,7 +1,7 @@
 let keranjang = [];
 let ongkirSekarang = 0;
 // MASUKKAN URL GOOGLE SCRIPT KAMU DI SINI
-const URL_MESIN_ONGKIR = "https://script.google.com/macros/s/AKfycbwGVQdvxCXNasPgMTEUIM9W9Co-tkXxpoyNmM0n4zfPjnBRvyHpHugqwfpEiXPTTvP5/exec"; 
+const URL_MESIN_ONGKIR = "https://script.google.com/macros/s/AKfycbw8bP4M66zDFkfEtdopcFk5E36Ii8ZgQKSNr_6DxlojdKdyhEhoTT9cSep1rTgQcfuG/exec"; 
 
 function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('active');
