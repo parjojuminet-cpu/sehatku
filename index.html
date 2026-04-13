@@ -1,211 +1,426 @@
-// ============================================================
-// 1. KONFIGURASI - GANTI LINK DI BAWAH INI
-// ============================================================
-// Masukkan link "Aplikasi Web" dari Google Apps Script (yang berakhiran /exec)
-const URL_GAS = "https://script.google.com/macros/s/AKfycbyD-OI98MDS4Zw8sTlBAUTa-LuvHOEYDNmJmutFBoaJhEsH5QzKAy_r5cNZoPp6pOSz/exec"; 
-
-let keranjang = [];
-let ongkirSekarang = 0;
-
-// ============================================================
-// 2. NAVIGASI & MENU
-// ============================================================
-function toggleMenu() {
-    document.getElementById('navMenu').classList.toggle('active');
-}
-
-function tampilkanHalaman(id) {
-    const sections = document.querySelectorAll('section');
-    sections.forEach(s => s.style.display = 'none');
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apotek Mitra Farma | Ramah & Terpercaya</title>
     
-    // Selalu tampilkan hero di halaman utama (promo)
-    if(id === 'promo') {
-        document.getElementById('hero').style.display = 'block';
-    } else {
-        document.getElementById('hero').style.display = 'none';
-    }
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    const target = document.getElementById(id);
-    if(target) target.style.display = 'block';
+    <!-- Link CSS Eksternal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR ATAS -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand" onclick="tampilkanHalaman('promo')" style="cursor:pointer">
+                <img src="mitra.png" alt="Logo" class="nav-logo">
+                <span class="brand-text">Mitra Farma</span>
+            </div>
+
+            <!-- SEARCH BAR -->
+            <div class="nav-search">
+                <input type="text" id="navSearchInput" onkeyup="cariProduk()" placeholder="Cari obat...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="javascript:void(0)" onclick="tampilkanHalaman('promo')">Home</a></li>
+                <li class="nav-dropdown">
+                    <a href="javascript:void(0)">Kategori <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-items">
+                        <li><a href="javascript:void(0)" onclick="tampilkanHalaman('kecantikan')">Kecantikan</a></li>
+                        <li><a href="javascript:void(0)" onclick="tampilkanHalaman('anak')">Anak & Bayi</a></li>
+                        <li><a href="javascript:void(0)" onclick="tampilkanHalaman('dewasa')">Dewasa</a></li>
+                        <li><a href="javascript:void(0)" onclick="tampilkanHalaman('vitamin')">Vitamin</a></li>
+                        <li><a href="javascript:void(0)" onclick="tampilkanHalaman('herbal')">Herbal</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0)" onclick="tampilkanHalaman('galeri')">Galeri</a></li>
+                <li><a href="javascript:void(0)" onclick="tampilkanHalaman('edukasi')">Edukasi</a></li>
+                <li><a href="javascript:void(0)" onclick="tampilkanHalaman('kontak')">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <!-- HERO SECTION (Selalu Tampil) -->
+        <section id="hero" class="hero">
+            <h1 class="main-title">SEHAT FARMA</h1>
+            <div onclick="waKonsultasi()" style="cursor:pointer">
+                <img src="apoteker.png" alt="Apoteker" class="hero-img">
+                <p class="hero-btn">KONSULTASI SEKARANG</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- PROMO -->
+            <div class="container">
+            <!-- SEKSI PROMO -->
+           <section id="promo">
+            <h2 class="section-title">✨ Promo Spesial ✨</h2>
+            <div class="grid">
+                <div class="card promo-card">
+                    <div class="promo-badge-custom">GRATIS ONGKIR JAWA BALI & COD</div>
+                    <img src="promo/klodermacrm.jpg">
+                    <h3>klodermacrm </h3>
+                    <button class="btn-buy" onclick="waPesan('klodermacrm')">Pesan</button>
+                </div>
+                <div class="card promo-card">
+                    <div class="promo-badge-custom">GRATIS ONGKIR JAWA BALI & COD</div>
+                    <img src="promo/klodermaoint.jpg">
+                    <h3>klodermaoint</h3>
+                    <button class="btn-buy" onclick="waPesan('klodermaoint')">Pesan</button>
+                </div>
+				 <div class="card promo-card">
+                    <div class="promo-badge-custom">GRATIS ONGKIR JAWA BALI & COD</div>
+                    <img src="promo/MEDIKLIN.jpg">
+                    <h3>MEDIKLIN</h3>
+                    <button class="btn-buy" onclick="waPesan('MEDIKLIN')">Pesan</button>
+                </div>
+                <div class="card promo-card">
+                    <div class="promo-badge-custom">GRATIS ONGKIR JAWA BALI & COD</div>
+                    <img src="promo/niacef.png">
+                    <h3>Niacef</h3>
+                    <button class="btn-buy" onclick="waPesan('Niacef')">Pesan</button>
+                </div>
+				<div class="card promo-card">
+                    <div class="promo-badge-custom">GRATIS ONGKIR JAWA BALI & COD</div>
+                    <img src="promo/vitacid.jpg">
+                    <h3>Vitacid </h3>
+                    <button class="btn-buy" onclick="waPesan('Vitacid')">Pesan</button>
+                </div>
+                <div class="card promo-card">
+                    <div class="promo-badge-custom">GRATIS ONGKIR JAWA BALI & COD</div>
+                    <img src="promo/vitacidcrm.jpg">
+                    <h3>Vitacidcrm</h3>
+                    <button class="btn-buy" onclick="waPesan('Vitacidcrm')">Pesan</button>
+                </div>
+				 <div class="card promo-card">
+                    <div class="promo-badge-custom">GRATIS ONGKIR JAWA BALI & COD</div>
+                    <img src="promo/KETOMEDSS.png">
+                    <h3>KETOMEDSS</h3>
+                    <button class="btn-buy" onclick="waPesan('KETOMEDSS')">Pesan</button>
+                </div>
+                <div class="card promo-card">
+                    <div class="promo-badge-custom">GRATIS ONGKIR JAWA BALI & COD</div>
+                    <img src="promo/CARMED20.jpg">
+                    <h3>CARMED20</h3>
+                    <button class="btn-buy" onclick="waPesan('CARMED20')">Pesan</button>
+                </div>
+            </div>
+			
+        </section>
+
+            <!-- KATEGORI KECANTIKAN -->
+            <section id="kecantikan">
+                <h2 class="section-title">Kecantikan</h2>
+                <div class="grid">
+    <div class="card"><img src="kecantikan/benzolac2.jpg"><h3>benzolac2%</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('benzolac2%', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/BENZOLAC-5.jpg"><h3>BENZOLAC-5</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('BENZOLAC-5', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/benzolac-cl.jpg"><h3>benzolac-cl</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('benzolac-cl', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/DESOLEX.jpg"><h3>DESOLEX</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('DESOLEX', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/ERYMED.png"><h3>ERYMED</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('ERYMED', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/ERYMED-ERYTHROMYCIN-2-15G.png"><h3>ERYMED-ERYTHROMYCIN-2-15G</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('ERYMED-ERYTHROMYCIN-2-15G', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/KLODERMAgel.png"><h3>KLODERMAgel</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('KLODERMAgel', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/mediklinsol.jpg"><h3>mediklinsol</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('mediklinsol', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/Palenox.jpg"><h3>Palenox</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('Palenox', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/PIROTOP-5G.png"><h3>PIROTOP-5G</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('PIROTOP-5G', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/REGROU-FOR-MEN.jpg"><h3>REGROU-FOR-MEN</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('REGROU-FOR-MEN', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/tekasolplus.jpg"><h3>tekasolplus</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('tekasolplus', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/VITACID  0,1.png"><h3>VITACID  0,1</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('VITACID  0,1', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/VITACID.png"><h3>VITACID</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('VITACID', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/vitacid-1.jpg"><h3>vitacid-1</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('vitacid-1', 50000)">Keranjang</button></div>
+    <div class="card"><img src="kecantikan/vitacidcrm0,1.jpg"><h3>vitacidcrm0,1</h3><p class="price">Rp50.000</p><button class="btn-cart" onclick="tambahKeranjang('vitacidcrm0,1', 50000)">Keranjang</button></div>
+</div>
+</section>
+
+<section id="anak">
+    <h2 class="section-title">Anak & Bayi</h2>
+<div class="grid">
+    <div class="card"><img src="anak/anakonidin.jpg"><h3>anakonidin</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('anakonidin', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/bodrexin.png"><h3>bodrexin</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('bodrexin', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/cefixim.png"><h3>cefixim</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('cefixim', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/Ciprofloxacin.jpg"><h3>Ciprofloxacin</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('Ciprofloxacin', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/CONTREXYN.png"><h3>CONTREXYN</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('CONTREXYN', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/Hufagripp.jpg"><h3>Hufagripp</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('Hufagripp', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/itamol-syr.jpg"><h3>itamol-syr</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('itamol-syr', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/koolfever.jpg"><h3>koolfever</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('koolfever', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/Lacto-B-1.jpg"><h3>Lacto-B-1</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('Lacto-B-1', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/obh.jpg"><h3>obh</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('obh', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/Ottopan-15ml.png"><h3>Ottopan-15ml</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('Ottopan-15ml', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/pyrexin.jpg"><h3>pyrexin</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('pyrexin', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/SANMOL.jpg"><h3>SANMOL</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('SANMOL', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/sumagesic.jpg"><h3>sumagesic</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('sumagesic', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/tempra.png"><h3>tempra</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('tempra', 30000)">Keranjang</button></div>
+    <div class="card"><img src="anak/termorex.jpg"><h3>termorex</h3><p class="price">Rp30.000</p><button class="btn-cart" onclick="tambahKeranjang('termorex', 30000)">Keranjang</button></div>
+</div>
+</section>
+
+<section id="dewasa">
+    <h2 class="section-title">Dewasa</h2>
+<div class="grid">
+    <div class="card"><img src="dewasa/ACTIFED.jpg"><h3>ACTIFED</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('ACTIFED', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/ANDALAN-FE.png"><h3>ANDALAN-FE</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('ANDALAN-FE', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/ANDALAN-KONDOM--12S.jpg"><h3>ANDALAN-KONDOM--12S</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('ANDALAN-KONDOM--12S', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/ANDALAN-LAKTASI-2.jpg"><h3>ANDALAN-LAKTASI-2</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('ANDALAN-LAKTASI-2', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/andalan-pil-kb.jpg"><h3>andalan-pil-kb</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('andalan-pil-kb', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/sanexon.png"><h3>sanexon</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('sanexon', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/becom.jpg"><h3>becom</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('becom', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/diane.jpg"><h3>diane</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('diane', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/ELZSA.jpg"><h3>ELZSA</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('ELZSA', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/INTERLAC-1.png"><h3>INTERLAC-1</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('INTERLAC-1', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/METFORMIN.jpg"><h3>METFORMIN</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('METFORMIN', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/postinor-2.png"><h3>postinor-2</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('postinor-2', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/POSTPIL.png"><h3>POSTPIL</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('POSTPIL', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/SUTRA.png"><h3>SUTRA</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('SUTRA', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/ultrasafe.png"><h3>Vitamin Dewasa</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('Vitamin Dewasa', 20000)">Keranjang</button></div>
+    <div class="card"><img src="dewasa/vivo.png"><h3>vivo</h3><p class="price">Rp20.000</p><button class="btn-cart" onclick="tambahKeranjang('vivo', 20000)">Keranjang</button></div>
+</div>
+</section>
+
+<section id="vitamin">
+    <h2 class="section-title">Vitamin</h2>
+<div class="grid">
+    <div class="card"><img src="vitamin/blackmores-1.jpg"><h3>blackmores-1</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('blackmores-1', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/Blackmores-multivitamin.jpg"><h3>Blackmores-multivitamin</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('Blackmores-multivitamin', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/Caviplex.png"><h3>Caviplex</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('Caviplex', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/CDR-2.jpg"><h3>CDR-2</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('CDR-2', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/ipi-d3.png"><h3>ipi-d3</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('ipi-d3', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/ENERVON-ACTIVE-FC-TAB-4S-STRIP-25S-2.jpg"><h3>ENERVON-ACTIVE-FC</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('ENERVON-ACTIVE-FC', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/ENERVON-C-EFF-10S-TUBE.jpg"><h3>ENERVON-C-EFF-10S-TUBE</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('ENERVON-C-EFF-10S-TUBE', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/H-BOOSTER-SYR-50ML.jpg"><h3>H-BOOSTER-SYR-50ML</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('H-BOOSTER-SYR-50ML', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/HEMAVITON-ACTION.png"><h3>HEMAVITON-ACTION</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('HEMAVITON-ACTION', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/Hemaviton-Stamina-Plus.jpg"><h3>Hemaviton-Stamina-Plus</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('Hemaviton-Stamina-Plus', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/IMBOOST-1-STRIP-4-TABLET.png"><h3>IMBOOST-1-STRIP-4-TABLET</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('IMBOOST-1-STRIP-4-TABLET', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/IMBOOST-VIT-C-D3.png"><h3>IMBOOST-VIT-C-D3</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('IMBOOST-VIT-C-D3', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/METFORMIN-HCI.jpg"><h3>METFORMIN-HCI</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('METFORMIN-HCI', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/renovit.jpg"><h3>renovit</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('renovit', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/stamina plus.png"><h3>stamina plus</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('stamina plus', 45000)">Keranjang</button></div>
+    <div class="card"><img src="vitamin/stimuno.jpg"><h3>stimuno</h3><p class="price">Rp45.000</p><button class="btn-cart" onclick="tambahKeranjang('stimuno', 45000)">Keranjang</button></div>
+</div>
+</section>
+
+<section id="obatresep">
+    <h2 class="section-title">Obat Resep</h2>
+<div class="grid">
+    <div class="card"><img src="resep/AMOXICILLIN-TRIHYDRATE.png"><h3>AMOXICILLIN-TRIHYDRATE</h3><p class="price">Rp10.000</p><button class="btn-cart" onclick="tambahKeranjang('AMOXICILLIN-TRIHYDRATE', 10000)">Keranjang</button></div>
+</div>
+</section>
+
+<section id="herbal">
+    <h2 class="section-title">Herbal</h2>
+<div class="grid">
+    <div class="card"><img src="herbal/ENKASARI-HERBAL-120ML-3.jpg"><h3>ENKASARI-HERBAL-120ML-3</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('ENKASARI-HERBAL-120ML-3', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/Entrostop-Anak-6-sachet.png"><h3>Entrostop-Anak-6-sachet</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('Entrostop-Anak-6-sachet', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/froz-herbal-ijo.jpg"><h3>froz-herbal-ijo</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('froz-herbal-ijo', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/KOMIK-HERBAL.png"><h3>KOMIK-HERBAL</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('KOMIK-HERBAL', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/KOMIK-HERBAL-LEMON.jpg"><h3>KOMIK-HERBAL-LEMON</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('KOMIK-HERBAL-LEMON', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/Laserin-herbal-30ml.jpg"><h3>Laserin-herbal-30ml</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('Laserin-herbal-30ml', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/OB-HERBAL-BATUK-SYR-60ML.jpg"><h3>OB-HERBAL-BATUK-SYR-60ML</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('OB-HERBAL-BATUK-SYR-60ML', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/PILKITA-PEGAL-LINU-TAB-2S-STRIP-50S--3-.jpg"><h3>PILKITA-PEGAL-LINU</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('PILKITA-PEGAL-LINU', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/promag-herbal.jpg"><h3>promag-herbal</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('promag-herbal', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/prospan-2.jpg"><h3>prospan-2</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('prospan-2', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/Siladex-Cough-Herbal.png"><h3>Siladex-Cough-Herbal</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('Siladex-Cough-Herbal', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/tolak-linu-herbal.jpg"><h3>tolak-linu-herbal</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('tolak-linu-herbal', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/vegeta-herbal-1.jpg"><h3>vegeta-herbal-1</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('vegeta-herbal-1', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/ZIPLONG.png"><h3>ZIPLONG</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('ZIPLONG', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/nutraforchol.jpg"><h3>nutraforchol</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('nutraforchol', 55000)">Keranjang</button></div>
+    <div class="card"><img src="herbal/tolak angin herbal.jpg"><h3>tolak angin herbal</h3><p class="price">Rp55.000</p><button class="btn-cart" onclick="tambahKeranjang('tolak angin herbal', 55000)">Keranjang</button></div>
+</div>
+        </section>
+
+        <!-- (DATA LAINNYA DIABAIKAN UNTUK SINGKATNYA, TETAPI TETAP ADA DI FILE ASLI ANDA) -->
+		<section id="galeri">
+            <h2 class="section-title">Galeri & Testimoni</h2>
+            <div class="grid">
+                <div style="text-align: center; margin: 30px auto; max-width: 700px; padding: 20px;">
+    <video width="100%" controls style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+        <source src="galeri/1.mp4" type="video/mp4">
+        Browser kamu tidak mendukung tag video.
+    </video>
+    <p style="margin-top: 10px; color: #7f8c8d; font-style: italic;">Simak layanan unggulan Sehat Farma</p>
+</div><div style="text-align: center; margin: 30px auto; max-width: 700px; padding: 20px;">
+    <video width="100%" controls style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+        <source src="galeri/2.mp4" type="video/mp4">
+        Browser kamu tidak mendukung tag video.
+    </video>
+    <p style="margin-top: 10px; color: #7f8c8d; font-style: italic;">Simak layanan unggulan Sehat Farma</p>
+</div>
+                <div style="text-align: center; margin: 30px auto; max-width: 700px; padding: 20px;">
+    <video width="100%" controls style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+        <source src="galeri/3.mp4" type="video/mp4">
+        Browser kamu tidak mendukung tag video.
+    </video>
+    <p style="margin-top: 10px; color: #7f8c8d; font-style: italic;">Simak layanan unggulan Sehat Farma</p>
+</div>
+				<div style="text-align: center; margin: 30px auto; max-width: 700px; padding: 20px;">
+    <video width="100%" controls style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+        <source src="galeri/5.mp4" type="video/mp4">
+        Browser kamu tidak mendukung tag video.
+    </video>
+    <p style="margin-top: 10px; color: #7f8c8d; font-style: italic;">Simak layanan unggulan Sehat Farma</p>
+</div>
+<div style="text-align: center; margin: 30px auto; max-width: 700px; padding: 20px;">
+    <video width="100%" controls style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+        <source src="galeri/6.mp4" type="video/mp4">
+        Browser kamu tidak mendukung tag video.
+    </video>
+    <p style="margin-top: 10px; color: #7f8c8d; font-style: italic;">Simak layanan unggulan Sehat Farma</p>
+</div>
+			</div>
+        </section>
+
+        <section id="edukasi">
+    <h2 class="section-title">Edukasi Kesehatan</h2>
     
-    // Tutup menu mobile setelah klik
-    document.getElementById('navMenu').classList.remove('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+    <div class="edukasi-container">
+        <div class="edukasi-card">
+            <div class="edukasi-icon">
+                <i class="fas fa-kidneys" style="color: #e74c3c;"></i>
+            </div>
+            <div class="edukasi-content">
+                <h3>Kebiasaan yang Merusak Ginjal</h3>
+                <p>Banyak kebiasaan sepele yang ternyata bisa merusak ginjal secara perlahan. Ketahui cara mencegahnya sebelum terlambat.</p>
+                <a href="https://www.youtube.com/watch?v=-E0Brk3Fy5s" target="_blank" class="btn-read-more">
+                    Lanjutkan menonton video <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
 
-// Fitur Cari Produk Sederhana
-function cariProduk() {
-    let input = document.getElementById('navSearchInput').value.toLowerCase();
-    let cards = document.querySelectorAll('.card');
-    
-    cards.forEach(card => {
-        let h3 = card.querySelector('h3');
-        if (h3) {
-            let text = h3.innerText.toLowerCase();
-            card.style.display = text.includes(input) ? "" : "none";
-        }
-    });
-}
+        <div class="edukasi-card">
+            <div class="edukasi-icon">
+                <i class="fas fa-pills" style="color: #3498db;"></i>
+            </div>
+            <div class="edukasi-content">
+                <h3>Cara Minum Obat yang Benar</h3>
+                <p>Apakah boleh minum obat dengan teh? Simak panduan lengkap cara konsumsi obat agar bekerja maksimal di tubuh Anda.</p>
+                <a href="https://www.youtube.com/watch?v=-E0Brk3Fy5s" target="_blank" class="btn-read-more">
+                    Lanjutkan membaca informasi <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+	<div class="edukasi-container">
+        <div class="edukasi-card">
+            <div class="edukasi-icon">
+                <i class="fas fa-kidneys" style="color: #e74c3c;"></i>
+            </div>
+            <div class="edukasi-content">
+                <h3>ULAS TUNTAS PERTANYAAN NETIZEN DI MITOS & FAKTA KESEHATAN!</h3>
+                <p>ULAS TUNTAS PERTANYAAN NETIZEN DI MITOS & FAKTA KESEHATAN bersama dr. tirta</p>
+                <a href="https://www.youtube.com/watch?v=qzmzsLs6orQ" target="_blank" class="btn-read-more">
+                    Lanjutkan menonton video <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
 
-// ============================================================
-// 3. LOGIKA KERANJANG
-// ============================================================
-function tambahKeranjang(nama, harga) {
-    keranjang.push({ nama: nama, harga: harga });
-    updateNotifKeranjang();
-    alert("✅ " + nama + " berhasil ditambah ke keranjang!");
-}
+        <div class="edukasi-card">
+            <div class="edukasi-icon">
+                <i class="fas fa-pills" style="color: #3498db;"></i>
+            </div>
+            <div class="edukasi-content">
+                <h3>tips kesehatan metabolic</h3>
+                <p>BEBAS Diabetes, Asam Lambung, Insomnia & Penyakit Lain Tanpa Konsumsi Obat! | SUARA BERKELAS</p>
+                <a href="https://www.youtube.com/watch?v=BG1juhuu3YE" target="_blank" class="btn-read-more">
+                    Lanjutkan membaca informasi <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+   
+</section>
 
-function updateNotifKeranjang() {
-    document.getElementById('cart-count').innerText = keranjang.length;
-}
+        <section id="kontak">
+            <h2 class="section-title">Tentang Sehat Farma</h2>
+            <div style="background: white; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <a href="https://wa.me/6285731070315" style="display: inline-block; background: #25d366; color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold;">
+                    <i class="fab fa-whatsapp"></i> Hubungi WA: 0857-3107-0315
+                </a>
+                <p style="margin-top: 15px; color: #7f8c8d;">Kabupaten Semarang, Jawa Tengah</p>
+            </div>
+        </section>
+    </div>
 
-function hapusItem(index) {
-    keranjang.splice(index, 1);
-    updateNotifKeranjang();
-    bukaModalKeranjang(); // Refresh tampilan modal
-}
+    <!-- FLOATING BUTTONS -->
+    <div id="floating-cart" onclick="bukaModalKeranjang()">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+    </div>
+    <a href="https://wa.me/6285731070315" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-function tutupModal(id) {
-    document.getElementById(id).style.display = 'none';
-}
+    <!-- MODAL KERANJANG -->
+    <div id="modal-keranjang" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-shopping-basket"></i> Keranjang</h3>
+                <span style="cursor:pointer; font-size:24px" onclick="tutupModal('modal-keranjang')">&times;</span>
+            </div>
 
-function bukaModalKeranjang() {
-    const container = document.getElementById('daftar-item-keranjang');
-    const textSubtotal = document.getElementById('text-subtotal');
-    const textTotal = document.getElementById('text-total');
-    
-    container.innerHTML = "";
-    let subtotal = 0;
+            <div id="daftar-item-keranjang" style="flex: 1; overflow-y: auto; padding: 10px 0;">
+                </div>
+            
+            <div class="form-checkout">
+                <p style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">Pilih Lokasi Pengiriman:</p>
+                <select id="kota-tujuan" onchange="hitungOngkirOtomatis()">
+                    <option value="">-- Pilih Kota/Kecamatan --</option>
+                    <option value="402">Ungaran / Kab. Semarang</option>
+                    <option value="399">Kota Semarang</option>
+                    <option value="398">Salatiga</option>
+                    <option value="152">Jakarta Pusat</option>
+                    <option value="444">Surabaya</option>
+                    </select>
 
-    if (keranjang.length === 0) {
-        container.innerHTML = "<p style='text-align:center;padding:20px;'>Keranjang Anda masih kosong.</p>";
-        document.getElementById('area-pembayaran').style.display = 'none';
-        document.getElementById('notif-ongkir').style.display = 'block';
-        textSubtotal.innerText = "Rp 0";
-        textTotal.innerText = "Rp 0";
-        ongkirSekarang = 0;
-        document.getElementById('text-ongkir').innerText = "Rp 0";
-    } else {
-        keranjang.forEach((item, i) => {
-            subtotal += item.harga;
-            container.innerHTML += `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
-                    <div style="text-align:left">
-                        <div style="font-weight:600; font-size:0.9rem;">${item.nama}</div>
-                        <div style="color:var(--primary); font-size:0.8rem;">Rp ${item.harga.toLocaleString('id-ID')}</div>
+                <div class="cart-total" id="total-container" style="display:block; background:#f8f9fa; padding:12px; border-radius:10px; margin-bottom:15px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>Subtotal:</span>
+                        <span id="text-subtotal">Rp 0</span>
                     </div>
-                    <i class="fas fa-trash-alt" onclick="hapusItem(${i})" style="color:#e74c3c; cursor:pointer; padding:5px;"></i>
-                </div>`;
-        });
-        
-        textSubtotal.innerText = "Rp " + subtotal.toLocaleString('id-ID');
-        // Update total dengan ongkir yang ada (jika sudah pilih kota)
-        textTotal.innerText = "Rp " + (subtotal + ongkirSekarang).toLocaleString('id-ID');
-    }
-    document.getElementById('modal-keranjang').style.display = 'flex';
-}
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px; color: #27ae60; font-weight: bold;">
+                        <span>Ongkos Kirim (JNE):</span>
+                        <span id="text-ongkir">Rp 0</span>
+                    </div>
+                    <hr style="border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
+                    <div style="display:flex; justify-content:space-between; font-weight:800; font-size: 1.1rem;">
+                        <span>Total Bayar:</span>
+                        <span id="text-total" style="color:var(--primary);">Rp 0</span>
+                    </div>
+                </div>
 
-// ============================================================
-// 4. HITUNG ONGKIR (VIA GOOGLE APPS SCRIPT)
-// ============================================================
-async function hitungOngkirOtomatis() {
-    const idKota = document.getElementById('kota-tujuan').value;
-    const textOngkir = document.getElementById('text-ongkir');
-    const textTotal = document.getElementById('text-total');
-    
-    if (!idKota) {
-        ongkirSekarang = 0;
-        textOngkir.innerText = "Rp 0";
-        return;
-    }
-    
-    textOngkir.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-    
-    // Memanggil Google Apps Script secara langsung (Browser akan handle redirect otomatis)
-    const urlFinal = `${URL_GAS}?dest=${idKota}&weight=1000`;
+                <input type="text" id="nama-pembeli" placeholder="Nama Lengkap">
+                <textarea id="alamat-pembeli" placeholder="Alamat Lengkap (Jl, No Rumah, RT/RW)" rows="2"></textarea>
+                
+                <div id="area-pembayaran" style="display:none;">
+                    <p style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">Metode Pembayaran:</p>
+                    <select id="metode-bayar" onchange="cekMetode()">
+                        <option value="COD">Bayar di Tempat (COD)</option>
+                        <option value="Transfer">Transfer BCA</option>
+                        <option value="QRIS">QRIS Sehat Farma</option>
+                    </select>
 
-    try {
-        const response = await fetch(urlFinal);
-        if (!response.ok) throw new Error('Gagal terhubung ke server');
-        
-        const data = await response.json(); 
-        
-        if (data.rajaongkir && data.rajaongkir.results[0].costs.length > 0) {
-            // Ambil biaya layanan pertama dari JNE (biasanya OKE atau REG)
-            ongkirSekarang = data.rajaongkir.results[0].costs[0].cost[0].value;
-            
-            textOngkir.innerText = "Rp " + ongkirSekarang.toLocaleString('id-ID');
-            
-            let subtotal = 0;
-            keranjang.forEach(item => subtotal += item.harga);
-            textTotal.innerText = "Rp " + (subtotal + ongkirSekarang).toLocaleString('id-ID');
-            
-            // Tampilkan pilihan pembayaran
-            document.getElementById('area-pembayaran').style.display = 'block';
-            document.getElementById('notif-ongkir').style.display = 'none';
-        } else {
-            textOngkir.innerText = "Tak tersedia";
-            alert("Layanan JNE tidak tersedia untuk lokasi ini.");
-        }
-    } catch (e) {
-        console.error("Error Ongkir:", e);
-        textOngkir.innerText = "Gagal memuat";
-        alert("Gagal mengambil data ongkir. Pastikan Google Script sudah di-deploy dengan benar (Access: Anyone).");
-    }
-}
+                    <div id="info-rek" class="info-rek"><b>BCA: 1234567890</b><br>A/N SEHAT FARMA</div>
+                    <div id="info-qris" class="info-rek" style="text-align:center">
+                        <img src="qris.png" alt="QRIS" style="width:100px"><br><small>Scan untuk Bayar</small>
+                    </div>
 
-// ============================================================
-// 5. PEMBAYARAN & WHATSAPP
-// ============================================================
-function cekMetode() {
-    const m = document.getElementById('metode-bayar').value;
-    document.getElementById('info-rek').style.display = (m === 'Transfer') ? 'block' : 'none';
-    document.getElementById('info-qris').style.display = (m === 'QRIS') ? 'block' : 'none';
-}
+                    <button class="btn-buy" style="background:#27ae60; margin-top:5px;" onclick="konfirmasiPesanan()">
+                        KONFIRMASI PESANAN <i class="fab fa-whatsapp"></i>
+                    </button>
+                </div>
+                
+                <div id="notif-ongkir" style="color: #e67e22; font-size: 0.8rem; text-align: center; padding: 10px;">
+                    *Pilih lokasi pengiriman untuk melihat total & cara bayar
+                </div>
+            </div>
+        </div>
+    </div>
 
-function konfirmasiPesanan() {
-    const nama = document.getElementById('nama-pembeli').value;
-    const alamat = document.getElementById('alamat-pembeli').value;
-    const kotaElem = document.getElementById('kota-tujuan');
-    const kotaText = kotaElem.options[kotaElem.selectedIndex].text;
-    const metode = document.getElementById('metode-bayar').value;
-    
-    if(!nama || !alamat || !kotaElem.value) {
-        return alert("Mohon lengkapi Nama, Alamat, dan Lokasi Pengiriman!");
-    }
-    
-    if(keranjang.length === 0) return alert("Keranjang masih kosong!");
-    
-    let detailProduk = "";
-    let subtotal = 0;
-    keranjang.forEach((item, index) => {
-        detailProduk += `${index + 1}. ${item.nama} (Rp ${item.harga.toLocaleString('id-ID')})%0A`;
-        subtotal += item.harga;
-    });
-    
-    const totalSemua = subtotal + ongkirSekarang;
-    
-    const pesan = `Halo Sehat Farma, saya ingin memesan:%0A%0A` +
-        `*DAFTAR PESANAN:*%0A${detailProduk}%0A` +
-        `*PENGIRIMAN:*%0A` +
-        `- Nama: ${nama}%0A` +
-        `- Alamat: ${alamat}%0A` +
-        `- Kota: ${kotaText}%0A%0A` +
-        `*RINCIAN BIAYA:*%0A` +
-        `- Subtotal: Rp ${subtotal.toLocaleString('id-ID')}%0A` +
-        `- Ongkir (JNE): Rp ${ongkirSekarang.toLocaleString('id-ID')}%0A` +
-        `- *Total Bayar: Rp ${totalSemua.toLocaleString('id-ID')}*%0A%0A` +
-        `*Metode Bayar:* ${metode}`;
-    
-    window.open(`https://wa.me/6285731070315?text=${pesan}`);
-}
-
-// Fungsi pesan cepat dari halaman promo
-function waPesan(nama) {
-    window.open(`https://wa.me/6285731070315?text=Halo admin, saya ingin pesan produk promo: *${nama}*`);
-}
-
-function waKonsultasi() {
-    window.open(`https://wa.me/6285731070315?text=Halo Apoteker Sehat Farma, saya ingin konsultasi kesehatan...`);
-}
+    <script src="script.js"></script>
+</body>
+</html>
