@@ -26,10 +26,10 @@ body { background: var(--bg-light); padding-top: 75px; overflow-x: hidden; }
 .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; }
 
 /* HERO */
-.hero { background: linear-gradient(135deg, #f78da7 0%, #e74c3c 100%); border-radius: 0 0 30px 30px; color: white; padding: 40px 15px; text-align: center; }
-.main-title { font-size: 1.8rem; margin-bottom: 15px; font-weight: 800; }
-.hero-img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid white; margin-bottom: 10px; }
-.hero-btn { background: white; color: var(--primary); padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; display: inline-block; }
+.hero-section { height: 65vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1586015555751-63bb77f4322a?q=80&w=2070') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+.hero-title { font-size: 3rem; font-weight: 900; }
+.hero-subtitle { color: #2ecc71; margin: 10px 0; }
+.btn-hero { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: 800; cursor: pointer; margin-top: 15px; }
 
 /* GRID & CARDS */
 .container { max-width: 1200px; margin: auto; padding: 0 10px; }
