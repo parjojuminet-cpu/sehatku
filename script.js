@@ -1,61 +1,8 @@
-// ============================================================
-// 1. LINK GOOGLE SCRIPT (SUDAH TERPASANG)
-// ============================================================
-const URL_GAS = "https://script.google.com/macros/s/AKfycbxZSCOYFzfjOhTehwlPyRpvCGd-eRR6JxGQNaLr7ZBr3dKzHZwcbFAs6nhq_OFb7FRW/exec"; 
-
+// VARIABEL GLOBAL
 let keranjang = [];
-let ongkirSekarang = 0;
 
 // ============================================================
-// 2. FUNGSI CEK ONGKIR (DIRECT FETCH - ANTI ERROR)
-// ============================================================
-async function hitungOngkirOtomatis() {
-    const idKota = document.getElementById('kota-tujuan').value;
-    const textOngkir = document.getElementById('text-ongkir');
-    const textTotal = document.getElementById('text-total');
-    
-    if (!idKota) return;
-    
-    // Tampilkan status loading
-    textOngkir.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengecek...';
-    
-    const finalUrl = `${URL_GAS}?dest=${idKota}&weight=1000`;
-
-    try {
-        // Pemanggilan langsung ke Google Script Anda
-        const response = await fetch(finalUrl);
-        
-        if (!response.ok) throw new Error('Gagal terhubung ke script');
-        
-        const data = await response.json(); 
-        
-        if (data.rajaongkir && data.rajaongkir.results[0].costs.length > 0) {
-            // Ambil biaya pengiriman JNE (pilihan pertama)
-            ongkirSekarang = data.rajaongkir.results[0].costs[0].cost[0].value;
-            
-            textOngkir.innerText = "Rp " + ongkirSekarang.toLocaleString('id-ID');
-            
-            // Hitung Total Bayar
-            let subtotal = 0;
-            keranjang.forEach(item => subtotal += item.harga);
-            textTotal.innerText = "Rp " + (subtotal + ongkirSekarang).toLocaleString('id-ID');
-            
-            // Munculkan bagian pembayaran
-            document.getElementById('area-pembayaran').style.display = 'block';
-            document.getElementById('notif-ongkir').style.display = 'none';
-        } else {
-            textOngkir.innerText = "Gagal memuat";
-            alert("Layanan JNE tidak tersedia untuk lokasi ini.");
-        }
-    } catch (e) {
-        console.error("Error Detail:", e);
-        textOngkir.innerText = "Error koneksi";
-        alert("Gagal mengambil data ongkir. Pastikan saat Deploy tadi Anda memilih 'Siapa saja' atau 'Anyone'.");
-    }
-}
-
-// ============================================================
-// 3. FUNGSI NAVIGASI & MENU
+// 1. FUNGSI NAVIGASI
 // ============================================================
 function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('active');
@@ -65,7 +12,7 @@ function tampilkanHalaman(id) {
     const sections = document.querySelectorAll('section');
     sections.forEach(s => s.style.display = 'none');
     
-    // Tampilkan Hero hanya di halaman utama (promo)
+    // Logika Hero dan Seksi
     if(id === 'promo') {
         document.getElementById('hero').style.display = 'block';
         document.getElementById('promo').style.display = 'block';
@@ -89,12 +36,12 @@ function cariProduk() {
 }
 
 // ============================================================
-// 4. LOGIKA KERANJANG
+// 2. LOGIKA KERANJANG
 // ============================================================
 function tambahKeranjang(nama, harga) {
     keranjang.push({ nama: nama, harga: harga });
     document.getElementById('cart-count').innerText = keranjang.length;
-    alert("✅ " + nama + " berhasil ditambah ke keranjang!");
+    alert("✅ Berhasil: " + nama + " masuk ke keranjang.");
 }
 
 function hapusItem(index) {
@@ -103,42 +50,39 @@ function hapusItem(index) {
     bukaModalKeranjang();
 }
 
-function tutupModal(id) {
-    document.getElementById(id).style.display = 'none';
-}
-
 function bukaModalKeranjang() {
     const container = document.getElementById('daftar-item-keranjang');
-    const textSubtotal = document.getElementById('text-subtotal');
     const textTotal = document.getElementById('text-total');
     
     container.innerHTML = "";
-    let subtotal = 0;
+    let total = 0;
 
     if (keranjang.length === 0) {
-        container.innerHTML = "<p style='text-align:center;padding:20px;'>Keranjang masih kosong</p>";
-        document.getElementById('area-pembayaran').style.display = 'none';
-        textSubtotal.innerText = "Rp 0";
+        container.innerHTML = "<p style='text-align:center;padding:20px;'>Keranjang belanja masih kosong.</p>";
         textTotal.innerText = "Rp 0";
     } else {
         keranjang.forEach((item, i) => {
-            subtotal += item.harga;
+            total += item.harga;
             container.innerHTML += `
-                <div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;">
-                    <span style="font-size:0.85rem;">${item.nama}</span>
-                    <span style="font-weight:bold;">Rp ${item.harga.toLocaleString('id-ID')} 
-                        <i class="fas fa-trash" onclick="hapusItem(${i})" style="color:red; cursor:pointer; margin-left:10px;"></i>
-                    </span>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px; border-bottom:1px solid #eee;">
+                    <div>
+                        <div style="font-size:0.9rem; font-weight:600;">${item.nama}</div>
+                        <div style="font-size:0.85rem; color:var(--primary);">Rp ${item.harga.toLocaleString('id-ID')}</div>
+                    </div>
+                    <i class="fas fa-trash" onclick="hapusItem(${i})" style="color:red; cursor:pointer; padding:5px;"></i>
                 </div>`;
         });
-        textSubtotal.innerText = "Rp " + subtotal.toLocaleString('id-ID');
-        textTotal.innerText = "Rp " + (subtotal + ongkirSekarang).toLocaleString('id-ID');
+        textTotal.innerText = "Rp " + total.toLocaleString('id-ID');
     }
     document.getElementById('modal-keranjang').style.display = 'flex';
 }
 
+function tutupModal(id) {
+    document.getElementById(id).style.display = 'none';
+}
+
 // ============================================================
-// 5. PEMBAYARAN & WHATSAPP
+// 3. PEMBAYARAN & WHATSAPP
 // ============================================================
 function cekMetode() {
     const m = document.getElementById('metode-bayar').value;
@@ -148,30 +92,37 @@ function cekMetode() {
 
 function konfirmasiPesanan() {
     const nama = document.getElementById('nama-pembeli').value;
+    const noWA = document.getElementById('wa-pembeli').value;
+    const kecamatan = document.getElementById('kecamatan-pembeli').value;
+    const kabupaten = document.getElementById('kabupaten-pembeli').value;
     const alamat = document.getElementById('alamat-pembeli').value;
-    const kotaElem = document.getElementById('kota-tujuan');
-    const kota = kotaElem.options[kotaElem.selectedIndex].text;
     const metode = document.getElementById('metode-bayar').value;
     
-    if(!nama || !alamat || !kotaElem.value) return alert("Mohon lengkapi Nama, Alamat, dan Lokasi!");
+    if (keranjang.length === 0) return alert("Keranjang belanja masih kosong!");
+    if (!nama || !noWA || !kecamatan || !kabupaten || !alamat) {
+        return alert("Mohon lengkapi semua data untuk perhitungan ongkir oleh admin!");
+    }
     
-    let detail = "";
-    let sub = 0;
+    let daftarPesanan = "";
+    let totalHarga = 0;
+    
     keranjang.forEach((item, index) => {
-        detail += `${index+1}. ${item.nama} (Rp ${item.harga.toLocaleString('id-ID')})%0A`;
-        sub += item.harga;
+        daftarPesanan += `${index + 1}. ${item.nama} (Rp ${item.harga.toLocaleString('id-ID')})%0A`;
+        totalHarga += item.harga;
     });
     
-    const totalSemua = sub + ongkirSekarang;
-    const pesan = `Halo Sehat Farma,%0ASaya ingin memesan:%0A%0A${detail}%0A*Rincian Biaya:*%0A- Subtotal: Rp ${sub.toLocaleString('id-ID')}%0A- Ongkir: Rp ${ongkirSekarang.toLocaleString('id-ID')}%0A- *Total Bayar: Rp ${totalSemua.toLocaleString('id-ID')}*%0A%0A*Data Pengiriman:*%0A- Penerima: ${nama}%0A- Alamat: ${alamat} (${kota})%0A- Metode Bayar: ${metode}`;
+    // Teks Pesanan untuk Admin
+    const teksWhatsApp = `Halo Admin Sehat Farma,%0ASaya mau pesan produk ini dan minta bantu *HITUNG ONGKIR*:%0A%0A${daftarPesanan}%0A*Total Produk: Rp ${totalHarga.toLocaleString('id-ID')}*%0A_(Belum Termasuk Ongkir)_%0A%0A*Data Pengiriman:*%0A- Nama: ${nama}%0A- No. WA: ${noWA}%0A- Kec/Kab: ${kecamatan}, ${kabupaten}%0A- Alamat: ${alamat}%0A- Metode Bayar: ${metode}%0A%0A*Note:* Saya tunggu konfirmasi total biaya + ongkos kirim serta info pembayaran/rekening dari Admin.`;
     
-    window.open(`https://wa.me/6285731070315?text=${pesan}`);
+    // Link ke nomor WhatsApp Admin
+    window.open(`https://wa.me/6285731070315?text=${teksWhatsApp}`);
 }
 
-function waPesan(nama) {
-    window.open(`https://wa.me/6285731070315?text=Halo admin Sehat Farma, saya ingin memesan produk promo: *${nama}*`);
+// Anda bisa menghapus fungsi cekMetode() dari script.js karena sudah tidak dipakai.
+function waPesan(namaProduk) {
+    window.open(`https://wa.me/6285731070315?text=Halo admin Sehat Farma, saya mau pesan produk promo: *${namaProduk}*`);
 }
 
 function waKonsultasi() {
-    window.open(`https://wa.me/6285731070315?text=Halo Apoteker Sehat Farma, saya ingin konsultasi kesehatan...`);
+    window.open(`https://wa.me/6285731070315?text=Halo Apoteker Sehat Farma, saya ingin konsultasi mengenai kesehatan/obat...`);
 }
