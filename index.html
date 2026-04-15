@@ -4,1025 +4,182 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apotek Mitra Farma | Obat & Kesehatan Kabupaten Semarang</title>
-<meta name="description" content="Apotek Mitra Farma - Solusi pembelian obat tanpa keluar rumah. Konsultasi gratis, pengiriman cepat, Kabupaten Semarang. Kecantikan, Vitamin, Herbal, Anak & Dewasa.">
+<meta name="description" content="Apotek Mitra Farma - Solusi pembelian obat tanpa keluar rumah. Konsultasi gratis, pengiriman cepat, Kabupaten Semarang.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --emerald:#00A878;
-  --emerald-dark:#007A57;
-  --emerald-deeper:#005240;
-  --emerald-light:#E0F5EF;
-  --emerald-glow:#00A87820;
-  --mint:#B8F0DC;
-  --gold:#D4A017;
-  --gold-light:#FFF3CC;
-  --coral:#FF6B6B;
-  --sky:#4ECDC4;
-  --text:#111827;
-  --text-muted:#6B7280;
-  --text-hint:#9CA3AF;
-  --bg:#F0FDF8;
-  --bg2:#E8FAF4;
-  --card:#FFFFFF;
-  --border:#D1FAE5;
-  --border-mid:#A7F3D0;
-  --radius:14px;
-  --radius-lg:20px;
-  --radius-sm:8px;
-  --shadow:0 1px 4px rgba(0,168,120,0.08),0 2px 8px rgba(0,0,0,0.04);
-  --shadow-md:0 4px 20px rgba(0,168,120,0.12),0 8px 30px rgba(0,0,0,0.06);
-  --shadow-xl:0 12px 40px rgba(0,168,120,0.18),0 20px 60px rgba(0,0,0,0.1);
+  --emerald:#00A878; --emerald-dark:#007A57; --emerald-deeper:#005240; --emerald-light:#E0F5EF;
+  --emerald-glow:#00A87820; --mint:#B8F0DC; --gold:#D4A017; --gold-light:#FFF3CC;
+  --coral:#FF6B6B; --sky:#4ECDC4; --text:#111827; --text-muted:#6B7280; --text-hint:#9CA3AF;
+  --bg:#F0FDF8; --bg2:#E8FAF4; --card:#FFFFFF; --border:#D1FAE5; --border-mid:#A7F3D0;
+  --radius:14px; --radius-lg:20px; --radius-sm:8px;
+  --shadow:0 1px 4px rgba(0,168,120,0.08); --shadow-md:0 4px 20px rgba(0,168,120,0.12);
+  --shadow-xl:0 12px 40px rgba(0,168,120,0.18);
 }
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;overflow-x:hidden}
 
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--emerald);border-radius:3px}
-
-/* ===== NAVBAR ===== */
+/* NAVBAR */
 .navbar{
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  padding:0 1.5rem;
-  display:flex;align-items:center;justify-content:space-between;
-  height:64px;
-  position:sticky;top:0;z-index:200;
-  transition:box-shadow 0.3s
+  background:rgba(255,255,255,0.92); backdrop-filter:blur(16px); border-bottom:1px solid var(--border);
+  padding:0 1.5rem; display:flex; align-items:center; justify-content:space-between;
+  height:64px; position:sticky; top:0; z-index:200; transition:0.3s
 }
 .navbar.scrolled{box-shadow:var(--shadow-md)}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .logo-icon{
-  width:42px;height:42px;
-  background:linear-gradient(135deg,var(--emerald-deeper),var(--emerald));
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 12px rgba(0,168,120,0.3)
+  width:42px;height:42px; background:linear-gradient(135deg,var(--emerald-deeper),var(--emerald));
+  border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,168,120,0.3)
 }
 .logo-icon svg{width:22px;height:22px;fill:white}
-.logo-text{display:flex;flex-direction:column}
 .logo-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--emerald-deeper);line-height:1.1}
-.logo-sub{font-size:10px;color:var(--text-hint);letter-spacing:0.05em;text-transform:uppercase}
-.nav-right{display:flex;align-items:center;gap:10px}
-.nav-links{display:none}
-@media(min-width:720px){
-  .nav-links{display:flex;gap:2px;align-items:center;margin-right:6px}
-  .nav-link{font-size:13px;color:var(--text-muted);padding:8px 14px;border-radius:8px;
-    transition:all 0.2s;text-decoration:none;font-weight:500;cursor:pointer}
-  .nav-link:hover{background:var(--emerald-light);color:var(--emerald-dark)}
-}
+
 .cart-btn{
   background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-  color:white;border:none;border-radius:10px;
-  padding:9px 16px;cursor:pointer;
-  display:flex;align-items:center;gap:7px;
-  font-size:13px;font-weight:600;
-  font-family:'DM Sans',sans-serif;
-  box-shadow:0 4px 12px rgba(0,168,120,0.3);
-  transition:all 0.25s;position:relative
+  color:white; border:none; border-radius:10px; padding:9px 16px; cursor:pointer;
+  display:flex; align-items:center; gap:7px; font-size:13px; font-weight:600; position:relative
 }
-.cart-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,168,120,0.4)}
 .cart-badge{
-  background:var(--coral);color:white;
-  border-radius:50%;width:20px;height:20px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;
-  position:absolute;top:-6px;right:-6px;
-  border:2px solid white;
-  transform:scale(0);transition:transform 0.3s
+  background:var(--coral); color:white; border-radius:50%; width:20px; height:20px;
+  display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
+  position:absolute; top:-6px; right:-6px; border:2px solid white; transform:scale(0); transition:0.3s
 }
 .cart-badge.visible{transform:scale(1)}
 
-/* ===== HERO ===== */
-.hero{
-  background:linear-gradient(160deg,var(--emerald-deeper) 0%,var(--emerald-dark) 45%,#009966 75%,var(--sky) 100%);
-  color:white;padding:3.5rem 1.5rem 4rem;
-  position:relative;overflow:hidden;
-  min-height:420px;display:flex;align-items:center
-}
-.hero-bg-orb{position:absolute;border-radius:50%;pointer-events:none}
-.hero-bg-orb.o1{width:350px;height:350px;background:rgba(255,255,255,0.05);top:-80px;right:-80px}
-.hero-bg-orb.o2{width:250px;height:250px;background:rgba(255,255,255,0.04);bottom:-60px;left:-40px}
-.hero-bg-orb.o3{width:150px;height:150px;background:rgba(78,205,196,0.15);top:50%;right:20%}
-.hero-pattern{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
-  background-size:28px 28px;pointer-events:none
-}
-.hero-inner{
-  position:relative;z-index:2;
-  max-width:680px;margin:0 auto;width:100%
-}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:7px;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.22);
-  border-radius:50px;padding:5px 15px;
-  font-size:12px;font-weight:500;margin-bottom:1.5rem;
-  backdrop-filter:blur(6px);letter-spacing:0.02em
-}
-.hero-badge span{width:7px;height:7px;background:#7DFFCB;border-radius:50%;display:inline-block;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.hero h1{
-  font-family:'Sora',sans-serif;
-  font-size:clamp(26px,6vw,40px);
-  font-weight:800;margin-bottom:0.75rem;
-  line-height:1.15;letter-spacing:-0.02em
-}
-.hero h1 .highlight{color:#7DFFCB}
-.hero p{font-size:15px;opacity:0.85;margin-bottom:2rem;max-width:480px;line-height:1.7}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{
-  background:white;color:var(--emerald-deeper);
-  border:none;padding:13px 24px;border-radius:10px;
-  font-size:14px;font-weight:700;cursor:pointer;
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.25s;
-  display:inline-flex;align-items:center;gap:8px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.15)
-}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
-.btn-ghost{
-  background:rgba(255,255,255,0.1);color:white;
-  border:1.5px solid rgba(255,255,255,0.35);
-  padding:12px 22px;border-radius:10px;
-  font-size:14px;font-weight:600;cursor:pointer;
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.25s;
-  display:inline-flex;align-items:center;gap:8px;
-  backdrop-filter:blur(6px)
-}
-.btn-ghost:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.6)}
-.hero-pills{
-  display:flex;flex-wrap:wrap;gap:8px;margin-top:1.75rem
-}
-.hero-pill{
-  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
-  border-radius:50px;padding:4px 13px;font-size:12px;
-  display:flex;align-items:center;gap:5px
-}
-.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:#7DFFCB}
-
-/* ===== STATS ===== */
-.stats-row{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:12px;padding:1.5rem 1.5rem 0.5rem;
-  max-width:700px;margin:0 auto
-}
-.stat-card{
-  background:var(--card);border-radius:var(--radius);
-  border:1px solid var(--border);
-  padding:1.1rem 0.75rem;text-align:center;
-  box-shadow:var(--shadow);
-  position:relative;overflow:hidden;
-  transition:transform 0.2s,box-shadow 0.2s
-}
-.stat-card::before{
-  content:'';position:absolute;top:-20px;right:-20px;
-  width:60px;height:60px;border-radius:50%;
-  background:var(--emerald-glow)
-}
-.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.stat-num{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--emerald-darker, var(--emerald-dark))}
-.stat-label{font-size:11px;color:var(--text-hint);margin-top:3px;font-weight:500}
-
-/* ===== SECTIONS ===== */
-.section-pad{padding:0 1.5rem}
-.section-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.section-heading{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
-.section-tag{
-  background:var(--gold-light);color:var(--gold);
-  font-size:11px;font-weight:700;padding:3px 10px;
-  border-radius:50px;border:1px solid rgba(212,160,23,0.25)
-}
-
-/* ===== TRUST BAR ===== */
-.trust-bar{
-  display:flex;overflow-x:auto;gap:10px;
-  padding:1rem 1.5rem;scrollbar-width:none;
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  background:var(--card);margin:1rem 0
-}
-.trust-bar::-webkit-scrollbar{display:none}
-.trust-item{
-  display:flex;align-items:center;gap:8px;
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:50px;padding:7px 14px;
-  flex-shrink:0;white-space:nowrap;
-  font-size:12px;font-weight:600;color:var(--emerald-dark)
-}
-.trust-item svg{flex-shrink:0;color:var(--emerald)}
-
-/* ===== PROMO ===== */
-.promo-scroll{
-  display:flex;gap:12px;overflow-x:auto;
-  padding:0.25rem 1.5rem 1rem;scrollbar-width:none;
-  -webkit-overflow-scrolling:touch
-}
-.promo-scroll::-webkit-scrollbar{display:none}
-.promo-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:14px 12px;min-width:140px;
-  text-align:center;flex-shrink:0;
-  box-shadow:var(--shadow);
-  transition:all 0.25s;cursor:pointer;
-  position:relative;overflow:hidden
-}
-.promo-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;
-  height:3px;background:linear-gradient(90deg,var(--emerald),var(--sky))
-}
-.promo-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--border-mid)}
-.promo-img{
-  width:88px;height:88px;object-fit:contain;
-  margin:0 auto 10px;display:block;border-radius:8px
-}
-.promo-ribbon{
-  background:linear-gradient(135deg,var(--coral),#FF8E53);
-  color:white;font-size:9px;font-weight:700;
-  padding:2px 9px;border-radius:50px;
-  display:inline-block;margin-bottom:6px;
-  letter-spacing:0.04em
-}
-.promo-name{font-size:11.5px;font-weight:600;margin-bottom:10px;line-height:1.4}
-.promo-order-btn{
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-  color:white;border:none;border-radius:8px;
-  padding:7px;font-size:11px;font-weight:700;
-  cursor:pointer;width:100%;
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.2s
-}
-.promo-order-btn:hover{opacity:0.9;transform:scale(0.98)}
-
-/* ===== SEARCH ===== */
+/* SEARCH */
 .search-section{
-  background:var(--card);border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:1rem 1.5rem;
-  position:sticky;top:64px;z-index:100
+  background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:1rem 1.5rem; position:sticky; top:64px; z-index:100
 }
-.search-box{
-  width:100%;padding:11px 16px 11px 44px;
-  border:1.5px solid var(--border-mid);
-  border-radius:12px;font-size:14px;
-  background:var(--bg);color:var(--text);
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.25s
-}
-.search-box:focus{outline:none;border-color:var(--emerald);background:white;box-shadow:0 0 0 3px var(--emerald-glow)}
 .search-wrap{position:relative}
-.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-hint);pointer-events:none}
-.clear-btn{
-  position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  background:none;border:none;cursor:pointer;
-  color:var(--text-hint);display:none;font-size:18px;line-height:1
+.search-box{
+  width:100%; padding:11px 16px 11px 44px; border:1.5px solid var(--border-mid);
+  border-radius:12px; font-size:14px; background:var(--bg); color:var(--text); transition:all 0.25s
 }
-.clear-btn.visible{display:block}
+.search-box:focus{outline:none; border-color:var(--emerald); background:white}
+.search-icon{position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-hint)}
 
-/* ===== FILTER CHIPS ===== */
-.filter-wrap{
-  display:flex;gap:7px;overflow-x:auto;
-  padding:0.75rem 1.5rem;scrollbar-width:none
-}
-.filter-wrap::-webkit-scrollbar{display:none}
-.chip{
-  background:var(--card);border:1.5px solid var(--border-mid);
-  border-radius:50px;padding:7px 16px;
-  font-size:12.5px;font-weight:600;cursor:pointer;
-  white-space:nowrap;color:var(--text-muted);
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.2s;flex-shrink:0;
-  display:flex;align-items:center;gap:6px
-}
-.chip.active{
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-  color:white;border-color:var(--emerald);
-  box-shadow:0 4px 12px rgba(0,168,120,0.3)
-}
-.chip:hover:not(.active){background:var(--emerald-light);color:var(--emerald-dark);border-color:var(--emerald)}
-.chip-count{
-  background:rgba(255,255,255,0.3);
-  border-radius:50px;padding:1px 7px;
-  font-size:10px
-}
-.chip:not(.active) .chip-count{background:var(--bg2);color:var(--text-hint)}
-
-/* ===== PRODUCTS ===== */
-.products-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0.5rem 1.5rem 0.75rem
-}
-.products-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:700}
-.products-count{
-  font-size:12px;color:var(--text-hint);
-  background:var(--card);border:1px solid var(--border);
-  border-radius:50px;padding:3px 12px;font-weight:500
-}
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-  gap:12px;padding:0 1.5rem 1.5rem
-}
-@media(min-width:500px){.product-grid{grid-template-columns:repeat(auto-fill,minmax(165px,1fr))}}
+/* PRODUCT GRID */
+.product-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; padding:1.5rem}
 .product-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  transition:all 0.25s;
-  display:flex;flex-direction:column
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column; transition:0.25s
 }
-.product-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:var(--border-mid)}
-.product-img-wrap{
-  background:linear-gradient(145deg,#F0FDF8,#E0F5EF);
-  height:130px;display:flex;
-  align-items:center;justify-content:center;
-  padding:12px;position:relative;overflow:hidden
-}
-.product-img-wrap::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:30px;
-  background:linear-gradient(to top,rgba(240,253,248,0.5),transparent)
-}
-.product-img{width:100%;height:100%;object-fit:contain}
-.cat-dot{
-  position:absolute;top:8px;left:8px;
-  border-radius:50px;padding:3px 9px;
-  font-size:9px;font-weight:700;
-  letter-spacing:0.02em;z-index:1
-}
-.cat-dot.Kecantikan{background:#FFE4E6;color:#E11D48}
-.cat-dot.Anak{background:#FEF3C7;color:#D97706}
-.cat-dot.Dewasa{background:#EDE9FE;color:#7C3AED}
-.cat-dot.Vitamin{background:#DBEAFE;color:#1D4ED8}
-.cat-dot.Herbal{background:#D1FAE5;color:#065F46}
-.product-info{padding:10px 11px 12px;flex:1;display:flex;flex-direction:column}
-.product-name{
-  font-size:12.5px;font-weight:700;
-  margin-bottom:2px;line-height:1.35;
-  overflow:hidden;display:-webkit-box;
-  -webkit-line-clamp:2;-webkit-box-orient:vertical;
-  flex:1
-}
-.product-cat{font-size:10px;color:var(--text-hint);margin-bottom:7px;font-weight:500}
-.product-price{
-  font-family:'Sora',sans-serif;
-  font-size:14px;font-weight:700;
-  color:var(--emerald-dark);margin-bottom:9px
-}
+.product-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-md)}
+.product-info{padding:12px; flex:1; display:flex; flex-direction:column}
+.product-name{font-size:12.5px; font-weight:700; margin-bottom:4px; line-height:1.4; flex:1}
+.product-price{font-family:'Sora',sans-serif; font-size:14px; font-weight:800; color:var(--emerald-dark); margin-bottom:10px}
 .add-btn{
-  background:var(--emerald-light);color:var(--emerald-dark);
-  border:1.5px solid var(--border-mid);
-  border-radius:8px;padding:8px;font-size:12px;
-  cursor:pointer;width:100%;font-weight:700;
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.2s;
-  display:flex;align-items:center;justify-content:center;gap:5px
+  background:var(--emerald-light); color:var(--emerald-dark); border:1.5px solid var(--border-mid);
+  border-radius:8px; padding:8px; font-size:12px; cursor:pointer; width:100%; font-weight:700
 }
-.add-btn:hover{
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-  color:white;border-color:var(--emerald);
-  box-shadow:0 4px 12px rgba(0,168,120,0.3)
-}
-.add-btn:active{transform:scale(0.97)}
-.no-result{
-  text-align:center;padding:3.5rem 1rem;
-  color:var(--text-hint);font-size:14px;
-  grid-column:1/-1;line-height:2
-}
-.no-result-icon{font-size:40px;margin-bottom:0.75rem}
 
-/* ===== WHATSAPP FLOAT ===== */
+/* MODAL BASE */
+.overlay{
+  display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.5); z-index:300; align-items:flex-end; justify-content:center; backdrop-filter:blur(4px)
+}
+.overlay.open{display:flex}
+.modal-sheet{
+  background:var(--card); border-radius:20px 20px 0 0; width:100%; max-width:540px;
+  max-height:92vh; overflow-y:auto; box-shadow:0 -8px 40px rgba(0,0,0,0.15); animation:slide-up 0.3s ease-out
+}
+@keyframes slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-top{padding:1.25rem 1.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:white; z-index:1}
+.modal-body{padding:1rem 1.5rem}
+
+/* FORM BIODATA */
+.form-section{margin-top:20px; border-top:2px dashed var(--border-mid); padding-top:20px}
+.form-title{font-size:14px; font-weight:800; color:var(--emerald-dark); margin-bottom:12px; display:flex; align-items:center; gap:6px}
+.form-group{margin-bottom:10px}
+.form-label{display:block; font-size:10px; font-weight:700; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase}
+.form-input{width:100%; padding:10px; border-radius:10px; border:1.5px solid var(--border-mid); font-family:inherit; font-size:13px}
+.checkout-btn{
+  background:linear-gradient(135deg,#25D366,#128C7E); color:white; border:none;
+  border-radius:12px; padding:16px; font-size:14px; font-weight:700; width:100%; margin-top:15px; cursor:pointer
+}
+
+/* POPUP PENCARIAN */
+.popup-result-card{background:white; border-radius:15px; padding:20px; text-align:center; border:2px solid var(--emerald)}
+
+.toast{
+  position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--emerald-deeper); color:white; padding:11px 22px; border-radius:50px;
+  font-size:13px; font-weight:600; z-index:400; opacity:0; transition:0.3s; pointer-events:none;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+/* WHATSAPP FLOAT */
 .wa-float{
   position:fixed;bottom:24px;right:20px;z-index:150;
   background:#25D366;color:white;
   border:none;border-radius:50%;width:56px;height:56px;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 20px rgba(37,211,102,0.4);
-  transition:all 0.3s;
-  animation:float-bounce 3s ease-in-out infinite
 }
-.wa-float:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,0.5)}
-@keyframes float-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-
-/* ===== CONTACT ===== */
-.contact-section{
-  background:linear-gradient(135deg,var(--emerald-deeper) 0%,var(--emerald-dark) 100%);
-  color:white;padding:3rem 1.5rem;
-  text-align:center;margin-top:0.5rem;
-  position:relative;overflow:hidden
-}
-.contact-section::before{
-  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
-  background-size:24px 24px
-}
-.contact-inner{position:relative;z-index:1}
-.contact-heading{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;margin-bottom:0.5rem}
-.contact-sub{font-size:14px;opacity:0.8;margin-bottom:2rem;line-height:1.7}
-.wa-big-btn{
-  background:#25D366;color:white;
-  border:none;border-radius:12px;
-  padding:15px 28px;font-size:15px;font-weight:700;
-  cursor:pointer;display:inline-flex;
-  align-items:center;gap:10px;margin-bottom:1.75rem;
-  font-family:'DM Sans',sans-serif;
-  box-shadow:0 8px 24px rgba(37,211,102,0.35);
-  transition:all 0.25s
-}
-.wa-big-btn:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,0.5)}
-.info-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:12px;margin-bottom:1.5rem
-}
-.info-box{
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:12px;padding:14px 12px;
-  font-size:13px;line-height:1.7
-}
-.info-box-icon{font-size:20px;margin-bottom:6px}
-.info-box-label{font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px}
-.pay-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
-.pay-chip{
-  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
-  color:white;border-radius:8px;padding:6px 16px;
-  font-size:12px;font-weight:600
-}
-.footer-copy{font-size:11px;opacity:0.45;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.12)}
-
-/* ===== MODAL BASE ===== */
-.overlay{
-  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
-  background:rgba(0,0,0,0.5);z-index:300;
-  align-items:flex-end;justify-content:center;
-  backdrop-filter:blur(4px)
-}
-.overlay.open{display:flex}
-.modal-sheet{
-  background:var(--card);
-  border-radius:20px 20px 0 0;
-  width:100%;max-width:540px;
-  max-height:92vh;overflow-y:auto;
-  padding:0;
-  box-shadow:0 -8px 40px rgba(0,0,0,0.15);
-  animation:slide-up 0.3s cubic-bezier(0.34,1.56,0.64,1)
-}
-@keyframes slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-handle{
-  width:40px;height:4px;background:var(--border-mid);
-  border-radius:2px;margin:12px auto 0
-}
-.modal-top{
-  padding:1.25rem 1.5rem 1rem;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;background:white;z-index:1
-}
-.modal-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
-.modal-close{
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:50%;width:32px;height:32px;
-  cursor:pointer;font-size:16px;color:var(--text-muted);
-  display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s
-}
-.modal-close:hover{background:var(--emerald-light);color:var(--emerald-dark)}
-.modal-body{padding:1rem 1.5rem}
-
-/* ===== KERANJANG ===== */
-.empty-cart{text-align:center;padding:3rem 1rem;color:var(--text-hint)}
-.empty-cart-icon{font-size:52px;margin-bottom:1rem;opacity:0.5}
-.empty-msg{font-size:14px;line-height:2}
-.cart-item{
-  display:flex;align-items:center;gap:12px;
-  padding:11px 0;border-bottom:1px solid var(--border)
-}
-.cart-img{
-  width:54px;height:54px;object-fit:contain;
-  background:var(--bg);border-radius:10px;padding:5px;
-  flex-shrink:0;border:1px solid var(--border)
-}
-.cart-info{flex:1;min-width:0}
-.cart-name{font-size:13px;font-weight:700;margin-bottom:2px;line-height:1.3}
-.cart-price{font-size:12.5px;color:var(--emerald-dark);font-weight:600}
-.qty-row{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.qty-btn{
-  background:var(--bg);border:1.5px solid var(--border-mid);
-  border-radius:8px;width:28px;height:28px;
-  cursor:pointer;font-size:15px;font-weight:600;
-  color:var(--text);display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s
-}
-.qty-btn:hover{background:var(--emerald-light);border-color:var(--emerald)}
-.qty-num{font-size:13px;font-weight:700;min-width:24px;text-align:center}
-.cart-summary-box{
-  background:var(--bg);border-radius:12px;
-  border:1px solid var(--border);
-  padding:1rem;margin-top:0.75rem
-}
-.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.total-label{font-size:13px;color:var(--text-muted);font-weight:500}
-.total-val{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--emerald-dark)}
-
-/* FORM DATA PENGIRIMAN */
-.form-section{margin-top:1.5rem}
-.form-title{
-  font-size:13px;font-weight:700;color:var(--emerald-dark);
-  margin-bottom:12px;display:flex;align-items:center;gap:6px
-}
-.form-group{margin-bottom:10px}
-.form-label{display:block;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase}
-.form-input{
-  width:100%;padding:10px 12px;border-radius:10px;
-  border:1.5px solid var(--border-mid);background:white;
-  font-family:'DM Sans',sans-serif;font-size:13px;transition:0.2s
-}
-.form-input:focus{outline:none;border-color:var(--emerald);box-shadow:0 0 0 3px var(--emerald-glow)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-.pay-section{margin-top:1.25rem}
-.pay-title{font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em}
-.pay-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
-.pay-opt{
-  border:1.5px solid var(--border-mid);
-  border-radius:10px;padding:10px 6px;
-  text-align:center;cursor:pointer;
-  font-size:12px;font-weight:700;
-  color:var(--text-muted);background:var(--card);
-  transition:all 0.2s
-}
-.pay-opt.sel{
-  background:var(--emerald-light);
-  border-color:var(--emerald);color:var(--emerald-dark)
-}
-.pay-opt-icon{font-size:18px;margin-bottom:4px}
-.cart-note-box{
-  background:var(--gold-light);border:1px solid rgba(212,160,23,0.25);
-  border-radius:10px;padding:10px 12px;
-  font-size:11.5px;color:#7A5C00;margin-bottom:1rem;line-height:1.6
-}
-.checkout-btn{
-  background:linear-gradient(135deg,#25D366,#128C7E);
-  color:white;border:none;border-radius:12px;
-  padding:15px;font-size:14px;font-weight:700;
-  cursor:pointer;width:100%;
-  font-family:'DM Sans',sans-serif;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  box-shadow:0 6px 20px rgba(37,211,102,0.3);
-  transition:all 0.25s;margin-bottom:0.75rem
-}
-.checkout-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,0.4)}
-
-/* ===== POPUP HASIL PENCARIAN ===== */
-.result-popup-card{
-  background:white;border-radius:15px;
-  padding:20px;text-align:center;
-  border:2px solid var(--emerald);
-  box-shadow:var(--shadow-xl)
-}
-.result-popup-title{font-weight:800;color:var(--emerald-dark);margin-bottom:5px}
-.result-popup-price{font-size:20px;font-weight:800;color:var(--text);margin-bottom:15px}
-.result-popup-btn{
-  background:var(--emerald);color:white;border:none;
-  padding:12px 20px;border-radius:10px;font-weight:700;
-  cursor:pointer;width:100%;font-family:inherit
-}
-
-/* ===== TOAST ===== */
-.toast{
-  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--emerald-deeper);color:white;
-  padding:11px 22px;border-radius:50px;
-  font-size:13px;font-weight:600;z-index:400;
-  opacity:0;transition:all 0.3s;
-  pointer-events:none;white-space:nowrap;
-  box-shadow:var(--shadow-xl)
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ===== ABOUT SECTION ===== */
-.about-section{
-  background:var(--card);border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:2rem 1.5rem
-}
-.about-grid{
-  display:grid;gap:1rem;
-  grid-template-columns:1fr;max-width:700px;margin:0 auto
-}
-@media(min-width:600px){.about-grid{grid-template-columns:repeat(2,1fr)}}
-.about-card{
-  background:var(--bg);border-radius:var(--radius);
-  border:1px solid var(--border);padding:1.25rem;
-  display:flex;gap:12px;align-items:flex-start
-}
-.about-icon-wrap{
-  width:42px;height:42px;border-radius:10px;
-  background:var(--emerald-light);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0
-}
-.about-card h3{font-size:13.5px;font-weight:700;margin-bottom:3px}
-.about-card p{font-size:12px;color:var(--text-muted);line-height:1.6}
-
-/* ===== MISC ===== */
-.divider{height:1px;background:var(--border);margin:0}
-.section-space{height:1.25rem}
-
-/* Animate on scroll */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.5s,transform 0.5s}
-.fade-in.visible{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <a class="logo" href="#">
-    <div class="logo-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a2 2 0 012 2v2h4a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h4V4a2 2 0 012-2zm1 9h2a1 1 0 010 2h-2v2a1 1 0 01-2 0v-2H9a1 1 0 010-2h2V9a1 1 0 012 0v2z"/></svg>
-    </div>
-    <div class="logo-text">
-      <span class="logo-name">Mitra Farma</span>
-      <span class="logo-sub">Apotek Terpercaya</span>
-    </div>
+    <div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a2 2 0 012 2v2h4a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h4V4a2 2 0 012-2zm1 9h2a1 1 0 010 2h-2v2a1 1 0 01-2 0v-2H9a1 1 0 010-2h2V9a1 1 0 012 0v2z"/></svg></div>
+    <div class="logo-text"><span class="logo-name">Mitra Farma</span></div>
   </a>
-  <div class="nav-right">
-    <div class="nav-links">
-      <a class="nav-link" href="#produk">Produk</a>
-      <a class="nav-link" href="#tentang">Layanan</a>
-      <a class="nav-link" href="#kontak">Kontak</a>
-    </div>
-    <button class="cart-btn" onclick="openCart()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      Keranjang
-      <span class="cart-badge" id="cartBadge">0</span>
-    </button>
-  </div>
+  <button class="cart-btn" onclick="openCart()">🛒 Keranjang <span class="cart-badge" id="cartBadge">0</span></button>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg-orb o1"></div>
-  <div class="hero-bg-orb o2"></div>
-  <div class="hero-bg-orb o3"></div>
-  <div class="hero-pattern"></div>
-  <div class="hero-inner">
-    <div class="hero-badge">
-      <span></span>
-      Buka Setiap Hari · Kabupaten Semarang
-    </div>
-    <h1>Apotek <span class="highlight">Mitra Farma</span><br>Hadir untuk Anda</h1>
-    <p>Pesan obat, vitamin & produk kesehatan tanpa keluar rumah. Konsultasi gratis dengan apoteker berpengalaman kami.</p>
-    <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('produk').scrollIntoView({behavior:'smooth'})">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        Lihat Produk
-      </button>
-      <button class="btn-ghost" onclick="openWA('Halo Mitra Farma, saya ingin konsultasi obat')">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.12 1.528 5.847L.057 23.571a.5.5 0 00.619.618l5.805-1.457A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.487-5.158-1.338l-.368-.213-3.44.864.88-3.35-.232-.378A9.947 9.947 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Konsultasi Gratis
-      </button>
-    </div>
-    <div class="hero-pills">
-      <div class="hero-pill"><div class="hero-pill-dot"></div> COD tersedia</div>
-      <div class="hero-pill"><div class="hero-pill-dot"></div> Transfer Bank & QRIS</div>
-      <div class="hero-pill"><div class="hero-pill-dot"></div> Pengiriman cepat</div>
-      <div class="hero-pill"><div class="hero-pill-dot"></div> 80+ produk</div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<div class="stats-row fade-in">
-  <div class="stat-card">
-    <div class="stat-num">80+</div>
-    <div class="stat-label">Produk Tersedia</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">6</div>
-    <div class="stat-label">Kategori Lengkap</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">COD</div>
-    <div class="stat-label">Bayar di Tempat</div>
+<div class="search-section">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-box" id="searchInput" type="text" placeholder="Cari nama obat (Contoh: ABATE, Acetyl, Bodrexin...)" oninput="onSearch()">
   </div>
 </div>
 
-<!-- TRUST BAR -->
-<div class="trust-bar fade-in">
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-    Produk Resmi BPOM
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Terjamin Keasliannya
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    Respons Cepat < 5 Menit
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-    Konsultasi Gratis
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-    Antar ke Rumah
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-    Harga Bersaing
-  </div>
+<div class="product-grid" id="productGrid">
+  <div style="grid-column:1/-1; text-align:center; padding:3rem; color:#9ca3af">Ketik nama obat untuk mencari...</div>
 </div>
 
-<!-- SECTION SPACE -->
-<div class="section-space"></div>
-
-<!-- PROMO -->
-<div class="section-pad fade-in">
-  <div class="section-title-row">
-    <div class="section-heading">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Promo Spesial
-    </div>
-    <div class="section-tag">🔥 Terbatas!</div>
-  </div>
-</div>
-<div class="promo-scroll" id="promoScroll"></div>
-
-<div class="divider"></div>
-
-<!-- ABOUT / LAYANAN -->
-<section class="about-section" id="tentang">
-  <div class="section-pad">
-    <div class="section-title-row" style="margin-bottom:1.25rem">
-      <div class="section-heading">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        Mengapa Mitra Farma?
-      </div>
-    </div>
-  </div>
-  <div class="about-grid">
-    <div class="about-card fade-in">
-      <div class="about-icon-wrap">
-        <svg width="20" height="20" fill="none" stroke="var(--emerald-dark)" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      </div>
-      <div>
-        <h3>Produk Resmi & Asli</h3>
-        <p>Semua produk kami bersumber dari distributor resmi dan terdaftar BPOM. Dijamin keaslian & keamanannya.</p>
-      </div>
-    </div>
-    <div class="about-card fade-in">
-      <div class="about-icon-wrap">
-        <svg width="20" height="20" fill="none" stroke="var(--emerald-dark)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      </div>
-      <div>
-        <h3>Konsultasi Gratis via WA</h3>
-        <p>Tanya apa saja tentang obat, dosis, dan efek samping kepada apoteker kami langsung via WhatsApp.</p>
-      </div>
-    </div>
-    <div class="about-card fade-in">
-      <div class="about-icon-wrap">
-        <svg width="20" height="20" fill="none" stroke="var(--emerald-dark)" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-      </div>
-      <div>
-        <h3>Pengiriman ke Rumah</h3>
-        <p>Antar ke seluruh wilayah Kabupaten Semarang. Cepat, aman, dan terlacak hingga ke tangan Anda.</p>
-      </div>
-    </div>
-    <div class="about-card fade-in">
-      <div class="about-icon-wrap">
-        <svg width="20" height="20" fill="none" stroke="var(--emerald-dark)" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-      </div>
-      <div>
-        <h3>Harga Transparan</h3>
-        <p>Harga tertera jelas tanpa biaya tersembunyi. Bayar COD, Transfer Bank, atau QRIS.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section id="produk">
-  <div class="search-section">
-    <div class="search-wrap">
-      <svg class="search-icon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-      <input class="search-box" id="searchInput" type="text" placeholder="Cari nama obat, vitamin, produk…" oninput="onSearch()">
-      <button class="clear-btn" id="clearBtn" onclick="clearSearch()">×</button>
-    </div>
-  </div>
-
-  <div class="filter-wrap" id="filterWrap"></div>
-
-  <div class="products-header">
-    <span class="products-title">Semua Produk</span>
-    <span class="products-count" id="prodCount">80 produk</span>
-  </div>
-
-  <div class="product-grid" id="productGrid"></div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact-section" id="kontak">
-  <div class="contact-inner">
-    <div class="contact-heading">Butuh Bantuan?</div>
-    <div class="contact-sub">
-      Chat langsung dengan apoteker kami — konsultasi gratis,<br>
-      respons cepat setiap hari Senin–Sabtu 08.00–20.00 WIB
-    </div>
-    <button class="wa-big-btn" onclick="openWA('Halo Mitra Farma, saya ingin bertanya')">
-      <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.12 1.528 5.847L.057 23.571a.5.5 0 00.619.618l5.805-1.457A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.487-5.158-1.338l-.368-.213-3.44.864.88-3.35-.232-.378A9.947 9.947 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Chat WhatsApp — 0857-3107-0315
-    </button>
-
-    <div class="info-grid">
-      <div class="info-box">
-        <div class="info-box-icon">📍</div>
-        <div class="info-box-label">Lokasi</div>
-        Kabupaten Semarang, Jawa Tengah
-      </div>
-      <div class="info-box">
-        <div class="info-box-icon">🕐</div>
-        <div class="info-box-label">Jam Operasional</div>
-        Senin – Sabtu<br>08.00 – 20.00 WIB
-      </div>
-      <div class="info-box">
-        <div class="info-box-icon">📞</div>
-        <div class="info-box-label">Kontak</div>
-        0857-3107-0315<br>WhatsApp Only
-      </div>
-    </div>
-
-    <div class="pay-chips">
-      <div class="pay-chip">💵 COD</div>
-      <div class="pay-chip">🏦 Transfer Bank</div>
-      <div class="pay-chip">📱 QRIS</div>
-    </div>
-
-    <div class="footer-copy">© 2025 Apotek Mitra Farma · Kabupaten Semarang · Semua hak dilindungi</div>
-  </div>
-</section>
-
-<!-- WHATSAPP FLOAT -->
-<button class="wa-float" onclick="openWA('Halo Mitra Farma, saya ingin bertanya')" title="Chat WhatsApp">
-  <svg width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.12 1.528 5.847L.057 23.571a.5.5 0 00.619.618l5.805-1.457A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.487-5.158-1.338l-.368-.213-3.44.864.88-3.35-.232-.378A9.947 9.947 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-</button>
-
-<!-- KERANJANG MODAL -->
+<!-- MODAL KERANJANG -->
 <div class="overlay" id="cartOverlay" onclick="handleOverlay(event)">
-  <div class="modal-sheet" id="cartSheet">
-    <div class="modal-handle"></div>
+  <div class="modal-sheet">
     <div class="modal-top">
-      <span class="modal-title">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        Keranjang Belanja
-      </span>
-      <button class="modal-close" onclick="closeCart()">✕</button>
+      <span style="font-family:Sora; font-weight:700">🛒 Keranjang Belanja</span>
+      <button onclick="closeCart()" style="border:none; background:none; font-size:20px; cursor:pointer">✕</button>
     </div>
     <div class="modal-body" id="cartBody"></div>
   </div>
 </div>
 
-<!-- POPUP HASIL PENCARIAN JSON -->
+<!-- POPUP SEARCH HASIL JSON -->
 <div class="overlay" id="searchPopupOverlay" onclick="handleSearchOverlay(event)">
   <div class="modal-sheet" style="max-width: 400px; border-radius: 20px; align-self: center; margin-bottom: auto; margin-top: auto;">
     <div class="modal-top" style="border:none">
-      <span class="modal-title">Produk Ditemukan!</span>
-      <button class="modal-close" onclick="closeSearchPopup()">✕</button>
+      <span style="font-weight:700">Produk Ditemukan!</span>
+      <button onclick="closeSearchPopup()" style="border:none; background:none; font-size:20px; cursor:pointer">✕</button>
     </div>
-    <div class="modal-body" id="searchPopupBody">
-      <!-- Diisi JS -->
-    </div>
+    <div class="modal-body" id="searchPopupBody"></div>
   </div>
 </div>
 
-<!-- TOAST -->
+<button class="wa-float" onclick="window.open('https://wa.me/6285731070315')">
+  <svg width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.12 1.528 5.847L.057 23.571a.5.5 0 00.619.618l5.805-1.457A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.487-5.158-1.338l-.368-.213-3.44.864.88-3.35-.232-.378A9.947 9.947 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</button>
+
 <div class="toast" id="toast"></div>
 
 <script>
 const WA_NUM = "6285731070315";
-const BASE = "https://parjojuminet-cpu.github.io/sehatku/";
-
-function openWA(msg){ window.open("https://wa.me/"+WA_NUM+"?text="+encodeURIComponent(msg),"_blank") }
-
-// Data display utama (Tetap tampil)
-const products = [
-  {name:"Benzolac 2%",cat:"Kecantikan",price:50000,img:"kecantikan/benzolac2.jpg"},
-  {name:"Benzolac 5",cat:"Kecantikan",price:50000,img:"kecantikan/BENZOLAC-5.jpg"},
-  {name:"Benzolac CL",cat:"Kecantikan",price:50000,img:"kecantikan/benzolac-cl.jpg"},
-  {name:"Desolex",cat:"Kecantikan",price:50000,img:"kecantikan/DESOLEX.jpg"},
-  {name:"Erymed",cat:"Kecantikan",price:50000,img:"kecantikan/ERYMED.png"},
-  {name:"Erymed Erythromycin 2%",cat:"Kecantikan",price:50000,img:"kecantikan/ERYMED-ERYTHROMYCIN-2-15G.png"},
-  {name:"Kloderma Gel",cat:"Kecantikan",price:50000,img:"kecantikan/KLODERMAgel.png"},
-  {name:"Mediklin Sol",cat:"Kecantikan",price:50000,img:"kecantikan/mediklinsol.jpg"},
-  {name:"Palenox",cat:"Kecantikan",price:50000,img:"kecantikan/Palenox.jpg"},
-  {name:"Pirotop 5G",cat:"Kecantikan",price:50000,img:"kecantikan/PIROTOP-5G.png"},
-  {name:"Regrou For Men",cat:"Kecantikan",price:50000,img:"kecantikan/REGROU-FOR-MEN.jpg"},
-  {name:"Tekasol Plus",cat:"Kecantikan",price:50000,img:"kecantikan/tekasolplus.jpg"},
-  {name:"Vitacid 0,1",cat:"Kecantikan",price:50000,img:"kecantikan/VITACID  0,1.png"},
-  {name:"Vitacid",cat:"Kecantikan",price:50000,img:"kecantikan/VITACID.png"},
-  {name:"Vitacid CRM 0,1",cat:"Kecantikan",price:50000,img:"kecantikan/vitacidcrm0,1.jpg"},
-  {name:"Anakonidin",cat:"Anak & Bayi",price:30000,img:"anak/anakonidin.jpg"},
-  {name:"Bodrexin",cat:"Anak & Bayi",price:30000,img:"anak/bodrexin.png"},
-  {name:"Cefixim",cat:"Anak & Bayi",price:30000,img:"anak/cefixim.png"},
-  {name:"Ciprofloxacin",cat:"Anak & Bayi",price:30000,img:"anak/Ciprofloxacin.jpg"},
-  {name:"Contrexyn",cat:"Anak & Bayi",price:30000,img:"anak/CONTREXYN.png"},
-  {name:"Hufagripp",cat:"Anak & Bayi",price:30000,img:"anak/Hufagripp.jpg"},
-  {name:"Itamol Syrup",cat:"Anak & Bayi",price:30000,img:"anak/itamol-syr.jpg"},
-  {name:"Koolfever",cat:"Anak & Bayi",price:30000,img:"anak/koolfever.jpg"},
-  {name:"Lacto B",cat:"Anak & Bayi",price:30000,img:"anak/Lacto-B-1.jpg"},
-  {name:"OBH Anak",cat:"Anak & Bayi",price:30000,img:"anak/obh.jpg"},
-  {name:"Ottopan 15ml",cat:"Anak & Bayi",price:30000,img:"anak/Ottopan-15ml.png"},
-  {name:"Pyrexin",cat:"Anak & Bayi",price:30000,img:"anak/pyrexin.jpg"},
-  {name:"Sanmol",cat:"Anak & Bayi",price:30000,img:"anak/SANMOL.jpg"},
-  {name:"Sumagesic",cat:"Anak & Bayi",price:30000,img:"anak/sumagesic.jpg"},
-  {name:"Tempra",cat:"Anak & Bayi",price:30000,img:"anak/tempra.png"},
-  {name:"Termorex",cat:"Anak & Bayi",price:30000,img:"anak/termorex.jpg"},
-  {name:"Actifed",cat:"Dewasa",price:20000,img:"dewasa/ACTIFED.jpg"},
-  {name:"Andalan FE",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-FE.png"},
-  {name:"Andalan Kondom 12s",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-KONDOM--12S.jpg"},
-  {name:"Andalan Laktasi",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-LAKTASI-2.jpg"},
-  {name:"Andalan Pil KB",cat:"Dewasa",price:20000,img:"dewasa/andalan-pil-kb.jpg"},
-  {name:"Sanexon",cat:"Dewasa",price:20000,img:"dewasa/sanexon.png"},
-  {name:"Becom",cat:"Dewasa",price:20000,img:"dewasa/becom.jpg"},
-  {name:"Diane",cat:"Dewasa",price:20000,img:"dewasa/diane.jpg"},
-  {name:"Elzsa",cat:"Dewasa",price:20000,img:"dewasa/ELZSA.jpg"},
-  {name:"Interlac",cat:"Dewasa",price:20000,img:"dewasa/INTERLAC-1.png"},
-  {name:"Metformin",cat:"Dewasa",price:20000,img:"dewasa/METFORMIN.jpg"},
-  {name:"Postinor 2",cat:"Dewasa",price:20000,img:"dewasa/postinor-2.png"},
-  {name:"Postpil",cat:"Dewasa",price:20000,img:"dewasa/POSTPIL.png"},
-  {name:"Sutra",cat:"Dewasa",price:20000,img:"dewasa/SUTRA.png"},
-  {name:"Ultrasafe",cat:"Dewasa",price:20000,img:"dewasa/ultrasafe.png"},
-  {name:"Vivo",cat:"Dewasa",price:20000,img:"dewasa/vivo.png"},
-  {name:"Blackmores",cat:"Vitamin",price:45000,img:"vitamin/blackmores-1.jpg"},
-  {name:"Blackmores Multivitamin",cat:"Vitamin",price:45000,img:"vitamin/Blackmores-multivitamin.jpg"},
-  {name:"Caviplex",cat:"Vitamin",price:45000,img:"vitamin/Caviplex.png"},
-  {name:"CDR",cat:"Vitamin",price:45000,img:"vitamin/CDR-2.jpg"},
-  {name:"IPI D3",cat:"Vitamin",price:45000,img:"vitamin/ipi-d3.png"},
-  {name:"Enervon Active",cat:"Vitamin",price:45000,img:"vitamin/ENERVON-ACTIVE-FC-TAB-4S-STRIP-25S-2.jpg"},
-  {name:"Enervon C Eff",cat:"Vitamin",price:45000,img:"vitamin/ENERVON-C-EFF-10S-TUBE.jpg"},
-  {name:"H Booster Syrup",cat:"Vitamin",price:45000,img:"vitamin/H-BOOSTER-SYR-50ML.jpg"},
-  {name:"Hemaviton Action",cat:"Vitamin",price:45000,img:"vitamin/HEMAVITON-ACTION.png"},
-  {name:"Hemaviton Stamina Plus",cat:"Vitamin",price:45000,img:"vitamin/Hemaviton-Stamina-Plus.jpg"},
-  {name:"Imboost",cat:"Vitamin",price:45000,img:"vitamin/IMBOOST-1-STRIP-4-TABLET.png"},
-  {name:"Imboost Vit C D3",cat:"Vitamin",price:45000,img:"vitamin/IMBOOST-VIT-C-D3.png"},
-  {name:"Renovit",cat:"Vitamin",price:45000,img:"vitamin/renovit.jpg"},
-  {name:"Stamina Plus",cat:"Vitamin",price:45000,img:"vitamin/stamina plus.png"},
-  {name:"Stimuno",cat:"Vitamin",price:45000,img:"vitamin/stimuno.jpg"},
-  {name:"Enkasari Herbal",cat:"Herbal",price:55000,img:"herbal/ENKASARI-HERBAL-120ML-3.jpg"},
-  {name:"Entrostop Anak",cat:"Herbal",price:55000,img:"herbal/Entrostop-Anak-6-sachet.png"},
-  {name:"Froz Herbal",cat:"Herbal",price:55000,img:"herbal/froz-herbal-ijo.jpg"},
-  {name:"Komik Herbal",cat:"Herbal",price:55000,img:"herbal/KOMIK-HERBAL.png"},
-  {name:"Komik Herbal Lemon",cat:"Herbal",price:55000,img:"herbal/KOMIK-HERBAL-LEMON.jpg"},
-  {name:"Laserin Herbal",cat:"Herbal",price:55000,img:"herbal/Laserin-herbal-30ml.jpg"},
-  {name:"OB Herbal Batuk",cat:"Herbal",price:55000,img:"herbal/OB-HERBAL-BATUK-SYR-60ML.jpg"},
-  {name:"Pilkita Pegal Linu",cat:"Herbal",price:55000,img:"herbal/PILKITA-PEGAL-LINU-TAB-2S-STRIP-50S--3-.jpg"},
-  {name:"Promag Herbal",cat:"Herbal",price:55000,img:"herbal/promag-herbal.jpg"},
-  {name:"Prospan",cat:"Herbal",price:55000,img:"herbal/prospan-2.jpg"},
-  {name:"Siladex Cough Herbal",cat:"Herbal",price:55000,img:"herbal/Siladex-Cough-Herbal.png"},
-  {name:"Tolak Linu Herbal",cat:"Herbal",price:55000,img:"herbal/tolak-linu-herbal.jpg"},
-  {name:"Vegeta Herbal",cat:"Herbal",price:55000,img:"herbal/vegeta-herbal-1.jpg"},
-  {name:"Ziplong",cat:"Herbal",price:55000,img:"herbal/ZIPLONG.png"},
-  {name:"Nutraforchol",cat:"Herbal",price:55000,img:"herbal/nutraforchol.jpg"},
-  {name:"Tolak Angin Herbal",cat:"Herbal",price:55000,img:"herbal/tolak angin herbal.jpg"},
-];
-
-const promoItems = [
-  {name:"Kloderma CRM",img:"promo/klodermacrm.jpg"},
-  {name:"Kloderma Oint",img:"promo/klodermaoint.jpg"},
-  {name:"Mediklin",img:"promo/MEDIKLIN.jpg"},
-  {name:"Niacef",img:"promo/niacef.png"},
-  {name:"Vitacid",img:"promo/vitacid.jpg"},
-  {name:"Vitacid CRM",img:"promo/vitacidcrm.jpg"},
-  {name:"Ketomed SS",img:"promo/KETOMEDSS.png"},
-  {name:"Carmed 20",img:"promo/CARMED20.jpg"},
-];
-
-const CATS = ["Semua","Kecantikan","Anak & Bayi","Dewasa","Vitamin","Herbal"];
-const CAT_EMOJIS = {"Semua":"🏪","Kecantikan":"✨","Anak & Bayi":"👶","Dewasa":"💊","Vitamin":"🌿","Herbal":"🍃"};
-
 let cart = [];
-let activeCat = "Semua";
-let payMethod = "cod";
-let allProducts = []; // Tempat menampung data dari csvjson.json
+let allProducts = [];
 
-// LOAD JSON DATA
+// AMBIL DATA DARI JSON GITHUB
 async function loadExternalProducts() {
   try {
     const response = await fetch('csvjson.json');
-    if (!response.ok) throw new Error('File json tidak ditemukan');
+    if (!response.ok) throw new Error('File tidak ditemukan');
     allProducts = await response.json();
     console.log("Database produk JSON berhasil dimuat");
   } catch (err) {
@@ -1030,312 +187,171 @@ async function loadExternalProducts() {
   }
 }
 
-function fmt(n){ return "Rp"+n.toLocaleString('id-ID') }
-function catClass(cat){ return cat ? cat.replace(' & ','').replace(' ','') : 'Umum' }
-function countCat(cat){ return cat==="Semua"?products.length:products.filter(p=>p.cat===cat).length }
-
-// Render promo
-function renderPromo(){
-  document.getElementById('promoScroll').innerHTML = promoItems.map(p=>`
-    <div class="promo-card" onclick="addByName('${p.name.replace(/'/g,"\\'")}')">
-      <img class="promo-img" src="${BASE+p.img}" onerror="this.src=''" alt="${p.name}" loading="lazy">
-      <div class="promo-ribbon">PROMO</div>
-      <div class="promo-name">${p.name}</div>
-      <button class="promo-order-btn">+ Pesan</button>
-    </div>`).join('');
+// Fungsi membersihkan harga "Rp10.000,00" -> 10000
+function parseHarga(str) {
+  if(!str) return 0;
+  let clean = str.replace(/[^\d]/g, "");
+  if (str.includes(",")) return parseInt(clean) / 100;
+  return parseInt(clean);
 }
 
-// Render filter chips
-function renderChips(){
-  document.getElementById('filterWrap').innerHTML = CATS.map(c=>`
-    <div class="chip${c===activeCat?' active':''}" onclick="setcat('${c}')">
-      ${CAT_EMOJIS[c]} ${c}
-      <span class="chip-count">${countCat(c)}</span>
-    </div>`).join('');
-}
+function fmt(n) { return "Rp" + (n || 0).toLocaleString('id-ID'); }
 
-function setcat(c){ activeCat=c; renderChips(); filterProducts(); }
-
-// FUNGSI PENCARIAN UTAMA
 function onSearch() {
   const q = document.getElementById('searchInput').value.toLowerCase().trim();
-  filterProducts(); // Filter yang ada di display
+  const grid = document.getElementById('productGrid');
   
-  // Jika mencari barang di luar display (min 3 karakter)
-  if (q.length >= 3) {
-    // Cari di database JSON (allProducts)
-    const foundInJson = allProducts.find(p => p.name.toLowerCase().includes(q));
-    
-    // Jika ketemu di JSON tapi tidak ada di display utama
-    const inDisplay = products.find(p => p.name.toLowerCase().includes(q));
-    
-    if (foundInJson && !inDisplay) {
-       showSearchPopup(foundInJson);
+  if (q.length < 3) {
+    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:#9ca3af">Ketik minimal 3 huruf...</div>`;
+    return;
+  }
+
+  // Filter berdasarkan kolom "nama" sesuai JSON
+  const found = allProducts.filter(p => p.nama && p.nama.toLowerCase().includes(q));
+
+  if (found.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:#9ca3af">Produk "${q}" tidak ditemukan di gudang.</div>`;
+  } else {
+    // Tampilkan di grid utama
+    grid.innerHTML = found.slice(0, 30).map(p => {
+      const hrg = parseHarga(p["harga online"]);
+      return `
+        <div class="product-card">
+          <div class="product-info">
+            <div class="product-name">${p.nama}</div>
+            <div class="product-price">${fmt(hrg)}</div>
+            <button class="add-btn" onclick="addToCart('${p.nama.replace(/'/g, "\\'")}', ${hrg})">+ Keranjang</button>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Tampilkan POPUP jika hanya ada 1 hasil yang sangat akurat
+    if (found.length === 1) {
+      showSearchPopup(found[0]);
     }
   }
 }
 
-function filterProducts(){
-  const q = document.getElementById('searchInput').value.toLowerCase().trim();
-  document.getElementById('clearBtn').classList.toggle('visible', q.length>0);
-  
-  const filtered = products.filter(p=>{
-    const matchCat = activeCat==="Semua"||p.cat===activeCat;
-    const matchQ = !q||p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q);
-    return matchCat&&matchQ;
-  });
-
-  document.getElementById('prodCount').textContent = filtered.length+" produk";
-  const grid = document.getElementById('productGrid');
-
-  if(filtered.length===0 && q.length < 3){
-    grid.innerHTML=`<div class="no-result">
-      <div class="no-result-icon">🔍</div>
-      Produk "<strong>${q}</strong>" tidak ditemukan di display utama.<br>
-      <small>Ketik minimal 3 huruf untuk cari di database lengkap...</small>
-    </div>`;
-    return;
-  }
-
-  grid.innerHTML = filtered.map(p=>{
-    const cc = catClass(p.cat);
-    return `<div class="product-card">
-      <div class="product-img-wrap">
-        <div class="cat-dot ${cc}">${p.cat}</div>
-        <img class="product-img" src="${BASE+p.img}" onerror="this.style.opacity=0.15" alt="${p.name}" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">${p.name}</div>
-        <div class="product-cat">${p.cat}</div>
-        <div class="product-price">${fmt(p.price)}</div>
-        <button class="add-btn" onclick="addToCartDirectly('${p.name.replace(/'/g,"\\'")}', ${p.price}, '${p.cat}', '${p.img}')">
-          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Keranjang
-        </button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// POPUP UNTUK BARANG DARI JSON
-function showSearchPopup(product) {
+function showSearchPopup(p) {
   const overlay = document.getElementById('searchPopupOverlay');
   const body = document.getElementById('searchPopupBody');
+  const hrg = parseHarga(p["harga online"]);
   
   body.innerHTML = `
-    <div class="result-popup-card">
-      <div class="result-popup-title">${product.name}</div>
-      <div style="font-size:12px; color:var(--text-hint); margin-bottom:10px">${product.cat || 'Kategori Umum'}</div>
-      <div class="result-popup-price">${fmt(product.price)}</div>
-      <button class="result-popup-btn" onclick="addAndClosePopup('${product.name.replace(/'/g,"\\'")}', ${product.price}, '${product.cat || 'Umum'}', '${product.img || ''}')">
-        + Masukkan Keranjang
-      </button>
-      <p style="font-size:10px; color:var(--text-hint); margin-top:10px">Tersedia di gudang farmasi kami</p>
+    <div class="popup-result-card">
+      <h3 style="margin-bottom:10px">${p.nama}</h3>
+      <div style="font-size:22px; font-weight:800; color:var(--emerald-dark); margin-bottom:20px">${fmt(hrg)}</div>
+      <button class="checkout-btn" style="margin-top:0" onclick="addAndClosePopup('${p.nama.replace(/'/g, "\\'")}', ${hrg})">+ Masukkan Keranjang</button>
     </div>
   `;
   overlay.classList.add('open');
 }
 
-function closeSearchPopup() {
-  document.getElementById('searchPopupOverlay').classList.remove('open');
-}
-
-function handleSearchOverlay(e){ if(e.target===document.getElementById('searchPopupOverlay')) closeSearchPopup(); }
-
-function addAndClosePopup(name, price, cat, img) {
-  addToCartDirectly(name, price, cat, img);
+function addAndClosePopup(n, pr) {
+  addToCart(n, pr);
   closeSearchPopup();
 }
 
-function clearSearch(){
-  document.getElementById('searchInput').value='';
-  filterProducts();
-  document.getElementById('clearBtn').classList.remove('visible');
-}
+function closeSearchPopup() { document.getElementById('searchPopupOverlay').classList.remove('open'); }
+function handleSearchOverlay(e) { if(e.target.id==='searchPopupOverlay') closeSearchPopup(); }
 
-// FUNGSI TAMBAH KERANJANG UNIVERSAL
-function addToCartDirectly(name, price, cat, img) {
+function addToCart(name, price) {
   const existing = cart.find(c => c.name === name);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ name, price, cat, img, qty: 1 });
-  }
+  if (existing) { existing.qty++; } else { cart.push({ name, price, qty: 1 }); }
   updateBadge();
   showToast("✓ " + name + " ditambahkan");
 }
 
-function addByName(name){
-  const p = products.find(p => p.name === name) || allProducts.find(p => p.name === name);
-  if(p) {
-    addToCartDirectly(p.name, p.price, p.cat, p.img);
-  } else {
-    openWA("Halo Mitra Farma, saya mau tanya tentang produk: " + name);
-  }
+function updateBadge() {
+  const total = cart.reduce((s, c) => s + c.qty, 0);
+  const b = document.getElementById('cartBadge');
+  b.textContent = total;
+  b.classList.toggle('visible', total > 0);
 }
 
-function updateBadge(){
-  const total = cart.reduce((s,c)=>s+c.qty,0);
-  const badge = document.getElementById('cartBadge');
-  badge.textContent = total;
-  badge.classList.toggle('visible', total>0);
-}
-
-// Keranjang modal
-function openCart(){
+function openCart() {
   document.getElementById('cartOverlay').classList.add('open');
   renderCart();
 }
-function closeCart(){ document.getElementById('cartOverlay').classList.remove('open'); }
-function handleOverlay(e){ if(e.target===document.getElementById('cartOverlay'))closeCart(); }
 
-function renderCart(){
+function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); }
+function handleOverlay(e) { if(e.target.id==='cartOverlay') closeCart(); }
+
+function renderCart() {
   const body = document.getElementById('cartBody');
-  if(cart.length===0){
-    body.innerHTML=`<div class="empty-cart">
-      <div class="empty-cart-icon">🛒</div>
-      <div class="empty-msg">Keranjang masih kosong<br><small>Yuk tambahkan produk favoritmu!</small></div>
-    </div>`;
+  if (cart.length === 0) {
+    body.innerHTML = `<div style="text-align:center; padding:3rem; color:#9ca3af">Keranjang masih kosong</div>`;
     return;
   }
-  const total = cart.reduce((s,c)=>s+c.price*c.qty,0);
-  const items = cart.map((c,i)=>`
-    <div class="cart-item">
-      <img class="cart-img" src="${BASE+c.img}" onerror="this.style.opacity=0.2" alt="${c.name}">
-      <div class="cart-info">
-        <div class="cart-name">${c.name}</div>
-        <div class="cart-price">${fmt(c.price)} × ${c.qty} = <strong>${fmt(c.price*c.qty)}</strong></div>
-      </div>
-      <div class="qty-row">
-        <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
-        <span class="qty-num">${c.qty}</span>
-        <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
-      </div>
-    </div>`).join('');
+
+  let totalBayar = 0;
+  const items = cart.map((c, i) => {
+    totalBayar += (c.price * c.qty);
+    return `
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #f0f0f0">
+        <div style="flex:1">
+          <div style="font-weight:700; font-size:13px">${c.name}</div>
+          <div style="color:var(--emerald-dark); font-size:12.5px">${fmt(c.price)} x ${c.qty}</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px">
+          <button class="qty-btn" onclick="changeQty(${i},-1)">-</button>
+          <strong>${c.qty}</strong>
+          <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+        </div>
+      </div>`;
+  }).join('');
 
   body.innerHTML = items + `
-    <div class="cart-summary-box">
-      <div class="total-row">
-        <span class="total-label">Total Belanja</span>
-        <span class="total-val">${fmt(total)}</span>
-      </div>
-      <div class="total-note">* Belum termasuk ongkos kirim</div>
+    <div style="margin-top:15px; background:var(--bg); padding:15px; border-radius:10px">
+      <div style="display:flex; justify-content:space-between"><span>Total:</span> <strong>${fmt(totalBayar)}</strong></div>
     </div>
 
     <!-- DATA PENGIRIMAN -->
     <div class="form-section">
-      <div class="form-title">
-        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
-        Data Pengiriman
-      </div>
-      <div class="form-group">
-        <label class="form-label">Nama Lengkap</label>
-        <input type="text" id="custName" class="form-input" placeholder="Nama penerima">
-      </div>
-      <div class="form-group">
-        <label class="form-label">No. WhatsApp</label>
-        <input type="tel" id="custWA" class="form-input" placeholder="0812xxxx">
-      </div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label">Kecamatan</label>
-          <input type="text" id="custKec" class="form-input" placeholder="Kecamatan">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Kabupaten</label>
-          <input type="text" id="custKab" class="form-input" value="Kabupaten Semarang" placeholder="Kabupaten">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Alamat Rinci (Jl., No Rumah, Patokan)</label>
-        <textarea id="custAddr" class="form-input" rows="3" placeholder="Contoh: Jl. Mawar No 10, RT 01/02, depan Masjid"></textarea>
-      </div>
+      <div class="form-title">📍 Data Pengiriman</div>
+      <div class="form-group"><label class="form-label">Nama Lengkap</label><input type="text" id="custName" class="form-input" placeholder="Nama Anda"></div>
+      <div class="form-group"><label class="form-label">No. WhatsApp</label><input type="tel" id="custWA" class="form-input" placeholder="08xxx"></div>
+      <div class="form-group"><label class="form-label">Kecamatan</label><input type="text" id="custKec" class="form-input" placeholder="Kecamatan"></div>
+      <div class="form-group"><label class="form-label">Kabupaten</label><input type="text" value="Kabupaten Semarang" id="custKab" class="form-input" readonly style="background:#eee"></div>
+      <div class="form-group"><label class="form-label">Alamat Lengkap Rinci</label><textarea id="custAddr" class="form-input" rows="2" placeholder="Jl, No Rumah, Patokan..."></textarea></div>
     </div>
 
-    <div class="pay-section">
-      <div class="pay-title">Metode Pembayaran</div>
-      <div class="pay-opts">
-        <div class="pay-opt${payMethod==='cod'?' sel':''}" id="pay-cod" onclick="selPay('cod')">
-          <div class="pay-opt-icon">💵</div>COD
-        </div>
-        <div class="pay-opt${payMethod==='transfer'?' sel':''}" id="pay-transfer" onclick="selPay('transfer')">
-          <div class="pay-opt-icon">🏦</div>Transfer
-        </div>
-        <div class="pay-opt${payMethod==='qris'?' sel':''}" id="pay-qris" onclick="selPay('qris')">
-          <div class="pay-opt-icon">📱</div>QRIS
-        </div>
-      </div>
-      <div class="cart-note-box">
-        ⚠️ Ongkir dihitung sesuai jarak. Admin akan menghubungi Anda via WhatsApp untuk konfirmasi detail pesanan & pengiriman.
-      </div>
-      <button class="checkout-btn" onclick="checkout()">
-        Pesan via WhatsApp ➔
-      </button>
-    </div>`;
+    <button class="checkout-btn" onclick="checkout()">Pesan via WhatsApp ➔</button>
+  `;
 }
 
-function changeQty(i,d){
-  cart[i].qty+=d;
-  if(cart[i].qty<=0)cart.splice(i,1);
+function changeQty(i, d) {
+  cart[i].qty += d;
+  if (cart[i].qty <= 0) cart.splice(i, 1);
   updateBadge();
   renderCart();
 }
 
-function selPay(m){
-  payMethod=m;
-  ['cod','transfer','qris'].forEach(k=>{
-    const el=document.getElementById('pay-'+k);
-    if(el)el.classList.toggle('sel',k===m);
-  });
-}
-
-function checkout(){
-  if(cart.length===0){showToast("Keranjang masih kosong!");return;}
-
+function checkout() {
   const name = document.getElementById('custName').value.trim();
   const wa = document.getElementById('custWA').value.trim();
   const kec = document.getElementById('custKec').value.trim();
-  const kab = document.getElementById('custKab').value.trim();
   const addr = document.getElementById('custAddr').value.trim();
 
-  if(!name || !wa || !kec || !addr){
-    showToast("⚠️ Mohon lengkapi biodata pengiriman");
+  if (!name || !wa || !kec || !addr) {
+    alert("⚠️ Mohon lengkapi biodata pengiriman!");
     return;
   }
 
-  const items = cart.map(c=>`• ${c.name} x${c.qty} = ${fmt(c.price*c.qty)}`).join('\n');
-  const total = cart.reduce((s,c)=>s+c.price*c.qty,0);
-  const payLabel = payMethod==="cod"?"Bayar di Tempat (COD)":payMethod==="transfer"?"Transfer Bank":"QRIS";
+  const itemsTxt = cart.map(c => `- ${c.name} (x${c.qty}) = ${fmt(c.price * c.qty)}`).join('\n');
+  const total = cart.reduce((s, c) => s + (c.price * c.qty), 0);
+  const msg = `Halo Mitra Farma, saya ingin memesan:\n\n${itemsTxt}\n\n*Total: ${fmt(total)}*\n\n*DATA PEMBELI:*\nNama: ${name}\nWA: ${wa}\nKecamatan: ${kec}\nAlamat: ${addr}\n\nTerima kasih.`;
 
-  const msg = `Halo Apotek Mitra Farma! Saya ingin memesan:\n\n${items}\n\n*Total: ${fmt(total)}*\nPembayaran: ${payLabel}\n\n*DATA PENGIRIMAN:*\nNama: ${name}\nWhatsApp: ${wa}\nKecamatan: ${kec}\nKabupaten: ${kab}\nAlamat: ${addr}\n\nMohon konfirmasi ongkir & pengiriman. Terima kasih! 🙏`;
-  
-  window.open("https://wa.me/"+WA_NUM+"?text="+encodeURIComponent(msg),"_blank");
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-function showToast(msg){
+function showToast(m) {
   const t = document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
+  t.textContent = m; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
 }
 
-// Navbar scroll
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY>20);
-});
-
-// Fade-in observer
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-},{threshold:0.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
-
-// Init
-window.onload = () => {
-  loadExternalProducts();
-  renderPromo();
-  renderChips();
-  filterProducts();
-};
+window.onload = loadExternalProducts;
 </script>
 </body>
 </html>
