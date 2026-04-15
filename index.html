@@ -625,6 +625,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     Terjamin Keasliannya
   </div>
+  <div class="trust-item">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Respons Cepat < 5 Menit
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    Konsultasi Gratis
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+    Antar ke Rumah
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    Harga Bersaing
+  </div>
 </div>
 
 <div class="section-space"></div>
@@ -718,25 +734,103 @@ function openWA(msg){ window.open("https://wa.me/"+WA_NUM+"?text="+encodeURIComp
 // Data display tetap sama
 const products = [
   {name:"Benzolac 2%",cat:"Kecantikan",price:50000,img:"kecantikan/benzolac2.jpg"},
+  {name:"Benzolac 5",cat:"Kecantikan",price:50000,img:"kecantikan/BENZOLAC-5.jpg"},
+  {name:"Benzolac CL",cat:"Kecantikan",price:50000,img:"kecantikan/benzolac-cl.jpg"},
+  {name:"Desolex",cat:"Kecantikan",price:50000,img:"kecantikan/DESOLEX.jpg"},
+  {name:"Erymed",cat:"Kecantikan",price:50000,img:"kecantikan/ERYMED.png"},
+  {name:"Erymed Erythromycin 2%",cat:"Kecantikan",price:50000,img:"kecantikan/ERYMED-ERYTHROMYCIN-2-15G.png"},
+  {name:"Kloderma Gel",cat:"Kecantikan",price:50000,img:"kecantikan/KLODERMAgel.png"},
+  {name:"Mediklin Sol",cat:"Kecantikan",price:50000,img:"kecantikan/mediklinsol.jpg"},
+  {name:"Palenox",cat:"Kecantikan",price:50000,img:"kecantikan/Palenox.jpg"},
+  {name:"Pirotop 5G",cat:"Kecantikan",price:50000,img:"kecantikan/PIROTOP-5G.png"},
+  {name:"Regrou For Men",cat:"Kecantikan",price:50000,img:"kecantikan/REGROU-FOR-MEN.jpg"},
+  {name:"Tekasol Plus",cat:"Kecantikan",price:50000,img:"kecantikan/tekasolplus.jpg"},
+  {name:"Vitacid 0,1",cat:"Kecantikan",price:50000,img:"kecantikan/VITACID  0,1.png"},
+  {name:"Vitacid",cat:"Kecantikan",price:50000,img:"kecantikan/VITACID.png"},
+  {name:"Vitacid CRM 0,1",cat:"Kecantikan",price:50000,img:"kecantikan/vitacidcrm0,1.jpg"},
+  {name:"Anakonidin",cat:"Anak & Bayi",price:30000,img:"anak/anakonidin.jpg"},
   {name:"Bodrexin",cat:"Anak & Bayi",price:30000,img:"anak/bodrexin.png"},
   {name:"Cefixim",cat:"Anak & Bayi",price:30000,img:"anak/cefixim.png"},
-  {name:"Andalan FE",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-FE.png"},
-  {name:"Blackmores",cat:"Vitamin",price:45000,img:"vitamin/blackmores-1.jpg"},
-  {name:"Enkasari Herbal",cat:"Herbal",price:55000,img:"herbal/ENKASARI-HERBAL-120ML-3.jpg"},
+  {name:"Ciprofloxacin",cat:"Anak & Bayi",price:30000,img:"anak/Ciprofloxacin.jpg"},
+  {name:"Contrexyn",cat:"Anak & Bayi",price:30000,img:"anak/CONTREXYN.png"},
+  {name:"Hufagripp",cat:"Anak & Bayi",price:30000,img:"anak/Hufagripp.jpg"},
+  {name:"Itamol Syrup",cat:"Anak & Bayi",price:30000,img:"anak/itamol-syr.jpg"},
+  {name:"Koolfever",cat:"Anak & Bayi",price:30000,img:"anak/koolfever.jpg"},
+  {name:"Lacto B",cat:"Anak & Bayi",price:30000,img:"anak/Lacto-B-1.jpg"},
+  {name:"OBH Anak",cat:"Anak & Bayi",price:30000,img:"anak/obh.jpg"},
+  {name:"Ottopan 15ml",cat:"Anak & Bayi",price:30000,img:"anak/Ottopan-15ml.png"},
+  {name:"Pyrexin",cat:"Anak & Bayi",price:30000,img:"anak/pyrexin.jpg"},
   {name:"Sanmol",cat:"Anak & Bayi",price:30000,img:"anak/SANMOL.jpg"},
   {name:"Sumagesic",cat:"Anak & Bayi",price:30000,img:"anak/sumagesic.jpg"},
+  {name:"Tempra",cat:"Anak & Bayi",price:30000,img:"anak/tempra.png"},
+  {name:"Termorex",cat:"Anak & Bayi",price:30000,img:"anak/termorex.jpg"},
+  {name:"Actifed",cat:"Dewasa",price:20000,img:"dewasa/ACTIFED.jpg"},
+  {name:"Andalan FE",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-FE.png"},
+  {name:"Andalan Kondom 12s",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-KONDOM--12S.jpg"},
+  {name:"Andalan Laktasi",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-LAKTASI-2.jpg"},
+  {name:"Andalan Pil KB",cat:"Dewasa",price:20000,img:"dewasa/andalan-pil-kb.jpg"},
+  {name:"Sanexon",cat:"Dewasa",price:20000,img:"dewasa/sanexon.png"},
+  {name:"Becom",cat:"Dewasa",price:20000,img:"dewasa/becom.jpg"},
+  {name:"Diane",cat:"Dewasa",price:20000,img:"dewasa/diane.jpg"},
+  {name:"Elzsa",cat:"Dewasa",price:20000,img:"dewasa/ELZSA.jpg"},
+  {name:"Interlac",cat:"Dewasa",price:20000,img:"dewasa/INTERLAC-1.png"},
+  {name:"Metformin",cat:"Dewasa",price:20000,img:"dewasa/METFORMIN.jpg"},
+  {name:"Postinor 2",cat:"Dewasa",price:20000,img:"dewasa/postinor-2.png"},
+  {name:"Postpil",cat:"Dewasa",price:20000,img:"dewasa/POSTPIL.png"},
+  {name:"Sutra",cat:"Dewasa",price:20000,img:"dewasa/SUTRA.png"},
+  {name:"Ultrasafe",cat:"Dewasa",price:20000,img:"dewasa/ultrasafe.png"},
+  {name:"Vivo",cat:"Dewasa",price:20000,img:"dewasa/vivo.png"},
+  {name:"Blackmores",cat:"Vitamin",price:45000,img:"vitamin/blackmores-1.jpg"},
+  {name:"Blackmores Multivitamin",cat:"Vitamin",price:45000,img:"vitamin/Blackmores-multivitamin.jpg"},
+  {name:"Caviplex",cat:"Vitamin",price:45000,img:"vitamin/Caviplex.png"},
+  {name:"CDR",cat:"Vitamin",price:45000,img:"vitamin/CDR-2.jpg"},
+  {name:"IPI D3",cat:"Vitamin",price:45000,img:"vitamin/ipi-d3.png"},
+  {name:"Enervon Active",cat:"Vitamin",price:45000,img:"vitamin/ENERVON-ACTIVE-FC-TAB-4S-STRIP-25S-2.jpg"},
+  {name:"Enervon C Eff",cat:"Vitamin",price:45000,img:"vitamin/ENERVON-C-EFF-10S-TUBE.jpg"},
+  {name:"H Booster Syrup",cat:"Vitamin",price:45000,img:"vitamin/H-BOOSTER-SYR-50ML.jpg"},
+  {name:"Hemaviton Action",cat:"Vitamin",price:45000,img:"vitamin/HEMAVITON-ACTION.png"},
+  {name:"Hemaviton Stamina Plus",cat:"Vitamin",price:45000,img:"vitamin/Hemaviton-Stamina-Plus.jpg"},
+  {name:"Imboost",cat:"Vitamin",price:45000,img:"vitamin/IMBOOST-1-STRIP-4-TABLET.png"},
+  {name:"Imboost Vit C D3",cat:"Vitamin",price:45000,img:"vitamin/IMBOOST-VIT-C-D3.png"},
+  {name:"Renovit",cat:"Vitamin",price:45000,img:"vitamin/renovit.jpg"},
+  {name:"Stamina Plus",cat:"Vitamin",price:45000,img:"vitamin/stamina plus.png"},
+  {name:"Stimuno",cat:"Vitamin",price:45000,img:"vitamin/stimuno.jpg"},
+  {name:"Enkasari Herbal",cat:"Herbal",price:55000,img:"herbal/ENKASARI-HERBAL-120ML-3.jpg"},
+  {name:"Entrostop Anak",cat:"Herbal",price:55000,img:"herbal/Entrostop-Anak-6-sachet.png"},
+  {name:"Froz Herbal",cat:"Herbal",price:55000,img:"herbal/froz-herbal-ijo.jpg"},
+  {name:"Komik Herbal",cat:"Herbal",price:55000,img:"herbal/KOMIK-HERBAL.png"},
+  {name:"Komik Herbal Lemon",cat:"Herbal",price:55000,img:"herbal/KOMIK-HERBAL-LEMON.jpg"},
+  {name:"Laserin Herbal",cat:"Herbal",price:55000,img:"herbal/Laserin-herbal-30ml.jpg"},
+  {name:"OB Herbal Batuk",cat:"Herbal",price:55000,img:"herbal/OB-HERBAL-BATUK-SYR-60ML.jpg"},
+  {name:"Pilkita Pegal Linu",cat:"Herbal",price:55000,img:"herbal/PILKITA-PEGAL-LINU-TAB-2S-STRIP-50S--3-.jpg"},
+  {name:"Promag Herbal",cat:"Herbal",price:55000,img:"herbal/promag-herbal.jpg"},
+  {name:"Prospan",cat:"Herbal",price:55000,img:"herbal/prospan-2.jpg"},
+  {name:"Siladex Cough Herbal",cat:"Herbal",price:55000,img:"herbal/Siladex-Cough-Herbal.png"},
+  {name:"Tolak Linu Herbal",cat:"Herbal",price:55000,img:"herbal/tolak-linu-herbal.jpg"},
+  {name:"Vegeta Herbal",cat:"Herbal",price:55000,img:"herbal/vegeta-herbal-1.jpg"},
+  {name:"Ziplong",cat:"Herbal",price:55000,img:"herbal/ZIPLONG.png"},
+  {name:"Nutraforchol",cat:"Herbal",price:55000,img:"herbal/nutraforchol.jpg"},
   {name:"Tolak Angin Herbal",cat:"Herbal",price:55000,img:"herbal/tolak angin herbal.jpg"},
 ];
 
 const promoItems = [
   {name:"Kloderma CRM",img:"promo/klodermacrm.jpg"},
+  {name:"Kloderma Oint",img:"promo/klodermaoint.jpg"},
   {name:"Mediklin",img:"promo/MEDIKLIN.jpg"},
+  {name:"Niacef",img:"promo/niacef.png"},
+  {name:"Vitacid",img:"promo/vitacid.jpg"},
+  {name:"Vitacid CRM",img:"promo/vitacidcrm.jpg"},
+  {name:"Ketomed SS",img:"promo/KETOMEDSS.png"},
+  {name:"Carmed 20",img:"promo/CARMED20.jpg"},
 ];
 
 const CATS = ["Semua","Kecantikan","Anak & Bayi","Dewasa","Vitamin","Herbal"];
+const CAT_EMOJIS = {"Semua":"🏪","Kecantikan":"✨","Anak & Bayi":"👶","Dewasa":"💊","Vitamin":"🌿","Herbal":"🍃"};
+
 let cart = [];
 let activeCat = "Semua";
-let allProducts = [];
+let payMethod = "cod";
+let allProducts = []; // Tempat menampung data dari csvjson.json
 
 // LOAD GITHUB JSON
 async function loadExternalProducts() {
