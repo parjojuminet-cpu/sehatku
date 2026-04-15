@@ -1716,7 +1716,7 @@ async function searchProducts(query, limit=10) {
       .map((p, i) => ({
         id: 'json_' + i + '_' + Date.now(),
         name: p.name || p.nama || p.NAMA || p.Name || 'Produk',
-        price: parseInt(p['harga online'] || p.price || p.harga || p.HARGA || 0) || 0,
+        price: parseInt(p.price || p.harga || p.HARGA || p.Price || 0) || 0,
         img: p.img || p.image || p.gambar || '',
         cat: p.category || p.kategori || p.KATEGORI || 'Produk',
       }));
