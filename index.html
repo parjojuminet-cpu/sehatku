@@ -1,1341 +1,2128 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apotek Mitra Farma | Obat & Kesehatan Kabupaten Semarang</title>
-<meta name="description" content="Apotek Mitra Farma - Solusi pembelian obat tanpa keluar rumah. Konsultasi gratis, pengiriman cepat, Kabupaten Semarang. Kecantikan, Vitamin, Herbal, Anak & Dewasa.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --emerald:#00A878;
-  --emerald-dark:#007A57;
-  --emerald-deeper:#005240;
-  --emerald-light:#E0F5EF;
-  --emerald-glow:#00A87820;
-  --mint:#B8F0DC;
-  --gold:#D4A017;
-  --gold-light:#FFF3CC;
-  --coral:#FF6B6B;
-  --sky:#4ECDC4;
-  --text:#111827;
-  --text-muted:#6B7280;
-  --text-hint:#9CA3AF;
-  --bg:#F0FDF8;
-  --bg2:#E8FAF4;
-  --card:#FFFFFF;
-  --border:#D1FAE5;
-  --border-mid:#A7F3D0;
-  --radius:14px;
-  --radius-lg:20px;
-  --radius-sm:8px;
-  --shadow:0 1px 4px rgba(0,168,120,0.08),0 2px 8px rgba(0,0,0,0.04);
-  --shadow-md:0 4px 20px rgba(0,168,120,0.12),0 8px 30px rgba(0,0,0,0.06);
-  --shadow-xl:0 12px 40px rgba(0,168,120,0.18),0 20px 60px rgba(0,0,0,0.1);
-}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;overflow-x:hidden}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apotek Mitra Farma | Ramah & Terpercaya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--emerald);border-radius:3px}
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --green-50: #f0fdf4;
+      --green-100: #dcfce7;
+      --green-200: #bbf7d0;
+      --green-400: #4ade80;
+      --green-500: #22c55e;
+      --green-600: #16a34a;
+      --green-700: #15803d;
+      --green-800: #166534;
+      --teal-500: #14b8a6;
+      --teal-600: #0d9488;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+      --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+      --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+      --radius-sm: 8px;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --transition: all 0.2s ease;
+      --transition-slow: all 0.4s ease;
+    }
 
-/* ===== NAVBAR ===== */
-.navbar{
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  padding:0 1.5rem;
-  display:flex;align-items:center;justify-content:space-between;
-  height:64px;
-  position:sticky;top:0;z-index:200;
-  transition:box-shadow 0.3s
-}
-.navbar.scrolled{box-shadow:var(--shadow-md)}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-icon{
-  width:42px;height:42px;
-  background:linear-gradient(135deg,var(--emerald-deeper),var(--emerald));
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 12px rgba(0,168,120,0.3)
-}
-.logo-icon svg{width:22px;height:22px;fill:white}
-.logo-text{display:flex;flex-direction:column}
-.logo-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--emerald-deeper);line-height:1.1}
-.logo-sub{font-size:10px;color:var(--text-hint);letter-spacing:0.05em;text-transform:uppercase}
-.nav-right{display:flex;align-items:center;gap:10px}
-.nav-links{display:none}
-@media(min-width:720px){
-  .nav-links{display:flex;gap:2px;align-items:center;margin-right:6px}
-  .nav-link{font-size:13px;color:var(--text-muted);padding:8px 14px;border-radius:8px;
-    transition:all 0.2s;text-decoration:none;font-weight:500;cursor:pointer}
-  .nav-link:hover{background:var(--emerald-light);color:var(--emerald-dark)}
-}
-.cart-btn{
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-  color:white;border:none;border-radius:10px;
-  padding:9px 16px;cursor:pointer;
-  display:flex;align-items:center;gap:7px;
-  font-size:13px;font-weight:600;
-  font-family:'DM Sans',sans-serif;
-  box-shadow:0 4px 12px rgba(0,168,120,0.3);
-  transition:all 0.25s;position:relative
-}
-.cart-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,168,120,0.4)}
-.cart-badge{
-  background:var(--coral);color:white;
-  border-radius:50%;width:20px;height:20px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;
-  position:absolute;top:-6px;right:-6px;
-  border:2px solid white;
-  transform:scale(0);transition:transform 0.3s
-}
-.cart-badge.visible{transform:scale(1)}
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul { list-style: none; }
 
-/* ===== HERO ===== */
-.hero{
-  background:linear-gradient(160deg,var(--emerald-deeper) 0%,var(--emerald-dark) 45%,#009966 75%,var(--sky) 100%);
-  color:white;padding:3.5rem 1.5rem 4rem;
-  position:relative;overflow:hidden;
-  min-height:420px;display:flex;align-items:center
-}
-.hero-bg-orb{position:absolute;border-radius:50%;pointer-events:none}
-.hero-bg-orb.o1{width:350px;height:350px;background:rgba(255,255,255,0.05);top:-80px;right:-80px}
-.hero-bg-orb.o2{width:250px;height:250px;background:rgba(255,255,255,0.04);bottom:-60px;left:-40px}
-.hero-bg-orb.o3{width:150px;height:150px;background:rgba(78,205,196,0.15);top:50%;right:20%}
-.hero-pattern{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
-  background-size:28px 28px;pointer-events:none
-}
-.hero-inner{
-  position:relative;z-index:2;
-  max-width:680px;margin:0 auto;width:100%
-}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:7px;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.22);
-  border-radius:50px;padding:5px 15px;
-  font-size:12px;font-weight:500;margin-bottom:1.5rem;
-  backdrop-filter:blur(6px);letter-spacing:0.02em
-}
-.hero-badge span{width:7px;height:7px;background:#7DFFCB;border-radius:50%;display:inline-block;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.hero h1{
-  font-family:'Sora',sans-serif;
-  font-size:clamp(26px,6vw,40px);
-  font-weight:800;margin-bottom:0.75rem;
-  line-height:1.15;letter-spacing:-0.02em
-}
-.hero h1 .highlight{color:#7DFFCB}
-.hero p{font-size:15px;opacity:0.85;margin-bottom:2rem;max-width:480px;line-height:1.7}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{
-  background:white;color:var(--emerald-deeper);
-  border:none;padding:13px 24px;border-radius:10px;
-  font-size:14px;font-weight:700;cursor:pointer;
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.25s;
-  display:inline-flex;align-items:center;gap:8px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.15)
-}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
-.btn-ghost{
-  background:rgba(255,255,255,0.1);color:white;
-  border:1.5px solid rgba(255,255,255,0.35);
-  padding:12px 22px;border-radius:10px;
-  font-size:14px;font-weight:600;cursor:pointer;
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.25s;
-  display:inline-flex;align-items:center;gap:8px;
-  backdrop-filter:blur(6px)
-}
-.btn-ghost:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.6)}
-.hero-pills{
-  display:flex;flex-wrap:wrap;gap:8px;margin-top:1.75rem
-}
-.hero-pill{
-  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
-  border-radius:50px;padding:4px 13px;font-size:12px;
-  display:flex;align-items:center;gap:5px
-}
-.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:#7DFFCB}
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--gray-100); }
+    ::-webkit-scrollbar-thumb { background: var(--green-400); border-radius: 3px; }
 
-/* ===== STATS ===== */
-.stats-row{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:12px;padding:1.5rem 1.5rem 0.5rem;
-  max-width:700px;margin:0 auto
-}
-.stat-card{
-  background:var(--card);border-radius:var(--radius);
-  border:1px solid var(--border);
-  padding:1.1rem 0.75rem;text-align:center;
-  box-shadow:var(--shadow);
-  position:relative;overflow:hidden;
-  transition:transform 0.2s,box-shadow 0.2s
-}
-.stat-card::before{
-  content:'';position:absolute;top:-20px;right:-20px;
-  width:60px;height:60px;border-radius:50%;
-  background:var(--emerald-glow)
-}
-.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.stat-num{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--emerald-darker, var(--emerald-dark))}
-.stat-label{font-size:11px;color:var(--text-hint);margin-top:3px;font-weight:500}
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-100);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .nav-top {
+      background: linear-gradient(135deg, var(--green-700), var(--teal-600));
+      padding: 6px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: rgba(255,255,255,0.9);
+    }
+    .nav-top a { color: rgba(255,255,255,0.9); }
+    .nav-top a:hover { color: white; }
+    .nav-main {
+      max-width: 1280px; margin: 0 auto;
+      padding: 12px 24px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600;
+      color: var(--green-700); white-space: nowrap;
+    }
+    .nav-logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    .nav-logo span { color: var(--teal-600); }
 
-/* ===== SECTIONS ===== */
-.section-pad{padding:0 1.5rem}
-.section-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.section-heading{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
-.section-tag{
-  background:var(--gold-light);color:var(--gold);
-  font-size:11px;font-weight:700;padding:3px 10px;
-  border-radius:50px;border:1px solid rgba(212,160,23,0.25)
-}
+    /* Search */
+    .search-wrapper {
+      flex: 1; max-width: 560px; position: relative;
+    }
+    .search-box {
+      display: flex; align-items: center;
+      border: 2px solid var(--green-500);
+      border-radius: var(--radius-full);
+      background: white;
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(34,197,94,0.15);
+    }
+    .search-box:focus-within {
+      border-color: var(--green-600);
+      box-shadow: 0 4px 16px rgba(34,197,94,0.25);
+    }
+    .search-box input {
+      flex: 1; padding: 10px 16px;
+      border: none; outline: none;
+      font-family: inherit; font-size: 14px; color: var(--gray-800);
+      background: transparent;
+    }
+    .search-box input::placeholder { color: var(--gray-400); }
+    .search-btn {
+      background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      color: white; padding: 10px 20px;
+      font-size: 14px; font-weight: 600;
+      display: flex; align-items: center; gap: 6px;
+      transition: var(--transition);
+    }
+    .search-btn:hover { opacity: 0.9; }
 
-/* ===== TRUST BAR ===== */
-.trust-bar{
-  display:flex;overflow-x:auto;gap:10px;
-  padding:1rem 1.5rem;scrollbar-width:none;
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  background:var(--card);margin:1rem 0
-}
-.trust-bar::-webkit-scrollbar{display:none}
-.trust-item{
-  display:flex;align-items:center;gap:8px;
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:50px;padding:7px 14px;
-  flex-shrink:0;white-space:nowrap;
-  font-size:12px;font-weight:600;color:var(--emerald-dark)
-}
-.trust-item svg{flex-shrink:0;color:var(--emerald)}
+    /* Autocomplete dropdown */
+    .autocomplete-dropdown {
+      position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+      background: white; border-radius: var(--radius);
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--gray-100);
+      z-index: 2000; overflow: hidden;
+      display: none; max-height: 420px; overflow-y: auto;
+      animation: dropIn 0.18s ease;
+    }
+    .autocomplete-dropdown.show { display: block; }
+    @keyframes dropIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .autocomplete-header {
+      padding: 10px 16px 6px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--gray-400);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .autocomplete-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 16px; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .autocomplete-item:hover { background: var(--green-50); }
+    .autocomplete-item .ac-icon {
+      width: 36px; height: 36px; border-radius: var(--radius-sm);
+      background: var(--gray-100); display: flex; align-items: center; justify-content: center;
+      color: var(--green-600); font-size: 14px; flex-shrink: 0;
+    }
+    .autocomplete-item .ac-info { flex: 1; min-width: 0; }
+    .autocomplete-item .ac-name {
+      font-size: 13px; font-weight: 600; color: var(--gray-800);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .autocomplete-item .ac-name mark {
+      background: var(--green-100); color: var(--green-700);
+      border-radius: 2px; padding: 0 1px;
+    }
+    .autocomplete-item .ac-price {
+      font-size: 12px; font-weight: 700; color: var(--green-600);
+    }
+    .autocomplete-footer {
+      padding: 10px 16px;
+      font-size: 13px; color: var(--green-600); font-weight: 600;
+      border-top: 1px solid var(--gray-100);
+      cursor: pointer; display: flex; align-items: center; gap: 6px;
+    }
+    .autocomplete-footer:hover { background: var(--green-50); }
+    .autocomplete-loading {
+      padding: 20px; text-align: center; color: var(--gray-400); font-size: 13px;
+    }
+    .autocomplete-empty {
+      padding: 20px; text-align: center; color: var(--gray-400); font-size: 13px;
+    }
 
-/* ===== PROMO ===== */
-.promo-scroll{
-  display:flex;gap:12px;overflow-x:auto;
-  padding:0.25rem 1.5rem 1rem;scrollbar-width:none;
-  -webkit-overflow-scrolling:touch
-}
-.promo-scroll::-webkit-scrollbar{display:none}
-.promo-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:14px 12px;min-width:140px;
-  text-align:center;flex-shrink:0;
-  box-shadow:var(--shadow);
-  transition:all 0.25s;cursor:pointer;
-  position:relative;overflow:hidden
-}
-.promo-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;
-  height:3px;background:linear-gradient(90deg,var(--emerald),var(--sky))
-}
-.promo-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--border-mid)}
-.promo-img{
-  width:88px;height:88px;object-fit:contain;
-  margin:0 auto 10px;display:block;border-radius:8px
-}
-.promo-ribbon{
-  background:linear-gradient(135deg,var(--coral),#FF8E53);
-  color:white;font-size:9px;font-weight:700;
-  padding:2px 9px;border-radius:50px;
-  display:inline-block;margin-bottom:6px;
-  letter-spacing:0.04em
-}
-.promo-name{font-size:11.5px;font-weight:600;margin-bottom:10px;line-height:1.4}
-.promo-order-btn{
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-  color:white;border:none;border-radius:8px;
-  padding:7px;font-size:11px;font-weight:700;
-  cursor:pointer;width:100%;
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.2s
-}
-.promo-order-btn:hover{opacity:0.9;transform:scale(0.98)}
+    /* Nav actions */
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .nav-action-btn {
+      position: relative; width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius); color: var(--gray-600);
+      transition: var(--transition); font-size: 18px;
+    }
+    .nav-action-btn:hover { background: var(--gray-100); color: var(--green-600); }
+    .cart-badge {
+      position: absolute; top: 4px; right: 4px;
+      background: var(--green-500); color: white;
+      font-size: 10px; font-weight: 700;
+      min-width: 18px; height: 18px; border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 4px;
+    }
+    .cart-btn {
+      background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      color: white; padding: 10px 20px; border-radius: var(--radius-full);
+      font-weight: 700; font-size: 14px;
+      display: flex; align-items: center; gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(22,163,74,0.3);
+    }
+    .cart-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(22,163,74,0.4); }
+    .cart-count-badge {
+      background: white; color: var(--green-700);
+      font-size: 11px; font-weight: 800;
+      min-width: 20px; height: 20px; border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+    }
 
-/* ===== SEARCH ===== */
-.search-section{
-  background:var(--card);border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:1rem 1.5rem;
-  position:sticky;top:64px;z-index:100
-}
-.search-box{
-  width:100%;padding:11px 16px 11px 44px;
-  border:1.5px solid var(--border-mid);
-  border-radius:12px;font-size:14px;
-  background:var(--bg);color:var(--text);
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.25s
-}
-.search-box:focus{outline:none;border-color:var(--emerald);background:white;box-shadow:0 0 0 3px var(--emerald-glow)}
-.search-wrap{position:relative}
-.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-hint);pointer-events:none}
-.clear-btn{
-  position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  background:none;border:none;cursor:pointer;
-  color:var(--text-hint);display:none;font-size:18px;line-height:1
-}
-.clear-btn.visible{display:block}
+    /* Nav menu */
+    .nav-menu-bar {
+      border-top: 1px solid var(--gray-100);
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 24px;
+      display: flex; align-items: center; gap: 2px;
+    }
+    .nav-menu-item {
+      position: relative;
+    }
+    .nav-menu-link {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 14px; font-size: 14px; font-weight: 600;
+      color: var(--gray-600); border-radius: var(--radius-sm);
+      transition: var(--transition); cursor: pointer; white-space: nowrap;
+    }
+    .nav-menu-link:hover, .nav-menu-link.active { color: var(--green-600); background: var(--green-50); }
+    .nav-menu-link i { font-size: 12px; }
 
-/* ===== FILTER CHIPS ===== */
-.filter-wrap{
-  display:flex;gap:7px;overflow-x:auto;
-  padding:0.75rem 1.5rem;scrollbar-width:none
-}
-.filter-wrap::-webkit-scrollbar{display:none}
-.chip{
-  background:var(--card);border:1.5px solid var(--border-mid);
-  border-radius:50px;padding:7px 16px;
-  font-size:12.5px;font-weight:600;cursor:pointer;
-  white-space:nowrap;color:var(--text-muted);
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.2s;flex-shrink:0;
-  display:flex;align-items:center;gap:6px
-}
-.chip.active{
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-  color:white;border-color:var(--emerald);
-  box-shadow:0 4px 12px rgba(0,168,120,0.3)
-}
-.chip:hover:not(.active){background:var(--emerald-light);color:var(--emerald-dark);border-color:var(--emerald)}
-.chip-count{
-  background:rgba(255,255,255,0.3);
-  border-radius:50px;padding:1px 7px;
-  font-size:10px
-}
-.chip:not(.active) .chip-count{background:var(--bg2);color:var(--text-hint)}
+    /* Dropdown menu */
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 0;
+      background: white; border-radius: var(--radius);
+      box-shadow: var(--shadow-xl); border: 1px solid var(--gray-100);
+      min-width: 180px; z-index: 100; overflow: hidden;
+      opacity: 0; pointer-events: none; transform: translateY(-8px);
+      transition: var(--transition);
+    }
+    .nav-menu-item:hover .dropdown-menu {
+      opacity: 1; pointer-events: auto; transform: translateY(0);
+    }
+    .dropdown-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px; font-size: 13px; font-weight: 500;
+      color: var(--gray-600); cursor: pointer;
+      transition: background 0.15s;
+    }
+    .dropdown-item:hover { background: var(--green-50); color: var(--green-700); }
+    .dropdown-item i { color: var(--green-500); width: 16px; }
 
-/* ===== PRODUCTS ===== */
-.products-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0.5rem 1.5rem 0.75rem
-}
-.products-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:700}
-.products-count{
-  font-size:12px;color:var(--text-hint);
-  background:var(--card);border:1px solid var(--border);
-  border-radius:50px;padding:3px 12px;font-weight:500
-}
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-  gap:12px;padding:0 1.5rem 1.5rem
-}
-@media(min-width:500px){.product-grid{grid-template-columns:repeat(auto-fill,minmax(165px,1fr))}}
-.product-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  transition:all 0.25s;
-  display:flex;flex-direction:column
-}
-.product-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:var(--border-mid)}
-.product-img-wrap{
-  background:linear-gradient(145deg,#F0FDF8,#E0F5EF);
-  height:130px;display:flex;
-  align-items:center;justify-content:center;
-  padding:12px;position:relative;overflow:hidden
-}
-.product-img-wrap::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:30px;
-  background:linear-gradient(to top,rgba(240,253,248,0.5),transparent)
-}
-.product-img{width:100%;height:100%;object-fit:contain}
-.cat-dot{
-  position:absolute;top:8px;left:8px;
-  border-radius:50px;padding:3px 9px;
-  font-size:9px;font-weight:700;
-  letter-spacing:0.02em;z-index:1
-}
-.cat-dot.Kecantikan{background:#FFE4E6;color:#E11D48}
-.cat-dot.Anak{background:#FEF3C7;color:#D97706}
-.cat-dot.Dewasa{background:#EDE9FE;color:#7C3AED}
-.cat-dot.Vitamin{background:#DBEAFE;color:#1D4ED8}
-.cat-dot.Herbal{background:#D1FAE5;color:#065F46}
-.product-info{padding:10px 11px 12px;flex:1;display:flex;flex-direction:column}
-.product-name{
-  font-size:12.5px;font-weight:700;
-  margin-bottom:2px;line-height:1.35;
-  overflow:hidden;display:-webkit-box;
-  -webkit-line-clamp:2;-webkit-box-orient:vertical;
-  flex:1
-}
-.product-cat{font-size:10px;color:var(--text-hint);margin-bottom:7px;font-weight:500}
-.product-price{
-  font-family:'Sora',sans-serif;
-  font-size:14px;font-weight:700;
-  color:var(--emerald-dark);margin-bottom:9px
-}
-.add-btn{
-  background:var(--emerald-light);color:var(--emerald-dark);
-  border:1.5px solid var(--border-mid);
-  border-radius:8px;padding:8px;font-size:12px;
-  cursor:pointer;width:100%;font-weight:700;
-  font-family:'DM Sans',sans-serif;
-  transition:all 0.2s;
-  display:flex;align-items:center;justify-content:center;gap:5px
-}
-.add-btn:hover{
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-  color:white;border-color:var(--emerald);
-  box-shadow:0 4px 12px rgba(0,168,120,0.3)
-}
-.add-btn:active{transform:scale(0.97)}
-.no-result{
-  text-align:center;padding:3.5rem 1rem;
-  color:var(--text-hint);font-size:14px;
-  grid-column:1/-1;line-height:2
-}
-.no-result-icon{font-size:40px;margin-bottom:0.75rem}
+    /* Hamburger mobile */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      padding: 8px; cursor: pointer;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--gray-700); border-radius: 2px;
+      transition: var(--transition);
+    }
 
-/* ===== WHATSAPP FLOAT ===== */
-.wa-float{
-  position:fixed;bottom:24px;right:20px;z-index:150;
-  background:#25D366;color:white;
-  border:none;border-radius:50%;width:56px;height:56px;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 20px rgba(37,211,102,0.4);
-  transition:all 0.3s;
-  animation:float-bounce 3s ease-in-out infinite
-}
-.wa-float:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,0.5)}
-@keyframes float-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--green-700) 0%, var(--teal-600) 50%, var(--green-600) 100%);
+      padding: 60px 24px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 40px;
+      position: relative; z-index: 1;
+    }
+    .hero-text { flex: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.15); color: white;
+      padding: 6px 14px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+      margin-bottom: 16px; backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 5vw, 48px);
+      color: white; line-height: 1.15; margin-bottom: 16px;
+    }
+    .hero h1 em { font-style: italic; color: var(--green-200); }
+    .hero p {
+      font-size: 16px; color: rgba(255,255,255,0.85);
+      max-width: 480px; margin-bottom: 28px; line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-hero-primary {
+      background: white; color: var(--green-700);
+      padding: 13px 28px; border-radius: var(--radius-full);
+      font-weight: 700; font-size: 15px;
+      display: flex; align-items: center; gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
+    .btn-hero-secondary {
+      background: rgba(255,255,255,0.15); color: white;
+      padding: 13px 28px; border-radius: var(--radius-full);
+      font-weight: 600; font-size: 15px;
+      border: 2px solid rgba(255,255,255,0.4);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; gap: 8px;
+      transition: var(--transition);
+    }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,0.25); }
+    .hero-stats {
+      display: flex; gap: 24px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .num {
+      font-family: 'Fraunces', serif;
+      font-size: 28px; font-weight: 700; color: white; display: block;
+    }
+    .hero-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.7); }
+    .hero-img-wrap {
+      flex: 0 0 auto; display: flex; flex-direction: column; gap: 12px;
+    }
+    .hero-card-float {
+      background: rgba(255,255,255,0.12); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg);
+      padding: 16px 20px; color: white;
+      animation: float 3s ease-in-out infinite;
+    }
+    .hero-card-float:nth-child(2) { animation-delay: 1.5s; }
+    .hero-card-float .card-icon {
+      font-size: 24px; margin-bottom: 6px;
+    }
+    .hero-card-float .card-title { font-weight: 700; font-size: 14px; }
+    .hero-card-float .card-sub { font-size: 12px; opacity: 0.7; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
 
-/* ===== CONTACT ===== */
-.contact-section{
-  background:linear-gradient(135deg,var(--emerald-deeper) 0%,var(--emerald-dark) 100%);
-  color:white;padding:3rem 1.5rem;
-  text-align:center;margin-top:0.5rem;
-  position:relative;overflow:hidden
-}
-.contact-section::before{
-  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
-  background-size:24px 24px
-}
-.contact-inner{position:relative;z-index:1}
-.contact-heading{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;margin-bottom:0.5rem}
-.contact-sub{font-size:14px;opacity:0.8;margin-bottom:2rem;line-height:1.7}
-.wa-big-btn{
-  background:#25D366;color:white;
-  border:none;border-radius:12px;
-  padding:15px 28px;font-size:15px;font-weight:700;
-  cursor:pointer;display:inline-flex;
-  align-items:center;gap:10px;margin-bottom:1.75rem;
-  font-family:'DM Sans',sans-serif;
-  box-shadow:0 8px 24px rgba(37,211,102,0.35);
-  transition:all 0.25s
-}
-.wa-big-btn:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,0.5)}
-.info-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:12px;margin-bottom:1.5rem
-}
-.info-box{
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:12px;padding:14px 12px;
-  font-size:13px;line-height:1.7
-}
-.info-box-icon{font-size:20px;margin-bottom:6px}
-.info-box-label{font-size:10px;opacity:0.6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px}
-.pay-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
-.pay-chip{
-  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
-  color:white;border-radius:8px;padding:6px 16px;
-  font-size:12px;font-weight:600
-}
-.footer-copy{font-size:11px;opacity:0.45;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.12)}
+    /* ===== TRUST STRIP ===== */
+    .trust-strip {
+      background: white; border-bottom: 1px solid var(--gray-100);
+    }
+    .trust-inner {
+      max-width: 1280px; margin: 0 auto; padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-around;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 600; color: var(--gray-600);
+    }
+    .trust-item i { color: var(--green-500); font-size: 20px; }
 
-/* ===== MODAL BASE ===== */
-.overlay{
-  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
-  background:rgba(0,0,0,0.5);z-index:300;
-  align-items:flex-end;justify-content:center;
-  backdrop-filter:blur(4px)
-}
-.overlay.open{display:flex}
-.modal-sheet{
-  background:var(--card);
-  border-radius:20px 20px 0 0;
-  width:100%;max-width:540px;
-  max-height:92vh;overflow-y:auto;
-  padding:0;
-  box-shadow:0 -8px 40px rgba(0,0,0,0.15);
-  animation:slide-up 0.3s cubic-bezier(0.34,1.56,0.64,1)
-}
-@keyframes slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-handle{
-  width:40px;height:4px;background:var(--border-mid);
-  border-radius:2px;margin:12px auto 0
-}
-.modal-top{
-  padding:1.25rem 1.5rem 1rem;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;background:white;z-index:1
-}
-.modal-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
-.modal-close{
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:50%;width:32px;height:32px;
-  cursor:pointer;font-size:16px;color:var(--text-muted);
-  display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s
-}
-.modal-close:hover{background:var(--emerald-light);color:var(--emerald-dark)}
-.modal-body{padding:1rem 1.5rem}
+    /* ===== SECTION WRAPPER ===== */
+    .section { padding: 60px 24px; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+    .section-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 32px; flex-wrap: wrap; gap: 12px;
+    }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-50); color: var(--green-600);
+      padding: 4px 12px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(22px, 4vw, 32px); color: var(--gray-900); line-height: 1.2;
+    }
+    .section-title span { color: var(--green-600); }
+    .section-sub { color: var(--gray-500); font-size: 14px; margin-top: 6px; }
+    .see-all-btn {
+      display: flex; align-items: center; gap: 6px;
+      color: var(--green-600); font-weight: 600; font-size: 14px;
+      padding: 8px 16px; border-radius: var(--radius-full);
+      border: 1.5px solid var(--green-200);
+      transition: var(--transition);
+    }
+    .see-all-btn:hover { background: var(--green-50); border-color: var(--green-400); }
 
-/* ===== KERANJANG ===== */
-.empty-cart{text-align:center;padding:3rem 1rem;color:var(--text-hint)}
-.empty-cart-icon{font-size:52px;margin-bottom:1rem;opacity:0.5}
-.empty-msg{font-size:14px;line-height:2}
-.cart-item{
-  display:flex;align-items:center;gap:12px;
-  padding:11px 0;border-bottom:1px solid var(--border)
-}
-.cart-img{
-  width:54px;height:54px;object-fit:contain;
-  background:var(--bg);border-radius:10px;padding:5px;
-  flex-shrink:0;border:1px solid var(--border)
-}
-.cart-info{flex:1;min-width:0}
-.cart-name{font-size:13px;font-weight:700;margin-bottom:2px;line-height:1.3}
-.cart-price{font-size:12.5px;color:var(--emerald-dark);font-weight:600}
-.qty-row{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.qty-btn{
-  background:var(--bg);border:1.5px solid var(--border-mid);
-  border-radius:8px;width:28px;height:28px;
-  cursor:pointer;font-size:15px;font-weight:600;
-  color:var(--text);display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s
-}
-.qty-btn:hover{background:var(--emerald-light);border-color:var(--emerald)}
-.qty-num{font-size:13px;font-weight:700;min-width:24px;text-align:center}
-.cart-summary-box{
-  background:var(--bg);border-radius:12px;
-  border:1px solid var(--border);
-  padding:1rem;margin-top:0.75rem
-}
-.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.total-label{font-size:13px;color:var(--text-muted);font-weight:500}
-.total-val{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--emerald-dark)}
+    /* ===== PROMO SLIDER ===== */
+    .promo-slider {
+      display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      -ms-overflow-style: none; scrollbar-width: none;
+    }
+    .promo-slider::-webkit-scrollbar { display: none; }
+    .promo-card {
+      flex: 0 0 180px; scroll-snap-align: start;
+      background: white; border-radius: var(--radius-lg);
+      overflow: hidden; cursor: pointer;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+      transition: var(--transition);
+    }
+    .promo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .promo-card img {
+      width: 100%; height: 140px; object-fit: contain;
+      padding: 12px; background: var(--gray-50);
+    }
+    .promo-card-body { padding: 10px 12px; }
+    .promo-badge {
+      display: inline-block; background: var(--green-500); color: white;
+      font-size: 10px; font-weight: 700; padding: 2px 8px;
+      border-radius: var(--radius-full); margin-bottom: 4px;
+    }
+    .promo-card-name { font-size: 13px; font-weight: 600; color: var(--gray-800); margin-bottom: 8px; }
+    .promo-order-btn {
+      width: 100%; padding: 7px; background: var(--green-600); color: white;
+      border-radius: var(--radius-sm); font-size: 12px; font-weight: 600;
+      transition: var(--transition);
+    }
+    .promo-order-btn:hover { background: var(--green-700); }
 
-/* FORM DATA PENGIRIMAN */
-.form-section{margin-top:1.5rem}
-.form-title{
-  font-size:13px;font-weight:700;color:var(--emerald-dark);
-  margin-bottom:12px;display:flex;align-items:center;gap:6px
-}
-.form-group{margin-bottom:10px}
-.form-label{display:block;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase}
-.form-input{
-  width:100%;padding:10px 12px;border-radius:10px;
-  border:1.5px solid var(--border-mid);background:white;
-  font-family:'DM Sans',sans-serif;font-size:13px;transition:0.2s
-}
-.form-input:focus{outline:none;border-color:var(--emerald);box-shadow:0 0 0 3px var(--emerald-glow)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    /* ===== CATEGORY PILLS ===== */
+    .category-pills {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .cat-pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: var(--radius-full);
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: 1.5px solid var(--gray-200); color: var(--gray-600);
+      transition: var(--transition); background: white;
+    }
+    .cat-pill:hover, .cat-pill.active {
+      background: var(--green-600); color: white; border-color: var(--green-600);
+    }
+    .cat-pill i { font-size: 14px; }
 
-.pay-section{margin-top:1.25rem}
-.pay-title{font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em}
-.pay-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
-.pay-opt{
-  border:1.5px solid var(--border-mid);
-  border-radius:10px;padding:10px 6px;
-  text-align:center;cursor:pointer;
-  font-size:12px;font-weight:700;
-  color:var(--text-muted);background:var(--card);
-  transition:all 0.2s
-}
-.pay-opt.sel{
-  background:var(--emerald-light);
-  border-color:var(--emerald);color:var(--emerald-dark)
-}
-.pay-opt-icon{font-size:18px;margin-bottom:4px}
-.cart-note-box{
-  background:var(--gold-light);border:1px solid rgba(212,160,23,0.25);
-  border-radius:10px;padding:10px 12px;
-  font-size:11.5px;color:#7A5C00;margin-bottom:1rem;line-height:1.6
-}
-.checkout-btn{
-  background:linear-gradient(135deg,#25D366,#128C7E);
-  color:white;border:none;border-radius:12px;
-  padding:15px;font-size:14px;font-weight:700;
-  cursor:pointer;width:100%;
-  font-family:'DM Sans',sans-serif;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  box-shadow:0 6px 20px rgba(37,211,102,0.3);
-  transition:all 0.25s;margin-bottom:0.75rem
-}
-.checkout-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,0.4)}
+    /* ===== PRODUCT GRID ===== */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .product-card {
+      background: white; border-radius: var(--radius-lg);
+      overflow: hidden; border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm); transition: var(--transition-slow);
+      cursor: pointer; position: relative;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .product-card:hover .product-add-overlay { opacity: 1; }
+    .product-img-wrap {
+      position: relative; padding: 16px; background: var(--gray-50);
+      height: 160px; display: flex; align-items: center; justify-content: center;
+    }
+    .product-img-wrap img {
+      max-width: 100%; max-height: 120px; object-fit: contain;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+    .product-add-overlay {
+      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+      background: var(--green-600); color: white;
+      padding: 7px 20px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 700; white-space: nowrap;
+      opacity: 0; transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .product-body { padding: 12px; }
+    .product-name {
+      font-size: 13px; font-weight: 600; color: var(--gray-800);
+      margin-bottom: 4px; line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .product-price {
+      font-size: 15px; font-weight: 800; color: var(--green-600);
+    }
+    .product-actions {
+      padding: 0 12px 12px; display: flex; gap: 6px;
+    }
+    .btn-cart {
+      flex: 1; background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      color: white; padding: 9px; border-radius: var(--radius-sm);
+      font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      transition: var(--transition);
+    }
+    .btn-cart:hover { opacity: 0.9; transform: scale(1.02); }
+    .btn-detail {
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-sm); background: var(--gray-100); color: var(--gray-500);
+      transition: var(--transition); font-size: 13px;
+    }
+    .btn-detail:hover { background: var(--green-50); color: var(--green-600); }
 
-/* ===== POPUP HASIL PENCARIAN ===== */
-.result-popup-card{
-  background:white;border-radius:15px;
-  padding:20px;text-align:center;
-  border:2px solid var(--emerald);
-  box-shadow:var(--shadow-xl)
-}
-.result-popup-title{font-weight:800;color:var(--emerald-dark);margin-bottom:5px}
-.result-popup-price{font-size:20px;font-weight:800;color:var(--text);margin-bottom:15px}
-.result-popup-btn{
-  background:var(--emerald);color:white;border:none;
-  padding:12px 20px;border-radius:10px;font-weight:700;
-  cursor:pointer;width:100%;font-family:inherit
-}
+    /* ===== GALERI ===== */
+    .gallery-section { background: var(--gray-900); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 12px;
+    }
+    .gallery-item {
+      position: relative; border-radius: var(--radius-lg); overflow: hidden;
+      cursor: pointer; aspect-ratio: 4/3;
+    }
+    .gallery-item:first-child { grid-column: span 2; aspect-ratio: 16/7; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      display: flex; align-items: flex-end;
+      padding: 16px; opacity: 0; transition: var(--transition);
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay-text { color: white; }
+    .gallery-overlay-text strong { font-size: 14px; font-weight: 700; }
+    .gallery-overlay-text p { font-size: 12px; opacity: 0.8; }
+    .gallery-zoom-icon {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+      color: white; width: 36px; height: 36px; border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: var(--transition); font-size: 14px;
+    }
+    .gallery-item:hover .gallery-zoom-icon { opacity: 1; }
 
-/* ===== TOAST ===== */
-.toast{
-  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--emerald-deeper);color:white;
-  padding:11px 22px;border-radius:50px;
-  font-size:13px;font-weight:600;z-index:400;
-  opacity:0;transition:all 0.3s;
-  pointer-events:none;white-space:nowrap;
-  box-shadow:var(--shadow-xl)
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    /* Gallery modal */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 3000;
+      background: rgba(0,0,0,0.92); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+    .modal-img {
+      max-width: 90vw; max-height: 85vh; border-radius: var(--radius-lg);
+      box-shadow: 0 0 60px rgba(0,0,0,0.5);
+      transform: scale(0.9); transition: transform 0.25s;
+    }
+    .modal-overlay.show .modal-img { transform: scale(1); }
+    .modal-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 44px; height: 44px; border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.1); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: var(--transition);
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.2); }
+    .modal-caption {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
+      color: white; padding: 8px 20px; border-radius: var(--radius-full);
+      font-size: 14px; font-weight: 600;
+    }
 
-/* ===== ABOUT SECTION ===== */
-.about-section{
-  background:var(--card);border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:2rem 1.5rem
-}
-.about-grid{
-  display:grid;gap:1rem;
-  grid-template-columns:1fr;max-width:700px;margin:0 auto
-}
-@media(min-width:600px){.about-grid{grid-template-columns:repeat(2,1fr)}}
-.about-card{
-  background:var(--bg);border-radius:var(--radius);
-  border:1px solid var(--border);padding:1.25rem;
-  display:flex;gap:12px;align-items:flex-start
-}
-.about-icon-wrap{
-  width:42px;height:42px;border-radius:10px;
-  background:var(--emerald-light);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0
-}
-.about-card h3{font-size:13.5px;font-weight:700;margin-bottom:3px}
-.about-card p{font-size:12px;color:var(--text-muted);line-height:1.6}
+    /* ===== INFORMASI KESEHATAN ===== */
+    .health-section { background: white; }
+    .health-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;
+    }
+    .health-card {
+      background: white; border-radius: var(--radius-xl);
+      overflow: hidden; border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm); transition: var(--transition-slow);
+    }
+    .health-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .health-card-img {
+      position: relative; height: 180px; overflow: hidden;
+      background: linear-gradient(135deg, var(--green-100), var(--teal-600));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .health-card-img i { font-size: 60px; color: white; opacity: 0.6; }
+    .health-type-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+      color: white; padding: 5px 12px; border-radius: var(--radius-full);
+      font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .health-type-badge.yt { background: rgba(255,0,0,0.7); }
+    .health-type-badge.web { background: rgba(22,163,74,0.7); }
+    .health-card-body { padding: 20px; }
+    .health-category {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--green-600); margin-bottom: 8px;
+    }
+    .health-card-title {
+      font-size: 16px; font-weight: 700; color: var(--gray-900);
+      margin-bottom: 10px; line-height: 1.4;
+    }
+    .health-card-desc { font-size: 13px; color: var(--gray-500); line-height: 1.6; margin-bottom: 16px; }
+    .health-read-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-50); color: var(--green-600);
+      padding: 8px 18px; border-radius: var(--radius-full);
+      font-size: 13px; font-weight: 700; transition: var(--transition);
+    }
+    .health-read-btn:hover { background: var(--green-600); color: white; }
 
-/* ===== MISC ===== */
-.divider{height:1px;background:var(--border);margin:0}
-.section-space{height:1.25rem}
+    /* ===== TESTIMONI ===== */
+    .testimoni-section { background: var(--gray-50); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;
+    }
+    .testi-card {
+      background: white; border-radius: var(--radius-xl); padding: 24px;
+      border: 1px solid var(--gray-100); box-shadow: var(--shadow-sm);
+      transition: var(--transition-slow); position: relative;
+    }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .testi-quote {
+      position: absolute; top: 16px; right: 20px;
+      font-size: 48px; color: var(--green-100); font-family: 'Fraunces', serif;
+      line-height: 1; pointer-events: none;
+    }
+    .testi-stars { color: #f59e0b; font-size: 13px; margin-bottom: 12px; }
+    .testi-text {
+      font-size: 14px; color: var(--gray-600); line-height: 1.7;
+      margin-bottom: 16px; font-style: italic;
+    }
+    .testi-author {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 16px; border-top: 1px solid var(--gray-100);
+    }
+    .testi-avatar {
+      width: 46px; height: 46px; border-radius: var(--radius-full);
+      object-fit: cover; border: 2px solid var(--green-200);
+    }
+    .testi-avatar-placeholder {
+      width: 46px; height: 46px; border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--green-400), var(--teal-500));
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 18px;
+      border: 2px solid var(--green-200); flex-shrink: 0;
+    }
+    .testi-name { font-size: 14px; font-weight: 700; color: var(--gray-800); }
+    .testi-loc { font-size: 12px; color: var(--gray-400); }
 
-/* Animate on scroll */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.5s,transform 0.5s}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-</style>
+    /* ===== SEARCH RESULTS POPUP ===== */
+    .popup-overlay {
+      position: fixed; inset: 0; z-index: 2500;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 80px 16px 20px;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .popup-overlay.show { opacity: 1; pointer-events: auto; }
+    .popup-box {
+      background: white; border-radius: var(--radius-xl);
+      width: 100%; max-width: 680px; max-height: 80vh;
+      overflow: hidden; display: flex; flex-direction: column;
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-20px); transition: transform 0.2s;
+    }
+    .popup-overlay.show .popup-box { transform: translateY(0); }
+    .popup-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .popup-header h3 { font-size: 16px; font-weight: 700; color: var(--gray-800); }
+    .popup-header span { font-size: 13px; color: var(--gray-400); }
+    .popup-close {
+      width: 32px; height: 32px; border-radius: var(--radius-full);
+      background: var(--gray-100); color: var(--gray-500);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: var(--transition);
+    }
+    .popup-close:hover { background: var(--gray-200); }
+    .popup-body { overflow-y: auto; padding: 12px; flex: 1; }
+    .popup-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px;
+    }
+    .popup-product-card {
+      background: var(--gray-50); border-radius: var(--radius-lg);
+      overflow: hidden; border: 1px solid var(--gray-100);
+      transition: var(--transition); cursor: pointer;
+    }
+    .popup-product-card:hover { border-color: var(--green-300); box-shadow: var(--shadow); }
+    .popup-product-img {
+      height: 110px; background: white;
+      display: flex; align-items: center; justify-content: center; padding: 10px;
+    }
+    .popup-product-img img { max-height: 90px; object-fit: contain; }
+    .popup-product-img .no-img {
+      color: var(--gray-300); font-size: 36px;
+    }
+    .popup-product-info { padding: 10px 12px; }
+    .popup-product-name {
+      font-size: 12px; font-weight: 600; color: var(--gray-800);
+      margin-bottom: 4px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .popup-product-price {
+      font-size: 14px; font-weight: 800; color: var(--green-600); margin-bottom: 8px;
+    }
+    .popup-add-btn {
+      width: 100%; background: var(--green-600); color: white;
+      padding: 7px; border-radius: var(--radius-sm);
+      font-size: 12px; font-weight: 700; transition: var(--transition);
+    }
+    .popup-add-btn:hover { background: var(--green-700); }
+    .popup-empty {
+      padding: 48px; text-align: center; color: var(--gray-400);
+    }
+    .popup-empty i { font-size: 48px; margin-bottom: 16px; color: var(--gray-200); display: block; }
+    .popup-loading {
+      padding: 48px; text-align: center; color: var(--gray-400);
+    }
+    .spinner {
+      width: 36px; height: 36px; border: 3px solid var(--gray-200);
+      border-top-color: var(--green-500); border-radius: 50%;
+      animation: spin 0.7s linear infinite; margin: 0 auto 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Product detail popup */
+    .detail-popup-overlay {
+      position: fixed; inset: 0; z-index: 3500;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .detail-popup-overlay.show { opacity: 1; pointer-events: auto; }
+    .detail-popup-box {
+      background: white; border-radius: var(--radius-xl);
+      width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+      transform: scale(0.95); transition: transform 0.2s;
+    }
+    .detail-popup-overlay.show .detail-popup-box { transform: scale(1); }
+    .detail-popup-img {
+      background: var(--gray-50); height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0; padding: 20px;
+    }
+    .detail-popup-img img { max-height: 180px; object-fit: contain; }
+    .detail-popup-body { padding: 24px; }
+    .detail-popup-name {
+      font-size: 20px; font-weight: 800; color: var(--gray-900); margin-bottom: 8px;
+    }
+    .detail-popup-price {
+      font-size: 24px; font-weight: 800; color: var(--green-600); margin-bottom: 16px;
+    }
+    .detail-popup-category {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-50); color: var(--green-600);
+      padding: 4px 12px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .detail-popup-desc {
+      font-size: 14px; color: var(--gray-500); line-height: 1.7; margin-bottom: 20px;
+    }
+    .detail-qty-row {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    }
+    .qty-btn {
+      width: 36px; height: 36px; border-radius: var(--radius-full);
+      background: var(--gray-100); color: var(--gray-700);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; transition: var(--transition);
+    }
+    .qty-btn:hover { background: var(--green-100); color: var(--green-700); }
+    .qty-num {
+      font-size: 18px; font-weight: 700; color: var(--gray-800);
+      min-width: 30px; text-align: center;
+    }
+    .detail-add-btn {
+      width: 100%; background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      color: white; padding: 14px; border-radius: var(--radius-lg);
+      font-size: 16px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: var(--transition); box-shadow: 0 4px 16px rgba(22,163,74,0.3);
+    }
+    .detail-add-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .detail-close-btn {
+      position: absolute; top: 12px; right: 12px;
+      width: 36px; height: 36px; border-radius: var(--radius-full);
+      background: rgba(0,0,0,0.3); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: var(--transition);
+    }
+    .detail-close-btn:hover { background: rgba(0,0,0,0.5); }
+    .detail-popup-img-wrap { position: relative; }
+
+    /* ===== CART DRAWER ===== */
+    .cart-drawer {
+      position: fixed; right: -100%; top: 0; bottom: 0;
+      width: 100%; max-width: 420px; z-index: 4000;
+      background: white; box-shadow: var(--shadow-xl);
+      display: flex; flex-direction: column;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cart-drawer.open { right: 0; }
+    .cart-drawer-bg {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+      z-index: 3999; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .cart-drawer-bg.show { opacity: 1; pointer-events: auto; }
+    .cart-drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .cart-drawer-header h3 {
+      font-size: 18px; font-weight: 800; color: var(--gray-900);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cart-drawer-body { flex: 1; overflow-y: auto; padding: 16px; }
+    .cart-item {
+      display: flex; gap: 12px; padding: 12px;
+      background: var(--gray-50); border-radius: var(--radius-lg); margin-bottom: 10px;
+    }
+    .cart-item-img {
+      width: 60px; height: 60px; border-radius: var(--radius-sm);
+      object-fit: contain; background: white; padding: 4px; flex-shrink: 0;
+    }
+    .cart-item-img-placeholder {
+      width: 60px; height: 60px; border-radius: var(--radius-sm);
+      background: var(--gray-200); display: flex; align-items: center; justify-content: center;
+      color: var(--gray-400); font-size: 20px; flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-size: 13px; font-weight: 600; color: var(--gray-800); margin-bottom: 4px; }
+    .cart-item-price { font-size: 14px; font-weight: 800; color: var(--green-600); margin-bottom: 8px; }
+    .cart-item-qty {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cart-qty-btn {
+      width: 26px; height: 26px; border-radius: var(--radius-full);
+      background: var(--gray-200); color: var(--gray-600);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; transition: var(--transition);
+    }
+    .cart-qty-btn:hover { background: var(--green-100); color: var(--green-700); }
+    .cart-qty-num { font-size: 14px; font-weight: 700; color: var(--gray-800); min-width: 20px; text-align: center; }
+    .cart-item-remove {
+      color: var(--gray-300); font-size: 16px; transition: var(--transition); align-self: flex-start;
+    }
+    .cart-item-remove:hover { color: #ef4444; }
+    .cart-empty {
+      padding: 60px 20px; text-align: center; color: var(--gray-400);
+    }
+    .cart-empty i { font-size: 56px; color: var(--gray-200); margin-bottom: 16px; display: block; }
+    .cart-empty p { font-size: 14px; }
+    .cart-drawer-footer {
+      padding: 20px 24px; border-top: 1px solid var(--gray-100);
+      flex-shrink: 0;
+    }
+    .cart-total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px;
+    }
+    .cart-total-label { font-size: 14px; color: var(--gray-500); }
+    .cart-total-val { font-size: 20px; font-weight: 800; color: var(--gray-900); }
+    .cart-note {
+      background: var(--green-50); border-radius: var(--radius-sm); padding: 10px 14px;
+      font-size: 12px; color: var(--gray-600); margin-bottom: 14px; line-height: 1.5;
+    }
+    .payment-select { margin-bottom: 14px; }
+    .payment-select label { font-size: 13px; font-weight: 600; color: var(--gray-700); display: block; margin-bottom: 6px; }
+    .payment-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .payment-opt {
+      flex: 1; min-width: 80px; padding: 8px 10px;
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+      font-size: 12px; font-weight: 600; color: var(--gray-600);
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      cursor: pointer; transition: var(--transition);
+    }
+    .payment-opt.selected { border-color: var(--green-500); background: var(--green-50); color: var(--green-600); }
+    .checkout-btn {
+      width: 100%; background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white; padding: 14px;
+      border-radius: var(--radius-lg); font-size: 15px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: var(--transition); box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+    }
+    .checkout-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+    .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .qris-section {
+      margin-top: 12px; text-align: center;
+      background: var(--gray-50); border-radius: var(--radius-sm); padding: 12px;
+    }
+    .qris-section img { max-width: 160px; margin: 0 auto 8px; }
+    .qris-section p { font-size: 12px; color: var(--gray-500); }
+
+    /* ===== TOAST ===== */
+    .toast-container {
+      position: fixed; bottom: 20px; right: 20px;
+      z-index: 9999; display: flex; flex-direction: column; gap: 8px;
+    }
+    .toast {
+      background: var(--gray-900); color: white;
+      padding: 12px 20px; border-radius: var(--radius-lg);
+      font-size: 13px; font-weight: 600;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: var(--shadow-lg);
+      animation: slideUp 0.3s ease, fadeAway 0.3s ease 2.7s forwards;
+      max-width: 300px;
+    }
+    .toast.success { border-left: 3px solid var(--green-500); }
+    .toast.error { border-left: 3px solid #ef4444; }
+    .toast.info { border-left: 3px solid var(--teal-500); }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeAway {
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+
+    /* ===== CONTACT / FOOTER ===== */
+    .contact-section { background: white; }
+    .contact-inner {
+      max-width: 1280px; margin: 0 auto; padding: 60px 24px;
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .contact-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-50); color: var(--green-600);
+      padding: 6px 14px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .contact-title {
+      font-family: 'Fraunces', serif;
+      font-size: 32px; color: var(--gray-900); margin-bottom: 16px; line-height: 1.2;
+    }
+    .contact-title span { color: var(--green-600); }
+    .contact-desc { font-size: 14px; color: var(--gray-500); line-height: 1.7; margin-bottom: 28px; }
+    .contact-info-item {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+    }
+    .contact-info-icon {
+      width: 44px; height: 44px; border-radius: var(--radius);
+      background: var(--green-50); color: var(--green-600);
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+      flex-shrink: 0;
+    }
+    .contact-info-label { font-size: 11px; color: var(--gray-400); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .contact-info-val { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+    .wa-btn-big {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white; padding: 16px 32px; border-radius: var(--radius-xl);
+      font-size: 16px; font-weight: 700; box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+      transition: var(--transition); margin-top: 12px;
+    }
+    .wa-btn-big:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.45); }
+    .wa-btn-big i { font-size: 22px; }
+    .contact-map {
+      background: var(--gray-100); border-radius: var(--radius-xl); overflow: hidden;
+      height: 320px; position: relative;
+    }
+    .contact-map iframe { width: 100%; height: 100%; border: none; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--gray-900); color: var(--gray-400);
+      padding: 40px 24px 20px;
+    }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 32px;
+    }
+    .footer-brand { }
+    .footer-logo {
+      font-family: 'Fraunces', serif; font-size: 22px; color: white;
+      margin-bottom: 12px;
+    }
+    .footer-logo span { color: var(--green-400); }
+    .footer-brand p { font-size: 13px; line-height: 1.7; max-width: 280px; }
+    .footer-socials { display: flex; gap: 10px; margin-top: 16px; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: var(--radius);
+      background: rgba(255,255,255,0.05); color: var(--gray-400);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; transition: var(--transition); border: 1px solid rgba(255,255,255,0.07);
+    }
+    .social-btn:hover { background: var(--green-600); color: white; border-color: var(--green-600); }
+    .footer-col h4 { font-size: 14px; font-weight: 700; color: white; margin-bottom: 14px; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { font-size: 13px; color: var(--gray-400); transition: var(--transition); }
+    .footer-col a:hover { color: var(--green-400); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 20px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+      font-size: 12px;
+    }
+
+    /* ===== BACK TO TOP ===== */
+    .back-top {
+      position: fixed; bottom: 24px; left: 24px; z-index: 99;
+      width: 44px; height: 44px; border-radius: var(--radius-full);
+      background: var(--green-600); color: white;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-lg); transition: var(--transition);
+      opacity: 0; pointer-events: none;
+    }
+    .back-top.show { opacity: 1; pointer-events: auto; }
+    .back-top:hover { background: var(--green-700); transform: translateY(-2px); }
+
+    /* ===== MOBILE NAV ===== */
+    .mobile-nav {
+      display: none;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
+      background: white; border-top: 1px solid var(--gray-100);
+      padding: 8px 0; box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    }
+    .mobile-nav-inner {
+      display: flex; justify-content: space-around; align-items: center;
+    }
+    .mobile-nav-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 6px 12px; color: var(--gray-400); font-size: 11px; font-weight: 600;
+      transition: var(--transition); cursor: pointer; position: relative;
+    }
+    .mobile-nav-btn i { font-size: 20px; }
+    .mobile-nav-btn.active, .mobile-nav-btn:hover { color: var(--green-600); }
+    .mobile-cart-badge {
+      position: absolute; top: 2px; right: 6px;
+      background: var(--green-500); color: white;
+      font-size: 9px; font-weight: 700;
+      min-width: 16px; height: 16px; border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ===== MOBILE MENU OVERLAY ===== */
+    .mobile-menu-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1500;
+      background: white; padding: 24px; overflow-y: auto;
+      flex-direction: column;
+    }
+    .mobile-menu-overlay.open { display: flex; }
+    .mobile-menu-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;
+    }
+    .mobile-menu-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 0; border-bottom: 1px solid var(--gray-100);
+      font-size: 15px; font-weight: 600; color: var(--gray-700); cursor: pointer;
+      transition: color 0.15s;
+    }
+    .mobile-menu-item i { color: var(--green-500); width: 20px; }
+    .mobile-menu-item:hover { color: var(--green-600); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-map { height: 250px; }
+    }
+    @media (max-width: 768px) {
+      .nav-top { display: none; }
+      .nav-menu-bar { display: none; }
+      .hamburger { display: flex; }
+      .hero-img-wrap { display: none; }
+      .nav-main { gap: 12px; }
+      .nav-logo { font-size: 18px; }
+      .cart-btn span:not(.cart-count-badge) { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-column: span 2; }
+      .mobile-nav { display: block; }
+      body { padding-bottom: 70px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .trust-inner { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
+      .search-btn span { display: none; }
+      .search-btn { padding: 10px 14px; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 40px 16px; }
+      .section { padding: 40px 16px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: 1; aspect-ratio: 4/3; }
+      .popup-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ===== NAVBAR ===== -->
 <nav class="navbar" id="navbar">
-  <a class="logo" href="#">
-    <div class="logo-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a2 2 0 012 2v2h4a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h4V4a2 2 0 012-2zm1 9h2a1 1 0 010 2h-2v2a1 1 0 01-2 0v-2H9a1 1 0 010-2h2V9a1 1 0 012 0v2z"/></svg>
+  <div class="nav-top">
+    <span><i class="fa fa-phone"></i> &nbsp;0857-3107-0315 &nbsp;|&nbsp; <i class="fa fa-map-marker-alt"></i> &nbsp;Kab. Semarang, Jawa Tengah</span>
+    <span><i class="fa fa-clock"></i> &nbsp;Buka Setiap Hari 08.00 – 21.00</span>
+  </div>
+  <div class="nav-main">
+    <div class="nav-logo">
+      <img src="https://parjojuminet-cpu.github.io/sehatku/mitra.png" alt="Logo" onerror="this.style.display='none'"/>
+      Mitra <span>Farma</span>
     </div>
-    <div class="logo-text">
-      <span class="logo-name">Mitra Farma</span>
-      <span class="logo-sub">Apotek Terpercaya</span>
+    <div class="search-wrapper" id="searchWrapper">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Cari produk, obat, vitamin..." autocomplete="off"/>
+        <button class="search-btn" id="searchBtn">
+          <i class="fas fa-search"></i>
+          <span>Cari</span>
+        </button>
+      </div>
+      <div class="autocomplete-dropdown" id="autocompleteDropdown">
+        <div class="autocomplete-loading"><div class="spinner"></div>Mencari...</div>
+      </div>
     </div>
-  </a>
-  <div class="nav-right">
-    <div class="nav-links">
-      <a class="nav-link" href="#produk">Produk</a>
-      <a class="nav-link" href="#tentang">Layanan</a>
-      <a class="nav-link" href="#kontak">Kontak</a>
+    <div class="nav-actions">
+      <button class="cart-btn" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Keranjang</span>
+        <span class="cart-count-badge" id="cartBadgeNav">0</span>
+      </button>
     </div>
-    <button class="cart-btn" onclick="openCart()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      Keranjang
-      <span class="cart-badge" id="cartBadge">0</span>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
     </button>
+  </div>
+  <div class="nav-menu-bar">
+    <div class="nav-menu-item">
+      <div class="nav-menu-link active" onclick="scrollToSection('home')"><i class="fas fa-home"></i> Home</div>
+    </div>
+    <div class="nav-menu-item">
+      <div class="nav-menu-link"><i class="fas fa-th-large"></i> Kategori <i class="fas fa-chevron-down"></i></div>
+      <div class="dropdown-menu">
+        <div class="dropdown-item" onclick="scrollToSection('kecantikan')"><i class="fas fa-star"></i> Kecantikan</div>
+        <div class="dropdown-item" onclick="scrollToSection('anak')"><i class="fas fa-baby"></i> Anak & Bayi</div>
+        <div class="dropdown-item" onclick="scrollToSection('dewasa')"><i class="fas fa-user"></i> Dewasa</div>
+        <div class="dropdown-item" onclick="scrollToSection('vitamin')"><i class="fas fa-capsules"></i> Vitamin</div>
+        <div class="dropdown-item" onclick="scrollToSection('herbal')"><i class="fas fa-leaf"></i> Herbal</div>
+      </div>
+    </div>
+    <div class="nav-menu-item">
+      <div class="nav-menu-link" onclick="scrollToSection('galeri')"><i class="fas fa-images"></i> Galeri</div>
+    </div>
+    <div class="nav-menu-item">
+      <div class="nav-menu-link" onclick="scrollToSection('health-info')"><i class="fas fa-heartbeat"></i> Info Kesehatan</div>
+    </div>
+    <div class="nav-menu-item">
+      <div class="nav-menu-link" onclick="scrollToSection('testimoni')"><i class="fas fa-star"></i> Testimoni</div>
+    </div>
+    <div class="nav-menu-item">
+      <div class="nav-menu-link" onclick="scrollToSection('contact')"><i class="fas fa-map-marker-alt"></i> Kontak</div>
+    </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg-orb o1"></div>
-  <div class="hero-bg-orb o2"></div>
-  <div class="hero-bg-orb o3"></div>
-  <div class="hero-pattern"></div>
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo" style="font-size:18px">Mitra <span>Farma</span></div>
+    <button onclick="toggleMobileMenu()" style="font-size:22px;color:var(--gray-500)"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="mobile-menu-item" onclick="scrollToSection('home');toggleMobileMenu()"><i class="fas fa-home"></i> Home</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('kecantikan');toggleMobileMenu()"><i class="fas fa-star"></i> Kecantikan</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('anak');toggleMobileMenu()"><i class="fas fa-baby"></i> Anak & Bayi</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('dewasa');toggleMobileMenu()"><i class="fas fa-user"></i> Dewasa</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('vitamin');toggleMobileMenu()"><i class="fas fa-capsules"></i> Vitamin</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('herbal');toggleMobileMenu()"><i class="fas fa-leaf"></i> Herbal</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('galeri');toggleMobileMenu()"><i class="fas fa-images"></i> Galeri</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('health-info');toggleMobileMenu()"><i class="fas fa-heartbeat"></i> Info Kesehatan</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('testimoni');toggleMobileMenu()"><i class="fas fa-star"></i> Testimoni</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('contact');toggleMobileMenu()"><i class="fas fa-map-marker-alt"></i> Kontak</div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-badge">
-      <span></span>
-      Buka Setiap Hari · Kabupaten Semarang
-    </div>
-    <h1>Apotek <span class="highlight">Mitra Farma</span><br>Hadir untuk Anda</h1>
-    <p>Pesan obat, vitamin & produk kesehatan tanpa keluar rumah. Konsultasi gratis dengan apoteker berpengalaman kami.</p>
-    <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('produk').scrollIntoView({behavior:'smooth'})">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        Lihat Produk
-      </button>
-      <button class="btn-ghost" onclick="openWA('Halo Mitra Farma, saya ingin konsultasi obat')">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.12 1.528 5.847L.057 23.571a.5.5 0 00.619.618l5.805-1.457A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.487-5.158-1.338l-.368-.213-3.44.864.88-3.35-.232-.378A9.947 9.947 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Konsultasi Gratis
-      </button>
-    </div>
-    <div class="hero-pills">
-      <div class="hero-pill"><div class="hero-pill-dot"></div> COD tersedia</div>
-      <div class="hero-pill"><div class="hero-pill-dot"></div> Transfer Bank & QRIS</div>
-      <div class="hero-pill"><div class="hero-pill-dot"></div> Pengiriman cepat</div>
-      <div class="hero-pill"><div class="hero-pill-dot"></div> 80+ produk</div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<div class="stats-row fade-in">
-  <div class="stat-card">
-    <div class="stat-num">80+</div>
-    <div class="stat-label">Produk Tersedia</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">6</div>
-    <div class="stat-label">Kategori Lengkap</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">COD</div>
-    <div class="stat-label">Bayar di Tempat</div>
-  </div>
-</div>
-
-<!-- TRUST BAR -->
-<div class="trust-bar fade-in">
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-    Produk Resmi BPOM
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Terjamin Keasliannya
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    Respons Cepat < 5 Menit
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-    Konsultasi Gratis
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-    Antar ke Rumah
-  </div>
-  <div class="trust-item">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-    Harga Bersaing
-  </div>
-</div>
-
-<!-- SECTION SPACE -->
-<div class="section-space"></div>
-
-<!-- PROMO -->
-<div class="section-pad fade-in">
-  <div class="section-title-row">
-    <div class="section-heading">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Promo Spesial
-    </div>
-    <div class="section-tag">🔥 Terbatas!</div>
-  </div>
-</div>
-<div class="promo-scroll" id="promoScroll"></div>
-
-<div class="divider"></div>
-
-<!-- ABOUT / LAYANAN -->
-<section class="about-section" id="tentang">
-  <div class="section-pad">
-    <div class="section-title-row" style="margin-bottom:1.25rem">
-      <div class="section-heading">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        Mengapa Mitra Farma?
+    <div class="hero-text">
+      <div class="hero-badge"><i class="fas fa-shield-alt"></i> Apotek Terpercaya Kab. Semarang</div>
+      <h1>Solusi Sehat <em>Tanpa</em><br>Keluar Rumah</h1>
+      <p>Dapatkan obat, vitamin, dan produk kesehatan berkualitas dengan harga terjangkau. Pesan sekarang, diantar ke pintu rumahmu!</p>
+      <div class="hero-btns">
+        <button class="btn-hero-primary" onclick="document.getElementById('searchInput').focus()">
+          <i class="fas fa-search"></i> Cari Produk
+        </button>
+        <a href="https://wa.me/6285731070315" target="_blank" class="btn-hero-secondary">
+          <i class="fab fa-whatsapp"></i> Konsultasi Gratis
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">500+</span><span class="lbl">Produk</span></div>
+        <div class="hero-stat"><span class="num">1K+</span><span class="lbl">Pelanggan</span></div>
+        <div class="hero-stat"><span class="num">⭐ 4.9</span><span class="lbl">Rating</span></div>
+        <div class="hero-stat"><span class="num">3th+</span><span class="lbl">Pengalaman</span></div>
       </div>
     </div>
-  </div>
-  <div class="about-grid">
-    <div class="about-card fade-in">
-      <div class="about-icon-wrap">
-        <svg width="20" height="20" fill="none" stroke="var(--emerald-dark)" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <div class="hero-img-wrap">
+      <div class="hero-card-float">
+        <div class="card-icon">💊</div>
+        <div class="card-title">Obat Lengkap</div>
+        <div class="card-sub">Tersedia ribuan produk</div>
       </div>
-      <div>
-        <h3>Produk Resmi & Asli</h3>
-        <p>Semua produk kami bersumber dari distributor resmi dan terdaftar BPOM. Dijamin keaslian & keamanannya.</p>
-      </div>
-    </div>
-    <div class="about-card fade-in">
-      <div class="about-icon-wrap">
-        <svg width="20" height="20" fill="none" stroke="var(--emerald-dark)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      </div>
-      <div>
-        <h3>Konsultasi Gratis via WA</h3>
-        <p>Tanya apa saja tentang obat, dosis, dan efek samping kepada apoteker kami langsung via WhatsApp.</p>
-      </div>
-    </div>
-    <div class="about-card fade-in">
-      <div class="about-icon-wrap">
-        <svg width="20" height="20" fill="none" stroke="var(--emerald-dark)" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-      </div>
-      <div>
-        <h3>Pengiriman ke Rumah</h3>
-        <p>Antar ke seluruh wilayah Kabupaten Semarang. Cepat, aman, dan terlacak hingga ke tangan Anda.</p>
-      </div>
-    </div>
-    <div class="about-card fade-in">
-      <div class="about-icon-wrap">
-        <svg width="20" height="20" fill="none" stroke="var(--emerald-dark)" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-      </div>
-      <div>
-        <h3>Harga Transparan</h3>
-        <p>Harga tertera jelas tanpa biaya tersembunyi. Bayar COD, Transfer Bank, atau QRIS.</p>
+      <div class="hero-card-float">
+        <div class="card-icon">🚀</div>
+        <div class="card-title">Pengiriman Cepat</div>
+        <div class="card-sub">Same-day delivery</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section id="produk">
-  <div class="search-section">
-    <div class="search-wrap">
-      <svg class="search-icon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-      <input class="search-box" id="searchInput" type="text" placeholder="Cari nama obat, vitamin, produk…" oninput="onSearch()">
-      <button class="clear-btn" id="clearBtn" onclick="clearSearch()">×</button>
+<!-- Trust strip -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item"><i class="fas fa-truck"></i> Pengiriman Cepat</div>
+    <div class="trust-item"><i class="fas fa-shield-alt"></i> Produk Original</div>
+    <div class="trust-item"><i class="fas fa-headset"></i> Konsultasi Gratis</div>
+    <div class="trust-item"><i class="fas fa-hand-holding-medical"></i> Apoteker Berpengalaman</div>
+    <div class="trust-item"><i class="fas fa-tag"></i> Harga Terjangkau</div>
+  </div>
+</div>
+
+<!-- ===== PROMO ===== -->
+<section class="section" style="background:white" id="promo">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-tag"><i class="fas fa-fire"></i> Promo Spesial</div>
+        <div class="section-title">Produk <span>Unggulan</span></div>
+        <div class="section-sub">Pilihan terbaik dengan harga spesial</div>
+      </div>
     </div>
+    <div class="promo-slider" id="promoSlider"></div>
   </div>
-
-  <div class="filter-wrap" id="filterWrap"></div>
-
-  <div class="products-header">
-    <span class="products-title">Semua Produk</span>
-    <span class="products-count" id="prodCount">80 produk</span>
-  </div>
-
-  <div class="product-grid" id="productGrid"></div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact-section" id="kontak">
+<!-- ===== PRODUK UTAMA ===== -->
+<section class="section" id="products-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-tag"><i class="fas fa-box-open"></i> Katalog Produk</div>
+        <div class="section-title">Produk <span>Kami</span></div>
+      </div>
+    </div>
+    <div class="category-pills" id="categoryPills">
+      <button class="cat-pill active" data-cat="all" onclick="filterCategory('all')"><i class="fas fa-th"></i> Semua</button>
+      <button class="cat-pill" data-cat="kecantikan" onclick="filterCategory('kecantikan')"><i class="fas fa-star"></i> Kecantikan</button>
+      <button class="cat-pill" data-cat="anak" onclick="filterCategory('anak')"><i class="fas fa-baby"></i> Anak & Bayi</button>
+      <button class="cat-pill" data-cat="dewasa" onclick="filterCategory('dewasa')"><i class="fas fa-user"></i> Dewasa</button>
+      <button class="cat-pill" data-cat="vitamin" onclick="filterCategory('vitamin')"><i class="fas fa-capsules"></i> Vitamin</button>
+      <button class="cat-pill" data-cat="herbal" onclick="filterCategory('herbal')"><i class="fas fa-leaf"></i> Herbal</button>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ===== GALERI ===== -->
+<section class="section gallery-section" id="galeri">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-tag" style="background:rgba(255,255,255,0.1);color:var(--green-300)"><i class="fas fa-images"></i> Galeri Kami</div>
+        <div class="section-title" style="color:white">Momen <span style="color:var(--green-400)">Bersama</span> Pelanggan</div>
+        <div class="section-sub" style="color:rgba(255,255,255,0.6)">Apotek bersih, nyaman, dan profesional</div>
+      </div>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ===== INFO KESEHATAN ===== -->
+<section class="section health-section" id="health-info">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-tag"><i class="fas fa-heartbeat"></i> Edukasi</div>
+        <div class="section-title">Informasi <span>Kesehatan</span></div>
+        <div class="section-sub">Tips sehat dan edukasi dari para ahli</div>
+      </div>
+    </div>
+    <div class="health-grid" id="healthGrid"></div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONI ===== -->
+<section class="section testimoni-section" id="testimoni">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-tag"><i class="fas fa-star"></i> Ulasan</div>
+        <div class="section-title">Kata <span>Pelanggan</span> Kami</div>
+        <div class="section-sub">Kepuasan Anda adalah prioritas kami</div>
+      </div>
+    </div>
+    <div class="testi-grid" id="testiGrid"></div>
+  </div>
+</section>
+
+<!-- ===== KONTAK ===== -->
+<section class="contact-section" id="contact">
   <div class="contact-inner">
-    <div class="contact-heading">Butuh Bantuan?</div>
-    <div class="contact-sub">
-      Chat langsung dengan apoteker kami — konsultasi gratis,<br>
-      respons cepat setiap hari Senin–Sabtu 08.00–20.00 WIB
-    </div>
-    <button class="wa-big-btn" onclick="openWA('Halo Mitra Farma, saya ingin bertanya')">
-      <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.12 1.528 5.847L.057 23.571a.5.5 0 00.619.618l5.805-1.457A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.487-5.158-1.338l-.368-.213-3.44.864.88-3.35-.232-.378A9.947 9.947 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Chat WhatsApp — 0857-3107-0315
-    </button>
-
-    <div class="info-grid">
-      <div class="info-box">
-        <div class="info-box-icon">📍</div>
-        <div class="info-box-label">Lokasi</div>
-        Kabupaten Semarang, Jawa Tengah
+    <div class="contact-grid">
+      <div>
+        <div class="contact-badge"><i class="fas fa-map-marker-alt"></i> Lokasi Kami</div>
+        <div class="contact-title">Kunjungi atau <span>Hubungi</span> Kami</div>
+        <div class="contact-desc">Kami siap melayani kebutuhan kesehatan Anda setiap hari. Datang langsung atau pesan via WhatsApp.</div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <div class="contact-info-label">Alamat</div>
+            <div class="contact-info-val">Kabupaten Semarang, Jawa Tengah</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fab fa-whatsapp"></i></div>
+          <div>
+            <div class="contact-info-label">WhatsApp</div>
+            <div class="contact-info-val">0857-3107-0315</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <div class="contact-info-label">Jam Operasional</div>
+            <div class="contact-info-val">Setiap Hari, 08.00 – 21.00 WIB</div>
+          </div>
+        </div>
+        <a href="https://wa.me/6285731070315" target="_blank" class="wa-btn-big">
+          <i class="fab fa-whatsapp"></i> Chat di WhatsApp
+        </a>
       </div>
-      <div class="info-box">
-        <div class="info-box-icon">🕐</div>
-        <div class="info-box-label">Jam Operasional</div>
-        Senin – Sabtu<br>08.00 – 20.00 WIB
-      </div>
-      <div class="info-box">
-        <div class="info-box-icon">📞</div>
-        <div class="info-box-label">Kontak</div>
-        0857-3107-0315<br>WhatsApp Only
+      <div class="contact-map">
+        <iframe src="https://maps.google.com/maps?q=Kabupaten+Semarang+Jawa+Tengah&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
-
-    <div class="pay-chips">
-      <div class="pay-chip">💵 COD</div>
-      <div class="pay-chip">🏦 Transfer Bank</div>
-      <div class="pay-chip">📱 QRIS</div>
-    </div>
-
-    <div class="footer-copy">© 2025 Apotek Mitra Farma · Kabupaten Semarang · Semua hak dilindungi</div>
   </div>
 </section>
 
-<!-- WHATSAPP FLOAT -->
-<button class="wa-float" onclick="openWA('Halo Mitra Farma, saya ingin bertanya')" title="Chat WhatsApp">
-  <svg width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.12 1.528 5.847L.057 23.571a.5.5 0 00.619.618l5.805-1.457A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.487-5.158-1.338l-.368-.213-3.44.864.88-3.35-.232-.378A9.947 9.947 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Mitra <span>Farma</span></div>
+        <p>Apotek terpercaya di Kabupaten Semarang yang menyediakan produk kesehatan lengkap dengan harga terjangkau dan pelayanan ramah.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/6285731070315" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Kategori Produk</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('kecantikan')">Kecantikan</a></li>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('anak')">Anak & Bayi</a></li>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('dewasa')">Dewasa</a></li>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('vitamin')">Vitamin</a></li>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('herbal')">Herbal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('galeri')">Galeri</a></li>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('health-info')">Info Kesehatan</a></li>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('testimoni')">Testimoni</a></li>
+          <li><a href="javascript:void(0)" onclick="scrollToSection('contact')">Kontak</a></li>
+          <li><a href="https://wa.me/6285731070315" target="_blank">Pesan via WA</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Apotek Mitra Farma. Semua hak dilindungi.</span>
+      <span>Dibuat dengan ❤️ untuk kesehatan Anda</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="cart-drawer-bg" id="cartBg" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h3><i class="fas fa-shopping-cart" style="color:var(--green-600)"></i> Keranjang Saya</h3>
+    <button onclick="toggleCart()" class="popup-close"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-drawer-body" id="cartBody">
+    <div class="cart-empty">
+      <i class="fas fa-shopping-cart"></i>
+      <p>Keranjang masih kosong</p>
+    </div>
+  </div>
+  <div class="cart-drawer-footer">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total Belanja</span>
+      <span class="cart-total-val" id="cartTotal">Rp 0</span>
+    </div>
+    <div class="cart-note">
+      ⚠️ Harga belum termasuk ongkir. Admin akan konfirmasi via WhatsApp.
+    </div>
+    <div class="payment-select">
+      <label>Metode Pembayaran</label>
+      <div class="payment-opts">
+        <div class="payment-opt selected" data-method="COD" onclick="selectPayment(this)"><i class="fas fa-money-bill"></i> COD</div>
+        <div class="payment-opt" data-method="Transfer" onclick="selectPayment(this)"><i class="fas fa-university"></i> Transfer</div>
+        <div class="payment-opt" data-method="QRIS" onclick="selectPayment(this)"><i class="fas fa-qrcode"></i> QRIS</div>
+      </div>
+    </div>
+    <div id="qrisSection" style="display:none" class="qris-section">
+      <img src="https://parjojuminet-cpu.github.io/sehatku/qris.png" alt="QRIS" onerror="this.src='https://via.placeholder.com/160x160/22c55e/white?text=QRIS'"/>
+      <p>Scan QRIS untuk bayar</p>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" disabled>
+      <i class="fab fa-whatsapp" style="font-size:20px"></i> Checkout via WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- ===== SEARCH RESULTS POPUP ===== -->
+<div class="popup-overlay" id="searchPopup" onclick="closeSearchPopup(event)">
+  <div class="popup-box">
+    <div class="popup-header">
+      <h3 id="searchPopupTitle">Hasil Pencarian</h3>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span id="searchPopupCount"></span>
+        <button class="popup-close" onclick="closeSearchPopupDirect()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="popup-body">
+      <div class="popup-grid" id="searchResultsGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRODUCT DETAIL POPUP ===== -->
+<div class="detail-popup-overlay" id="detailPopup" onclick="closeDetailPopup(event)">
+  <div class="detail-popup-box" id="detailPopupBox">
+    <div class="detail-popup-img-wrap">
+      <div class="detail-popup-img"><img id="detailImg" src="" alt=""/></div>
+      <button class="detail-close-btn" onclick="closeDetailPopupDirect()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="detail-popup-body">
+      <div class="detail-popup-category" id="detailCategory"></div>
+      <div class="detail-popup-name" id="detailName"></div>
+      <div class="detail-popup-price" id="detailPrice"></div>
+      <div class="detail-popup-desc" id="detailDesc">Produk kesehatan berkualitas dari Apotek Mitra Farma. Terjamin keaslian dan kualitasnya.</div>
+      <div class="detail-qty-row">
+        <button class="qty-btn" onclick="changeDetailQty(-1)"><i class="fas fa-minus"></i></button>
+        <span class="qty-num" id="detailQty">1</span>
+        <button class="qty-btn" onclick="changeDetailQty(1)"><i class="fas fa-plus"></i></button>
+        <span style="font-size:13px;color:var(--gray-400);margin-left:8px">Pcs</span>
+      </div>
+      <button class="detail-add-btn" id="detailAddBtn" onclick="addDetailToCart()">
+        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GALLERY MODAL ===== -->
+<div class="modal-overlay" id="galleryModal" onclick="closeGalleryModal(event)">
+  <button class="modal-close" onclick="closeGalleryModalDirect()"><i class="fas fa-times"></i></button>
+  <img class="modal-img" id="galleryModalImg" src="" alt=""/>
+  <div class="modal-caption" id="galleryModalCaption"></div>
+</div>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
 </button>
 
-<!-- KERANJANG MODAL -->
-<div class="overlay" id="cartOverlay" onclick="handleOverlay(event)">
-  <div class="modal-sheet" id="cartSheet">
-    <div class="modal-handle"></div>
-    <div class="modal-top">
-      <span class="modal-title">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        Keranjang Belanja
-      </span>
-      <button class="modal-close" onclick="closeCart()">✕</button>
+<!-- ===== MOBILE BOTTOM NAV ===== -->
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <div class="mobile-nav-btn active" onclick="scrollToSection('home')"><i class="fas fa-home"></i><span>Home</span></div>
+    <div class="mobile-nav-btn" onclick="scrollToSection('products-section')"><i class="fas fa-box-open"></i><span>Produk</span></div>
+    <div class="mobile-nav-btn" onclick="document.getElementById('searchInput').focus();document.getElementById('searchInput').scrollIntoView()"><i class="fas fa-search"></i><span>Cari</span></div>
+    <div class="mobile-nav-btn" onclick="toggleCart()" style="position:relative">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="mobile-cart-badge" id="mobileBadge">0</span>
+      <span>Keranjang</span>
     </div>
-    <div class="modal-body" id="cartBody"></div>
+    <div class="mobile-nav-btn" onclick="scrollToSection('contact')"><i class="fas fa-phone"></i><span>Kontak</span></div>
   </div>
 </div>
 
-<!-- POPUP HASIL PENCARIAN JSON -->
-<div class="overlay" id="searchPopupOverlay" onclick="handleSearchOverlay(event)">
-  <div class="modal-sheet" style="max-width: 400px; border-radius: 20px; align-self: center; margin-bottom: auto; margin-top: auto;">
-    <div class="modal-top" style="border:none">
-      <span class="modal-title">Produk Ditemukan!</span>
-      <button class="modal-close" onclick="closeSearchPopup()">✕</button>
-    </div>
-    <div class="modal-body" id="searchPopupBody">
-      <!-- Diisi JS -->
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
+<!-- ===== JAVASCRIPT ===== -->
 <script>
-const WA_NUM = "6285731070315";
-const BASE = "https://parjojuminet-cpu.github.io/sehatku/";
-
-function openWA(msg){ window.open("https://wa.me/"+WA_NUM+"?text="+encodeURIComponent(msg),"_blank") }
-
-// Data display utama (Tetap tampil)
-const products = [
-  {name:"Benzolac 2%",cat:"Kecantikan",price:50000,img:"kecantikan/benzolac2.jpg"},
-  {name:"Benzolac 5",cat:"Kecantikan",price:50000,img:"kecantikan/BENZOLAC-5.jpg"},
-  {name:"Benzolac CL",cat:"Kecantikan",price:50000,img:"kecantikan/benzolac-cl.jpg"},
-  {name:"Desolex",cat:"Kecantikan",price:50000,img:"kecantikan/DESOLEX.jpg"},
-  {name:"Erymed",cat:"Kecantikan",price:50000,img:"kecantikan/ERYMED.png"},
-  {name:"Erymed Erythromycin 2%",cat:"Kecantikan",price:50000,img:"kecantikan/ERYMED-ERYTHROMYCIN-2-15G.png"},
-  {name:"Kloderma Gel",cat:"Kecantikan",price:50000,img:"kecantikan/KLODERMAgel.png"},
-  {name:"Mediklin Sol",cat:"Kecantikan",price:50000,img:"kecantikan/mediklinsol.jpg"},
-  {name:"Palenox",cat:"Kecantikan",price:50000,img:"kecantikan/Palenox.jpg"},
-  {name:"Pirotop 5G",cat:"Kecantikan",price:50000,img:"kecantikan/PIROTOP-5G.png"},
-  {name:"Regrou For Men",cat:"Kecantikan",price:50000,img:"kecantikan/REGROU-FOR-MEN.jpg"},
-  {name:"Tekasol Plus",cat:"Kecantikan",price:50000,img:"kecantikan/tekasolplus.jpg"},
-  {name:"Vitacid 0,1",cat:"Kecantikan",price:50000,img:"kecantikan/VITACID  0,1.png"},
-  {name:"Vitacid",cat:"Kecantikan",price:50000,img:"kecantikan/VITACID.png"},
-  {name:"Vitacid CRM 0,1",cat:"Kecantikan",price:50000,img:"kecantikan/vitacidcrm0,1.jpg"},
-  {name:"Anakonidin",cat:"Anak & Bayi",price:30000,img:"anak/anakonidin.jpg"},
-  {name:"Bodrexin",cat:"Anak & Bayi",price:30000,img:"anak/bodrexin.png"},
-  {name:"Cefixim",cat:"Anak & Bayi",price:30000,img:"anak/cefixim.png"},
-  {name:"Ciprofloxacin",cat:"Anak & Bayi",price:30000,img:"anak/Ciprofloxacin.jpg"},
-  {name:"Contrexyn",cat:"Anak & Bayi",price:30000,img:"anak/CONTREXYN.png"},
-  {name:"Hufagripp",cat:"Anak & Bayi",price:30000,img:"anak/Hufagripp.jpg"},
-  {name:"Itamol Syrup",cat:"Anak & Bayi",price:30000,img:"anak/itamol-syr.jpg"},
-  {name:"Koolfever",cat:"Anak & Bayi",price:30000,img:"anak/koolfever.jpg"},
-  {name:"Lacto B",cat:"Anak & Bayi",price:30000,img:"anak/Lacto-B-1.jpg"},
-  {name:"OBH Anak",cat:"Anak & Bayi",price:30000,img:"anak/obh.jpg"},
-  {name:"Ottopan 15ml",cat:"Anak & Bayi",price:30000,img:"anak/Ottopan-15ml.png"},
-  {name:"Pyrexin",cat:"Anak & Bayi",price:30000,img:"anak/pyrexin.jpg"},
-  {name:"Sanmol",cat:"Anak & Bayi",price:30000,img:"anak/SANMOL.jpg"},
-  {name:"Sumagesic",cat:"Anak & Bayi",price:30000,img:"anak/sumagesic.jpg"},
-  {name:"Tempra",cat:"Anak & Bayi",price:30000,img:"anak/tempra.png"},
-  {name:"Termorex",cat:"Anak & Bayi",price:30000,img:"anak/termorex.jpg"},
-  {name:"Actifed",cat:"Dewasa",price:20000,img:"dewasa/ACTIFED.jpg"},
-  {name:"Andalan FE",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-FE.png"},
-  {name:"Andalan Kondom 12s",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-KONDOM--12S.jpg"},
-  {name:"Andalan Laktasi",cat:"Dewasa",price:20000,img:"dewasa/ANDALAN-LAKTASI-2.jpg"},
-  {name:"Andalan Pil KB",cat:"Dewasa",price:20000,img:"dewasa/andalan-pil-kb.jpg"},
-  {name:"Sanexon",cat:"Dewasa",price:20000,img:"dewasa/sanexon.png"},
-  {name:"Becom",cat:"Dewasa",price:20000,img:"dewasa/becom.jpg"},
-  {name:"Diane",cat:"Dewasa",price:20000,img:"dewasa/diane.jpg"},
-  {name:"Elzsa",cat:"Dewasa",price:20000,img:"dewasa/ELZSA.jpg"},
-  {name:"Interlac",cat:"Dewasa",price:20000,img:"dewasa/INTERLAC-1.png"},
-  {name:"Metformin",cat:"Dewasa",price:20000,img:"dewasa/METFORMIN.jpg"},
-  {name:"Postinor 2",cat:"Dewasa",price:20000,img:"dewasa/postinor-2.png"},
-  {name:"Postpil",cat:"Dewasa",price:20000,img:"dewasa/POSTPIL.png"},
-  {name:"Sutra",cat:"Dewasa",price:20000,img:"dewasa/SUTRA.png"},
-  {name:"Ultrasafe",cat:"Dewasa",price:20000,img:"dewasa/ultrasafe.png"},
-  {name:"Vivo",cat:"Dewasa",price:20000,img:"dewasa/vivo.png"},
-  {name:"Blackmores",cat:"Vitamin",price:45000,img:"vitamin/blackmores-1.jpg"},
-  {name:"Blackmores Multivitamin",cat:"Vitamin",price:45000,img:"vitamin/Blackmores-multivitamin.jpg"},
-  {name:"Caviplex",cat:"Vitamin",price:45000,img:"vitamin/Caviplex.png"},
-  {name:"CDR",cat:"Vitamin",price:45000,img:"vitamin/CDR-2.jpg"},
-  {name:"IPI D3",cat:"Vitamin",price:45000,img:"vitamin/ipi-d3.png"},
-  {name:"Enervon Active",cat:"Vitamin",price:45000,img:"vitamin/ENERVON-ACTIVE-FC-TAB-4S-STRIP-25S-2.jpg"},
-  {name:"Enervon C Eff",cat:"Vitamin",price:45000,img:"vitamin/ENERVON-C-EFF-10S-TUBE.jpg"},
-  {name:"H Booster Syrup",cat:"Vitamin",price:45000,img:"vitamin/H-BOOSTER-SYR-50ML.jpg"},
-  {name:"Hemaviton Action",cat:"Vitamin",price:45000,img:"vitamin/HEMAVITON-ACTION.png"},
-  {name:"Hemaviton Stamina Plus",cat:"Vitamin",price:45000,img:"vitamin/Hemaviton-Stamina-Plus.jpg"},
-  {name:"Imboost",cat:"Vitamin",price:45000,img:"vitamin/IMBOOST-1-STRIP-4-TABLET.png"},
-  {name:"Imboost Vit C D3",cat:"Vitamin",price:45000,img:"vitamin/IMBOOST-VIT-C-D3.png"},
-  {name:"Renovit",cat:"Vitamin",price:45000,img:"vitamin/renovit.jpg"},
-  {name:"Stamina Plus",cat:"Vitamin",price:45000,img:"vitamin/stamina plus.png"},
-  {name:"Stimuno",cat:"Vitamin",price:45000,img:"vitamin/stimuno.jpg"},
-  {name:"Enkasari Herbal",cat:"Herbal",price:55000,img:"herbal/ENKASARI-HERBAL-120ML-3.jpg"},
-  {name:"Entrostop Anak",cat:"Herbal",price:55000,img:"herbal/Entrostop-Anak-6-sachet.png"},
-  {name:"Froz Herbal",cat:"Herbal",price:55000,img:"herbal/froz-herbal-ijo.jpg"},
-  {name:"Komik Herbal",cat:"Herbal",price:55000,img:"herbal/KOMIK-HERBAL.png"},
-  {name:"Komik Herbal Lemon",cat:"Herbal",price:55000,img:"herbal/KOMIK-HERBAL-LEMON.jpg"},
-  {name:"Laserin Herbal",cat:"Herbal",price:55000,img:"herbal/Laserin-herbal-30ml.jpg"},
-  {name:"OB Herbal Batuk",cat:"Herbal",price:55000,img:"herbal/OB-HERBAL-BATUK-SYR-60ML.jpg"},
-  {name:"Pilkita Pegal Linu",cat:"Herbal",price:55000,img:"herbal/PILKITA-PEGAL-LINU-TAB-2S-STRIP-50S--3-.jpg"},
-  {name:"Promag Herbal",cat:"Herbal",price:55000,img:"herbal/promag-herbal.jpg"},
-  {name:"Prospan",cat:"Herbal",price:55000,img:"herbal/prospan-2.jpg"},
-  {name:"Siladex Cough Herbal",cat:"Herbal",price:55000,img:"herbal/Siladex-Cough-Herbal.png"},
-  {name:"Tolak Linu Herbal",cat:"Herbal",price:55000,img:"herbal/tolak-linu-herbal.jpg"},
-  {name:"Vegeta Herbal",cat:"Herbal",price:55000,img:"herbal/vegeta-herbal-1.jpg"},
-  {name:"Ziplong",cat:"Herbal",price:55000,img:"herbal/ZIPLONG.png"},
-  {name:"Nutraforchol",cat:"Herbal",price:55000,img:"herbal/nutraforchol.jpg"},
-  {name:"Tolak Angin Herbal",cat:"Herbal",price:55000,img:"herbal/tolak angin herbal.jpg"},
+/* ============================================================
+   DATA — PRODUK UTAMA
+   ============================================================ */
+const MAIN_PRODUCTS = [
+  // KECANTIKAN
+  { id:'k1', name:'benzolac2%', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/benzolac2.jpg', cat:'kecantikan' },
+  { id:'k2', name:'BENZOLAC-5', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/BENZOLAC-5.jpg', cat:'kecantikan' },
+  { id:'k3', name:'benzolac-cl', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/benzolac-cl.jpg', cat:'kecantikan' },
+  { id:'k4', name:'DESOLEX', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/DESOLEX.jpg', cat:'kecantikan' },
+  { id:'k5', name:'ERYMED', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/ERYMED.png', cat:'kecantikan' },
+  { id:'k6', name:'KLODERMAgel', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/KLODERMAgel.png', cat:'kecantikan' },
+  { id:'k7', name:'mediklinsol', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/mediklinsol.jpg', cat:'kecantikan' },
+  { id:'k8', name:'Palenox', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/Palenox.jpg', cat:'kecantikan' },
+  { id:'k9', name:'VITACID 0,1', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/VITACID  0,1.png', cat:'kecantikan' },
+  { id:'k10', name:'VITACID', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/VITACID.png', cat:'kecantikan' },
+  { id:'k11', name:'vitacidcrm0,1', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/vitacidcrm0,1.jpg', cat:'kecantikan' },
+  { id:'k12', name:'REGROU FOR MEN', price:50000, img:'https://parjojuminet-cpu.github.io/sehatku/kecantikan/REGROU-FOR-MEN.jpg', cat:'kecantikan' },
+  // ANAK
+  { id:'a1', name:'anakonidin', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/anakonidin.jpg', cat:'anak' },
+  { id:'a2', name:'bodrexin', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/bodrexin.png', cat:'anak' },
+  { id:'a3', name:'Ciprofloxacin', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/Ciprofloxacin.jpg', cat:'anak' },
+  { id:'a4', name:'CONTREXYN', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/CONTREXYN.png', cat:'anak' },
+  { id:'a5', name:'Hufagripp', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/Hufagripp.jpg', cat:'anak' },
+  { id:'a6', name:'koolfever', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/koolfever.jpg', cat:'anak' },
+  { id:'a7', name:'Lacto-B', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/Lacto-B-1.jpg', cat:'anak' },
+  { id:'a8', name:'SANMOL Syrup', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/SANMOL.jpg', cat:'anak' },
+  { id:'a9', name:'tempra', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/tempra.png', cat:'anak' },
+  { id:'a10', name:'termorex', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/termorex.jpg', cat:'anak' },
+  { id:'a11', name:'itamol syrup', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/itamol-syr.jpg', cat:'anak' },
+  { id:'a12', name:'pyrexin', price:30000, img:'https://parjojuminet-cpu.github.io/sehatku/anak/pyrexin.jpg', cat:'anak' },
+  // DEWASA
+  { id:'d1', name:'ACTIFED', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/ACTIFED.jpg', cat:'dewasa' },
+  { id:'d2', name:'ANDALAN FE', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/ANDALAN-FE.png', cat:'dewasa' },
+  { id:'d3', name:'ANDALAN PIL KB', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/andalan-pil-kb.jpg', cat:'dewasa' },
+  { id:'d4', name:'sanexon', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/sanexon.png', cat:'dewasa' },
+  { id:'d5', name:'becom', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/becom.jpg', cat:'dewasa' },
+  { id:'d6', name:'diane', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/diane.jpg', cat:'dewasa' },
+  { id:'d7', name:'ELZSA', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/ELZSA.jpg', cat:'dewasa' },
+  { id:'d8', name:'METFORMIN', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/METFORMIN.jpg', cat:'dewasa' },
+  { id:'d9', name:'postinor-2', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/postinor-2.png', cat:'dewasa' },
+  { id:'d10', name:'SUTRA', price:20000, img:'https://parjojuminet-cpu.github.io/sehatku/dewasa/SUTRA.png', cat:'dewasa' },
+  // VITAMIN
+  { id:'v1', name:'blackmores', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/blackmores-1.jpg', cat:'vitamin' },
+  { id:'v2', name:'Blackmores Multivitamin', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/Blackmores-multivitamin.jpg', cat:'vitamin' },
+  { id:'v3', name:'Caviplex', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/Caviplex.png', cat:'vitamin' },
+  { id:'v4', name:'CDR', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/CDR-2.jpg', cat:'vitamin' },
+  { id:'v5', name:'ENERVON ACTIVE', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/ENERVON-ACTIVE-FC-TAB-4S-STRIP-25S-2.jpg', cat:'vitamin' },
+  { id:'v6', name:'IMBOOST', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/IMBOOST-1-STRIP-4-TABLET.png', cat:'vitamin' },
+  { id:'v7', name:'IMBOOST VIT C D3', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/IMBOOST-VIT-C-D3.png', cat:'vitamin' },
+  { id:'v8', name:'HEMAVITON ACTION', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/HEMAVITON-ACTION.png', cat:'vitamin' },
+  { id:'v9', name:'stimuno', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/stimuno.jpg', cat:'vitamin' },
+  { id:'v10', name:'ipi-d3', price:45000, img:'https://parjojuminet-cpu.github.io/sehatku/vitamin/ipi-d3.png', cat:'vitamin' },
+  // HERBAL
+  { id:'h1', name:'ENKASARI HERBAL', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/ENKASARI-HERBAL-120ML-3.jpg', cat:'herbal' },
+  { id:'h2', name:'froz herbal', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/froz-herbal-ijo.jpg', cat:'herbal' },
+  { id:'h3', name:'KOMIK HERBAL', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/KOMIK-HERBAL.png', cat:'herbal' },
+  { id:'h4', name:'OB HERBAL BATUK', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/OB-HERBAL-BATUK-SYR-60ML.jpg', cat:'herbal' },
+  { id:'h5', name:'promag herbal', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/promag-herbal.jpg', cat:'herbal' },
+  { id:'h6', name:'tolak linu herbal', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/tolak-linu-herbal.jpg', cat:'herbal' },
+  { id:'h7', name:'tolak angin herbal', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/tolak angin herbal.jpg', cat:'herbal' },
+  { id:'h8', name:'ZIPLONG', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/ZIPLONG.png', cat:'herbal' },
+  { id:'h9', name:'vegeta herbal', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/vegeta-herbal-1.jpg', cat:'herbal' },
+  { id:'h10', name:'nutraforchol', price:55000, img:'https://parjojuminet-cpu.github.io/sehatku/herbal/nutraforchol.jpg', cat:'herbal' },
 ];
 
-const promoItems = [
-  {name:"Kloderma CRM",img:"promo/klodermacrm.jpg"},
-  {name:"Kloderma Oint",img:"promo/klodermaoint.jpg"},
-  {name:"Mediklin",img:"promo/MEDIKLIN.jpg"},
-  {name:"Niacef",img:"promo/niacef.png"},
-  {name:"Vitacid",img:"promo/vitacid.jpg"},
-  {name:"Vitacid CRM",img:"promo/vitacidcrm.jpg"},
-  {name:"Ketomed SS",img:"promo/KETOMEDSS.png"},
-  {name:"Carmed 20",img:"promo/CARMED20.jpg"},
+const PROMO_PRODUCTS = [
+  { name:'klodermacrm', img:'https://parjojuminet-cpu.github.io/sehatku/promo/klodermacrm.jpg' },
+  { name:'klodermaoint', img:'https://parjojuminet-cpu.github.io/sehatku/promo/klodermaoint.jpg' },
+  { name:'MEDIKLIN', img:'https://parjojuminet-cpu.github.io/sehatku/promo/MEDIKLIN.jpg' },
+  { name:'Niacef', img:'https://parjojuminet-cpu.github.io/sehatku/promo/niacef.png' },
+  { name:'Vitacid', img:'https://parjojuminet-cpu.github.io/sehatku/promo/vitacid.jpg' },
+  { name:'Vitacidcrm', img:'https://parjojuminet-cpu.github.io/sehatku/promo/vitacidcrm.jpg' },
+  { name:'KETOMEDSS', img:'https://parjojuminet-cpu.github.io/sehatku/promo/KETOMEDSS.png' },
+  { name:'CARMED20', img:'https://parjojuminet-cpu.github.io/sehatku/promo/CARMED20.jpg' },
 ];
 
-const CATS = ["Semua","Kecantikan","Anak & Bayi","Dewasa","Vitamin","Herbal"];
-const CAT_EMOJIS = {"Semua":"🏪","Kecantikan":"✨","Anak & Bayi":"👶","Dewasa":"💊","Vitamin":"🌿","Herbal":"🍃"};
+/* Galeri data */
+const GALLERY_DATA = [
+  { img:'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80', title:'Interior Apotek', desc:'Ruang pelayanan bersih & modern' },
+  { img:'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80', title:'Produk Lengkap', desc:'Ribuan produk tersedia' },
+  { img:'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&q=80', title:'Tim Apoteker', desc:'Siap melayani konsultasi' },
+  { img:'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&q=80', title:'Vitamin & Suplemen', desc:'Pilihan terlengkap' },
+  { img:'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&q=80', title:'Pelayanan Ramah', desc:'Kepuasan pelanggan utama kami' },
+];
 
+/* Health info data */
+const HEALTH_DATA = [
+  {
+    type:'yt', typeLabel:'YouTube', icon:'fab fa-youtube',
+    bg:'linear-gradient(135deg, #ff6b6b, #ee0979)',
+    category:'Tips Kesehatan', title:'Cara Menggunakan Obat yang Benar dan Aman',
+    desc:'Pelajari panduan lengkap dari apoteker mengenai cara konsumsi obat yang benar agar efektif dan aman.',
+    url:'https://www.youtube.com/watch?v=-E0Brk3Fy5s', btnIcon:'fab fa-youtube', btnLabel:'Tonton di YouTube'
+  },
+  {
+    type:'web', typeLabel:'Artikel', icon:'fas fa-newspaper',
+    bg:'linear-gradient(135deg, #43e97b, #38f9d7)',
+    category:'Gaya Hidup Sehat', title:'10 Vitamin Penting yang Dibutuhkan Tubuh Setiap Hari',
+    desc:'Cukupi kebutuhan nutrisi harian dengan memilih suplemen yang tepat sesuai kebutuhan tubuh Anda.',
+    url:'https://www.halodoc.com/artikel/ini-vitamin-dan-mineral-yang-penting-untuk-tubuh', btnIcon:'fas fa-external-link-alt', btnLabel:'Baca Artikel'
+  },
+  {
+    type:'web', typeLabel:'Artikel', icon:'fas fa-heartbeat',
+    bg:'linear-gradient(135deg, #4facfe, #00f2fe)',
+    category:'Penyakit & Obat', title:'Mengenal Obat Herbal: Manfaat dan Cara Pemakaiannya',
+    desc:'Obat herbal semakin populer, namun tetap ada aturan pemakaian yang perlu diperhatikan agar efektif.',
+    url:'https://www.alodokter.com/obat-herbal', btnIcon:'fas fa-external-link-alt', btnLabel:'Baca di Alodokter'
+  },
+  {
+    type:'yt', typeLabel:'YouTube', icon:'fab fa-youtube',
+    bg:'linear-gradient(135deg, #f093fb, #f5576c)',
+    category:'Kesehatan Anak', title:'Demam Pada Anak: Kapan Harus ke Dokter?',
+    desc:'Panduan lengkap untuk orang tua dalam menangani demam anak di rumah dan kapan perlu penanganan medis.',
+    url:'https://www.youtube.com/results?search_query=demam+anak+kapan+ke+dokter', btnIcon:'fab fa-youtube', btnLabel:'Tonton Video'
+  },
+  {
+    type:'web', typeLabel:'Artikel', icon:'fas fa-pills',
+    bg:'linear-gradient(135deg, #30cfd0, #330867)',
+    category:'Farmasi', title:'Cara Membaca Label Obat dengan Benar',
+    desc:'Informasi penting yang tertera di kemasan obat seringkali diabaikan. Pelajari cara membacanya dengan benar.',
+    url:'https://www.alodokter.com/cara-membaca-label-obat', btnIcon:'fas fa-external-link-alt', btnLabel:'Baca Artikel'
+  },
+  {
+    type:'web', typeLabel:'Artikel', icon:'fas fa-apple-alt',
+    bg:'linear-gradient(135deg, #a8edea, #fed6e3)',
+    category:'Nutrisi', title:'Panduan Gizi Seimbang untuk Keluarga Indonesia',
+    desc:'Penuhi kebutuhan gizi keluarga dengan pola makan seimbang berdasarkan panduan kesehatan terkini.',
+    url:'https://www.halodoc.com/artikel/panduan-gizi-seimbang', btnIcon:'fas fa-external-link-alt', btnLabel:'Baca di Halodoc'
+  },
+];
+
+/* Testimoni data */
+const TESTI_DATA = [
+  { name:'Siti Rahayu', loc:'Ungaran, Semarang', rating:5, text:'Pelayanannya ramah banget, obatnya lengkap dan harganya terjangkau. Udah jadi langganan tetap selama 2 tahun!', init:'SR', color:'#22c55e' },
+  { name:'Budi Santoso', loc:'Ambarawa, Semarang', rating:5, text:'Cepet banget responnya waktu pesan via WA, dianterin juga nggak lama. Produknya original semua, recommended!', init:'BS', color:'#14b8a6' },
+  { name:'Dewi Anggraini', loc:'Bawen, Semarang', rating:5, text:'Vitamin untuk anak saya selalu beli di sini, terjangkau dan apotekernya helpful banget kasih saran yang tepat.', init:'DA', color:'#f59e0b' },
+  { name:'Ahmad Fauzi', loc:'Tengaran, Semarang', rating:5, text:'Apotek yang bisa dipercaya! Pernah konsultasi soal obat diabetes dan dikasih penjelasan lengkap. Terima kasih!', init:'AF', color:'#8b5cf6' },
+  { name:'Rina Lestari', loc:'Salatiga', rating:5, text:'Suka banget sama pelayanannya, sabar dan informatif. Stok selalu lengkap, nggak pernah kehabisan produk yang dicari.', init:'RL', color:'#ec4899' },
+  { name:'Hendra Wijaya', loc:'Bringin, Semarang', rating:4, text:'Mudah pesan lewat WhatsApp, harga bersaing dan kualitas produk terjamin. Pengiriman cepat ke area Semarang.', init:'HW', color:'#f97316' },
+];
+
+/* ============================================================
+   CART STATE
+   ============================================================ */
 let cart = [];
-let activeCat = "Semua";
-let payMethod = "cod";
-let allProducts = []; // Tempat menampung data dari csvjson.json
+let selectedPayment = 'COD';
+let detailProduct = null;
+let detailQty = 1;
+let jsonData = null;
+let isJsonLoading = false;
 
-// LOAD JSON DATA
-async function loadExternalProducts() {
+/* ============================================================
+   UTILITY FUNCTIONS
+   ============================================================ */
+const formatRp = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+
+function showToast(msg, type='success') {
+  const tc = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  const icon = type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':'fa-info-circle';
+  t.className = `toast ${type}`;
+  t.innerHTML = `<i class="fas ${icon}" style="color:${type==='success'?'#4ade80':type==='error'?'#f87171':'#38bdf8'}"></i>${msg}`;
+  tc.appendChild(t);
+  setTimeout(() => t.remove(), 3200);
+}
+
+function debounce(fn, delay) {
+  let timer;
+  return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+/* ============================================================
+   JSON LOADER (lazy — load once)
+   ============================================================ */
+async function loadJson() {
+  if(jsonData) return jsonData;
+  if(isJsonLoading) return null;
+  isJsonLoading = true;
   try {
-    const response = await fetch('csvjson.json');
-    if (!response.ok) throw new Error('File json tidak ditemukan');
-    allProducts = await response.json();
-    console.log("Database produk JSON berhasil dimuat");
-  } catch (err) {
-    console.warn("Gagal memuat csvjson.json: ", err.message);
+    const res = await fetch('csvjson.json');
+    if(!res.ok) throw new Error('not found');
+    jsonData = await res.json();
+  } catch(e) {
+    // Fallback: also search main products
+    jsonData = [];
   }
+  isJsonLoading = false;
+  return jsonData;
 }
 
-function fmt(n){ return "Rp"+n.toLocaleString('id-ID') }
-function catClass(cat){ return cat ? cat.replace(' & ','').replace(' ','') : 'Umum' }
-function countCat(cat){ return cat==="Semua"?products.length:products.filter(p=>p.cat===cat).length }
+/* Search in both JSON and main products */
+async function searchProducts(query, limit=10) {
+  const q = query.toLowerCase().trim();
+  if(!q) return [];
 
-// Render promo
-function renderPromo(){
-  document.getElementById('promoScroll').innerHTML = promoItems.map(p=>`
-    <div class="promo-card" onclick="addByName('${p.name.replace(/'/g,"\\'")}')">
-      <img class="promo-img" src="${BASE+p.img}" onerror="this.src=''" alt="${p.name}" loading="lazy">
-      <div class="promo-ribbon">PROMO</div>
-      <div class="promo-name">${p.name}</div>
-      <button class="promo-order-btn">+ Pesan</button>
-    </div>`).join('');
-}
+  // Search in main products first
+  const mainResults = MAIN_PRODUCTS.filter(p => p.name.toLowerCase().includes(q));
 
-// Render filter chips
-function renderChips(){
-  document.getElementById('filterWrap').innerHTML = CATS.map(c=>`
-    <div class="chip${c===activeCat?' active':''}" onclick="setcat('${c}')">
-      ${CAT_EMOJIS[c]} ${c}
-      <span class="chip-count">${countCat(c)}</span>
-    </div>`).join('');
-}
-
-function setcat(c){ activeCat=c; renderChips(); filterProducts(); }
-
-// FUNGSI PENCARIAN UTAMA
-function onSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase().trim();
-  filterProducts(); // Filter yang ada di display
-  
-  // Jika mencari barang di luar display (min 3 karakter)
-  if (q.length >= 3) {
-    // Cari di database JSON (allProducts)
-    const foundInJson = allProducts.find(p => p.name.toLowerCase().includes(q));
-    
-    // Jika ketemu di JSON tapi tidak ada di display utama
-    const inDisplay = products.find(p => p.name.toLowerCase().includes(q));
-    
-    if (foundInJson && !inDisplay) {
-       showSearchPopup(foundInJson);
-    }
+  // Try to load JSON
+  let jsonResults = [];
+  const data = await loadJson();
+  if(data && data.length) {
+    jsonResults = data
+      .filter(p => {
+        const name = (p.name || p.nama || p.NAMA || p.Name || '').toString().toLowerCase();
+        return name.includes(q);
+      })
+      .slice(0, limit)
+      .map((p, i) => ({
+        id: 'json_' + i + '_' + Date.now(),
+        name: p.name || p.nama || p.NAMA || p.Name || 'Produk',
+        price: parseInt(p.price || p.harga || p.HARGA || p.Price || 0) || 0,
+        img: p.img || p.image || p.gambar || '',
+        cat: p.category || p.kategori || p.KATEGORI || 'Produk',
+      }));
   }
+
+  // Merge, deduplicate, limit
+  const combined = [...mainResults, ...jsonResults];
+  const seen = new Set();
+  return combined.filter(p => {
+    const key = p.name.toLowerCase();
+    if(seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, limit);
 }
 
-function filterProducts(){
-  const q = document.getElementById('searchInput').value.toLowerCase().trim();
-  document.getElementById('clearBtn').classList.toggle('visible', q.length>0);
-  
-  const filtered = products.filter(p=>{
-    const matchCat = activeCat==="Semua"||p.cat===activeCat;
-    const matchQ = !q||p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q);
-    return matchCat&&matchQ;
-  });
+/* ============================================================
+   AUTOCOMPLETE SEARCH
+   ============================================================ */
+const searchInput = document.getElementById('searchInput');
+const dropdown = document.getElementById('autocompleteDropdown');
 
-  document.getElementById('prodCount').textContent = filtered.length+" produk";
-  const grid = document.getElementById('productGrid');
+function highlightText(text, query) {
+  if(!query) return text;
+  const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return text.replace(re, '<mark>$1</mark>');
+}
 
-  if(filtered.length===0 && q.length < 3){
-    grid.innerHTML=`<div class="no-result">
-      <div class="no-result-icon">🔍</div>
-      Produk "<strong>${q}</strong>" tidak ditemukan di display utama.<br>
-      <small>Ketik minimal 3 huruf untuk cari di database lengkap...</small>
-    </div>`;
+async function onSearchInput(e) {
+  const q = e.target.value.trim();
+  if(q.length < 2) { dropdown.classList.remove('show'); return; }
+
+  dropdown.innerHTML = '<div class="autocomplete-loading"><div class="spinner"></div>Mencari...</div>';
+  dropdown.classList.add('show');
+
+  const results = await searchProducts(q, 10);
+
+  if(!results.length) {
+    dropdown.innerHTML = `<div class="autocomplete-empty"><i class="fas fa-search" style="margin-right:6px;color:var(--gray-300)"></i>Produk "${q}" tidak ditemukan</div>`;
     return;
   }
 
-  grid.innerHTML = filtered.map(p=>{
-    const cc = catClass(p.cat);
-    return `<div class="product-card">
-      <div class="product-img-wrap">
-        <div class="cat-dot ${cc}">${p.cat}</div>
-        <img class="product-img" src="${BASE+p.img}" onerror="this.style.opacity=0.15" alt="${p.name}" loading="lazy">
+  let html = `<div class="autocomplete-header">Hasil Pencarian (${results.length})</div>`;
+  results.forEach(p => {
+    const highlighted = highlightText(p.name, q);
+    html += `<div class="autocomplete-item" onclick="openDetailFromSearch(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+      <div class="ac-icon"><i class="fas fa-pills"></i></div>
+      <div class="ac-info">
+        <div class="ac-name">${highlighted}</div>
+        <div class="ac-price">${formatRp(p.price)}</div>
       </div>
-      <div class="product-info">
-        <div class="product-name">${p.name}</div>
-        <div class="product-cat">${p.cat}</div>
-        <div class="product-price">${fmt(p.price)}</div>
-        <button class="add-btn" onclick="addToCartDirectly('${p.name.replace(/'/g,"\\'")}', ${p.price}, '${p.cat}', '${p.img}')">
-          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Keranjang
+      <i class="fas fa-chevron-right" style="color:var(--gray-300);font-size:12px"></i>
+    </div>`;
+  });
+  html += `<div class="autocomplete-footer" onclick="triggerSearch()"><i class="fas fa-search"></i> Lihat semua hasil untuk "${q}"</div>`;
+  dropdown.innerHTML = html;
+}
+
+const debouncedSearch = debounce(onSearchInput, 350);
+searchInput.addEventListener('input', debouncedSearch);
+searchInput.addEventListener('keydown', e => { if(e.key==='Enter') { dropdown.classList.remove('show'); triggerSearch(); } });
+searchInput.addEventListener('focus', e => { if(e.target.value.length>=2) debouncedSearch(e); });
+
+document.addEventListener('click', e => {
+  if(!document.getElementById('searchWrapper').contains(e.target)) {
+    dropdown.classList.remove('show');
+  }
+});
+document.getElementById('searchBtn').addEventListener('click', () => { dropdown.classList.remove('show'); triggerSearch(); });
+
+async function triggerSearch() {
+  const q = searchInput.value.trim();
+  if(q.length < 2) { showToast('Masukkan minimal 2 karakter untuk mencari','info'); return; }
+  showSearchPopup(q);
+}
+
+/* ============================================================
+   SEARCH RESULTS POPUP
+   ============================================================ */
+async function showSearchPopup(q) {
+  const popup = document.getElementById('searchPopup');
+  const grid = document.getElementById('searchResultsGrid');
+  document.getElementById('searchPopupTitle').textContent = `Hasil: "${q}"`;
+  document.getElementById('searchPopupCount').textContent = '';
+  grid.innerHTML = '<div class="popup-loading"><div class="spinner"></div>Mencari produk...</div>';
+  popup.classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  const results = await searchProducts(q, 10);
+
+  if(!results.length) {
+    grid.innerHTML = `<div class="popup-empty"><i class="fas fa-search"></i>Produk tidak ditemukan untuk kata kunci <strong>"${q}"</strong></div>`;
+    document.getElementById('searchPopupCount').textContent = '0 produk';
+    return;
+  }
+
+  document.getElementById('searchPopupCount').textContent = `${results.length} produk`;
+  grid.innerHTML = results.map(p => `
+    <div class="popup-product-card" onclick="openDetailFromSearch(${JSON.stringify(p).replace(/"/g,'&quot;').replace(/'/g,'&#39;')})">
+      <div class="popup-product-img">
+        ${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.parentNode.innerHTML='<i class=\\'fas fa-pills no-img\\'></i>'"/>` : '<i class="fas fa-pills no-img"></i>'}
+      </div>
+      <div class="popup-product-info">
+        <div class="popup-product-name">${p.name}</div>
+        <div class="popup-product-price">${formatRp(p.price)}</div>
+        <button class="popup-add-btn" onclick="event.stopPropagation();addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+          <i class="fas fa-plus"></i> Tambah
         </button>
       </div>
-    </div>`;
-  }).join('');
-}
-
-// POPUP UNTUK BARANG DARI JSON
-function showSearchPopup(product) {
-  const overlay = document.getElementById('searchPopupOverlay');
-  const body = document.getElementById('searchPopupBody');
-  
-  body.innerHTML = `
-    <div class="result-popup-card">
-      <div class="result-popup-title">${product.name}</div>
-      <div style="font-size:12px; color:var(--text-hint); margin-bottom:10px">${product.cat || 'Kategori Umum'}</div>
-      <div class="result-popup-price">${fmt(product.price)}</div>
-      <button class="result-popup-btn" onclick="addAndClosePopup('${product.name.replace(/'/g,"\\'")}', ${product.price}, '${product.cat || 'Umum'}', '${product.img || ''}')">
-        + Masukkan Keranjang
-      </button>
-      <p style="font-size:10px; color:var(--text-hint); margin-top:10px">Tersedia di gudang farmasi kami</p>
     </div>
-  `;
-  overlay.classList.add('open');
+  `).join('');
 }
 
-function closeSearchPopup() {
-  document.getElementById('searchPopupOverlay').classList.remove('open');
+function closeSearchPopup(e) { if(e.target===document.getElementById('searchPopup')) closeSearchPopupDirect(); }
+function closeSearchPopupDirect() {
+  document.getElementById('searchPopup').classList.remove('show');
+  document.body.style.overflow = '';
 }
 
-function handleSearchOverlay(e){ if(e.target===document.getElementById('searchPopupOverlay')) closeSearchPopup(); }
-
-function addAndClosePopup(name, price, cat, img) {
-  addToCartDirectly(name, price, cat, img);
-  closeSearchPopup();
+/* ============================================================
+   PRODUCT DETAIL POPUP
+   ============================================================ */
+function openDetailFromSearch(product) {
+  detailProduct = product;
+  detailQty = 1;
+  document.getElementById('detailImg').src = product.img || '';
+  document.getElementById('detailImg').onerror = function(){this.src='';this.style.display='none';};
+  document.getElementById('detailName').textContent = product.name;
+  document.getElementById('detailPrice').textContent = formatRp(product.price);
+  document.getElementById('detailCategory').innerHTML = `<i class="fas fa-tag"></i> ${product.cat || 'Produk'}`;
+  document.getElementById('detailQty').textContent = 1;
+  document.getElementById('detailPopup').classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
 
-function clearSearch(){
-  document.getElementById('searchInput').value='';
-  filterProducts();
-  document.getElementById('clearBtn').classList.remove('visible');
+function closeDetailPopup(e) { if(e.target===document.getElementById('detailPopup')) closeDetailPopupDirect(); }
+function closeDetailPopupDirect() {
+  document.getElementById('detailPopup').classList.remove('show');
+  document.body.style.overflow = '';
 }
 
-// FUNGSI TAMBAH KERANJANG UNIVERSAL
-function addToCartDirectly(name, price, cat, img) {
-  const existing = cart.find(c => c.name === name);
-  if (existing) {
-    existing.qty++;
+function changeDetailQty(delta) {
+  detailQty = Math.max(1, detailQty + delta);
+  document.getElementById('detailQty').textContent = detailQty;
+}
+
+function addDetailToCart() {
+  if(!detailProduct) return;
+  addToCart(detailProduct, detailQty);
+  closeDetailPopupDirect();
+}
+
+/* ============================================================
+   CART
+   ============================================================ */
+function addToCart(product, qty=1) {
+  const existing = cart.find(i => i.name.toLowerCase() === product.name.toLowerCase());
+  if(existing) {
+    existing.qty += qty;
+    showToast(`+${qty} ${product.name} (total: ${existing.qty})`);
   } else {
-    cart.push({ name, price, cat, img, qty: 1 });
+    cart.push({ ...product, qty });
+    showToast(`${product.name} ditambahkan ke keranjang 🛒`);
   }
-  updateBadge();
-  showToast("✓ " + name + " ditambahkan");
-}
-
-function addByName(name){
-  const p = products.find(p => p.name === name) || allProducts.find(p => p.name === name);
-  if(p) {
-    addToCartDirectly(p.name, p.price, p.cat, p.img);
-  } else {
-    openWA("Halo Mitra Farma, saya mau tanya tentang produk: " + name);
-  }
-}
-
-function updateBadge(){
-  const total = cart.reduce((s,c)=>s+c.qty,0);
-  const badge = document.getElementById('cartBadge');
-  badge.textContent = total;
-  badge.classList.toggle('visible', total>0);
-}
-
-// Keranjang modal
-function openCart(){
-  document.getElementById('cartOverlay').classList.add('open');
   renderCart();
 }
-function closeCart(){ document.getElementById('cartOverlay').classList.remove('open'); }
-function handleOverlay(e){ if(e.target===document.getElementById('cartOverlay'))closeCart(); }
 
-function renderCart(){
+function removeFromCart(idx) {
+  cart.splice(idx, 1);
+  renderCart();
+}
+
+function updateQty(idx, delta) {
+  cart[idx].qty = Math.max(1, cart[idx].qty + delta);
+  renderCart();
+}
+
+function renderCart() {
   const body = document.getElementById('cartBody');
-  if(cart.length===0){
-    body.innerHTML=`<div class="empty-cart">
-      <div class="empty-cart-icon">🛒</div>
-      <div class="empty-msg">Keranjang masih kosong<br><small>Yuk tambahkan produk favoritmu!</small></div>
-    </div>`;
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const count = cart.reduce((s,i) => s + i.qty, 0);
+
+  // Update badges
+  document.getElementById('cartBadgeNav').textContent = count;
+  document.getElementById('mobileBadge').textContent = count;
+
+  // Checkout button
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  checkoutBtn.disabled = cart.length === 0;
+
+  if(!cart.length) {
+    body.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-cart"></i><p>Keranjang masih kosong</p></div>`;
+    document.getElementById('cartTotal').textContent = 'Rp 0';
     return;
   }
-  const total = cart.reduce((s,c)=>s+c.price*c.qty,0);
-  const items = cart.map((c,i)=>`
+
+  document.getElementById('cartTotal').textContent = formatRp(total);
+
+  body.innerHTML = cart.map((item, idx) => `
     <div class="cart-item">
-      <img class="cart-img" src="${BASE+c.img}" onerror="this.style.opacity=0.2" alt="${c.name}">
-      <div class="cart-info">
-        <div class="cart-name">${c.name}</div>
-        <div class="cart-price">${fmt(c.price)} × ${c.qty} = <strong>${fmt(c.price*c.qty)}</strong></div>
+      ${item.img
+        ? `<img class="cart-item-img" src="${item.img}" alt="${item.name}" onerror="this.className='cart-item-img-placeholder';this.innerHTML='<i class=\\'fas fa-pills\\'></i>'"/>`
+        : `<div class="cart-item-img-placeholder"><i class="fas fa-pills"></i></div>`}
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${formatRp(item.price)}</div>
+        <div class="cart-item-qty">
+          <button class="cart-qty-btn" onclick="updateQty(${idx},-1)"><i class="fas fa-minus"></i></button>
+          <span class="cart-qty-num">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="updateQty(${idx},1)"><i class="fas fa-plus"></i></button>
+          <span style="font-size:12px;color:var(--gray-400);margin-left:4px">= ${formatRp(item.price * item.qty)}</span>
+        </div>
       </div>
-      <div class="qty-row">
-        <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
-        <span class="qty-num">${c.qty}</span>
-        <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
-      </div>
-    </div>`).join('');
-
-  body.innerHTML = items + `
-    <div class="cart-summary-box">
-      <div class="total-row">
-        <span class="total-label">Total Belanja</span>
-        <span class="total-val">${fmt(total)}</span>
-      </div>
-      <div class="total-note">* Belum termasuk ongkos kirim</div>
+      <button class="cart-item-remove" onclick="removeFromCart(${idx})"><i class="fas fa-trash-alt"></i></button>
     </div>
+  `).join('');
+}
 
-    <!-- DATA PENGIRIMAN -->
-    <div class="form-section">
-      <div class="form-title">
-        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
-        Data Pengiriman
+function toggleCart() {
+  const drawer = document.getElementById('cartDrawer');
+  const bg = document.getElementById('cartBg');
+  const isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !isOpen);
+  bg.classList.toggle('show', !isOpen);
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+
+function selectPayment(el) {
+  document.querySelectorAll('.payment-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPayment = el.dataset.method;
+  document.getElementById('qrisSection').style.display = selectedPayment==='QRIS' ? 'block' : 'none';
+}
+
+function checkout() {
+  if(!cart.length) return;
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const lines = cart.map(i => `• ${i.name} x${i.qty} = ${formatRp(i.price * i.qty)}`).join('\n');
+  const msg = `Halo Apotek Mitra Farma! 👋\n\nSaya ingin memesan:\n${lines}\n\n💰 Total: ${formatRp(total)}\n💳 Pembayaran: ${selectedPayment}\n\nMohon konfirmasi ongkir dan ketersediaan. Terima kasih!`;
+  window.open(`https://wa.me/6285731070315?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* ============================================================
+   RENDER MAIN PRODUCTS
+   ============================================================ */
+let currentCat = 'all';
+
+function filterCategory(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('active', p.dataset.cat===cat));
+  renderProducts();
+}
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  const filtered = currentCat==='all' ? MAIN_PRODUCTS : MAIN_PRODUCTS.filter(p=>p.cat===currentCat);
+  if(!filtered.length) { grid.innerHTML = '<p style="color:var(--gray-400);padding:20px">Tidak ada produk</p>'; return; }
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card" onclick="openDetailFromSearch(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='';this.parentNode.innerHTML='<div style=\\'color:var(--gray-200);font-size:40px;display:flex;align-items:center;justify-content:center;height:120px\\'><i class=\\'fas fa-pills\\'></i></div>'"/>
+        <div class="product-add-overlay"><i class="fas fa-eye"></i> Lihat Detail</div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Nama Lengkap</label>
-        <input type="text" id="custName" class="form-input" placeholder="Nama penerima">
+      <div class="product-body">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">${formatRp(p.price)}</div>
       </div>
-      <div class="form-group">
-        <label class="form-label">No. WhatsApp</label>
-        <input type="tel" id="custWA" class="form-input" placeholder="0812xxxx">
-      </div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label">Kecamatan</label>
-          <input type="text" id="custKec" class="form-input" placeholder="Kecamatan">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Kabupaten</label>
-          <input type="text" id="custKab" class="form-input" value="Kabupaten Semarang" placeholder="Kabupaten">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Alamat Rinci (Jl., No Rumah, Patokan)</label>
-        <textarea id="custAddr" class="form-input" rows="3" placeholder="Contoh: Jl. Mawar No 10, RT 01/02, depan Masjid"></textarea>
+      <div class="product-actions">
+        <button class="btn-cart" onclick="event.stopPropagation();addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+          <i class="fas fa-cart-plus"></i> Keranjang
+        </button>
       </div>
     </div>
+  `).join('');
+}
 
-    <div class="pay-section">
-      <div class="pay-title">Metode Pembayaran</div>
-      <div class="pay-opts">
-        <div class="pay-opt${payMethod==='cod'?' sel':''}" id="pay-cod" onclick="selPay('cod')">
-          <div class="pay-opt-icon">💵</div>COD
-        </div>
-        <div class="pay-opt${payMethod==='transfer'?' sel':''}" id="pay-transfer" onclick="selPay('transfer')">
-          <div class="pay-opt-icon">🏦</div>Transfer
-        </div>
-        <div class="pay-opt${payMethod==='qris'?' sel':''}" id="pay-qris" onclick="selPay('qris')">
-          <div class="pay-opt-icon">📱</div>QRIS
+/* ============================================================
+   RENDER PROMO
+   ============================================================ */
+function renderPromo() {
+  const slider = document.getElementById('promoSlider');
+  slider.innerHTML = PROMO_PRODUCTS.map(p => `
+    <div class="promo-card" onclick="window.open('https://wa.me/6285731070315?text=Halo, saya tertarik dengan produk ${encodeURIComponent(p.name)}','_blank')">
+      <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.background='var(--gray-100)'"/>
+      <div class="promo-card-body">
+        <span class="promo-badge">PROMO</span>
+        <div class="promo-card-name">${p.name}</div>
+        <button class="promo-order-btn">Pesan Sekarang</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   RENDER GALLERY
+   ============================================================ */
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  grid.innerHTML = GALLERY_DATA.map((g,i) => `
+    <div class="gallery-item" onclick="openGalleryModal('${g.img}','${g.title}')">
+      <img src="${g.img}" alt="${g.title}" loading="lazy"/>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-text">
+          <strong>${g.title}</strong>
+          <p>${g.desc}</p>
         </div>
       </div>
-      <div class="cart-note-box">
-        ⚠️ Ongkir dihitung sesuai jarak. Admin akan menghubungi Anda via WhatsApp untuk konfirmasi detail pesanan & pengiriman.
+      <div class="gallery-zoom-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  `).join('');
+}
+
+function openGalleryModal(src, caption) {
+  const modal = document.getElementById('galleryModal');
+  document.getElementById('galleryModalImg').src = src;
+  document.getElementById('galleryModalCaption').textContent = caption;
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeGalleryModal(e) { if(e.target===document.getElementById('galleryModal')) closeGalleryModalDirect(); }
+function closeGalleryModalDirect() {
+  document.getElementById('galleryModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ============================================================
+   RENDER HEALTH INFO
+   ============================================================ */
+function renderHealth() {
+  const grid = document.getElementById('healthGrid');
+  grid.innerHTML = HEALTH_DATA.map(h => `
+    <div class="health-card">
+      <div class="health-card-img" style="background:${h.bg}">
+        <i class="${h.icon}" style="font-size:64px;color:rgba(255,255,255,0.5)"></i>
+        <div class="health-type-badge ${h.type}"><i class="${h.btnIcon}"></i> ${h.typeLabel}</div>
       </div>
-      <button class="checkout-btn" onclick="checkout()">
-        Pesan via WhatsApp ➔
-      </button>
-    </div>`;
+      <div class="health-card-body">
+        <div class="health-category">${h.category}</div>
+        <div class="health-card-title">${h.title}</div>
+        <div class="health-card-desc">${h.desc}</div>
+        <a href="${h.url}" target="_blank" rel="noopener" class="health-read-btn">
+          <i class="${h.btnIcon}"></i> ${h.btnLabel}
+        </a>
+      </div>
+    </div>
+  `).join('');
 }
 
-function changeQty(i,d){
-  cart[i].qty+=d;
-  if(cart[i].qty<=0)cart.splice(i,1);
-  updateBadge();
-  renderCart();
+/* ============================================================
+   RENDER TESTIMONI
+   ============================================================ */
+function renderTesti() {
+  const grid = document.getElementById('testiGrid');
+  const stars = n => '<i class="fas fa-star"></i>'.repeat(n) + '<i class="far fa-star"></i>'.repeat(5-n);
+  grid.innerHTML = TESTI_DATA.map(t => `
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">${stars(t.rating)}</div>
+      <div class="testi-text">"${t.text}"</div>
+      <div class="testi-author">
+        <div class="testi-avatar-placeholder" style="background:linear-gradient(135deg,${t.color},${t.color}bb)">${t.init}</div>
+        <div>
+          <div class="testi-name">${t.name}</div>
+          <div class="testi-loc"><i class="fas fa-map-marker-alt" style="color:var(--green-400);margin-right:3px;font-size:10px"></i>${t.loc}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
 }
 
-function selPay(m){
-  payMethod=m;
-  ['cod','transfer','qris'].forEach(k=>{
-    const el=document.getElementById('pay-'+k);
-    if(el)el.classList.toggle('sel',k===m);
-  });
+/* ============================================================
+   MOBILE MENU & UI
+   ============================================================ */
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-function checkout(){
-  if(cart.length===0){showToast("Keranjang masih kosong!");return;}
-
-  const name = document.getElementById('custName').value.trim();
-  const wa = document.getElementById('custWA').value.trim();
-  const kec = document.getElementById('custKec').value.trim();
-  const kab = document.getElementById('custKab').value.trim();
-  const addr = document.getElementById('custAddr').value.trim();
-
-  if(!name || !wa || !kec || !addr){
-    showToast("⚠️ Mohon lengkapi biodata pengiriman");
-    return;
-  }
-
-  const items = cart.map(c=>`• ${c.name} x${c.qty} = ${fmt(c.price*c.qty)}`).join('\n');
-  const total = cart.reduce((s,c)=>s+c.price*c.qty,0);
-  const payLabel = payMethod==="cod"?"Bayar di Tempat (COD)":payMethod==="transfer"?"Transfer Bank":"QRIS";
-
-  const msg = `Halo Apotek Mitra Farma! Saya ingin memesan:\n\n${items}\n\n*Total: ${fmt(total)}*\nPembayaran: ${payLabel}\n\n*DATA PENGIRIMAN:*\nNama: ${name}\nWhatsApp: ${wa}\nKecamatan: ${kec}\nKabupaten: ${kab}\nAlamat: ${addr}\n\nMohon konfirmasi ongkir & pengiriman. Terima kasih! 🙏`;
-  
-  window.open("https://wa.me/"+WA_NUM+"?text="+encodeURIComponent(msg),"_blank");
-}
-
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
-}
-
-// Navbar scroll
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY>20);
+/* Back to top */
+window.addEventListener('scroll', () => {
+  const bt = document.getElementById('backTop');
+  bt.classList.toggle('show', window.scrollY > 400);
 });
 
-// Fade-in observer
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-},{threshold:0.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+/* Keyboard close */
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape') {
+    closeSearchPopupDirect();
+    closeDetailPopupDirect();
+    closeGalleryModalDirect();
+    if(document.getElementById('cartDrawer').classList.contains('open')) toggleCart();
+  }
+});
 
-// Init
-window.onload = () => {
-  loadExternalProducts();
-  renderPromo();
-  renderChips();
-  filterProducts();
-};
+/* ============================================================
+   INIT
+   ============================================================ */
+renderPromo();
+renderProducts();
+renderGallery();
+renderHealth();
+renderTesti();
+renderCart();
+
+// Preload JSON silently after page load
+window.addEventListener('load', () => setTimeout(loadJson, 2000));
 </script>
 </body>
 </html>
