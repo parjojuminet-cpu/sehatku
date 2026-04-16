@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
+ 
     /* ===== CSS VARIABLES ===== */
     :root {
       --green-50: #f0fdf4; --green-100: #dcfce7; --green-200: #bbf7d0;
@@ -495,6 +496,26 @@
       .popup-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
       .payment-opts { flex-wrap: wrap; }
     }
+	.cart-drawer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.cart-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 100px;
+}
+
+.cart-drawer-footer {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  z-index: 10;
+  padding: 12px;
+}
+
   </style>
 </head>
 <body>
