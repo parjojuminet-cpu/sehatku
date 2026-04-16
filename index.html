@@ -91,12 +91,12 @@
       font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600;
       color: var(--green-700); white-space: nowrap;
     }
-    .nav-logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    .nav-logo img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; }
     .nav-logo span { color: var(--teal-600); }
 
     /* Search */
     .search-wrapper {
-      flex: 1; max-width: 560px; position: relative;
+      flex: 1; max-width: 100px; position: relative;
     }
     .search-box {
       display: flex; align-items: center;
@@ -1077,7 +1077,7 @@
       .hamburger { display: flex; }
       .hero-img-wrap { display: none; }
       .nav-main { gap: 12px; }
-      .nav-logo { font-size: 18px; }
+      .nav-logo { font-size: 10px; }
       .cart-btn span:not(.cart-count-badge) { display: none; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item:first-child { grid-column: span 2; }
@@ -1109,7 +1109,7 @@
   <div class="nav-main">
     <div class="nav-logo">
       <img src="https://parjojuminet-cpu.github.io/sehatku/mitra.png" alt="Logo" onerror="this.style.display='none'"/>
-      Mitra <span>Farma</span>
+      Mitra</span>
     </div>
     <div class="search-wrapper" id="searchWrapper">
       <div class="search-box">
@@ -1166,7 +1166,7 @@
 <!-- ===== MOBILE MENU ===== -->
 <div class="mobile-menu-overlay" id="mobileMenu">
   <div class="mobile-menu-header">
-    <div class="nav-logo" style="font-size:18px">Mitra <span>Farma</span></div>
+    <div class="nav-logo" style="font-size:50px">Mitra <span>Farma</span></div>
     <button onclick="toggleMobileMenu()" style="font-size:22px;color:var(--gray-500)"><i class="fas fa-times"></i></button>
   </div>
   <div class="mobile-menu-item" onclick="scrollToSection('home');toggleMobileMenu()"><i class="fas fa-home"></i> Home</div>
@@ -1416,6 +1416,23 @@
         <div class="payment-opt" data-method="Transfer" onclick="selectPayment(this)"><i class="fas fa-university"></i> Transfer</div>
         <div class="payment-opt" data-method="QRIS" onclick="selectPayment(this)"><i class="fas fa-qrcode"></i> QRIS</div>
       </div>
+          <!-- DATA PENGIRIMAN -->
+    <div class="form-section">
+      <div class="form-title">📍 Data Pengiriman</div>
+      <div class="form-group"><label class="form-label">Nama Lengkap</label><input type="text" id="cName" class="form-input" placeholder="Nama Anda"></div>
+      <div class="form-group"><label class="form-label">No. WhatsApp</label><input type="tel" id="cWA" class="form-input" placeholder="08xxx"></div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Kecamatan</label><input type="text" id="cKec" class="form-input" placeholder="Kecamatan"></div>
+        <div class="form-group"><label class="form-label">Kabupaten</label><input type="text" value="Kabupaten Semarang" id="cKab" class="form-input" readonly style="background:#eee"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Alamat Lengkap Rinci</label><textarea id="cAddr" class="form-input" rows="2" placeholder="Jl, No Rumah, Patokan..."></textarea></div>
+    </div>
+
+    <button class="checkout-btn" onclick="checkout()">Pesan via WhatsApp ➔</button>
+  `;
+}
+
+      
     </div>
     <div id="qrisSection" style="display:none" class="qris-section">
       <img src="https://parjojuminet-cpu.github.io/sehatku/qris.png" alt="QRIS" onerror="this.src='https://via.placeholder.com/160x160/22c55e/white?text=QRIS'"/>
@@ -1675,7 +1692,30 @@ function scrollToSection(id) {
   const el = document.getElementById(id);
   if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
 }
+function changeQty(i, d) {
+  cart[i].qty += d;
+  if (cart[i].qty <= 0) cart.splice(i, 1);
+  updateBadge();
+  renderCart();
+}
 
+function checkout() {
+  const name = document.getElementById('cName').value.trim();
+  const wa = document.getElementById('cWA').value.trim();
+  const kec = document.getElementById('cKec').value.trim();
+  const addr = document.getElementById('cAddr').value.trim();
+
+  if (!name || !wa || !kec || !addr) {
+    alert("⚠️ Mohon lengkapi biodata pengiriman!");
+    return;
+  }
+
+  const itemsTxt = cart.map(c => `- ${c.name} (x${c.qty}) = ${fmt(c.price * c.qty)}`).join('\n');
+  const total = cart.reduce((s, c) => s + (c.price * c.qty), 0);
+  const msg = `Halo Mitra Farma, saya mau pesan:\n\n${itemsTxt}\n\n*Total: ${fmt(total)}*\n\n*DATA PEMBELI:*\nNama: ${name}\nWA: ${wa}\nKecamatan: ${kec}\nAlamat: ${addr}`;
+
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
+}
 /* ============================================================
    JSON LOADER (lazy — load once)
    ============================================================ */
