@@ -873,7 +873,7 @@
       <div class="field-error" id="errCaptcha">Jawaban salah, coba lagi</div>
     </div>
 
-    <button class="checkout-btn" id="checkoutBtn" onclick="doCheckout()" disabled>
+    <button class="checkout-btn" id="checkoutBtn" onclick="doCheckout()">
       <i class="fab fa-whatsapp" style="font-size:20px"></i> Pesan via WhatsApp
     </button>
   </div>
@@ -1176,6 +1176,10 @@ function refreshCaptcha() {
 /* ============================================================
    PAYMENT METHOD
    ============================================================ */
+const PAYMENT_INFO = {
+  Transfer: '<strong>Cara Transfer:</strong> Tunggu konfirmasi admin di WhatsApp untuk total tagihan + ongkir. Setelah setuju, kirim bukti transfer ke WhatsApp kami.',
+  COD: '<strong>Cara COD:</strong> Setelah konfirmasi via WhatsApp, kirim share lokasi dan foto rumah/kantor untuk proses pengiriman.',
+};
 
 function selectPayment(el) {
   document.querySelectorAll('.payment-opt').forEach(e => e.classList.remove('selected'));
