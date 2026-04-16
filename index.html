@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
- 
+  
     /* ===== CSS VARIABLES ===== */
     :root {
       --green-50: #f0fdf4; --green-100: #dcfce7; --green-200: #bbf7d0;
@@ -50,7 +50,7 @@
     .nav-top a:hover { color: white; }
     .nav-main { max-width: 1280px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 16px; }
     .nav-logo { display: flex; align-items: center; gap: 10px; font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--green-700); white-space: nowrap; flex-shrink: 0; }
-    .nav-logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    .nav-logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green-200); flex-shrink: 0; }
     .nav-logo span { color: var(--teal-600); }
 
     /* Search */
@@ -283,6 +283,8 @@
     .cart-drawer-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
     .cart-drawer-header h3 { font-size: 18px; font-weight: 800; color: var(--gray-900); display: flex; align-items: center; gap: 8px; }
     .cart-drawer-body { flex: 1; overflow-y: auto; padding: 16px; }
+    /* Footer scrollable (form fields) */
+    .cart-drawer-footer { overflow-y: auto; padding: 20px 24px 8px; flex-shrink: 0; max-height: 55vh; border-top: 1px solid var(--gray-100); }
     .cart-item { display: flex; gap: 12px; padding: 12px; background: var(--gray-50); border-radius: var(--radius-lg); margin-bottom: 10px; }
     .cart-item-img { width: 60px; height: 60px; border-radius: var(--radius-sm); object-fit: contain; background: white; padding: 4px; flex-shrink: 0; }
     .cart-item-img-placeholder { width: 60px; height: 60px; border-radius: var(--radius-sm); background: var(--gray-200); display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 20px; flex-shrink: 0; }
@@ -345,6 +347,9 @@
     .checkout-btn { width: 100%; background: linear-gradient(135deg, #25d366, #128c7e); color: white; padding: 14px; border-radius: var(--radius-lg); font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; transition: var(--transition); box-shadow: 0 4px 16px rgba(37,211,102,0.3); margin-top: 4px; }
     .checkout-btn:hover:not(:disabled) { opacity: 0.92; transform: translateY(-1px); }
     .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Sticky checkout button wrap at bottom of cart footer on mobile */
+    .checkout-sticky-wrap { position: sticky; bottom: 0; background: white; padding: 12px 0 4px; margin: 0 -24px -20px; padding-left: 24px; padding-right: 24px; box-shadow: 0 -4px 16px rgba(0,0,0,0.07); border-top: 1px solid var(--gray-100); z-index: 10; }
 
     /* ===== TOAST ===== */
     .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
@@ -430,22 +435,23 @@
       /* 3. Membuat tulisan Mitra Farma BESAR dan di TENGAH */
       .nav-logo { 
         order: 1; 
-        flex: 1;                 /* Mengambil ruang penuh di baris atas */
+        flex: 1;
         display: flex;
-        justify-content: center; /* Mengetengahkan teks */
+        justify-content: center;
         align-items: center;
-        position: relative;      /* Patokan untuk posisi logo gambar */
-        font-size: 26px;         /* UKURAN TULISAN BESAR */
+        font-size: 24px;
         font-weight: 800;
-        margin-right: 40px;      /* Offset agar teks benar-benar di tengah (menyeimbangkan hamburger) */
+        gap: 10px;
+        letter-spacing: -0.3px;
       }
 
-      /* 4. Logo Gambar tetap di KIRI (melayang) */
+      /* 4. Logo Gambar normal flow (tidak absolute) */
       .nav-logo img { 
-        position: absolute;
-        left: 0; 
-        width: 38px; 
-        height: 38px; 
+        position: static;
+        width: 36px; 
+        height: 36px;
+        flex-shrink: 0;
+        object-fit: cover;
       }
 
       /* 5. Sembunyikan tombol keranjang di header atas (sesuai sketsa Anda) */
@@ -496,26 +502,41 @@
       .popup-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
       .payment-opts { flex-wrap: wrap; }
     }
-	.cart-drawer {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
 
-.cart-drawer-body {
-  flex: 1;
-  overflow-y: auto;
-  padding-bottom: 100px;
-}
+    /* ===== FLOATING WA BUTTON ===== */
+    .wa-float-btn { position: fixed; right: 20px; bottom: 90px; z-index: 998; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #25d366, #128c7e); color: white; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 6px 24px rgba(37,211,102,0.45); transition: var(--transition); animation: pulse-wa 2.5s ease-in-out infinite; }
+    .wa-float-btn:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.6); animation: none; }
+    @keyframes pulse-wa { 0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,0.45); } 50% { box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 0 0 8px rgba(37,211,102,0.12); } }
+    @media (max-width: 768px) { .wa-float-btn { bottom: 80px; right: 16px; } }
 
-.cart-drawer-footer {
-  position: sticky;
-  bottom: 0;
-  background: white;
-  z-index: 10;
-  padding: 12px;
-}
+    /* ===== BEST SELLER BADGE ===== */
+    .badge-best { position: absolute; top: 8px; left: 8px; background: linear-gradient(135deg, #f59e0b, #f97316); color: white; font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: var(--radius-full); text-transform: uppercase; letter-spacing: 0.05em; z-index: 2; box-shadow: 0 2px 6px rgba(245,158,11,0.4); }
+    .badge-promo { position: absolute; top: 8px; right: 8px; background: linear-gradient(135deg, var(--red-500), #c0392b); color: white; font-size: 9px; font-weight: 800; padding: 3px 7px; border-radius: var(--radius-full); z-index: 2; }
 
+    /* ===== PRODUCT ADDED NOTIFICATION ===== */
+    .cart-add-notif { position: fixed; top: 80px; left: 50%; transform: translateX(-50%) translateY(-20px); z-index: 9998; background: var(--gray-900); color: white; padding: 10px 22px; border-radius: var(--radius-full); font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; white-space: nowrap; }
+    .cart-add-notif.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .cart-add-notif i { color: var(--green-400); }
+
+    /* ===== SMOOTH HOVER ENHANCEMENTS ===== */
+    .promo-card { transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease; }
+    .product-card { transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.2s; }
+    .btn-cart { position: relative; overflow: hidden; }
+    .btn-cart::after { content: ''; position: absolute; inset: 0; background: white; opacity: 0; transition: opacity 0.15s; }
+    .btn-cart:active::after { opacity: 0.18; }
+    .cat-pill { transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s; }
+    .cat-pill:active { transform: scale(0.96); }
+
+    /* ===== LOADING SKELETON ===== */
+    .skeleton { background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: var(--radius-sm); }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
+    /* ===== MOBILE SPECIFIC CART FOOTER FIX ===== */
+    @media (max-width: 768px) {
+      .cart-drawer { max-width: 100%; }
+      .cart-drawer-footer { padding-bottom: 16px; }
+      .checkout-sticky-wrap { position: sticky; bottom: 0; }
+    }
   </style>
 </head>
 <body>
@@ -610,7 +631,7 @@
         <button class="btn-hero-primary" onclick="document.getElementById('searchInput').focus()">
           <i class="fas fa-search"></i> Cari Produk
         </button>
-        <a href="https://wa.me/6285731070315" target="_blank" rel="noopener" class="btn-hero-secondary">
+        <a href="https://wa.me/6285731070315?text=Halo%20Mitra%20Farma%2C%20saya%20ingin%20konsultasi%20terkait%20obat%2Fproduk." target="_blank" rel="noopener" class="btn-hero-secondary">
           <i class="fab fa-whatsapp"></i> Konsultasi Gratis
         </a>
       </div>
@@ -753,7 +774,7 @@
             <div class="contact-info-val">Setiap Hari, 08.00 – 21.00 WIB</div>
           </div>
         </div>
-        <a href="https://wa.me/6285731070315" target="_blank" rel="noopener" class="wa-btn-big">
+        <a href="https://wa.me/6285731070315?text=Halo%20Mitra%20Farma%2C%20saya%20ingin%20bertanya." target="_blank" rel="noopener" class="wa-btn-big">
           <i class="fab fa-whatsapp"></i> Chat di WhatsApp
         </a>
       </div>
@@ -772,7 +793,7 @@
         <div class="footer-logo">Mitra <span>Farma</span></div>
         <p>Apotek terpercaya di Kabupaten Semarang yang menyediakan produk kesehatan lengkap dengan harga terjangkau dan pelayanan ramah.</p>
         <div class="footer-socials">
-          <a href="https://wa.me/6285731070315" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://wa.me/6285731070315?text=Halo%20Mitra%20Farma%2C%20saya%20ingin%20bertanya." target="_blank" rel="noopener" class="social-btn"><i class="fab fa-whatsapp"></i></a>
           <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
           <a href="#" class="social-btn"><i class="fab fa-facebook"></i></a>
           <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
@@ -893,7 +914,10 @@
       </div>
       <div class="field-error" id="errCaptcha">Jawaban salah, coba lagi</div>
     </div>
+  </div>
 
+  <!-- Sticky Checkout Button - always visible at bottom -->
+  <div class="checkout-sticky-wrap">
     <button class="checkout-btn" id="checkoutBtn" onclick="doCheckout()" disabled>
       <i class="fab fa-whatsapp" style="font-size:20px"></i> Pesan via WhatsApp
     </button>
@@ -969,6 +993,17 @@
     </div>
     <div class="mobile-nav-btn" onclick="scrollToSection('contact')"><i class="fas fa-phone"></i><span>Kontak</span></div>
   </div>
+</div>
+
+<!-- ===== FLOATING WA BUTTON ===== -->
+<a href="https://wa.me/6285731070315?text=Halo%20Mitra%20Farma%2C%20saya%20ingin%20bertanya." target="_blank" rel="noopener" class="wa-float-btn" title="Chat WhatsApp" aria-label="Chat via WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ===== CART ADDED NOTIFICATION ===== -->
+<div class="cart-add-notif" id="cartAddNotif">
+  <i class="fas fa-check-circle"></i>
+  <span id="cartAddNotifText">Produk ditambahkan ke keranjang</span>
 </div>
 
 <!-- ===== JAVASCRIPT ===== -->
@@ -1221,14 +1256,23 @@ function getProductById(id) {
   return PRODUCT_MAP[id] || jsonData?.find(p => p.id === id) || null;
 }
 
+function showCartNotif(msg) {
+  const notif = document.getElementById('cartAddNotif');
+  const text = document.getElementById('cartAddNotifText');
+  text.textContent = msg;
+  notif.classList.add('show');
+  clearTimeout(notif._timer);
+  notif._timer = setTimeout(() => notif.classList.remove('show'), 2200);
+}
+
 function addToCart(product, qty = 1) {
   const existing = cart.find(i => i.id === product.id);
   if (existing) {
     existing.qty += qty;
-    showToast('+' + qty + ' ' + product.name + ' (total: ' + existing.qty + ')');
+    showCartNotif('+' + qty + ' ' + product.name + ' (total: ' + existing.qty + ')');
   } else {
     cart.push({ id: product.id, qty });
-    showToast(product.name + ' ditambahkan ke keranjang 🛒');
+    showCartNotif(product.name + ' ditambahkan ke keranjang 🛒');
   }
   renderCart();
 }
@@ -1453,6 +1497,7 @@ function doCheckout() {
   }).filter(Boolean).join('\n');
 
   const msg =
+    'Halo Mitra Farma, saya ingin melakukan pemesanan produk berikut:\n\n' +
     '🧾 *ORDER*\n' +
     'ID: ' + orderId + '\n\n' +
     'Nama: ' + name + '\n' +
@@ -1716,6 +1761,10 @@ function renderProducts() {
     return;
   }
 
+  // IDs yang termasuk best seller
+  const BEST_SELLER_IDS = new Set(['k1','k2','k9','k10','a2','a6','a8','d1','v1','v5','v6','h5','h7']);
+  const PROMO_IDS = new Set(['k3','k6','k7','a3','d6','v8','h1','h4']);
+
   grid.innerHTML = '';
   filtered.forEach(p => {
     const card = document.createElement('div');
@@ -1724,6 +1773,20 @@ function renderProducts() {
 
     const imgWrap = document.createElement('div');
     imgWrap.className = 'product-img-wrap';
+
+    // Best Seller badge
+    if (BEST_SELLER_IDS.has(p.id)) {
+      const bsBadge = document.createElement('div');
+      bsBadge.className = 'badge-best';
+      bsBadge.innerHTML = '⭐ Best Seller';
+      imgWrap.appendChild(bsBadge);
+    } else if (PROMO_IDS.has(p.id)) {
+      const promoBadge = document.createElement('div');
+      promoBadge.className = 'badge-promo';
+      promoBadge.innerHTML = '🔥 Promo';
+      imgWrap.appendChild(promoBadge);
+    }
+
     const img = document.createElement('img');
     img.src = p.img;
     img.alt = p.name;
@@ -1768,7 +1831,7 @@ function renderPromo() {
     const card = document.createElement('div');
     card.className = 'promo-card';
     card.addEventListener('click', () => {
-      window.open('https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent('Halo, saya tertarik dengan produk ' + p.name), '_blank');
+      window.open('https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent('Halo Mitra Farma, saya ingin melakukan pemesanan produk berikut:\n- ' + p.name), '_blank');
     });
 
     const img = document.createElement('img');
