@@ -415,24 +415,77 @@
       .contact-map { height: 250px; }
     }
     @media (max-width: 768px) {
-      .nav-top { display: none; }
-      .nav-menu-bar { display: none; }
-      .hamburger { display: flex; }
-      .hero-img-wrap { display: none; }
-      .nav-main { gap: 10px; padding: 10px 16px; }
-      .nav-logo { font-size: 18px; }
-      .cart-btn span:not(.cart-count-badge) { display: none; }
-      .cart-btn { padding: 10px 14px; }
-      .gallery-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-item:first-child { grid-column: span 2; }
-      .mobile-nav { display: block; }
+      /* 1. Sembunyikan elemen desktop yang tidak perlu */
+      .nav-top, .nav-menu-bar, .hero-img-wrap { display: none; }
+
+      /* 2. Atur navigasi utama agar bisa pecah baris */
+      .nav-main { 
+        flex-wrap: wrap; 
+        justify-content: space-between; 
+        padding: 12px 16px;
+        gap: 8px;
+      }
+
+      /* 3. Membuat tulisan Mitra Farma BESAR dan di TENGAH */
+      .nav-logo { 
+        order: 1; 
+        flex: 1;                 /* Mengambil ruang penuh di baris atas */
+        display: flex;
+        justify-content: center; /* Mengetengahkan teks */
+        align-items: center;
+        position: relative;      /* Patokan untuk posisi logo gambar */
+        font-size: 26px;         /* UKURAN TULISAN BESAR */
+        font-weight: 800;
+        margin-right: 40px;      /* Offset agar teks benar-benar di tengah (menyeimbangkan hamburger) */
+      }
+
+      /* 4. Logo Gambar tetap di KIRI (melayang) */
+      .nav-logo img { 
+        position: absolute;
+        left: 0; 
+        width: 38px; 
+        height: 38px; 
+      }
+
+      /* 5. Sembunyikan tombol keranjang di header atas (sesuai sketsa Anda) */
+      .nav-actions { display: none; }
+
+      /* 6. Tombol Hamburger tetap di KANAN */
+      .hamburger { 
+        order: 2; 
+        display: flex;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* 7. Baris Kedua: Kolom Search Lebar Penuh */
+      .search-wrapper { 
+        order: 3; 
+        flex: 0 0 100%; 
+        margin-top: 5px;
+      }
+
+      .search-box {
+        border-radius: 10px; 
+        overflow: hidden;
+      }
+
+      .search-box input {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+
+      .search-btn span {
+        display: inline-block !important; /* Memunculkan tulisan "Cari" */
+      }
+
+      /* Penyesuaian elemen lainnya untuk Mobile */
       body { padding-bottom: 70px; }
+      .mobile-nav { display: block; }
+      .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .trust-inner { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
       .footer-grid { grid-template-columns: 1fr; }
-      .trust-inner { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
-      .search-btn span { display: none; }
-      .search-btn { padding: 10px 14px; }
-      .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-      .form-grid-2 { grid-template-columns: 1fr; }
+      .section { padding: 30px 16px; }
     }
     @media (max-width: 480px) {
       .hero { padding: 40px 16px; }
