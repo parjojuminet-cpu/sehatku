@@ -1176,10 +1176,6 @@ function refreshCaptcha() {
 /* ============================================================
    PAYMENT METHOD
    ============================================================ */
-const PAYMENT_INFO = {
-  Transfer: '<strong>Cara Transfer:</strong> Tunggu konfirmasi admin di WhatsApp untuk total tagihan + ongkir. Setelah setuju, kirim bukti transfer ke WhatsApp kami.',
-  COD: '<strong>Cara COD:</strong> Setelah konfirmasi via WhatsApp, kirim share lokasi dan foto rumah/kantor untuk proses pengiriman.',
-};
 
 function selectPayment(el) {
   document.querySelectorAll('.payment-opt').forEach(e => e.classList.remove('selected'));
