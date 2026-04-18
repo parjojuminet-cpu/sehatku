@@ -537,6 +537,362 @@
       .checkout-sticky-wrap { position: sticky; bottom: 0; }
     }
   </style>
+
+  <!-- ========== UPGRADE UI/UX STYLES ========== -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== FONT & BASE UPGRADE ===== */
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* ===== FADE-IN ANIMATIONS ===== */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+    @keyframes shimmerMove { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ===== NAVBAR UPGRADE ===== */
+    .navbar {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(22,163,74,0.12);
+      box-shadow: 0 2px 32px rgba(0,0,0,0.06);
+    }
+    .nav-top {
+      background: linear-gradient(90deg, #15803d 0%, #0d9488 50%, #15803d 100%);
+      background-size: 200% 100%;
+      animation: shimmerMove 6s linear infinite;
+      font-size: 12px;
+      letter-spacing: 0.01em;
+    }
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo img {
+      border: 2.5px solid var(--green-400);
+      box-shadow: 0 2px 12px rgba(34,197,94,0.25);
+    }
+    .search-box {
+      border: 2px solid var(--green-400);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(34,197,94,0.12);
+    }
+    .search-box:focus-within {
+      border-color: var(--green-600);
+      box-shadow: 0 4px 20px rgba(34,197,94,0.22);
+    }
+    .search-btn {
+      border-radius: 0 12px 12px 0;
+      padding: 10px 22px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .cart-btn {
+      border-radius: 14px;
+      font-weight: 700;
+      padding: 10px 20px;
+      letter-spacing: 0.01em;
+      box-shadow: 0 4px 16px rgba(22,163,74,0.28);
+    }
+    .cart-btn:hover { box-shadow: 0 6px 22px rgba(22,163,74,0.42); }
+    .nav-menu-link { font-size: 13.5px; border-radius: 10px; font-weight: 600; }
+    .nav-menu-link:hover, .nav-menu-link.active {
+      background: linear-gradient(135deg, var(--green-50), rgba(20,184,166,0.06));
+      color: var(--green-700);
+    }
+    .dropdown-menu { border-radius: 14px; border: 1px solid rgba(22,163,74,0.1); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+
+    /* ===== TRUST STRIP UPGRADE ===== */
+    .trust-strip { background: linear-gradient(90deg, #f0fdf4, #f0fdfa); border-bottom: 1px solid #d1fae5; }
+    .trust-item { font-size: 12.5px; font-weight: 600; letter-spacing: 0.01em; }
+    .trust-item i { font-size: 18px; color: var(--green-600); }
+
+    /* ===== HERO UPGRADE ===== */
+    .hero {
+      background: linear-gradient(135deg, #15803d 0%, #0d9488 45%, #166534 100%);
+      padding: 72px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .hero h1 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -1px; }
+    .hero p { font-size: 15.5px; letter-spacing: 0.01em; }
+    .hero-badge {
+      font-size: 11.5px;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      border: 1.5px solid rgba(255,255,255,0.25);
+    }
+    .btn-hero-primary {
+      border-radius: 14px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      padding: 14px 30px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-hero-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 32px rgba(0,0,0,0.24); }
+    .btn-hero-secondary {
+      border-radius: 14px;
+      font-weight: 700;
+      padding: 14px 30px;
+    }
+    .hero-stat .num { font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 900; }
+    .hero-stat .lbl { font-size: 11px; letter-spacing: 0.04em; }
+    .hero-card-float {
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      min-width: 180px;
+    }
+
+    /* ===== SECTION HEADER UPGRADE ===== */
+    .section-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      border-radius: 10px;
+      padding: 5px 14px;
+    }
+    .section-title { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+
+    /* ===== PROMO CARD UPGRADE ===== */
+    .promo-card {
+      border-radius: 18px;
+      border: 1.5px solid rgba(34,197,94,0.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      flex: 0 0 190px;
+    }
+    .promo-card:hover { box-shadow: 0 10px 32px rgba(34,197,94,0.18); transform: translateY(-6px) scale(1.01); border-color: var(--green-300); }
+    .promo-card img { border-radius: 12px; }
+    .promo-badge { border-radius: 8px; font-size: 10px; padding: 3px 10px; }
+    .promo-order-btn { border-radius: 10px; font-size: 12px; padding: 8px; font-weight: 700; }
+
+    /* ===== CATEGORY PILLS UPGRADE ===== */
+    .cat-pill {
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 9px 20px;
+      font-size: 13px;
+      border: 1.5px solid rgba(34,197,94,0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .cat-pill:hover, .cat-pill.active {
+      background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(22,163,74,0.3);
+    }
+
+    /* ===== PRODUCT CARD UPGRADE ===== */
+    .product-card {
+      border-radius: 18px;
+      border: 1.5px solid rgba(34,197,94,0.1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      overflow: visible;
+    }
+    .product-card > * { border-radius: 18px; overflow: hidden; }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(34,197,94,0.16);
+      border-color: var(--green-300);
+    }
+    .product-img-wrap { border-radius: 18px 18px 0 0; background: linear-gradient(135deg, #f8fffe, #f0fdf4); }
+    .product-body { padding: 14px 14px 8px; }
+    .product-name { font-size: 13.5px; font-weight: 700; line-height: 1.45; color: var(--gray-800); }
+    .product-price { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: var(--green-600); }
+    .product-actions { padding: 0 14px 14px; }
+    .btn-cart {
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: 0 3px 10px rgba(22,163,74,0.2);
+    }
+    .btn-cart:hover { box-shadow: 0 6px 18px rgba(22,163,74,0.35); transform: scale(1.02); }
+    .product-add-overlay { border-radius: var(--radius-full); font-weight: 700; letter-spacing: 0.02em; }
+
+    /* ===== BADGES UPGRADE ===== */
+    .badge-best { border-radius: 10px; font-size: 9.5px; padding: 3px 10px; }
+    .badge-promo { border-radius: 10px; font-size: 9.5px; padding: 3px 9px; }
+
+    /* ===== GALLERY UPGRADE ===== */
+    .gallery-section {
+      background: linear-gradient(180deg, #0f172a 0%, #1a2635 100%);
+      padding: 60px 24px 80px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .gallery-item {
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+      background: #1e293b;
+      aspect-ratio: 4/3;
+    }
+    .gallery-item:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+    .gallery-item:first-child { grid-column: span 2; aspect-ratio: 16/7; }
+    .gallery-item img, .gallery-item video {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+    .gallery-item:hover img, .gallery-item:hover video { transform: scale(1.05); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+      display: flex; align-items: flex-end;
+      padding: 18px;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay-text strong { font-size: 14px; font-weight: 700; color: white; display: block; }
+    .gallery-overlay-text p { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+    .gallery-zoom-icon {
+      position: absolute; top: 14px; right: 14px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      color: white; width: 38px; height: 38px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.25s;
+      font-size: 15px;
+    }
+    .gallery-item:hover .gallery-zoom-icon { opacity: 1; }
+    /* VIDEO item */
+    .gallery-item.is-video .gallery-play-btn {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 22px;
+      border: 2px solid rgba(255,255,255,0.35);
+      transition: all 0.25s;
+      pointer-events: none;
+    }
+    .gallery-item.is-video:hover .gallery-play-btn { background: rgba(34,197,94,0.7); border-color: #22c55e; transform: translate(-50%, -50%) scale(1.08); }
+    .gallery-item video { pointer-events: none; }
+    /* Gallery modal video */
+    .modal-video { max-width: 90vw; max-height: 80vh; border-radius: 16px; outline: none; box-shadow: 0 0 60px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.25s; }
+    .modal-overlay.show .modal-video { transform: scale(1); }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .gallery-item:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: 1; aspect-ratio: 4/3; }
+    }
+
+    /* ===== MODAL UPGRADE ===== */
+    .modal-overlay { background: rgba(0,0,0,0.95); }
+    .modal-close {
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      font-size: 18px;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.24); transform: rotate(90deg); }
+    .modal-img { border-radius: 18px; }
+    .modal-caption { border-radius: 30px; font-size: 13px; font-weight: 700; padding: 9px 22px; }
+
+    /* ===== HEALTH SECTION UPGRADE ===== */
+    .health-card { border-radius: 20px; border: 1.5px solid rgba(34,197,94,0.1); }
+    .health-card:hover { box-shadow: 0 16px 40px rgba(34,197,94,0.12); }
+    .health-read-btn { border-radius: 12px; font-weight: 700; }
+
+    /* ===== TESTIMONIAL UPGRADE ===== */
+    .testi-card { border-radius: 20px; border: 1.5px solid rgba(0,0,0,0.06); }
+    .testi-card:hover { box-shadow: 0 14px 36px rgba(34,197,94,0.12); }
+    .testi-avatar-placeholder { border-radius: 50%; border: 2px solid rgba(255,255,255,0.6); }
+    .testi-name { font-family: 'Outfit', sans-serif; font-weight: 700; }
+
+    /* ===== CONTACT UPGRADE ===== */
+    .contact-section { background: linear-gradient(180deg, #f8fffe 0%, white 100%); }
+    .contact-title { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+    .contact-info-icon { border-radius: 14px; box-shadow: 0 2px 10px rgba(34,197,94,0.15); }
+    .wa-btn-big {
+      border-radius: 16px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      padding: 16px 36px;
+      font-size: 15px;
+    }
+    .wa-btn-big:hover { transform: translateY(-3px) scale(1.01); }
+    .contact-map { border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+
+    /* ===== FOOTER UPGRADE ===== */
+    footer { background: linear-gradient(180deg, #0f172a, #111827); }
+    .footer-logo { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.5px; font-size: 24px; }
+    .social-btn { border-radius: 12px; }
+
+    /* ===== CART DRAWER UPGRADE ===== */
+    .cart-drawer { border-radius: 24px 0 0 24px; }
+    .cart-drawer-header { padding: 22px 26px; }
+    .checkout-btn { border-radius: 16px; font-size: 15.5px; font-weight: 800; letter-spacing: 0.02em; }
+
+    /* ===== POPUP UPGRADE ===== */
+    .popup-box { border-radius: 24px; }
+    .detail-popup-box { border-radius: 24px; }
+    .detail-add-btn { border-radius: 16px; font-weight: 800; }
+
+    /* ===== WA FLOATING BUTTON UPGRADE ===== */
+    .wa-float-btn {
+      width: 60px; height: 60px;
+      font-size: 28px;
+      border-radius: 50%;
+      box-shadow: 0 8px 32px rgba(37,211,102,0.55);
+    }
+    .wa-float-btn:hover { transform: scale(1.12); }
+
+    /* ===== MOBILE NAV UPGRADE ===== */
+    .mobile-nav { border-top: 1px solid #e9f7ef; box-shadow: 0 -4px 24px rgba(0,0,0,0.08); }
+    .mobile-nav-btn { border-radius: 12px; }
+
+    /* ===== BACK TO TOP UPGRADE ===== */
+    .back-top { border-radius: 50%; width: 46px; height: 46px; box-shadow: 0 4px 18px rgba(22,163,74,0.35); }
+
+    /* ===== FORM UPGRADE ===== */
+    .form-input { border-radius: 12px; padding: 10px 14px; border: 1.5px solid #e5e7eb; }
+    .form-input:focus { border-color: var(--green-500); box-shadow: 0 0 0 4px rgba(34,197,94,0.1); }
+
+    /* ===== PRODUCT GRID ===== */
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(188px, 1fr)); gap: 18px; }
+
+    /* ===== GENERAL SECTION SPACING ===== */
+    .section { padding: 68px 24px; }
+    @media (max-width: 768px) { .section { padding: 40px 16px; } }
+  </style>
 </head>
 <body>
 
@@ -711,6 +1067,21 @@
         <div class="section-title" style="color:white">Momen <span style="color:var(--green-400)">Bersama</span> Pelanggan</div>
         <div class="section-sub" style="color:rgba(255,255,255,0.6)">Apotek bersih, nyaman, dan profesional</div>
       </div>
+    </div>
+    <!-- Gallery Filter Tabs -->
+    <div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;">
+      <button class="gallery-tab active" data-filter="all" onclick="filterGallery('all',this)"
+        style="display:flex;align-items:center;gap:7px;padding:8px 20px;border-radius:30px;font-size:13px;font-weight:700;border:1.5px solid rgba(255,255,255,0.25);color:white;background:rgba(34,197,94,0.25);cursor:pointer;transition:all 0.2s;">
+        <i class="fas fa-th"></i> Semua
+      </button>
+      <button class="gallery-tab" data-filter="video" onclick="filterGallery('video',this)"
+        style="display:flex;align-items:center;gap:7px;padding:8px 20px;border-radius:30px;font-size:13px;font-weight:700;border:1.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);background:transparent;cursor:pointer;transition:all 0.2s;">
+        <i class="fas fa-play-circle"></i> Video
+      </button>
+      <button class="gallery-tab" data-filter="image" onclick="filterGallery('image',this)"
+        style="display:flex;align-items:center;gap:7px;padding:8px 20px;border-radius:30px;font-size:13px;font-weight:700;border:1.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);background:transparent;cursor:pointer;transition:all 0.2s;">
+        <i class="fas fa-camera"></i> Foto
+      </button>
     </div>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
@@ -1094,6 +1465,14 @@ const PROMO_PRODUCTS = [
 ];
 
 const GALLERY_DATA = [
+  // ── VIDEO ── (simpan di folder galeri/)
+  { type:'video', src:'galeri/1.mp4', poster:'', title:'Aktivitas Apotek', desc:'Suasana & pelayanan harian kami' },
+  { type:'video', src:'galeri/2.mp4', poster:'', title:'Produk Unggulan', desc:'Koleksi produk terlengkap' },
+  { type:'video', src:'galeri/3.mp4', poster:'', title:'Testimoni Pelanggan', desc:'Pelanggan kami berbicara' },
+  { type:'video', src:'galeri/4.mp4', poster:'', title:'Aktivitas Apotek', desc:'Suasana & pelayanan harian kami' },
+  { type:'video', src:'galeri/5.mp4', poster:'', title:'Produk Unggulan', desc:'Koleksi produk terlengkap' },
+  { type:'video', src:'galeri/6.mp4', poster:'', title:'Testimoni Pelanggan', desc:'Pelanggan kami berbicara' },
+  // ── FOTO LOCAL ── (simpan di folder galeri/, format .png / .jpg)
   { img:'https://i.imgur.com/ugvBfzN.jpeg', title:'Interior Apotek', desc:'Ruang pelayanan bersih & modern' },
   { img:'https://i.imgur.com/TAlQPB0.jpeg', title:'Produk Lengkap', desc:'Ribuan produk tersedia' },
   { img:'https://i.imgur.com/uXBOyKb.jpeg', title:'Tim Apoteker', desc:'Siap melayani konsultasi' },
@@ -1892,40 +2271,103 @@ function renderPromo() {
    ============================================================ */
 function renderGallery() {
   const grid = document.getElementById('galleryGrid');
-  GALLERY_DATA.forEach(g => {
+  GALLERY_DATA.forEach((g, idx) => {
     const item = document.createElement('div');
-    item.className = 'gallery-item';
-    item.addEventListener('click', () => openGalleryModal(g.img, g.title));
+    item.className = 'gallery-item' + (g.type === 'video' ? ' is-video' : '');
 
-    const img = document.createElement('img');
-    img.src = g.img;
-    img.alt = g.title;
-    img.loading = 'lazy';
+    if (g.type === 'video') {
+      // VIDEO thumbnail (preload metadata for poster frame)
+      const vid = document.createElement('video');
+      vid.src = g.src;
+      vid.muted = true;
+      vid.preload = 'metadata';
+      vid.playsInline = true;
+      if (g.poster) vid.poster = g.poster;
+      vid.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+      item.appendChild(vid);
+
+      // Play icon overlay
+      const playBtn = document.createElement('div');
+      playBtn.className = 'gallery-play-btn';
+      playBtn.innerHTML = '<i class="fas fa-play"></i>';
+      item.appendChild(playBtn);
+
+      item.addEventListener('click', () => openGalleryModalVideo(g.src, g.title));
+    } else {
+      // IMAGE
+      const img = document.createElement('img');
+      img.src = g.src;
+      img.alt = g.title;
+      img.loading = 'lazy';
+      img.onerror = function() {
+        // If local image not found, show placeholder
+        this.style.cssText = 'width:100%;height:100%;object-fit:cover;background:linear-gradient(135deg,#166534,#0d9488);opacity:0.7;';
+        this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="140"><rect fill="%23166534" width="200" height="140"/><text x="50%" y="50%" fill="rgba(255,255,255,0.4)" font-size="14" text-anchor="middle" dominant-baseline="middle">📷 ' + encodeURIComponent(g.title) + '</text></svg>';
+      };
+      item.appendChild(img);
+      item.addEventListener('click', () => openGalleryModal(g.src, g.title));
+    }
 
     const overlay = document.createElement('div');
     overlay.className = 'gallery-overlay';
-    overlay.innerHTML = '<div class="gallery-overlay-text"><strong></strong><p></p></div>';
-    overlay.querySelector('strong').textContent = g.title;
-    overlay.querySelector('p').textContent = g.desc;
+    overlay.innerHTML = `<div class="gallery-overlay-text"><strong>${g.title}</strong><p>${g.desc}</p></div>`;
+    item.appendChild(overlay);
 
-    const zoom = document.createElement('div');
-    zoom.className = 'gallery-zoom-icon';
-    zoom.innerHTML = '<i class="fas fa-expand"></i>';
+    const zoomIcon = document.createElement('div');
+    zoomIcon.className = 'gallery-zoom-icon';
+    zoomIcon.innerHTML = g.type === 'video' ? '<i class="fas fa-play"></i>' : '<i class="fas fa-expand"></i>';
+    item.appendChild(zoomIcon);
 
-    item.append(img, overlay, zoom);
     grid.appendChild(item);
   });
 }
 
+function openGalleryModalVideo(src, caption) {
+  const modal = document.getElementById('galleryModal');
+  // Replace img with video
+  const existing = modal.querySelector('.modal-img, .modal-video');
+  if (existing) existing.remove();
+
+  const vid = document.createElement('video');
+  vid.className = 'modal-video';
+  vid.src = src;
+  vid.controls = true;
+  vid.autoplay = true;
+  vid.playsInline = true;
+  modal.insertBefore(vid, document.getElementById('galleryModalCaption'));
+  document.getElementById('galleryModalCaption').textContent = caption;
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
 function openGalleryModal(src, caption) {
   const modal = document.getElementById('galleryModal');
-  document.getElementById('galleryModalImg').src = src;
+  // Remove any video that might be there
+  const existingVid = modal.querySelector('.modal-video');
+  if (existingVid) existingVid.remove();
+  // Make sure img is present
+  let img = document.getElementById('galleryModalImg');
+  if (!img) {
+    img = document.createElement('img');
+    img.id = 'galleryModalImg';
+    img.className = 'modal-img';
+    modal.insertBefore(img, document.getElementById('galleryModalCaption'));
+  }
+  img.style.display = 'block';
+  img.src = src;
   document.getElementById('galleryModalCaption').textContent = caption;
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
 }
 function closeGalleryModal(e) { if (e.target === document.getElementById('galleryModal')) closeGalleryModalDirect(); }
-function closeGalleryModalDirect() { document.getElementById('galleryModal').classList.remove('show'); document.body.style.overflow = ''; }
+function closeGalleryModalDirect() {
+  const modal = document.getElementById('galleryModal');
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
+  // Stop video if playing
+  const vid = modal.querySelector('.modal-video');
+  if (vid) { vid.pause(); vid.remove(); }
+}
 
 /* ============================================================
    RENDER — HEALTH
@@ -2056,8 +2498,64 @@ renderHealth();
 renderTesti();
 renderCart();
 
+/* ============================================================
+   GALLERY FILTER (video / foto)
+   ============================================================ */
+function filterGallery(type, btn) {
+  // Update active tab style
+  document.querySelectorAll('.gallery-tab').forEach(t => {
+    t.style.background = 'transparent';
+    t.style.color = 'rgba(255,255,255,0.7)';
+    t.style.borderColor = 'rgba(255,255,255,0.15)';
+  });
+  btn.style.background = 'rgba(34,197,94,0.25)';
+  btn.style.color = 'white';
+  btn.style.borderColor = 'rgba(255,255,255,0.25)';
+
+  const items = document.querySelectorAll('#galleryGrid .gallery-item');
+  items.forEach(item => {
+    if (type === 'all') {
+      item.style.display = '';
+    } else if (type === 'video') {
+      item.style.display = item.classList.contains('is-video') ? '' : 'none';
+    } else {
+      item.style.display = !item.classList.contains('is-video') ? '' : 'none';
+    }
+  });
+}
+
 // Preload JSON setelah halaman dimuat
 window.addEventListener('load', () => setTimeout(loadJson, 2000));
+
+/* ============================================================
+   SCROLL REVEAL ANIMATION
+   ============================================================ */
+(function initReveal() {
+  const revealEls = [
+    '.trust-item', '.promo-card', '.product-card', '.health-card',
+    '.testi-card', '.section-header', '.contact-info-item', '.hero-stat'
+  ];
+  // Add reveal class to matching elements
+  revealEls.forEach(sel => {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      el.classList.add('reveal');
+      if (i % 4 === 1) el.classList.add('reveal-delay-1');
+      else if (i % 4 === 2) el.classList.add('reveal-delay-2');
+      else if (i % 4 === 3) el.classList.add('reveal-delay-3');
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
 </script>
 </body>
 </html>
