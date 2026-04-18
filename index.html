@@ -488,7 +488,23 @@
       /* Penyesuaian elemen lainnya untuk Mobile */
       body { padding-bottom: 70px; overflow-x: hidden; }
       .mobile-nav { display: block; }
-      .product-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+      .product-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 10px !important;
+        padding-bottom: 12px !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .product-grid::-webkit-scrollbar { display: none; }
+      .product-card {
+        flex: 0 0 38vw !important;
+        min-width: 0 !important;
+        scroll-snap-align: start !important;
+        max-width: 160px !important;
+      }
       .trust-inner { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
       .footer-grid { grid-template-columns: 1fr; }
       .section { padding: 30px 16px; }
@@ -508,7 +524,7 @@
     @media (max-width: 480px) {
       .hero { padding: 40px 16px; }
       .section { padding: 40px 16px; }
-      .product-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
+      .product-card { flex: 0 0 42vw !important; max-width: 150px !important; }
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item:first-child { grid-column: 1; aspect-ratio: 4/3; }
       .popup-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
@@ -550,17 +566,19 @@
       .checkout-sticky-wrap { position: sticky; bottom: 0; }
     }
 
-    /* ===== PRODUCT CARD 3 KOLOM MOBILE ===== */
+    /* ===== PRODUCT CARD HORIZONTAL SCROLL MOBILE ===== */
     @media (max-width: 768px) {
-      .product-img-wrap { height: 100px; padding: 8px; }
-      .product-img-wrap img { max-height: 72px; }
-      .product-body { padding: 6px 8px; }
-      .product-name { font-size: 11px; -webkit-line-clamp: 2; }
-      .product-price { font-size: 12px; }
-      .product-actions { padding: 0 6px 8px; }
-      .btn-cart { font-size: 10px; padding: 6px 4px; gap: 2px; border-radius: 6px; }
-      .btn-cart i { font-size: 10px; }
+      .product-img-wrap { height: 120px; padding: 10px; }
+      .product-img-wrap img { max-height: 90px; }
+      .product-body { padding: 8px 8px 4px; }
+      .product-name { font-size: 12px; -webkit-line-clamp: 2; }
+      .product-price { font-size: 13px; font-weight: 800; }
+      .product-actions { padding: 0 8px 10px; }
+      .btn-cart { font-size: 11px; padding: 7px 6px; gap: 4px; border-radius: 8px; }
+      .btn-cart i { font-size: 11px; }
       .badge-best, .badge-promo { font-size: 8px; padding: 2px 5px; }
+      /* Hint geser produk */
+      #products-section .section-sub .swipe-hint { display: inline-block; }
     }
   </style>
 
@@ -914,12 +932,6 @@
 
     /* ===== PRODUCT GRID ===== */
     .product-grid { grid-template-columns: repeat(auto-fill, minmax(188px, 1fr)); gap: 18px; }
-    @media (max-width: 768px) {
-      .product-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
-    }
-    @media (max-width: 480px) {
-      .product-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
-    }
 
     /* ===== GENERAL SECTION SPACING ===== */
     .section { padding: 68px 24px; }
@@ -1210,6 +1222,7 @@
       <div>
         <div class="section-tag"><i class="fas fa-box-open"></i> Katalog Produk</div>
         <div class="section-title">Produk <span>Kami</span></div>
+        <div class="section-sub">Pilih kategori &amp; geser untuk lihat semua &nbsp;<span class="swipe-hint">geser →</span></div>
       </div>
     </div>
     <div class="category-pills" id="categoryPills">
