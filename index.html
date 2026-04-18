@@ -925,6 +925,95 @@
     .section { padding: 68px 24px; }
     @media (max-width: 768px) { .section { padding: 40px 16px; } }
 
+    /* ===== SWIPE HINT ===== */
+    .swipe-hint { display: none; }
+    @media (max-width: 768px) {
+      .swipe-hint {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--green-400);
+        background: rgba(34,197,94,0.12);
+        padding: 2px 8px;
+        border-radius: 20px;
+        animation: nudge 1.5s ease-in-out infinite;
+      }
+      @keyframes nudge {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(4px); }
+      }
+    }
+
+    /* ===== MOBILE HORIZONTAL SCROLL: GALERI, EDUKASI, ULASAN ===== */
+    @media (max-width: 768px) {
+
+      /* --- GALERI --- */
+      .gallery-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        gap: 10px !important;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .gallery-grid::-webkit-scrollbar { display: none; }
+      .gallery-item {
+        flex: 0 0 75vw !important;
+        min-width: 0 !important;
+        grid-column: unset !important;
+        aspect-ratio: 4/3 !important;
+        scroll-snap-align: start;
+      }
+      .gallery-item:first-child {
+        flex: 0 0 75vw !important;
+        grid-column: unset !important;
+        aspect-ratio: 4/3 !important;
+      }
+
+      /* --- EDUKASI / HEALTH --- */
+      .health-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        gap: 12px !important;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .health-grid::-webkit-scrollbar { display: none; }
+      .health-card {
+        flex: 0 0 72vw !important;
+        min-width: 0 !important;
+        scroll-snap-align: start;
+      }
+
+      /* --- ULASAN / TESTIMONI --- */
+      .testi-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        gap: 12px !important;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .testi-grid::-webkit-scrollbar { display: none; }
+      .testi-card {
+        flex: 0 0 75vw !important;
+        min-width: 0 !important;
+        scroll-snap-align: start;
+      }
+
+      /* Indikator geser */
+      .gallery-grid::after,
+      .health-grid::after,
+      .testi-grid::after {
+        content: '';
+        flex: 0 0 4px;
+      }
+    }
+
     /* ===== MOBILE HERO FIX ===== */
     @media (max-width: 768px) {
       .hero { padding: 32px 16px 36px !important; overflow: hidden; }
@@ -1142,7 +1231,7 @@
       <div>
         <div class="section-tag" style="background:rgba(255,255,255,0.1);color:var(--green-300)"><i class="fas fa-images"></i> Galeri Kami</div>
         <div class="section-title" style="color:white">Momen <span style="color:var(--green-400)">Bersama</span> Pelanggan</div>
-        <div class="section-sub" style="color:rgba(255,255,255,0.6)">Apotek bersih, nyaman, dan profesional</div>
+        <div class="section-sub" style="color:rgba(255,255,255,0.6)">Apotek bersih, nyaman, dan profesional &nbsp;<span class="swipe-hint">geser →</span></div>
       </div>
     </div>
     <!-- Gallery Filter Tabs -->
@@ -1171,7 +1260,7 @@
       <div>
         <div class="section-tag"><i class="fas fa-heartbeat"></i> Edukasi</div>
         <div class="section-title">Informasi <span>Kesehatan</span></div>
-        <div class="section-sub">Tips sehat dan edukasi dari para ahli</div>
+        <div class="section-sub">Tips sehat dan edukasi dari para ahli &nbsp;<span class="swipe-hint">geser →</span></div>
       </div>
     </div>
     <div class="health-grid" id="healthGrid"></div>
@@ -1185,7 +1274,7 @@
       <div>
         <div class="section-tag"><i class="fas fa-star"></i> Ulasan</div>
         <div class="section-title">Kata <span>Pelanggan</span> Kami</div>
-        <div class="section-sub">Kepuasan Anda adalah prioritas kami</div>
+        <div class="section-sub">Kepuasan Anda adalah prioritas kami &nbsp;<span class="swipe-hint">geser →</span></div>
       </div>
     </div>
     <div class="testi-grid" id="testiGrid"></div>
