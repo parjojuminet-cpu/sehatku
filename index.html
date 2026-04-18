@@ -488,7 +488,7 @@
       /* Penyesuaian elemen lainnya untuk Mobile */
       body { padding-bottom: 70px; }
       .mobile-nav { display: block; }
-      .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .product-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
       .trust-inner { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
       .footer-grid { grid-template-columns: 1fr; }
       .section { padding: 30px 16px; }
@@ -535,6 +535,18 @@
       .cart-drawer { max-width: 100%; }
       .cart-drawer-footer { padding-bottom: 16px; }
       .checkout-sticky-wrap { position: sticky; bottom: 0; }
+    }
+
+    /* ===== PRODUCT CARD 3 KOLOM MOBILE ===== */
+    @media (max-width: 768px) {
+      .product-img-wrap { height: 110px; padding: 10px; }
+      .product-img-wrap img { max-height: 80px; }
+      .product-body { padding: 8px; }
+      .product-name { font-size: 11px; }
+      .product-price { font-size: 12px; }
+      .product-actions { padding: 0 8px 8px; }
+      .btn-cart { font-size: 10px; padding: 7px 4px; gap: 3px; }
+      .btn-cart i { font-size: 10px; }
     }
   </style>
 
