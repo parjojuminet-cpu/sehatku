@@ -1493,6 +1493,86 @@
     .nav-menu-link.cek-link:hover {
       background: linear-gradient(135deg, var(--green-100), rgba(20,184,166,0.12)) !important;
     }
+
+    /* ---- BIODATA FORM ---- */
+    .biodata-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      border: 1px solid var(--gray-100);
+      animation: fadeInUp 0.3s ease;
+    }
+    .biodata-intro {
+      background: linear-gradient(135deg, var(--green-50), rgba(20,184,166,0.06));
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .biodata-intro-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .biodata-intro-text {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+    .biodata-intro-text strong { color: var(--green-700); }
+    .biodata-field {
+      margin-bottom: 16px;
+    }
+    .biodata-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 6px;
+    }
+    .biodata-label span {
+      color: var(--red-500);
+      margin-left: 2px;
+    }
+    .biodata-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--gray-800);
+      outline: none;
+      transition: var(--transition);
+      background: white;
+    }
+    .biodata-input:focus {
+      border-color: var(--green-500);
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.1);
+    }
+    .biodata-input.error {
+      border-color: var(--red-500);
+      box-shadow: 0 0 0 4px rgba(239,68,68,0.08);
+    }
+    .biodata-error-msg {
+      font-size: 11px;
+      color: var(--red-500);
+      margin-top: 4px;
+      display: none;
+      font-weight: 600;
+    }
+    .biodata-error-msg.show { display: block; }
+    .biodata-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 480px) {
+      .biodata-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -3382,23 +3462,157 @@ const FUNNEL_DATA = {
 };
 
 // Funnel state
-let funnelState = {
+var funnelState = {
   type: null,
   step: 0,
-  answers: {}
+  answers: {},
+  biodata: {},
+  phase: 'biodata' // 'biodata' | 'questions'
 };
 
 function openFunnel(type) {
-  funnelState = { type, step: 0, answers: {} };
-  const overlay = document.getElementById('funnelOverlay');
+  funnelState = { type: type, step: 0, answers: {}, biodata: {}, phase: 'biodata' };
+  var overlay = document.getElementById('funnelOverlay');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
-  renderFunnelStep();
+  renderBiodata();
 }
 
 function closeFunnel() {
   document.getElementById('funnelOverlay').classList.remove('open');
   document.body.style.overflow = '';
+}
+
+function renderBiodata() {
+  var data = FUNNEL_DATA[funnelState.type];
+  document.getElementById('funnelTitle').textContent = 'Data Diri';
+
+  var body = document.getElementById('funnelBody');
+  body.innerHTML = '';
+
+  // Progress (step 0 of total+1 visually)
+  var total = data.questions.length;
+  var progressDiv = document.createElement('div');
+  progressDiv.className = 'funnel-progress';
+  progressDiv.innerHTML =
+    '<div class="funnel-progress-label">' +
+      '<span class="step-label">Biodata Diri</span>' +
+      '<span>0%</span>' +
+    '</div>' +
+    '<div class="funnel-progress-bar-bg">' +
+      '<div class="funnel-progress-bar-fill" style="width:0%"></div>' +
+    '</div>';
+  body.appendChild(progressDiv);
+
+  // Biodata card
+  var card = document.createElement('div');
+  card.className = 'biodata-card';
+
+  // Intro box
+  var intro = document.createElement('div');
+  intro.className = 'biodata-intro';
+  intro.innerHTML =
+    '<div class="biodata-intro-icon">📋</div>' +
+    '<div class="biodata-intro-text">' +
+      '<strong>Sebelum memulai, isi data diri kamu dulu ya.</strong><br>' +
+      'Informasi ini membantu dokter memberikan analisa yang lebih akurat dan personal sesuai kondisimu.' +
+    '</div>';
+  card.appendChild(intro);
+
+  // Fields
+  var fields = [
+    { id: 'nama', label: 'Nama Lengkap', placeholder: 'Contoh: Budi Santoso', type: 'text', required: true },
+    { id: 'umur', label: 'Usia', placeholder: 'Contoh: 25', type: 'number', required: true },
+    { id: 'jenkel', label: 'Jenis Kelamin', placeholder: '', type: 'select', required: true, options: ['Laki-laki', 'Perempuan'] },
+    { id: 'pekerjaan', label: 'Pekerjaan / Sekolah', placeholder: 'Contoh: Mahasiswa, Karyawan, Ibu Rumah Tangga...', type: 'text', required: true }
+  ];
+
+  // Row 1: nama (full width)
+  fields.forEach(function(f, idx) {
+    var fieldDiv = document.createElement('div');
+    fieldDiv.className = 'biodata-field';
+
+    var label = document.createElement('label');
+    label.className = 'biodata-label';
+    label.setAttribute('for', 'bio_' + f.id);
+    label.innerHTML = f.label + (f.required ? '<span>*</span>' : '');
+    fieldDiv.appendChild(label);
+
+    var input;
+    if (f.type === 'select') {
+      input = document.createElement('select');
+      input.className = 'biodata-input';
+      var defOpt = document.createElement('option');
+      defOpt.value = '';
+      defOpt.textContent = '-- Pilih --';
+      input.appendChild(defOpt);
+      f.options.forEach(function(opt) {
+        var o = document.createElement('option');
+        o.value = opt;
+        o.textContent = opt;
+        if (funnelState.biodata[f.id] === opt) o.selected = true;
+        input.appendChild(o);
+      });
+    } else {
+      input = document.createElement('input');
+      input.type = f.type;
+      input.placeholder = f.placeholder;
+      input.value = funnelState.biodata[f.id] || '';
+      input.className = 'biodata-input';
+    }
+    input.id = 'bio_' + f.id;
+    if (f.type === 'number') { input.min = 1; input.max = 120; }
+
+    var errMsg = document.createElement('div');
+    errMsg.className = 'biodata-error-msg';
+    errMsg.id = 'bio_err_' + f.id;
+    errMsg.textContent = f.label + ' wajib diisi';
+
+    (function(fid) {
+      input.addEventListener('input', function() {
+        funnelState.biodata[fid] = this.value;
+        this.classList.remove('error');
+        document.getElementById('bio_err_' + fid).classList.remove('show');
+      });
+      input.addEventListener('change', function() {
+        funnelState.biodata[fid] = this.value;
+      });
+    })(f.id);
+
+    fieldDiv.appendChild(input);
+    fieldDiv.appendChild(errMsg);
+    card.appendChild(fieldDiv);
+  });
+
+  // Start button
+  var startBtn = document.createElement('button');
+  startBtn.className = 'funnel-next-btn';
+  startBtn.innerHTML = 'Mulai Kuesioner <i class="fas fa-arrow-right"></i>';
+  startBtn.style.marginTop = '8px';
+  startBtn.addEventListener('click', function() {
+    // Validate
+    var valid = true;
+    fields.forEach(function(f) {
+      if (f.required) {
+        var val = (document.getElementById('bio_' + f.id).value || '').trim();
+        if (!val) {
+          valid = false;
+          document.getElementById('bio_' + f.id).classList.add('error');
+          document.getElementById('bio_err_' + f.id).classList.add('show');
+        } else {
+          funnelState.biodata[f.id] = val;
+        }
+      }
+    });
+    if (valid) {
+      funnelState.phase = 'questions';
+      renderFunnelStep();
+    }
+  });
+  card.appendChild(startBtn);
+  body.appendChild(card);
+
+  document.getElementById('funnelOverlay').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderFunnelStep() {
@@ -3555,9 +3769,12 @@ function nextFunnelStep() {
 }
 
 function prevFunnelStep() {
-  if (funnelState.step > 0) {
+  if (funnelState.phase === 'questions' && funnelState.step > 0) {
     funnelState.step--;
     renderFunnelStep();
+  } else if (funnelState.phase === 'questions' && funnelState.step === 0) {
+    funnelState.phase = 'biodata';
+    renderBiodata();
   } else {
     closeFunnel();
   }
@@ -3617,7 +3834,19 @@ function showFunnelResult() {
   issues = issues.slice(0, 3);
   if (issues.length === 0) issues.push({ title: 'Kondisi secara umum baik', desc: 'Namun konsultasi dokter dapat membantu optimasi lebih lanjut sesuai kondisi spesifik kamu.' });
 
-  var waMsg = 'Halo, saya ingin lanjut konsultasi dokter dari sehatku.store.\n\nBerikut hasil awal saya:\n- Kategori: ' + kategori + '\n- Ringkasan: ' + summary + '\n\nMohon dibantu untuk konsultasi lebih lanjut.';
+  var bio = funnelState.biodata;
+  var biodataLine = 'Nama: ' + (bio.nama || '-') + ', Usia: ' + (bio.umur || '-') + ' thn, Jenis Kelamin: ' + (bio.jenkel || '-') + ', Pekerjaan: ' + (bio.pekerjaan || '-');
+  var waMsg = 'Halo, saya ingin lanjut konsultasi dokter dari sehatku.store.' +
+    '\n\n*Data Diri:*' +
+    '\n- Nama: ' + (bio.nama || '-') +
+    '\n- Usia: ' + (bio.umur || '-') + ' tahun' +
+    '\n- Jenis Kelamin: ' + (bio.jenkel || '-') +
+    '\n- Pekerjaan/Sekolah: ' + (bio.pekerjaan || '-') +
+    '\n\n*Hasil Analisa Awal:*' +
+    '\n- Jenis Cek: ' + (type === 'diet' ? 'Cek Diet' : 'Cek Kulit') +
+    '\n- Kategori: ' + kategori +
+    '\n- Ringkasan: ' + summary +
+    '\n\nMohon dibantu untuk konsultasi lebih lanjut. Terima kasih!';
   var waLink = 'https://wa.me/6285731070315?text=' + encodeURIComponent(waMsg);
 
   var data = FUNNEL_DATA[type];
@@ -3633,9 +3862,17 @@ function showFunnelResult() {
   var hCard = document.createElement('div');
   hCard.className = 'result-header-card';
   hCard.style.background = data.color;
-  hCard.innerHTML = '<div class="result-tag"><i class="fas fa-chart-bar"></i> Hasil Analisa Awal Kamu</div>' +
+  hCard.innerHTML =
+    '<div class="result-tag"><i class="fas fa-chart-bar"></i> Hasil Analisa Awal Kamu</div>' +
     '<div class="result-title">' + data.icon + ' ' + (type === 'diet' ? 'Analisa Diet' : 'Analisa Kulit') + '</div>' +
-    '<div class="result-category">' + kategori + '</div>';
+    '<div class="result-category">' + kategori + '</div>' +
+    '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.2);font-size:13px;opacity:0.9;line-height:1.7;">' +
+      '<i class="fas fa-user" style="margin-right:6px;opacity:0.8"></i>' +
+      '<strong>' + (bio.nama || '-') + '</strong>' +
+      ' &nbsp;·&nbsp; ' + (bio.umur || '-') + ' thn' +
+      ' &nbsp;·&nbsp; ' + (bio.jenkel || '-') +
+      ' &nbsp;·&nbsp; ' + (bio.pekerjaan || '-') +
+    '</div>';
   wrapper.appendChild(hCard);
 
   // Issues card
