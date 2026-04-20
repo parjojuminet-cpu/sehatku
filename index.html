@@ -3835,18 +3835,96 @@ function showFunnelResult() {
   if (issues.length === 0) issues.push({ title: 'Kondisi secara umum baik', desc: 'Namun konsultasi dokter dapat membantu optimasi lebih lanjut sesuai kondisi spesifik kamu.' });
 
   var bio = funnelState.biodata;
-  var biodataLine = 'Nama: ' + (bio.nama || '-') + ', Usia: ' + (bio.umur || '-') + ' thn, Jenis Kelamin: ' + (bio.jenkel || '-') + ', Pekerjaan: ' + (bio.pekerjaan || '-');
-  var waMsg = 'Halo, saya ingin lanjut konsultasi dokter dari sehatku.store.' +
-    '\n\n*Data Diri:*' +
-    '\n- Nama: ' + (bio.nama || '-') +
-    '\n- Usia: ' + (bio.umur || '-') + ' tahun' +
-    '\n- Jenis Kelamin: ' + (bio.jenkel || '-') +
-    '\n- Pekerjaan/Sekolah: ' + (bio.pekerjaan || '-') +
-    '\n\n*Hasil Analisa Awal:*' +
-    '\n- Jenis Cek: ' + (type === 'diet' ? 'Cek Diet' : 'Cek Kulit') +
-    '\n- Kategori: ' + kategori +
-    '\n- Ringkasan: ' + summary +
-    '\n\nMohon dibantu untuk konsultasi lebih lanjut. Terima kasih!';
+  var a = funnelState.answers;
+
+  // ── Label maps for human-readable answers ──────────────────────────────
+  var LABELS = {
+    // Diet
+    tujuan:     { turun_bb:'Turun berat badan', perut:'Mengecilkan perut', jaga_bb:'Menjaga berat badan', otot:'Menambah massa otot' },
+    aktivitas:  { sedentary:'Sangat jarang bergerak (duduk terus)', light:'Kadang-kadang gerak ringan', moderate:'Aktif bergerak setiap hari', heavy:'Olahraga intens / kerja fisik berat' },
+    kebiasaan:  { manis_ngemil:'Sering makan manis & ngemil', goreng:'Sering makan gorengan', sehat:'Sudah cukup sehat', skip:'Sering skip makan / tidak teratur' },
+    riwayat:    { belum:'Belum pernah diet', gagal:'Pernah, tapi gagal/tidak konsisten', yoyo:'Pernah berhasil tapi yo-yo', sedang:'Sedang menjalani program diet' },
+    kendala:    { nafsu:'Susah kontrol nafsu makan', motivasi:'Tidak ada motivasi', bingung:'Tidak tahu harus mulai dari mana', mahal:'Makanan sehat dianggap mahal' },
+    // Kulit
+    masalah:    { jerawat:'Jerawat / bruntusan', kusam:'Kulit kusam / tidak cerah', berminyak:'Kulit berminyak berlebih', kering:'Kulit kering & mengelupas', flek:'Flek / hiperpigmentasi' },
+    jenis_kulit:{ berminyak:'Berminyak', kering:'Kering', kombinasi:'Kombinasi', normal:'Normal', sensitif:'Sensitif' },
+    frekuensi_jerawat: { jarang:'Jarang / hampir tidak pernah', kadang:'Kadang-kadang (sebulan sekali)', sering:'Cukup sering (seminggu sekali)', selalu:'Hampir setiap hari' },
+    rutinitas:  { tidak_ada:'Tidak ada rutinitas', cuci_muka:'Hanya cuci muka', basic:'Basic (sabun + pelembap)', lengkap:'Lengkap (toner, serum, dll.)' },
+    sunscreen:  { tidak:'Tidak pernah', kadang:'Kadang-kadang saja', keluar:'Hanya kalau keluar rumah', selalu:'Setiap hari' },
+    stres:      { rendah:'Santai / tidak banyak tekanan', sedang:'Normal, bisa dikelola', tinggi:'Cukup stres / agak berat', sangat_tinggi:'Sangat stres akhir-akhir ini' },
+    // Shared
+    tidur:      { kurang:'Kurang dari 5 jam', cukup_kurang:'5–6 jam', ideal:'7–8 jam', lebih:'Lebih dari 8 jam' }
+  };
+
+  function L(key, val) {
+    return (LABELS[key] && LABELS[key][val]) ? LABELS[key][val] : (val || '-');
+  }
+
+  // ── Build WA message ────────────────────────────────────────────────────
+  var berat = a.berat ? a.berat + ' kg' : '-';
+  var tinggi = a.tinggi ? a.tinggi + ' cm' : '-';
+  var bmi = (parseFloat(a.berat) && parseFloat(a.tinggi))
+    ? (parseFloat(a.berat) / Math.pow(parseFloat(a.tinggi)/100, 2)).toFixed(1)
+    : null;
+  var bmiStatus = bmi
+    ? (bmi < 18.5 ? 'Kurang Berat (Underweight)' : bmi < 25 ? 'Normal' : bmi < 30 ? 'Kelebihan Berat (Overweight)' : 'Obesitas')
+    : null;
+
+  var line = '\n';
+  var sep  = '\n─────────────────────────\n';
+
+  var waMsg = '🏥 *FORMULIR KONSULTASI SEHATKU.STORE*' + sep;
+
+  waMsg += '👤 *DATA PASIEN*' + line;
+  waMsg += '• Nama       : ' + (bio.nama      || '-') + line;
+  waMsg += '• Usia       : ' + (bio.umur      || '-') + ' tahun' + line;
+  waMsg += '• Kelamin    : ' + (bio.jenkel    || '-') + line;
+  waMsg += '• Pekerjaan  : ' + (bio.pekerjaan || '-') + sep;
+
+  if (type === 'diet') {
+    waMsg += '🥗 *JENIS KONSULTASI: DIET & BERAT BADAN*' + sep;
+
+    waMsg += '📋 *JAWABAN KUESIONER*' + line;
+    waMsg += '1. Tujuan utama    : ' + L('tujuan', a.tujuan) + line;
+    waMsg += '2. Berat badan     : ' + berat + line;
+    waMsg += '3. Tinggi badan    : ' + tinggi + line;
+    if (bmi) {
+    waMsg += '   IMT / BMI       : ' + bmi + ' (' + bmiStatus + ')' + line;
+    }
+    waMsg += '4. Aktivitas harian: ' + L('aktivitas', a.aktivitas) + line;
+    waMsg += '5. Kebiasaan makan : ' + L('kebiasaan', a.kebiasaan) + line;
+    waMsg += '6. Jam tidur       : ' + L('tidur', a.tidur) + line;
+    waMsg += '7. Riwayat diet    : ' + L('riwayat', a.riwayat) + line;
+    waMsg += '8. Kendala terbesar: ' + L('kendala', a.kendala) + sep;
+
+    waMsg += '📊 *HASIL ANALISA AWAL*' + line;
+    waMsg += '• Kategori : ' + kategori + line;
+    issues.forEach(function(iss, i) {
+      waMsg += '• Poin ' + (i+1) + '   : ' + iss.title + ' — ' + iss.desc + line;
+    });
+
+  } else {
+    waMsg += '✨ *JENIS KONSULTASI: KULIT & SKINCARE*' + sep;
+
+    waMsg += '📋 *JAWABAN KUESIONER*' + line;
+    waMsg += '1. Masalah utama       : ' + L('masalah', a.masalah) + line;
+    waMsg += '2. Jenis kulit         : ' + L('jenis_kulit', a.jenis_kulit) + line;
+    waMsg += '3. Frekuensi jerawat   : ' + L('frekuensi_jerawat', a.frekuensi_jerawat) + line;
+    waMsg += '4. Rutinitas skincare  : ' + L('rutinitas', a.rutinitas) + line;
+    waMsg += '5. Pemakaian sunscreen : ' + L('sunscreen', a.sunscreen) + line;
+    waMsg += '6. Jam tidur           : ' + L('tidur', a.tidur) + line;
+    waMsg += '7. Tingkat stres       : ' + L('stres', a.stres) + sep;
+
+    waMsg += '📊 *HASIL ANALISA AWAL*' + line;
+    waMsg += '• Kategori : ' + kategori + line;
+    issues.forEach(function(iss, i) {
+      waMsg += '• Poin ' + (i+1) + '   : ' + iss.title + ' — ' + iss.desc + line;
+    });
+  }
+
+  waMsg += sep;
+  waMsg += '_Mohon dibantu untuk konsultasi lebih lanjut. Terima kasih! 🙏_';
+
   var waLink = 'https://wa.me/6285731070315?text=' + encodeURIComponent(waMsg);
 
   var data = FUNNEL_DATA[type];
