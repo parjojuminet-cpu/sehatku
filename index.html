@@ -1674,9 +1674,6 @@
       <button class="cek-btn cek-btn-kulit" onclick="openFunnel('kulit')">
         <span class="btn-icon">✨</span> Cek Kulit
       </button>
-      <button class="cek-btn cek-btn-obat" onclick="scrollToSection('products-section')">
-        <span class="btn-icon">💊</span> Cari Obat
-      </button>
     </div>
   </div>
 </section>
@@ -3405,89 +3402,148 @@ function closeFunnel() {
 }
 
 function renderFunnelStep() {
-  const data = FUNNEL_DATA[funnelState.type];
-  const questions = data.questions;
-  const step = funnelState.step;
-  const total = questions.length;
+  var data = FUNNEL_DATA[funnelState.type];
+  var questions = data.questions;
+  var step = funnelState.step;
+  var total = questions.length;
+  var q = questions[step];
+  var pct = Math.round((step / total) * 100);
+  var hasAnswer = funnelState.answers[q.id];
+  var isLast = (step === total - 1);
 
-  // Update header
   document.getElementById('funnelTitle').textContent = data.title;
 
-  // Update progress
-  const pct = Math.round((step / total) * 100);
-  document.getElementById('funnelProgressFill').style.width = pct + '%';
-  document.getElementById('funnelProgressLabel').textContent = 'Langkah ' + (step + 1) + ' dari ' + total;
+  var body = document.getElementById('funnelBody');
+  body.innerHTML = '';
 
-  const body = document.getElementById('funnelBody');
-  const q = questions[step];
+  // --- Progress ---
+  var progressDiv = document.createElement('div');
+  progressDiv.className = 'funnel-progress';
+  var labelRow = document.createElement('div');
+  labelRow.className = 'funnel-progress-label';
+  var stepSpan = document.createElement('span');
+  stepSpan.className = 'step-label';
+  stepSpan.id = 'funnelProgressLabel';
+  stepSpan.textContent = 'Langkah ' + (step + 1) + ' dari ' + total;
+  var pctSpan = document.createElement('span');
+  pctSpan.textContent = pct + '%';
+  labelRow.appendChild(stepSpan);
+  labelRow.appendChild(pctSpan);
+  var barBg = document.createElement('div');
+  barBg.className = 'funnel-progress-bar-bg';
+  var barFill = document.createElement('div');
+  barFill.className = 'funnel-progress-bar-fill';
+  barFill.id = 'funnelProgressFill';
+  barFill.style.width = pct + '%';
+  barBg.appendChild(barFill);
+  progressDiv.appendChild(labelRow);
+  progressDiv.appendChild(barBg);
+  body.appendChild(progressDiv);
 
-  let optionsHTML = '';
+  // --- Question card ---
+  var card = document.createElement('div');
+  card.className = 'funnel-question-card';
+
+  var qNum = document.createElement('div');
+  qNum.className = 'funnel-q-num';
+  qNum.textContent = 'Pertanyaan ' + (step + 1);
+  card.appendChild(qNum);
+
+  var qText = document.createElement('div');
+  qText.className = 'funnel-q-text';
+  qText.textContent = q.text;
+  card.appendChild(qText);
+
+  // --- Options container ---
+  var optionsDiv = document.createElement('div');
+  optionsDiv.className = 'funnel-options';
+  optionsDiv.id = 'funnelOptions';
+
   if (q.type === 'choice') {
-    optionsHTML = q.options.map(opt => `
-      <button class="funnel-option" onclick="selectOption('${q.id}', '${opt.value}', this)">
-        <span class="opt-icon">${opt.icon}</span>
-        <span>${opt.label}</span>
-        <span class="opt-check"><i class="fas fa-check"></i></span>
-      </button>
-    `).join('');
-  } else if (q.type === 'number') {
-    const saved = funnelState.answers[q.id] || '';
-    optionsHTML = `
-      <input type="number" class="funnel-number-input" id="numInput_${q.id}"
-        placeholder="${q.placeholder}" value="${saved}"
-        min="${q.min}" max="${q.max}"
-        oninput="funnelState.answers['${q.id}']=this.value; document.getElementById('funnelNextBtn').disabled=!this.value"
-      />
-      <div class="funnel-input-hint">Masukkan angka dalam satuan ${q.unit}</div>
-    `;
-  }
+    q.options.forEach(function(opt) {
+      var btn = document.createElement('button');
+      btn.className = 'funnel-option';
+      if (funnelState.answers[q.id] === opt.value) btn.classList.add('selected');
 
-  const hasAnswer = funnelState.answers[q.id];
-  const isLast = step === total - 1;
+      var iconSpan = document.createElement('span');
+      iconSpan.className = 'opt-icon';
+      iconSpan.textContent = opt.icon;
 
-  body.innerHTML = `
-    <div class="funnel-progress">
-      <div class="funnel-progress-label">
-        <span class="step-label" id="funnelProgressLabel">Langkah ${step + 1} dari ${total}</span>
-        <span>${pct}%</span>
-      </div>
-      <div class="funnel-progress-bar-bg">
-        <div class="funnel-progress-bar-fill" id="funnelProgressFill" style="width:${pct}%"></div>
-      </div>
-    </div>
-    <div class="funnel-question-card">
-      <div class="funnel-q-num">Pertanyaan ${step + 1}</div>
-      <div class="funnel-q-text">${q.text}</div>
-      <div class="funnel-options" id="funnelOptions">
-        ${optionsHTML}
-      </div>
-      <button class="funnel-next-btn" id="funnelNextBtn"
-        onclick="${isLast ? 'showFunnelResult()' : 'nextFunnelStep()'}"
-        ${hasAnswer ? '' : 'disabled'}>
-        ${isLast ? '<i class="fas fa-chart-bar"></i> Lihat Hasil Analisa' : 'Lanjut <i class="fas fa-arrow-right"></i>'}
-      </button>
-    </div>
-  `;
+      var labelSpan = document.createElement('span');
+      labelSpan.textContent = opt.label;
 
-  // Restore selected state if revisiting
-  if (q.type === 'choice' && funnelState.answers[q.id]) {
-    document.querySelectorAll('#funnelOptions .funnel-option').forEach(btn => {
-      if (btn.getAttribute('onclick').includes(funnelState.answers[q.id])) {
-        btn.classList.add('selected');
-      }
+      var checkSpan = document.createElement('span');
+      checkSpan.className = 'opt-check';
+      var checkIcon = document.createElement('i');
+      checkIcon.className = 'fas fa-check';
+      checkSpan.appendChild(checkIcon);
+
+      btn.appendChild(iconSpan);
+      btn.appendChild(labelSpan);
+      btn.appendChild(checkSpan);
+
+      (function(qId, val) {
+        btn.addEventListener('click', function() {
+          selectOption(qId, val, btn);
+        });
+      })(q.id, opt.value);
+
+      optionsDiv.appendChild(btn);
     });
+  } else if (q.type === 'number') {
+    var input = document.createElement('input');
+    input.type = 'number';
+    input.className = 'funnel-number-input';
+    input.id = 'numInput_' + q.id;
+    input.placeholder = q.placeholder;
+    input.value = funnelState.answers[q.id] || '';
+    input.min = q.min;
+    input.max = q.max;
+    (function(qId) {
+      input.addEventListener('input', function() {
+        funnelState.answers[qId] = this.value;
+        var nb = document.getElementById('funnelNextBtn');
+        if (nb) nb.disabled = !this.value;
+      });
+    })(q.id);
+    optionsDiv.appendChild(input);
+
+    var hint = document.createElement('div');
+    hint.className = 'funnel-input-hint';
+    hint.textContent = 'Masukkan angka dalam satuan ' + q.unit;
+    optionsDiv.appendChild(hint);
   }
 
-  // Scroll to top
+  card.appendChild(optionsDiv);
+
+  // --- Next button ---
+  var nextBtn = document.createElement('button');
+  nextBtn.className = 'funnel-next-btn';
+  nextBtn.id = 'funnelNextBtn';
+  nextBtn.disabled = !hasAnswer;
+
+  if (isLast) {
+    nextBtn.innerHTML = '<i class="fas fa-chart-bar"></i> Lihat Hasil Analisa';
+    nextBtn.addEventListener('click', showFunnelResult);
+  } else {
+    nextBtn.innerHTML = 'Lanjut <i class="fas fa-arrow-right"></i>';
+    nextBtn.addEventListener('click', nextFunnelStep);
+  }
+
+  card.appendChild(nextBtn);
+  body.appendChild(card);
+
   document.getElementById('funnelOverlay').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function selectOption(questionId, value, btn) {
-  // Deselect all
-  document.querySelectorAll('#funnelOptions .funnel-option').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#funnelOptions .funnel-option').forEach(function(b) {
+    b.classList.remove('selected');
+  });
   btn.classList.add('selected');
   funnelState.answers[questionId] = value;
-  document.getElementById('funnelNextBtn').disabled = false;
+  var nb = document.getElementById('funnelNextBtn');
+  if (nb) nb.disabled = false;
 }
 
 function nextFunnelStep() {
@@ -3508,32 +3564,36 @@ function prevFunnelStep() {
 }
 
 function showFunnelResult() {
-  const a = funnelState.answers;
-  const type = funnelState.type;
-  let kategori = '', issues = [], summary = '';
+  var a = funnelState.answers;
+  var type = funnelState.type;
+  var kategori = '', issues = [], summary = '';
 
   if (type === 'diet') {
-    const berat = parseFloat(a.berat) || 0;
-    const tinggi = parseFloat(a.tinggi) || 0;
-    const bmi = tinggi > 0 ? (berat / ((tinggi/100) ** 2)).toFixed(1) : null;
+    var berat = parseFloat(a.berat) || 0;
+    var tinggi = parseFloat(a.tinggi) || 0;
+    var bmi = tinggi > 0 ? (berat / Math.pow(tinggi/100, 2)).toFixed(1) : null;
 
     if (a.tujuan === 'turun_bb' || a.tujuan === 'perut') {
-      kategori = bmi && bmi > 25 ? 'Berat Badan Berlebih — Perlu Program Diet Khusus' : 'Ingin Menurunkan Berat Badan';
+      kategori = (bmi && bmi > 25) ? 'Berat Badan Berlebih — Perlu Program Diet Khusus' : 'Ingin Menurunkan Berat Badan';
     } else if (a.tujuan === 'otot') {
       kategori = 'Program Pembentukan Tubuh (Body Recomposition)';
     } else {
       kategori = 'Maintenance — Menjaga Berat Badan Ideal';
     }
 
-    if (bmi) issues.push({ title: `IMT kamu: ${bmi}`, desc: bmi < 18.5 ? 'Berat badan kurang dari ideal. Perlu penambahan kalori sehat.' : bmi > 25 ? 'Berat badan di atas ideal. Defisit kalori terstruktur diperlukan.' : 'Berat badan dalam rentang ideal. Fokus pada komposisi tubuh.' });
+    if (bmi) {
+      var bmiDesc = bmi < 18.5 ? 'Berat badan kurang dari ideal. Perlu penambahan kalori sehat.' : bmi > 25 ? 'Berat badan di atas ideal. Defisit kalori terstruktur diperlukan.' : 'Berat badan dalam rentang ideal. Fokus pada komposisi tubuh.';
+      issues.push({ title: 'IMT kamu: ' + bmi, desc: bmiDesc });
+    }
     if (a.kebiasaan === 'manis_ngemil') issues.push({ title: 'Kebiasaan konsumsi gula tinggi', desc: 'Gula berlebih menyebabkan lonjakan insulin yang menghambat pembakaran lemak.' });
     if (a.aktivitas === 'sedentary') issues.push({ title: 'Aktivitas fisik sangat rendah', desc: 'Kurang gerak memperlambat metabolisme dan mempersulit penurunan berat badan.' });
     if (a.tidur === 'kurang') issues.push({ title: 'Tidur kurang dari 5 jam', desc: 'Kurang tidur meningkatkan hormon lapar (ghrelin) dan menghambat diet.' });
     if (a.riwayat === 'yoyo') issues.push({ title: 'Riwayat diet yo-yo', desc: 'Berat yang naik-turun menandakan program sebelumnya tidak berkelanjutan.' });
 
-    summary = `Tujuan: ${a.tujuan === 'turun_bb' ? 'Turun BB' : a.tujuan === 'perut' ? 'Mengecilkan perut' : a.tujuan === 'otot' ? 'Massa otot' : 'Menjaga BB'}, Aktivitas: ${a.aktivitas || '-'}, Kendala: ${a.kendala || '-'}`;
+    var tujuanLabel = a.tujuan === 'turun_bb' ? 'Turun BB' : a.tujuan === 'perut' ? 'Mengecilkan perut' : a.tujuan === 'otot' ? 'Massa otot' : 'Menjaga BB';
+    summary = 'Tujuan: ' + tujuanLabel + ', Aktivitas: ' + (a.aktivitas || '-') + ', Kendala: ' + (a.kendala || '-');
   } else {
-    if (a.masalah === 'jerawat' || (a.frekuensi_jerawat === 'sering' || a.frekuensi_jerawat === 'selalu')) {
+    if (a.masalah === 'jerawat' || a.frekuensi_jerawat === 'sering' || a.frekuensi_jerawat === 'selalu') {
       kategori = 'Kulit Berjerawat — Perlu Perawatan Terarah';
     } else if (a.masalah === 'kusam') {
       kategori = 'Kulit Kusam — Perlu Brightening Routine';
@@ -3551,69 +3611,83 @@ function showFunnelResult() {
     if (a.rutinitas === 'tidak_ada' || a.rutinitas === 'cuci_muka') issues.push({ title: 'Rutinitas skincare belum terbentuk', desc: 'Perawatan dasar (pembersih, pelembap, SPF) sangat penting untuk kesehatan kulit jangka panjang.' });
     if (a.masalah === 'kering' && a.jenis_kulit === 'kering') issues.push({ title: 'Kulit kering membutuhkan hidrasi lebih', desc: 'Diperlukan produk dengan kandungan ceramide, hyaluronic acid, atau glycerin yang tepat.' });
 
-    summary = `Masalah: ${a.masalah || '-'}, Jenis kulit: ${a.jenis_kulit || '-'}, Rutinitas: ${a.rutinitas || '-'}`;
+    summary = 'Masalah: ' + (a.masalah || '-') + ', Jenis kulit: ' + (a.jenis_kulit || '-') + ', Rutinitas: ' + (a.rutinitas || '-');
   }
 
-  // Take max 3 issues
   issues = issues.slice(0, 3);
   if (issues.length === 0) issues.push({ title: 'Kondisi secara umum baik', desc: 'Namun konsultasi dokter dapat membantu optimasi lebih lanjut sesuai kondisi spesifik kamu.' });
 
-  const issueHTML = issues.map(i => `
-    <div class="result-issue-item">
-      <div class="result-issue-dot"></div>
-      <div class="result-issue-text"><strong>${i.title}:</strong> ${i.desc}</div>
-    </div>
-  `).join('');
+  var waMsg = 'Halo, saya ingin lanjut konsultasi dokter dari sehatku.store.\n\nBerikut hasil awal saya:\n- Kategori: ' + kategori + '\n- Ringkasan: ' + summary + '\n\nMohon dibantu untuk konsultasi lebih lanjut.';
+  var waLink = 'https://wa.me/6285731070315?text=' + encodeURIComponent(waMsg);
 
-  const waText = encodeURIComponent(
-    `Halo, saya ingin lanjut konsultasi dokter dari sehatku.store.\n\nBerikut hasil awal saya:\n- Kategori: ${kategori}\n- Ringkasan: ${summary}\n\nMohon dibantu untuk konsultasi lebih lanjut.`
-  );
-  const waLink = `https://wa.me/6285731070315?text=${waText}`;
-
-  const data = FUNNEL_DATA[type];
+  var data = FUNNEL_DATA[type];
   document.getElementById('funnelTitle').textContent = 'Hasil Analisa';
-  document.getElementById('funnelBody').innerHTML = `
-    <div class="funnel-result">
-      <div class="result-header-card" style="background:${data.color}">
-        <div class="result-tag"><i class="fas fa-chart-bar"></i> Hasil Analisa Awal Kamu</div>
-        <div class="result-title">${data.icon} ${type === 'diet' ? 'Analisa Diet' : 'Analisa Kulit'}</div>
-        <div class="result-category">${kategori}</div>
-      </div>
 
-      <div class="result-issues-card">
-        <div class="result-issues-title"><i class="fas fa-exclamation-circle" style="color:var(--green-500)"></i> Poin Utama yang Perlu Diperhatikan</div>
-        ${issueHTML}
-      </div>
+  var body = document.getElementById('funnelBody');
+  body.innerHTML = '';
 
-      <div class="result-cta-card">
-        <div class="result-cta-title">Ingin hasil lebih akurat?</div>
-        <div class="result-cta-desc">Lanjutkan konsultasi dengan dokter untuk mendapatkan analisa lengkap dan rekomendasi personal sesuai kondisi kamu.</div>
+  var wrapper = document.createElement('div');
+  wrapper.className = 'funnel-result';
 
-        <div class="result-value-list">
-          <div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Analisa kondisi oleh dokter</div>
-          <div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Rekomendasi personal sesuai kondisi</div>
-          <div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Saran obat atau produk (jika diperlukan)</div>
-          <div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Panduan yang mudah diikuti</div>
-        </div>
+  // Header card
+  var hCard = document.createElement('div');
+  hCard.className = 'result-header-card';
+  hCard.style.background = data.color;
+  hCard.innerHTML = '<div class="result-tag"><i class="fas fa-chart-bar"></i> Hasil Analisa Awal Kamu</div>' +
+    '<div class="result-title">' + data.icon + ' ' + (type === 'diet' ? 'Analisa Diet' : 'Analisa Kulit') + '</div>' +
+    '<div class="result-category">' + kategori + '</div>';
+  wrapper.appendChild(hCard);
 
-        <div class="result-price-box">
-          <div>
-            <div class="result-price-label">Biaya konsultasi</div>
-            <div class="result-price-val">Rp35.000</div>
-          </div>
-          <div class="result-price-note">💳 Pembayaran dilakukan setelah konsultasi melalui WhatsApp</div>
-        </div>
+  // Issues card
+  var iCard = document.createElement('div');
+  iCard.className = 'result-issues-card';
+  iCard.innerHTML = '<div class="result-issues-title"><i class="fas fa-exclamation-circle" style="color:var(--green-500)"></i> Poin Utama yang Perlu Diperhatikan</div>';
+  issues.forEach(function(iss) {
+    var item = document.createElement('div');
+    item.className = 'result-issue-item';
+    var dot = document.createElement('div');
+    dot.className = 'result-issue-dot';
+    var txt = document.createElement('div');
+    txt.className = 'result-issue-text';
+    txt.innerHTML = '<strong>' + iss.title + ':</strong> ' + iss.desc;
+    item.appendChild(dot);
+    item.appendChild(txt);
+    iCard.appendChild(item);
+  });
+  wrapper.appendChild(iCard);
 
-        <a href="${waLink}" target="_blank" rel="noopener" class="result-wa-btn">
-          <i class="fab fa-whatsapp" style="font-size:22px"></i> Lanjutkan Konsultasi
-        </a>
-        <div class="result-urgency">
-          <i class="fas fa-bolt" style="color:var(--green-500)"></i>
-          <span>Respon cepat</span>, biasanya &lt; 30 menit
-        </div>
-      </div>
-    </div>
-  `;
+  // CTA card
+  var ctaCard = document.createElement('div');
+  ctaCard.className = 'result-cta-card';
+  ctaCard.innerHTML =
+    '<div class="result-cta-title">Ingin hasil lebih akurat?</div>' +
+    '<div class="result-cta-desc">Lanjutkan konsultasi dengan dokter untuk mendapatkan analisa lengkap dan rekomendasi personal sesuai kondisi kamu.</div>' +
+    '<div class="result-value-list">' +
+      '<div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Analisa kondisi oleh dokter</div>' +
+      '<div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Rekomendasi personal sesuai kondisi</div>' +
+      '<div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Saran obat atau produk (jika diperlukan)</div>' +
+      '<div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Panduan yang mudah diikuti</div>' +
+    '</div>' +
+    '<div class="result-price-box">' +
+      '<div><div class="result-price-label">Biaya konsultasi</div><div class="result-price-val">Rp35.000</div></div>' +
+      '<div class="result-price-note">&#x1F4B3; Pembayaran dilakukan setelah konsultasi melalui WhatsApp</div>' +
+    '</div>';
+
+  var waBtn = document.createElement('a');
+  waBtn.href = waLink;
+  waBtn.target = '_blank';
+  waBtn.rel = 'noopener';
+  waBtn.className = 'result-wa-btn';
+  waBtn.innerHTML = '<i class="fab fa-whatsapp" style="font-size:22px"></i> Lanjutkan Konsultasi';
+  ctaCard.appendChild(waBtn);
+
+  var urgency = document.createElement('div');
+  urgency.className = 'result-urgency';
+  urgency.innerHTML = '<i class="fas fa-bolt" style="color:var(--green-500)"></i> <span>Respon cepat</span>, biasanya &lt; 30 menit';
+  ctaCard.appendChild(urgency);
+
+  wrapper.appendChild(ctaCard);
+  body.appendChild(wrapper);
 
   document.getElementById('funnelOverlay').scrollTo({ top: 0, behavior: 'smooth' });
 }
