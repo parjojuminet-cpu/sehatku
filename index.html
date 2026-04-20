@@ -1040,6 +1040,460 @@
       .hero p { font-size: 13px; margin-bottom: 16px; max-width: 100%; }
     }
   </style>
+
+  <!-- ===== CEK KEBUTUHAN STYLES ===== -->
+  <style>
+    /* ---- FUNNEL ENTRY SECTION ---- */
+    .cek-section {
+      background: linear-gradient(135deg, #f0fdf4 0%, #f0fdfa 50%, #ecfdf5 100%);
+      border-bottom: 1px solid #d1fae5;
+      padding: 36px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cek-section::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.07);
+      pointer-events: none;
+    }
+    .cek-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .cek-text { flex: 1; min-width: 220px; }
+    .cek-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-100); color: var(--green-700);
+      padding: 4px 12px; border-radius: var(--radius-full);
+      font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 10px;
+    }
+    .cek-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(20px, 3.5vw, 30px);
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+    .cek-title span { color: var(--green-600); }
+    .cek-subtitle { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+    .cek-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .cek-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 22px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .cek-btn-diet {
+      background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      color: white;
+    }
+    .cek-btn-diet:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 24px rgba(22,163,74,0.35); }
+    .cek-btn-kulit {
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: white;
+    }
+    .cek-btn-kulit:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 24px rgba(139,92,246,0.35); }
+    .cek-btn-obat {
+      background: white;
+      color: var(--green-700);
+      border: 2px solid var(--green-300);
+    }
+    .cek-btn-obat:hover { transform: translateY(-3px) scale(1.02); background: var(--green-50); box-shadow: 0 8px 24px rgba(22,163,74,0.15); }
+    .cek-btn .btn-icon { font-size: 20px; }
+    @media (max-width: 768px) {
+      .cek-inner { flex-direction: column; align-items: flex-start; }
+      .cek-buttons { width: 100%; flex-direction: column; }
+      .cek-btn { width: 100%; justify-content: center; padding: 16px 20px; font-size: 16px; }
+    }
+
+    /* ---- FUNNEL PAGE OVERLAY ---- */
+    .funnel-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: #f9fafb;
+      overflow-y: auto;
+      display: none;
+      flex-direction: column;
+    }
+    .funnel-overlay.open { display: flex; }
+
+    .funnel-header {
+      background: white;
+      border-bottom: 1px solid var(--gray-100);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .funnel-back-btn {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      flex-shrink: 0;
+    }
+    .funnel-back-btn:hover { background: var(--gray-200); }
+    .funnel-header-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--gray-900);
+      flex: 1;
+    }
+    .funnel-header-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--green-700);
+    }
+    .funnel-header-logo span { color: var(--teal-600); }
+
+    .funnel-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+
+    /* Progress bar */
+    .funnel-progress {
+      margin-bottom: 28px;
+    }
+    .funnel-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+    .funnel-progress-label .step-label { color: var(--green-600); }
+    .funnel-progress-bar-bg {
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .funnel-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green-500), var(--teal-500));
+      border-radius: 99px;
+      transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* Question card */
+    .funnel-question-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      border: 1px solid var(--gray-100);
+      animation: fadeInUp 0.3s ease;
+    }
+    .funnel-q-num {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--green-500);
+      margin-bottom: 10px;
+    }
+    .funnel-q-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+
+    /* Answer options */
+    .funnel-options { display: flex; flex-direction: column; gap: 10px; }
+    .funnel-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 2px solid var(--gray-200);
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-700);
+      text-align: left;
+      width: 100%;
+    }
+    .funnel-option:hover {
+      border-color: var(--green-400);
+      background: var(--green-50);
+      color: var(--green-700);
+      transform: translateX(4px);
+    }
+    .funnel-option.selected {
+      border-color: var(--green-500);
+      background: linear-gradient(135deg, var(--green-50), rgba(20,184,166,0.06));
+      color: var(--green-700);
+    }
+    .funnel-option .opt-icon { font-size: 22px; flex-shrink: 0; }
+    .funnel-option .opt-check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-300);
+      margin-left: auto;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+      font-size: 12px;
+      color: transparent;
+    }
+    .funnel-option.selected .opt-check {
+      background: var(--green-500);
+      border-color: var(--green-500);
+      color: white;
+    }
+
+    /* Number input question */
+    .funnel-number-input {
+      width: 100%;
+      padding: 16px 18px;
+      border: 2px solid var(--gray-200);
+      border-radius: 14px;
+      font-size: 24px;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      color: var(--gray-900);
+      outline: none;
+      text-align: center;
+      transition: var(--transition);
+      background: white;
+    }
+    .funnel-number-input:focus { border-color: var(--green-500); box-shadow: 0 0 0 4px rgba(34,197,94,0.1); }
+    .funnel-input-hint { font-size: 13px; color: var(--gray-400); text-align: center; margin-top: 8px; }
+
+    /* Next button */
+    .funnel-next-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 4px 16px rgba(22,163,74,0.3);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .funnel-next-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(22,163,74,0.4); }
+    .funnel-next-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    /* ---- RESULT PAGE ---- */
+    .funnel-result {
+      animation: fadeInUp 0.4s ease;
+    }
+    .result-header-card {
+      background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      border-radius: 24px;
+      padding: 28px 24px;
+      color: white;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .result-header-card::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 130px; height: 130px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    .result-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.2);
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      margin-bottom: 12px;
+    }
+    .result-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px; font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .result-category {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .result-issues-card {
+      background: white;
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid var(--gray-100);
+      margin-bottom: 16px;
+    }
+    .result-issues-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px; font-weight: 800;
+      color: var(--gray-800);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .result-issue-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .result-issue-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .result-issue-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green-500);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+    .result-issue-text { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+    .result-issue-text strong { color: var(--gray-800); }
+
+    /* CTA card */
+    .result-cta-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid var(--gray-100);
+      margin-bottom: 16px;
+    }
+    .result-cta-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px; font-weight: 900;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+    .result-cta-desc {
+      font-size: 14px; color: var(--gray-500);
+      line-height: 1.7; margin-bottom: 18px;
+    }
+    .result-value-list { margin-bottom: 20px; }
+    .result-value-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0;
+      font-size: 14px; color: var(--gray-700);
+      font-weight: 600;
+    }
+    .result-value-icon {
+      width: 24px; height: 24px;
+      background: var(--green-100);
+      color: var(--green-700);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+    .result-price-box {
+      background: var(--green-50);
+      border: 1.5px solid var(--green-200);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .result-price-label { font-size: 13px; color: var(--gray-500); }
+    .result-price-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--green-700);
+    }
+    .result-price-note { font-size: 11px; color: var(--gray-400); width: 100%; }
+    .result-wa-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 17px;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+      text-decoration: none;
+    }
+    .result-wa-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(37,211,102,0.5); }
+    .result-urgency {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-top: 10px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .result-urgency span { color: var(--green-500); font-weight: 700; }
+
+    /* ---- Nav highlight for Cek Kebutuhan ---- */
+    .nav-menu-link.cek-link {
+      color: var(--green-700) !important;
+      background: linear-gradient(135deg, var(--green-50), rgba(20,184,166,0.08)) !important;
+      border: 1.5px solid var(--green-200);
+    }
+    .nav-menu-link.cek-link:hover {
+      background: linear-gradient(135deg, var(--green-100), rgba(20,184,166,0.12)) !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -1101,6 +1555,9 @@
     <div class="nav-menu-item">
       <div class="nav-menu-link" onclick="scrollToSection('contact')"><i class="fas fa-map-marker-alt"></i> Kontak</div>
     </div>
+    <div class="nav-menu-item">
+      <div class="nav-menu-link cek-link" onclick="scrollToSection('cek-kebutuhan')" style="cursor:pointer"><i class="fas fa-stethoscope"></i> Cek Kebutuhan ✨</div>
+    </div>
   </div>
 </nav>
 
@@ -1120,6 +1577,7 @@
   <div class="mobile-menu-item" onclick="scrollToSection('health-info');toggleMobileMenu()"><i class="fas fa-heartbeat"></i> Info Kesehatan</div>
   <div class="mobile-menu-item" onclick="scrollToSection('testimoni');toggleMobileMenu()"><i class="fas fa-star"></i> Testimoni</div>
   <div class="mobile-menu-item" onclick="scrollToSection('contact');toggleMobileMenu()"><i class="fas fa-map-marker-alt"></i> Kontak</div>
+  <div class="mobile-menu-item" onclick="scrollToSection('cek-kebutuhan');toggleMobileMenu()" style="color:var(--green-700);font-weight:700;background:var(--green-50)"><i class="fas fa-stethoscope" style="color:var(--green-600)"></i> Cek Kebutuhan ✨</div>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -1200,6 +1658,28 @@
     <div class="trust-item"><i class="fas fa-tag"></i> Harga Terjangkau</div>
   </div>
 </div>
+
+<!-- ===== CEK KEBUTUHAN ENTRY ===== -->
+<section id="cek-kebutuhan" class="cek-section">
+  <div class="cek-inner">
+    <div class="cek-text">
+      <div class="cek-badge"><i class="fas fa-stethoscope"></i> Analisa Personal</div>
+      <div class="cek-title">Cek Kebutuhan <span>Kamu Sekarang</span></div>
+      <div class="cek-subtitle">Diet, Kecantikan, atau Cari Obat? Kami bantu sesuai kondisi kamu</div>
+    </div>
+    <div class="cek-buttons">
+      <button class="cek-btn cek-btn-diet" onclick="openFunnel('diet')">
+        <span class="btn-icon">🥗</span> Cek Diet
+      </button>
+      <button class="cek-btn cek-btn-kulit" onclick="openFunnel('kulit')">
+        <span class="btn-icon">✨</span> Cek Kulit
+      </button>
+      <button class="cek-btn cek-btn-obat" onclick="scrollToSection('products-section')">
+        <span class="btn-icon">💊</span> Cari Obat
+      </button>
+    </div>
+  </div>
+</section>
 
 <!-- ===== PROMO ===== -->
 <section class="section" style="background:white" id="promo">
@@ -2723,6 +3203,422 @@ function filterGallery(type, btn) {
 window.addEventListener('load', () => setTimeout(loadJson, 2000));
 
 /* ============================================================
+   CEK KEBUTUHAN FUNNEL SYSTEM
+   ============================================================ */
+
+const FUNNEL_DATA = {
+  diet: {
+    title: 'Cek Kondisi Diet',
+    icon: '🥗',
+    color: 'linear-gradient(135deg, #16a34a, #0d9488)',
+    questions: [
+      {
+        id: 'tujuan',
+        text: 'Apa tujuan utama kamu?',
+        type: 'choice',
+        options: [
+          { icon: '⚖️', label: 'Turun berat badan', value: 'turun_bb' },
+          { icon: '📏', label: 'Mengecilkan perut', value: 'perut' },
+          { icon: '✅', label: 'Menjaga berat badan', value: 'jaga_bb' },
+          { icon: '💪', label: 'Menambah massa otot', value: 'otot' },
+        ]
+      },
+      {
+        id: 'berat',
+        text: 'Berapa berat badan kamu sekarang?',
+        type: 'number',
+        unit: 'kg',
+        placeholder: 'Contoh: 65',
+        min: 30, max: 200
+      },
+      {
+        id: 'tinggi',
+        text: 'Berapa tinggi badan kamu?',
+        type: 'number',
+        unit: 'cm',
+        placeholder: 'Contoh: 165',
+        min: 100, max: 250
+      },
+      {
+        id: 'aktivitas',
+        text: 'Bagaimana aktivitas harian kamu?',
+        type: 'choice',
+        options: [
+          { icon: '🪑', label: 'Sangat jarang bergerak (duduk terus)', value: 'sedentary' },
+          { icon: '🚶', label: 'Kadang-kadang gerak ringan', value: 'light' },
+          { icon: '🏃', label: 'Aktif bergerak setiap hari', value: 'moderate' },
+          { icon: '🏋️', label: 'Olahraga intens / kerja fisik berat', value: 'heavy' },
+        ]
+      },
+      {
+        id: 'kebiasaan',
+        text: 'Kebiasaan makan kamu seperti apa?',
+        type: 'choice',
+        options: [
+          { icon: '🍬', label: 'Sering makan manis & ngemil', value: 'manis_ngemil' },
+          { icon: '🍟', label: 'Sering makan gorengan', value: 'goreng' },
+          { icon: '🥗', label: 'Sudah cukup sehat', value: 'sehat' },
+          { icon: '⏰', label: 'Sering skip makan / tidak teratur', value: 'skip' },
+        ]
+      },
+      {
+        id: 'tidur',
+        text: 'Berapa jam kamu tidur per malam?',
+        type: 'choice',
+        options: [
+          { icon: '😴', label: 'Kurang dari 5 jam', value: 'kurang' },
+          { icon: '🌙', label: '5–6 jam', value: 'cukup_kurang' },
+          { icon: '✅', label: '7–8 jam', value: 'ideal' },
+          { icon: '🛌', label: 'Lebih dari 8 jam', value: 'lebih' },
+        ]
+      },
+      {
+        id: 'riwayat',
+        text: 'Pernah mencoba diet sebelumnya?',
+        type: 'choice',
+        options: [
+          { icon: '❌', label: 'Belum pernah', value: 'belum' },
+          { icon: '😔', label: 'Pernah, tapi gagal / tidak konsisten', value: 'gagal' },
+          { icon: '🔄', label: 'Pernah berhasil tapi yo-yo', value: 'yoyo' },
+          { icon: '✅', label: 'Sedang menjalani program diet', value: 'sedang' },
+        ]
+      },
+      {
+        id: 'kendala',
+        text: 'Apa kendala terbesar kamu saat diet?',
+        type: 'choice',
+        options: [
+          { icon: '🤤', label: 'Susah kontrol nafsu makan', value: 'nafsu' },
+          { icon: '😩', label: 'Tidak ada motivasi', value: 'motivasi' },
+          { icon: '⏰', label: 'Tidak tahu harus mulai dari mana', value: 'bingung' },
+          { icon: '💸', label: 'Makanan sehat dianggap mahal', value: 'mahal' },
+        ]
+      }
+    ]
+  },
+  kulit: {
+    title: 'Cek Kondisi Kulit',
+    icon: '✨',
+    color: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
+    questions: [
+      {
+        id: 'masalah',
+        text: 'Masalah kulit utama yang kamu rasakan?',
+        type: 'choice',
+        options: [
+          { icon: '😤', label: 'Jerawat / bruntusan', value: 'jerawat' },
+          { icon: '😶', label: 'Kulit kusam / tidak cerah', value: 'kusam' },
+          { icon: '💧', label: 'Kulit berminyak berlebih', value: 'berminyak' },
+          { icon: '🏜️', label: 'Kulit kering & mengelupas', value: 'kering' },
+          { icon: '🟤', label: 'Flek / hiperpigmentasi', value: 'flek' },
+        ]
+      },
+      {
+        id: 'jenis_kulit',
+        text: 'Jenis kulit kamu secara umum?',
+        type: 'choice',
+        options: [
+          { icon: '💧', label: 'Berminyak (T-zone selalu kilap)', value: 'berminyak' },
+          { icon: '🏜️', label: 'Kering (sering terasa kencang)', value: 'kering' },
+          { icon: '🔀', label: 'Kombinasi (minyak di T-zone, kering di pipi)', value: 'kombinasi' },
+          { icon: '✅', label: 'Normal', value: 'normal' },
+          { icon: '🌹', label: 'Sensitif (mudah merah/iritasi)', value: 'sensitif' },
+        ]
+      },
+      {
+        id: 'frekuensi_jerawat',
+        text: 'Seberapa sering jerawat muncul?',
+        type: 'choice',
+        options: [
+          { icon: '✅', label: 'Jarang / hampir tidak pernah', value: 'jarang' },
+          { icon: '🔄', label: 'Kadang-kadang (sebulan sekali)', value: 'kadang' },
+          { icon: '⚠️', label: 'Cukup sering (seminggu sekali)', value: 'sering' },
+          { icon: '🚨', label: 'Hampir setiap hari ada jerawat baru', value: 'selalu' },
+        ]
+      },
+      {
+        id: 'rutinitas',
+        text: 'Rutinitas skincare kamu saat ini?',
+        type: 'choice',
+        options: [
+          { icon: '❌', label: 'Tidak ada rutinitas sama sekali', value: 'tidak_ada' },
+          { icon: '🧼', label: 'Hanya cuci muka', value: 'cuci_muka' },
+          { icon: '📦', label: 'Basic (sabun + pelembap)', value: 'basic' },
+          { icon: '💼', label: 'Lengkap (toner, serum, dll.)', value: 'lengkap' },
+        ]
+      },
+      {
+        id: 'sunscreen',
+        text: 'Apakah kamu rutin pakai sunscreen?',
+        type: 'choice',
+        options: [
+          { icon: '❌', label: 'Tidak pernah', value: 'tidak' },
+          { icon: '🤔', label: 'Kadang-kadang saja', value: 'kadang' },
+          { icon: '☀️', label: 'Ya, tapi hanya kalau keluar rumah', value: 'keluar' },
+          { icon: '✅', label: 'Ya, setiap hari', value: 'selalu' },
+        ]
+      },
+      {
+        id: 'tidur',
+        text: 'Rata-rata jam tidur kamu per malam?',
+        type: 'choice',
+        options: [
+          { icon: '😴', label: 'Kurang dari 5 jam', value: 'kurang' },
+          { icon: '🌙', label: '5–6 jam', value: 'cukup_kurang' },
+          { icon: '✅', label: '7–8 jam', value: 'ideal' },
+          { icon: '🛌', label: 'Lebih dari 8 jam', value: 'lebih' },
+        ]
+      },
+      {
+        id: 'stres',
+        text: 'Bagaimana tingkat stres kamu belakangan ini?',
+        type: 'choice',
+        options: [
+          { icon: '😌', label: 'Santai, tidak banyak tekanan', value: 'rendah' },
+          { icon: '🙂', label: 'Normal, bisa dikelola', value: 'sedang' },
+          { icon: '😟', label: 'Cukup stres, agak berat', value: 'tinggi' },
+          { icon: '🤯', label: 'Sangat stres akhir-akhir ini', value: 'sangat_tinggi' },
+        ]
+      }
+    ]
+  }
+};
+
+// Funnel state
+let funnelState = {
+  type: null,
+  step: 0,
+  answers: {}
+};
+
+function openFunnel(type) {
+  funnelState = { type, step: 0, answers: {} };
+  const overlay = document.getElementById('funnelOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderFunnelStep();
+}
+
+function closeFunnel() {
+  document.getElementById('funnelOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderFunnelStep() {
+  const data = FUNNEL_DATA[funnelState.type];
+  const questions = data.questions;
+  const step = funnelState.step;
+  const total = questions.length;
+
+  // Update header
+  document.getElementById('funnelTitle').textContent = data.title;
+
+  // Update progress
+  const pct = Math.round((step / total) * 100);
+  document.getElementById('funnelProgressFill').style.width = pct + '%';
+  document.getElementById('funnelProgressLabel').textContent = 'Langkah ' + (step + 1) + ' dari ' + total;
+
+  const body = document.getElementById('funnelBody');
+  const q = questions[step];
+
+  let optionsHTML = '';
+  if (q.type === 'choice') {
+    optionsHTML = q.options.map(opt => `
+      <button class="funnel-option" onclick="selectOption('${q.id}', '${opt.value}', this)">
+        <span class="opt-icon">${opt.icon}</span>
+        <span>${opt.label}</span>
+        <span class="opt-check"><i class="fas fa-check"></i></span>
+      </button>
+    `).join('');
+  } else if (q.type === 'number') {
+    const saved = funnelState.answers[q.id] || '';
+    optionsHTML = `
+      <input type="number" class="funnel-number-input" id="numInput_${q.id}"
+        placeholder="${q.placeholder}" value="${saved}"
+        min="${q.min}" max="${q.max}"
+        oninput="funnelState.answers['${q.id}']=this.value; document.getElementById('funnelNextBtn').disabled=!this.value"
+      />
+      <div class="funnel-input-hint">Masukkan angka dalam satuan ${q.unit}</div>
+    `;
+  }
+
+  const hasAnswer = funnelState.answers[q.id];
+  const isLast = step === total - 1;
+
+  body.innerHTML = `
+    <div class="funnel-progress">
+      <div class="funnel-progress-label">
+        <span class="step-label" id="funnelProgressLabel">Langkah ${step + 1} dari ${total}</span>
+        <span>${pct}%</span>
+      </div>
+      <div class="funnel-progress-bar-bg">
+        <div class="funnel-progress-bar-fill" id="funnelProgressFill" style="width:${pct}%"></div>
+      </div>
+    </div>
+    <div class="funnel-question-card">
+      <div class="funnel-q-num">Pertanyaan ${step + 1}</div>
+      <div class="funnel-q-text">${q.text}</div>
+      <div class="funnel-options" id="funnelOptions">
+        ${optionsHTML}
+      </div>
+      <button class="funnel-next-btn" id="funnelNextBtn"
+        onclick="${isLast ? 'showFunnelResult()' : 'nextFunnelStep()'}"
+        ${hasAnswer ? '' : 'disabled'}>
+        ${isLast ? '<i class="fas fa-chart-bar"></i> Lihat Hasil Analisa' : 'Lanjut <i class="fas fa-arrow-right"></i>'}
+      </button>
+    </div>
+  `;
+
+  // Restore selected state if revisiting
+  if (q.type === 'choice' && funnelState.answers[q.id]) {
+    document.querySelectorAll('#funnelOptions .funnel-option').forEach(btn => {
+      if (btn.getAttribute('onclick').includes(funnelState.answers[q.id])) {
+        btn.classList.add('selected');
+      }
+    });
+  }
+
+  // Scroll to top
+  document.getElementById('funnelOverlay').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectOption(questionId, value, btn) {
+  // Deselect all
+  document.querySelectorAll('#funnelOptions .funnel-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  funnelState.answers[questionId] = value;
+  document.getElementById('funnelNextBtn').disabled = false;
+}
+
+function nextFunnelStep() {
+  const data = FUNNEL_DATA[funnelState.type];
+  if (funnelState.step < data.questions.length - 1) {
+    funnelState.step++;
+    renderFunnelStep();
+  }
+}
+
+function prevFunnelStep() {
+  if (funnelState.step > 0) {
+    funnelState.step--;
+    renderFunnelStep();
+  } else {
+    closeFunnel();
+  }
+}
+
+function showFunnelResult() {
+  const a = funnelState.answers;
+  const type = funnelState.type;
+  let kategori = '', issues = [], summary = '';
+
+  if (type === 'diet') {
+    const berat = parseFloat(a.berat) || 0;
+    const tinggi = parseFloat(a.tinggi) || 0;
+    const bmi = tinggi > 0 ? (berat / ((tinggi/100) ** 2)).toFixed(1) : null;
+
+    if (a.tujuan === 'turun_bb' || a.tujuan === 'perut') {
+      kategori = bmi && bmi > 25 ? 'Berat Badan Berlebih — Perlu Program Diet Khusus' : 'Ingin Menurunkan Berat Badan';
+    } else if (a.tujuan === 'otot') {
+      kategori = 'Program Pembentukan Tubuh (Body Recomposition)';
+    } else {
+      kategori = 'Maintenance — Menjaga Berat Badan Ideal';
+    }
+
+    if (bmi) issues.push({ title: `IMT kamu: ${bmi}`, desc: bmi < 18.5 ? 'Berat badan kurang dari ideal. Perlu penambahan kalori sehat.' : bmi > 25 ? 'Berat badan di atas ideal. Defisit kalori terstruktur diperlukan.' : 'Berat badan dalam rentang ideal. Fokus pada komposisi tubuh.' });
+    if (a.kebiasaan === 'manis_ngemil') issues.push({ title: 'Kebiasaan konsumsi gula tinggi', desc: 'Gula berlebih menyebabkan lonjakan insulin yang menghambat pembakaran lemak.' });
+    if (a.aktivitas === 'sedentary') issues.push({ title: 'Aktivitas fisik sangat rendah', desc: 'Kurang gerak memperlambat metabolisme dan mempersulit penurunan berat badan.' });
+    if (a.tidur === 'kurang') issues.push({ title: 'Tidur kurang dari 5 jam', desc: 'Kurang tidur meningkatkan hormon lapar (ghrelin) dan menghambat diet.' });
+    if (a.riwayat === 'yoyo') issues.push({ title: 'Riwayat diet yo-yo', desc: 'Berat yang naik-turun menandakan program sebelumnya tidak berkelanjutan.' });
+
+    summary = `Tujuan: ${a.tujuan === 'turun_bb' ? 'Turun BB' : a.tujuan === 'perut' ? 'Mengecilkan perut' : a.tujuan === 'otot' ? 'Massa otot' : 'Menjaga BB'}, Aktivitas: ${a.aktivitas || '-'}, Kendala: ${a.kendala || '-'}`;
+  } else {
+    if (a.masalah === 'jerawat' || (a.frekuensi_jerawat === 'sering' || a.frekuensi_jerawat === 'selalu')) {
+      kategori = 'Kulit Berjerawat — Perlu Perawatan Terarah';
+    } else if (a.masalah === 'kusam') {
+      kategori = 'Kulit Kusam — Perlu Brightening Routine';
+    } else if (a.masalah === 'berminyak') {
+      kategori = 'Kulit Berminyak — Perlu Regulasi Sebum';
+    } else if (a.masalah === 'kering') {
+      kategori = 'Kulit Kering — Perlu Hidrasi Intensif';
+    } else {
+      kategori = 'Hiperpigmentasi / Flek — Perlu Perawatan Meratakan Warna';
+    }
+
+    if (a.sunscreen !== 'selalu') issues.push({ title: 'Sunscreen belum rutin', desc: 'UV adalah penyebab utama penuaan dini, kusam, dan flek. Sunscreen wajib setiap hari.' });
+    if (a.stres === 'tinggi' || a.stres === 'sangat_tinggi') issues.push({ title: 'Tingkat stres tinggi', desc: 'Stres meningkatkan kortisol yang memperparah jerawat dan menghambat regenerasi kulit.' });
+    if (a.tidur === 'kurang') issues.push({ title: 'Kurang tidur berdampak pada kulit', desc: 'Sel kulit beregenerasi saat tidur. Kurang tidur memperlambat perbaikan kulit.' });
+    if (a.rutinitas === 'tidak_ada' || a.rutinitas === 'cuci_muka') issues.push({ title: 'Rutinitas skincare belum terbentuk', desc: 'Perawatan dasar (pembersih, pelembap, SPF) sangat penting untuk kesehatan kulit jangka panjang.' });
+    if (a.masalah === 'kering' && a.jenis_kulit === 'kering') issues.push({ title: 'Kulit kering membutuhkan hidrasi lebih', desc: 'Diperlukan produk dengan kandungan ceramide, hyaluronic acid, atau glycerin yang tepat.' });
+
+    summary = `Masalah: ${a.masalah || '-'}, Jenis kulit: ${a.jenis_kulit || '-'}, Rutinitas: ${a.rutinitas || '-'}`;
+  }
+
+  // Take max 3 issues
+  issues = issues.slice(0, 3);
+  if (issues.length === 0) issues.push({ title: 'Kondisi secara umum baik', desc: 'Namun konsultasi dokter dapat membantu optimasi lebih lanjut sesuai kondisi spesifik kamu.' });
+
+  const issueHTML = issues.map(i => `
+    <div class="result-issue-item">
+      <div class="result-issue-dot"></div>
+      <div class="result-issue-text"><strong>${i.title}:</strong> ${i.desc}</div>
+    </div>
+  `).join('');
+
+  const waText = encodeURIComponent(
+    `Halo, saya ingin lanjut konsultasi dokter dari sehatku.store.\n\nBerikut hasil awal saya:\n- Kategori: ${kategori}\n- Ringkasan: ${summary}\n\nMohon dibantu untuk konsultasi lebih lanjut.`
+  );
+  const waLink = `https://wa.me/6285731070315?text=${waText}`;
+
+  const data = FUNNEL_DATA[type];
+  document.getElementById('funnelTitle').textContent = 'Hasil Analisa';
+  document.getElementById('funnelBody').innerHTML = `
+    <div class="funnel-result">
+      <div class="result-header-card" style="background:${data.color}">
+        <div class="result-tag"><i class="fas fa-chart-bar"></i> Hasil Analisa Awal Kamu</div>
+        <div class="result-title">${data.icon} ${type === 'diet' ? 'Analisa Diet' : 'Analisa Kulit'}</div>
+        <div class="result-category">${kategori}</div>
+      </div>
+
+      <div class="result-issues-card">
+        <div class="result-issues-title"><i class="fas fa-exclamation-circle" style="color:var(--green-500)"></i> Poin Utama yang Perlu Diperhatikan</div>
+        ${issueHTML}
+      </div>
+
+      <div class="result-cta-card">
+        <div class="result-cta-title">Ingin hasil lebih akurat?</div>
+        <div class="result-cta-desc">Lanjutkan konsultasi dengan dokter untuk mendapatkan analisa lengkap dan rekomendasi personal sesuai kondisi kamu.</div>
+
+        <div class="result-value-list">
+          <div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Analisa kondisi oleh dokter</div>
+          <div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Rekomendasi personal sesuai kondisi</div>
+          <div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Saran obat atau produk (jika diperlukan)</div>
+          <div class="result-value-item"><div class="result-value-icon"><i class="fas fa-check"></i></div> Panduan yang mudah diikuti</div>
+        </div>
+
+        <div class="result-price-box">
+          <div>
+            <div class="result-price-label">Biaya konsultasi</div>
+            <div class="result-price-val">Rp35.000</div>
+          </div>
+          <div class="result-price-note">💳 Pembayaran dilakukan setelah konsultasi melalui WhatsApp</div>
+        </div>
+
+        <a href="${waLink}" target="_blank" rel="noopener" class="result-wa-btn">
+          <i class="fab fa-whatsapp" style="font-size:22px"></i> Lanjutkan Konsultasi
+        </a>
+        <div class="result-urgency">
+          <i class="fas fa-bolt" style="color:var(--green-500)"></i>
+          <span>Respon cepat</span>, biasanya &lt; 30 menit
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('funnelOverlay').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
    SCROLL REVEAL ANIMATION
    ============================================================ */
 (function initReveal() {
@@ -2752,5 +3648,19 @@ window.addEventListener('load', () => setTimeout(loadJson, 2000));
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 })();
 </script>
+<!-- ===== FUNNEL OVERLAY ===== -->
+<div class="funnel-overlay" id="funnelOverlay">
+  <div class="funnel-header">
+    <button class="funnel-back-btn" onclick="prevFunnelStep()" aria-label="Kembali">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <div class="funnel-header-title" id="funnelTitle">Cek Kondisi</div>
+    <div class="funnel-header-logo">Mitra <span>Farma</span></div>
+  </div>
+  <div class="funnel-body" id="funnelBody">
+    <!-- rendered by JS -->
+  </div>
+</div>
+
 </body>
 </html>
