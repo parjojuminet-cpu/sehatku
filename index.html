@@ -220,6 +220,11 @@
     .health-card-desc { font-size: 13px; color: var(--gray-500); line-height: 1.6; margin-bottom: 16px; }
     .health-read-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--green-50); color: var(--green-600); padding: 8px 18px; border-radius: var(--radius-full); font-size: 13px; font-weight: 700; transition: var(--transition); }
     .health-read-btn:hover { background: var(--green-600); color: white; }
+    /* Tanggal update — sinyal SEO Freshness */
+    .health-card-date { font-size: 11px; color: var(--gray-400); margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+    .health-card-date i { color: var(--green-400); }
+    /* Skeleton loading animation */
+    @keyframes skeletonPulse { 0%,100%{opacity:1} 50%{opacity:0.45} }
 
     /* ===== TESTIMONI ===== */
     .testimoni-section { background: var(--gray-50); }
@@ -2240,14 +2245,7 @@ const GALLERY_DATA = [
   { type:'image', src:'https://i.imgur.com/HfHQ6in.jpeg', title:'Vitamin & Suplemen', desc:'Pilihan terlengkap' },
   { type:'image', src:'https://i.imgur.com/ppaMzvs.jpeg', title:'Pelayanan Ramah', desc:'Kepuasan pelanggan utama kami' },
 ];
-const HEALTH_DATA = [
-  { type:'yt', typeLabel:'YouTube', icon:'fab fa-youtube', bg:'linear-gradient(135deg,#ff6b6b,#ee0979)', category:'Tips Kesehatan', title:'Cara Menggunakan Obat yang Benar dan Aman', desc:'Pelajari panduan lengkap dari apoteker mengenai cara konsumsi obat yang benar agar efektif dan aman.', url:'https://www.youtube.com/watch?v=-E0Brk3Fy5s', btnIcon:'fab fa-youtube', btnLabel:'Tonton di YouTube' },
-  { type:'web', typeLabel:'Artikel', icon:'fas fa-newspaper', bg:'linear-gradient(135deg,#43e97b,#38f9d7)', category:'Gaya Hidup Sehat', title:'10 Vitamin Penting yang Dibutuhkan Tubuh Setiap Hari', desc:'Cukupi kebutuhan nutrisi harian dengan memilih suplemen yang tepat sesuai kebutuhan tubuh Anda.', url:'https://www.halodoc.com/artikel/ini-vitamin-dan-mineral-yang-penting-untuk-tubuh', btnIcon:'fas fa-external-link-alt', btnLabel:'Baca Artikel' },
-  { type:'web', typeLabel:'Artikel', icon:'fas fa-heartbeat', bg:'linear-gradient(135deg,#4facfe,#00f2fe)', category:'Penyakit & Obat', title:'Mengenal Obat Herbal: Manfaat dan Cara Pemakaiannya', desc:'Obat herbal semakin populer, namun tetap ada aturan pemakaian yang perlu diperhatikan agar efektif.', url:'https://www.alodokter.com/obat-herbal', btnIcon:'fas fa-external-link-alt', btnLabel:'Baca di Alodokter' },
-  { type:'yt', typeLabel:'YouTube', icon:'fab fa-youtube', bg:'linear-gradient(135deg,#f093fb,#f5576c)', category:'Kesehatan Anak', title:'Demam Pada Anak: Kapan Harus ke Dokter?', desc:'Panduan lengkap untuk orang tua dalam menangani demam anak di rumah dan kapan perlu penanganan medis.', url:'https://www.youtube.com/results?search_query=demam+anak+kapan+ke+dokter', btnIcon:'fab fa-youtube', btnLabel:'Tonton Video' },
-  { type:'web', typeLabel:'Artikel', icon:'fas fa-pills', bg:'linear-gradient(135deg,#30cfd0,#330867)', category:'Farmasi', title:'Cara Membaca Label Obat dengan Benar', desc:'Informasi penting yang tertera di kemasan obat seringkali diabaikan. Pelajari cara membacanya dengan benar.', url:'https://www.alodokter.com/cara-membaca-label-obat', btnIcon:'fas fa-external-link-alt', btnLabel:'Baca Artikel' },
-  { type:'web', typeLabel:'Artikel', icon:'fas fa-apple-alt', bg:'linear-gradient(135deg,#a8edea,#fed6e3)', category:'Nutrisi', title:'Panduan Gizi Seimbang untuk Keluarga Indonesia', desc:'Penuhi kebutuhan gizi keluarga dengan pola makan seimbang berdasarkan panduan kesehatan terkini.', url:'https://www.halodoc.com/artikel/panduan-gizi-seimbang', btnIcon:'fas fa-external-link-alt', btnLabel:'Baca di Halodoc' },
-];
+/* HEALTH_DATA dihapus — sekarang dimuat dinamis dari data_edukasi.json */
 
 const TESTI_DATA = [
   { name:'Siti Rahayu',    loc:'Ungaran, Semarang',   rating:5, text:'Pelayanannya ramah banget, obatnya lengkap dan harganya terjangkau. Udah jadi langganan tetap selama 2 tahun!', init:'SR', color:'#22c55e' },
@@ -3131,53 +3129,140 @@ function closeGalleryModalDirect() {
 }
 
 /* ============================================================
-   RENDER — HEALTH
+   RENDER — HEALTH (Dinamis via Fetch API dari data_edukasi.json)
+   LIMIT: Tampilkan hanya 8 kartu terbaru dari atas JSON.
+   SEO : Semua data lama tetap tersimpan di JSON, tidak dirender.
    ============================================================ */
-function renderHealth() {
-  const grid = document.getElementById('healthGrid');
-  HEALTH_DATA.forEach(h => {
-    const card = document.createElement('div');
-    card.className = 'health-card';
+const HEALTH_DISPLAY_LIMIT = 8; // Ubah ke 6 jika ingin lebih ringan
 
-    const imgDiv = document.createElement('div');
-    imgDiv.className = 'health-card-img';
-    imgDiv.style.background = h.bg;
-    const icon = document.createElement('i');
-    icon.className = h.icon;
-    icon.style.cssText = 'font-size:64px;color:rgba(255,255,255,0.5)';
-    const badge = document.createElement('div');
-    badge.className = 'health-type-badge ' + h.type;
-    const bIcon = document.createElement('i');
-    bIcon.className = h.btnIcon;
-    badge.appendChild(bIcon);
-    badge.appendChild(document.createTextNode(' ' + h.typeLabel));
-    imgDiv.append(icon, badge);
+function renderHealthCard(h, grid) {
+  const card = document.createElement('div');
+  card.className = 'health-card reveal';
 
-    const body = document.createElement('div');
-    body.className = 'health-card-body';
-    const cat = document.createElement('div');
-    cat.className = 'health-category';
-    cat.textContent = h.category;
-    const title = document.createElement('div');
-    title.className = 'health-card-title';
-    title.textContent = h.title;
-    const desc = document.createElement('div');
-    desc.className = 'health-card-desc';
-    desc.textContent = h.desc;
-    const btn = document.createElement('a');
-    btn.className = 'health-read-btn';
-    btn.href = h.url;
-    btn.target = '_blank';
-    btn.rel = 'noopener';
-    const btnIcon = document.createElement('i');
-    btnIcon.className = h.btnIcon;
-    btn.appendChild(btnIcon);
-    btn.appendChild(document.createTextNode(' ' + h.btnLabel));
-    body.append(cat, title, desc, btn);
+  /* — Bagian Gambar / Icon — */
+  const imgDiv = document.createElement('div');
+  imgDiv.className = 'health-card-img';
+  imgDiv.style.background = h.bg || 'linear-gradient(135deg,var(--green-600),var(--teal-600))';
 
-    card.append(imgDiv, body);
-    grid.appendChild(card);
+  const icon = document.createElement('i');
+  icon.className = h.icon || 'fas fa-heartbeat';
+  icon.style.cssText = 'font-size:64px;color:rgba(255,255,255,0.5)';
+
+  const badge = document.createElement('div');
+  badge.className = 'health-type-badge ' + (h.type || 'web');
+  const bIcon = document.createElement('i');
+  bIcon.className = (h.type === 'yt') ? 'fab fa-youtube' : 'fas fa-newspaper';
+  badge.appendChild(bIcon);
+  badge.appendChild(document.createTextNode(' ' + (h.typeLabel || 'Artikel')));
+  imgDiv.append(icon, badge);
+
+  /* — Bagian Body — */
+  const body = document.createElement('div');
+  body.className = 'health-card-body';
+
+  const cat = document.createElement('div');
+  cat.className = 'health-category';
+  cat.textContent = h.category || '';
+
+  const title = document.createElement('div');
+  title.className = 'health-card-title';
+  title.textContent = h.title || '';
+
+  /* Tanggal Update — penting untuk sinyal SEO Freshness */
+  const dateEl = document.createElement('div');
+  dateEl.className = 'health-card-date';
+  dateEl.innerHTML = '<i class="fas fa-calendar-alt"></i> Diperbarui: ' + (h.tanggal || '');
+
+  const desc = document.createElement('div');
+  desc.className = 'health-card-desc';
+  desc.textContent = h.desc || '';
+
+  const btn = document.createElement('a');
+  btn.className = 'health-read-btn';
+  btn.href = h.url || '#';
+  btn.target = '_blank';
+  btn.rel = 'noopener noreferrer';
+  /* Schema.org dasar untuk SEO */
+  btn.setAttribute('aria-label', h.btnLabel + ': ' + h.title);
+  const btnIcon = document.createElement('i');
+  btnIcon.className = (h.type === 'yt') ? 'fab fa-youtube' : 'fas fa-external-link-alt';
+  btn.appendChild(btnIcon);
+  btn.appendChild(document.createTextNode(' ' + (h.btnLabel || 'Selengkapnya')));
+
+  body.append(cat, title, dateEl, desc, btn);
+  card.append(imgDiv, body);
+  grid.appendChild(card);
+}
+
+function renderHealthSkeleton(grid, count) {
+  grid.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const sk = document.createElement('div');
+    sk.className = 'health-card health-skeleton';
+    sk.innerHTML =
+      '<div class="health-card-img" style="background:var(--gray-200);animation:skeletonPulse 1.4s ease-in-out infinite"></div>' +
+      '<div class="health-card-body">' +
+        '<div style="height:11px;width:60px;background:var(--gray-200);border-radius:6px;margin-bottom:10px;animation:skeletonPulse 1.4s ease-in-out infinite"></div>' +
+        '<div style="height:16px;width:90%;background:var(--gray-200);border-radius:6px;margin-bottom:8px;animation:skeletonPulse 1.4s ease-in-out infinite"></div>' +
+        '<div style="height:16px;width:70%;background:var(--gray-200);border-radius:6px;margin-bottom:12px;animation:skeletonPulse 1.4s ease-in-out infinite"></div>' +
+        '<div style="height:12px;width:100%;background:var(--gray-100);border-radius:6px;margin-bottom:6px;animation:skeletonPulse 1.4s ease-in-out infinite"></div>' +
+        '<div style="height:12px;width:80%;background:var(--gray-100);border-radius:6px;animation:skeletonPulse 1.4s ease-in-out infinite"></div>' +
+      '</div>';
+    grid.appendChild(sk);
+  }
+}
+
+function applyRevealToHealth() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('#healthGrid .health-card.reveal').forEach((el, i) => {
+    if (i % 4 === 1) el.classList.add('reveal-delay-1');
+    else if (i % 4 === 2) el.classList.add('reveal-delay-2');
+    else if (i % 4 === 3) el.classList.add('reveal-delay-3');
+    observer.observe(el);
   });
+}
+
+async function renderHealth() {
+  const grid = document.getElementById('healthGrid');
+  if (!grid) return;
+
+  /* Tampilkan skeleton saat loading */
+  renderHealthSkeleton(grid, 3);
+
+  try {
+    const res = await fetch('data_edukasi.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    /* Ambil dari atas (terbaru), batasi sesuai HEALTH_DISPLAY_LIMIT */
+    const items = Array.isArray(data) ? data : (data.edukasi || []);
+    const limited = items.slice(0, HEALTH_DISPLAY_LIMIT);
+
+    grid.innerHTML = '';
+    if (limited.length === 0) {
+      grid.innerHTML = '<p style="color:var(--gray-400);padding:20px">Belum ada konten edukasi.</p>';
+      return;
+    }
+
+    limited.forEach(h => renderHealthCard(h, grid));
+    applyRevealToHealth();
+
+  } catch (err) {
+    console.warn('[sehatku.store] Gagal memuat data_edukasi.json:', err.message);
+    grid.innerHTML =
+      '<div style="padding:24px;color:var(--gray-500);font-size:14px;text-align:center">' +
+        '<i class="fas fa-exclamation-circle" style="color:var(--gray-300);font-size:32px;display:block;margin-bottom:12px"></i>' +
+        'Konten edukasi sedang dimuat ulang. Coba refresh halaman.' +
+      '</div>';
+  }
 }
 
 /* ============================================================
