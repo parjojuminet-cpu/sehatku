@@ -1600,7 +1600,7 @@
   <div class="nav-main">
     <div class="nav-logo">
       <img src="https://parjojuminet-cpu.github.io/sehatku/mitra.png" alt="Logo Mitra Farma" onerror="this.style.display='none'"/>
-      Mitra <span>Farma</span>
+      SEHATKU <span>STORE</span>
     </div>
     <div class="search-wrapper" id="searchWrapper">
       <div class="search-box">
@@ -1911,8 +1911,8 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo">Mitra <span>Farma</span></div>
-        <p>Apotek terpercaya yang menyediakan produk kesehatan lengkap dengan harga terjangkau dan pelayanan ramah.</p>
+        <div class="footer-logo">sehatku <span>store</span></div>
+        <p>Sehatku.store adalah platform layanan informasi kesehatan terpercaya, yang bekerjasama dengan apotek resmi berijin, untuk mendapatkan informasi dapat menghubungi melalui kontak kami</p>
         <div class="footer-socials">
   <!-- WhatsApp -->
   <a href="https://wa.me/6285731070315?text=Halo%20Mitra%20Farma%2C%20saya%20ingin%20bertanya." target="_blank" rel="noopener" class="social-btn" title="WhatsApp">
@@ -2088,7 +2088,7 @@
       <div class="detail-popup-category" id="detailCategory"></div>
       <div class="detail-popup-name" id="detailName"></div>
       <div class="detail-popup-price" id="detailPrice"></div>
-      <div class="detail-popup-desc" id="detailDesc">Produk kesehatan berkualitas dari Apotek Mitra Farma. Terjamin keaslian dan kualitasnya.</div>
+      <div class="detail-popup-desc" id="detailDesc">Produk kesehatan berkualitas Terjamin keaslian dan kualitasnya.</div>
       <div class="detail-qty-row">
         <button class="qty-btn" onclick="changeDetailQty(-1)" aria-label="Kurangi"><i class="fas fa-minus"></i></button>
         <span class="qty-num" id="detailQty">1</span>
@@ -2241,7 +2241,7 @@ const GALLERY_DATA = [
   { type:'video', src:'galeri/6.mp4', poster:'', title:'Testimoni Pelanggan', desc:'Pelanggan kami berbicara' },
   // ── FOTO LOCAL ── (simpan di folder galeri/, format .png / .jpg)
   // ── FOTO ONLINE (cadangan / bisa diganti foto lokal) ──
-  { type:'image', src:'https://i.imgur.com/ugvBfzN.jpeg', title:'Apotek Mitra Farma', desc:'Tempat belanja produk kesehatanmu' },
+  { type:'image', src:'https://i.imgur.com/ugvBfzN.jpeg', title:'Sehatku', desc:'Tempat belanja produk kesehatanmu' },
   { type:'image', src:'https://i.imgur.com/HfHQ6in.jpeg', title:'Vitamin & Suplemen', desc:'Pilihan terlengkap' },
   { type:'image', src:'https://i.imgur.com/ppaMzvs.jpeg', title:'Pelayanan Ramah', desc:'Kepuasan pelanggan utama kami' },
 ];
@@ -2401,7 +2401,7 @@ function refreshCaptcha() {
    ============================================================ */
 const PAYMENT_INFO = {
   Transfer: '<strong>Cara Transfer:</strong> Tunggu konfirmasi admin di WhatsApp untuk total tagihan + ongkir. Setelah setuju, kirim bukti transfer ke WhatsApp kami.',
-  COD: '<strong>Cara COD:</strong> Untuk saat ini layanan COD tersedia untuk pelanggan yang sudah order minimal 2x ke mitra online ya kak, untuk order pertama bisa transfer dulu ya kak  ',
+  COD: '<strong>Cara COD:</strong> Untuk saat ini layanan COD tersedia untuk pelanggan yang sudah order minimal 2x ke sehatku online ya kak, untuk order pertama bisa transfer dulu ya kak  ',
 };
 
 function selectPayment(el) {
@@ -2664,7 +2664,7 @@ function doCheckout() {
   }).filter(Boolean).join('\n');
 
   const msg =
-    'Halo Mitra Farma, saya ingin melakukan pemesanan produk berikut:\n\n' +
+    'Halo Sehatku , saya ingin melakukan pemesanan produk berikut:\n\n' +
     '🧾 *ORDER*\n' +
     'ID: ' + orderId + '\n\n' +
     'Nama: ' + name + '\n' +
@@ -2998,7 +2998,7 @@ function renderPromo() {
     const card = document.createElement('div');
     card.className = 'promo-card';
     card.addEventListener('click', () => {
-      window.open('https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent('Halo Mitra Farma, saya ingin melakukan pemesanan produk berikut:\n- ' + p.name), '_blank');
+      window.open('https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent('Halo Sehatku, saya ingin melakukan pemesanan produk berikut:\n- ' + p.name), '_blank');
     });
 
     const img = document.createElement('img');
@@ -4138,7 +4138,7 @@ function showFunnelResult() {
       <i class="fas fa-arrow-left"></i>
     </button>
     <div class="funnel-header-title" id="funnelTitle">Cek Kondisi</div>
-    <div class="funnel-header-logo">Mitra <span>Farma</span></div>
+    <div class="funnel-header-logo">SEHATKU <span>STORE</span></div>
   </div>
   <div class="funnel-body" id="funnelBody">
     <!-- rendered by JS -->
