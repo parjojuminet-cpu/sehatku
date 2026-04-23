@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Arahkan Google ke Sitemap Anda
+Sitemap: https://sehatku.store/sitemap.xml
