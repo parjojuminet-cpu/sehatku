@@ -1,0 +1,50 @@
+[
+  {
+    "type": "web",
+    "typeLabel": "Artikel",
+    "icon": "fas fa-spa",
+    "bg": "linear-gradient(135deg,#84fab0,#8fd3f4)",
+    "category": "Skincare",
+    "title": "Panduan Lengkap Skincare Rutin Pagi & Malam untuk Pemula",
+    "tanggal": "23 April 2025",
+    "desc": "Mulai skincare tidak harus mahal. Pelajari urutan produk yang benar — dari cleanser, toner, moisturizer, hingga sunscreen — agar kulit wajah tetap sehat dan glowing setiap hari.",
+    "url": "https://www.halodoc.com/artikel/skincare-routine",
+    "btnLabel": "Baca Artikel"
+  },
+  {
+    "type": "web",
+    "typeLabel": "Artikel",
+    "icon": "fas fa-sun",
+    "bg": "linear-gradient(135deg,#f9d423,#ff4e50)",
+    "category": "Skincare",
+    "title": "Sunscreen: Kenapa Wajib Dipakai Setiap Hari Meski di Dalam Rumah?",
+    "tanggal": "20 April 2025",
+    "desc": "Paparan sinar UV tidak hanya terjadi saat di luar ruangan. Cahaya dari jendela dan layar HP juga memengaruhi kulit. Simak penjelasan lengkap tentang pentingnya sunscreen harian.",
+    "url": "https://www.alodokter.com/manfaat-sunscreen",
+    "btnLabel": "Baca di Alodokter"
+  },
+  {
+    "type": "yt",
+    "typeLabel": "YouTube",
+    "icon": "fab fa-youtube",
+    "bg": "linear-gradient(135deg,#ff6b6b,#ee0979)",
+    "category": "Edukasi Obat",
+    "title": "Cara Menggunakan Obat yang Benar dan Aman — Penjelasan Apoteker",
+    "tanggal": "17 April 2025",
+    "desc": "Banyak orang salah dalam mengonsumsi obat. Video ini menjelaskan aturan minum obat, perbedaan sebelum/sesudah makan, serta bahaya penggunaan obat sembarangan.",
+    "url": "https://www.youtube.com/watch?v=-E0Brk3Fy5s",
+    "btnLabel": "Tonton di YouTube"
+  },
+  {
+    "type": "web",
+    "typeLabel": "Artikel",
+    "icon": "fas fa-heartbeat",
+    "bg": "linear-gradient(135deg,#43e97b,#38f9d7)",
+    "category": "Tips Kesehatan Umum",
+    "title": "7 Kebiasaan Sehat Sederhana yang Bisa Dilakukan Setiap Hari",
+    "tanggal": "15 April 2025",
+    "desc": "Kesehatan bukan soal olahraga berat atau diet ekstrem. Cukup dengan 7 kebiasaan kecil ini — mulai dari minum air putih cukup hingga tidur teratur — tubuh Anda akan terasa lebih bugar.",
+    "url": "https://www.halodoc.com/artikel/kebiasaan-hidup-sehat",
+    "btnLabel": "Baca Artikel"
+  }
+]
