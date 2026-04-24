@@ -1,4 +1,28 @@
 [
+   {
+    "type": "web",
+    "typeLabel": "Artikel",
+    "icon": "fas fa-spa",
+    "bg": "linear-gradient(135deg,#84fab0,#8fd3f4)",
+    "category": "Skincare",
+    "title": "Buah Utuh vs Jus: Apa Bedanya di Tubuh?",
+    "tanggal": "23 April 2025",
+    "desc": "Sekilas, jus buah dan buah utuh berasal dari bahan yang sama. Tapi di dalam tubuh, efeknya bisa berbeda, terutama pada gula darah.(kesehatan untuk warga salatiga,demak,kudus,pati,kab. semarang,jateng.",
+    "url": "https://health.detik.com/diet/d-8451121/kenapa-buah-potong-lebih-sehat-dibanding-jus-begini-teorinya",
+    "btnLabel": "Baca Artikel"
+  },
+   {
+    "type": "web",
+    "typeLabel": "Artikel",
+    "icon": "fas fa-spa",
+    "bg": "linear-gradient(135deg,#84fab0,#8fd3f4)",
+    "category": "Skincare",
+    "title": "Tips Gizi Seimbang & Diet Real Food",
+    "tanggal": "23 April 2025",
+    "desc": "Portal Detik Health sering membagikan panduan praktis mengenai nutrisi, terutama cara menghindari makanan ultra-proses (UPF) yang sedang menjadi perhatian besar tahun ini (kesehatan untuk warga semarang, kab. semarang, jateng.",
+    "url": "https://health.detik.com/diet",
+    "btnLabel": "Baca Artikel"
+  },
   {
     "type": "web",
     "typeLabel": "Artikel",
